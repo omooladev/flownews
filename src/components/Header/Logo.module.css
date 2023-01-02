@@ -17,8 +17,10 @@
   text-transform: uppercase;
   padding: 0.2rem 0;
   font-weight: normal;
+  color: var(--nav-text-color);
 }
 .logo #publication_text {
   padding: 0.2rem 0;
   font-weight: normal;
+  color: var(--nav-text-color);
 }
