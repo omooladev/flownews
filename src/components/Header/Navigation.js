@@ -4,9 +4,11 @@ import { AuthContext } from "../../store/Auth/auth-context";
 import { BiMoon, BiSearch, BiSun, BiX } from "react-icons/bi";
 import styles from "./Navigation.module.css";
 import { AppContext } from "../../store/App/app-context";
+import SearchField from "../../UI/SearchField";
 const Navigation = (props) => {
   let className = props.className || "";
-  const { appDisplayMode, onchangeAppDisplayMode } = useContext(AppContext);
+  const { appDisplayMode, isSearching, onchangeAppDisplayMode, onToggleSearch } =
+    useContext(AppContext);
   const { isLoggedIn } = useContext(AuthContext);
 
   const toggleAppDisplayMode = () => {
@@ -55,12 +57,20 @@ const Navigation = (props) => {
       </ul>
       <div className={styles["darkLight-searchBox"]}>
         <div className={styles.darkLight} onClick={toggleAppDisplayMode}>
-          {appDisplayMode === "light" && <BiMoon className={`${styles.icon} moon`} />}
-          {appDisplayMode === "dark" && <BiSun className={`${styles.icon} sun`} />}
+          {appDisplayMode === "light" && <BiMoon className={`${styles.icon} ${styles.moon}`} />}
+          {appDisplayMode === "dark" && <BiSun className={`${styles.icon} ${styles.sun}`} />}
         </div>
         <div className={styles.searchBox}>
-          <BiSearch className={`${styles.icon} search`} />
-          <BiX className={`${styles.icon} cancel`} />
+          <div className={styles.searchToggle} onClick={onToggleSearch}>
+            {isSearching && <BiX className={`${styles.icon} ${styles.cancel}`} />}
+            {!isSearching && <BiSearch className={`${styles.icon} ${styles.search}`} />}
+          </div>
+          {isSearching && (
+            <div className={styles.searchField}>
+              <SearchField className={styles.input} />
+              <BiSearch className={`${styles.icon} ${styles.search}`} />
+            </div>
+          )}
         </div>
       </div>
     </nav>

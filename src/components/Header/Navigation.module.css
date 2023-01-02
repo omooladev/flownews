@@ -62,7 +62,7 @@
 }
 
 .navigation .darkLight-searchBox .darkLight,
-.navigation .darkLight-searchBox .searchBox {
+.navigation .darkLight-searchBox .searchBox .searchToggle {
   cursor: pointer;
   display: flex;
   flex-direction: row;
@@ -72,6 +72,53 @@
   margin: 0 5px;
 }
 .navigation .darkLight-searchBox .icon {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: var(--nav-text-color);
+}
+.navigation .darkLight-searchBox .searchBox {
+  position: relative;
+}
+.navigation .darkLight-searchBox .searchBox .searchField {
+  position: absolute;
+  background-color: red;
+  bottom: -80px;
+  right: 5px;
+  height: 2.5rem;
+  width: 300px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+  background-color: var(--header-color);
+
+  box-shadow: 0 5px 5px var(--header-color);
+}
+.navigation .darkLight-searchBox .searchBox .searchField::before {
+  content: "";
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  right: 14px;
+  top: -4px;
+  transform: rotate(-45deg);
+  background-color: var(--header-color);
+  z-index: 1;
+}
+.navigation .darkLight-searchBox .searchBox .searchField .input {
+  height: 100%;
+  width: 100%;
+  padding: 0 45px 0 15px;
+  font-size: 1rem;
+  color: var(--nav-text-color);
+  background-color: transparent;
+  font-weight: 400px;
+  border-radius: 4px;
+}
+.navigation .darkLight-searchBox .searchBox .searchField .search {
+  position: absolute;
+  cursor: pointer;
+  color: var(--nav-text-color);
+  right: 15px;
 }
