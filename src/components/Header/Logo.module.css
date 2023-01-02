@@ -1,0 +1,24 @@
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  color: black;
+  font-size: 0.8rem;
+}
+
+.logo #FN_text {
+  font-size: 3.4rem;
+  color: var(--nav-text-hover-color);
+}
+
+.logo #flownews_text {
+  text-transform: uppercase;
+  padding: 0.2rem 0;
+  font-weight: normal;
+}
+.logo #publication_text {
+  padding: 0.2rem 0;
+  font-weight: normal;
+}
