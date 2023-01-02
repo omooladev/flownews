@@ -1,3 +1,4 @@
+import Account from "./Account";
 import styles from "./Header.module.css";
 import Logo from "./Logo";
 import Navigation from "./Navigation";
@@ -6,7 +7,7 @@ const Header = () => {
     <header className={styles.header}>
       <Logo className={styles.logo} />
       <Navigation className={styles.navigation} />
-      <div></div>
+      <Account className={styles.account_subscribe} />
     </header>
   );
 };

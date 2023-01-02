@@ -3,7 +3,7 @@ import { AppContext } from "./app-context";
 
 const AppContextProvider = (props) => {
   const [appDisplayMode, setAppDisplayMode] = useState("light");
-  const [isSearching, setIsSearching] = useState("false");
+  const [isSearching, setIsSearching] = useState(false);
   const changeDisplayMode = (mode) => {
     document.body.classList.toggle("dark");
     setAppDisplayMode((prevMode) => {
