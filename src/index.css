@@ -3,17 +3,30 @@
   padding: 0;
   box-sizing: border-box;
 }
-body {
-  font-family: "Roboto";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
   --body-color: #ac6161;
   --header-color: #ffffff;
   --nav-text-color: black;
   --nav-text-hover-color: #309b65;
-
+}
+body {
+  font-family: "Roboto";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background-color: var(--body-color);
 }
 
 body.dark {
+  --body-color: #18191a;
+  --header-color: #242526;
+  --nav-text-color: #ccc;
+  --nav-text-hover-color: orange;
+}
+
+/* GLOBAL STYLES */
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
 }
