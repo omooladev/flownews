@@ -1,3 +1,4 @@
+/* MOBILE SCREEN OF LESS THAN 700PX */
 .header {
   position: fixed;
   top: 0%;
@@ -6,13 +7,14 @@
   height: 10vh;
   padding: 1rem 5%;
   background-color: var(--header-color);
-
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   border-bottom: 1px solid var(--nav-text-hover-color);
+  transition: all 0.4s ease;
 }
+
 .logo,
 .navigation,
 .account_subscribe {
@@ -22,6 +24,31 @@
   align-items: center;
   justify-content: space-around;
 }
-.logo {
-  width: 10.7rem;
+
+.header .logo {
+  margin-left: 3rem;
+  width: auto;
+  transition: all 0.4s ease;
+}
+/* HIDDEN ELEMENT FOR MOBILE SCREEN */
+.header .account_subscribe {
+  display: none;
+}
+.header.active .logo {
+  opacity: 0;
+}
+
+@media (min-width: 700px) {
+  .header .account_subscribe {
+    display: flex;
+  }
+}
+
+@media (min-width: 1200px) {
+  .header {
+    justify-content: space-between;
+  }
+  .header.active .logo {
+    opacity: 1;
+  }
 }

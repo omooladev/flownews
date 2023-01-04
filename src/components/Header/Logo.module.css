@@ -1,22 +1,25 @@
 .logo {
   overflow: hidden;
-  color: black;
   font-size: 0.8rem;
+  color: var(--nav-text-color);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .logo #FN_text {
   font-size: 3.4rem;
   color: var(--nav-text-hover-color);
+  padding-right: 0.5rem;
 }
 
 .logo #flownews_text {
   text-transform: uppercase;
   padding: 0.2rem 0;
   font-weight: normal;
-  color: var(--nav-text-color);
 }
 .logo #publication_text {
   padding: 0.2rem 0;
   font-weight: normal;
-  color: var(--nav-text-color);
 }

@@ -48,9 +48,7 @@
   display: block;
   margin-top: 0.5rem;
 }
-/* .account_subscribe .my_account .my_account_container .my_account_container_button {
-  background-color: red;
-} */
+
 .account_subscribe .my_account_container .my_account_container_button button {
   cursor: pointer;
   margin: 0.5rem;

@@ -6,6 +6,7 @@
 :root {
   --body-color: #ffffff;
   --header-color: #ffffff;
+  --side-nav: #ccc;
   --nav-text-color: black;
   --nav-text-hover-color: #309b65;
   --subscribe-button: var(--nav-text-hover-color);
@@ -31,6 +32,7 @@ body {
 body.dark {
   --body-color: #18191a;
   --header-color: #242526;
+  --side-nav: #242526;
   --nav-text-color: #ccc;
   --nav-text-hover-color: orange;
   --subscribe-button: var(--nav-text-hover-color);
