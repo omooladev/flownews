@@ -5,7 +5,7 @@
   left: 0%;
   width: 100vw;
   height: 10vh;
-  padding: 1rem 5%;
+  padding: 2rem 5%;
   background-color: var(--header-color);
   display: flex;
   flex-direction: row;
