@@ -15,20 +15,20 @@ const Account = (props) => {
       return false;
     });
   }, []);
+  const toggleAccountContainer = useCallback((event) => {
+    setOpenAccount((prevState) => {
+      return !prevState;
+    });
+  }, []);
 
   return (
     <div className={`${className} ${styles.account_subscribe} ${openAccount ? styles.active : ""}`}>
-      <div className={styles.my_account}>
-        <div onMouseOver={showOpenAccountContainer}>
+      <div className={styles.my_account} onClick={toggleAccountContainer}>
+        <div onMouseEnter={showOpenAccountContainer}>
           <FaRegUser className={styles.icon} />
           <span>my account</span>
         </div>
-
-        <div
-          className={styles["my_account_container"]}
-          onMouseOut={hideOpenAccountContainer}
-          onMouseOver={showOpenAccountContainer}
-        >
+        <div className={styles["my_account_container"]} onMouseLeave={hideOpenAccountContainer}>
           <span>Get into your account</span>
           <hr />
           <div className={styles["my_account_container_button"]}>

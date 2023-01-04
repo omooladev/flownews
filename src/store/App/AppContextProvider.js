@@ -26,6 +26,7 @@ const AppContextProvider = (props) => {
   const closeMenuHandler = useCallback(() => {
     setToggleMenu((prevState) => {
       if (prevState) return false;
+      return;
     });
   }, []);
 
