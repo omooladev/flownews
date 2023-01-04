@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
+import { useCallback, useContext, useRef } from "react";
 import { AuthContext } from "../../store/Auth/auth-context";
 import { BiMoon, BiSearch, BiSun, BiX } from "react-icons/bi";
 
@@ -20,12 +20,15 @@ const Navigation = (props) => {
   } = useContext(AppContext);
   const { isLoggedIn } = useContext(AuthContext);
 
-  const toggleAppDisplayMode = () => {
+  const toggleAppDisplayMode = useCallback(() => {
     if (appDisplayMode === "light") {
       return onchangeAppDisplayMode("dark");
     }
     return onchangeAppDisplayMode("light");
-  };
+  }, []);
+  const onToggleSearchHandler = useCallback(() => {
+    onToggleSearch();
+  }, []);
   return (
     <nav className={`${className} ${styles.navigation} ${toggleMenu ? styles.active : ""}`}>
       <div className={styles["navigation-list"]}>
@@ -95,13 +98,13 @@ const Navigation = (props) => {
           {appDisplayMode === "dark" && <BiSun className={`${styles.icon} ${styles.sun}`} />}
         </div>
         <div className={styles.searchBox}>
-          <div className={styles.searchToggle} onClick={onToggleSearch}>
+          <div className={styles.searchToggle} onClick={onToggleSearchHandler}>
             {isSearching && <BiX className={`${styles.icon} ${styles.cancel}`} />}
             {!isSearching && <BiSearch className={`${styles.icon} ${styles.search}`} />}
           </div>
           {isSearching && (
             <div className={styles.searchField}>
-              <SearchField className={styles.input} onFocus={onCloseMenu} />
+              <SearchField className={styles.input} onFocus={onCloseMenu} search={isSearching} />
               <BiSearch className={`${styles.icon} ${styles.search}`} />
             </div>
           )}
