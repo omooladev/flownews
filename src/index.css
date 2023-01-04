@@ -39,7 +39,7 @@ body.dark {
   --subscribe-button-color: var(--header-color);
   --subscribe-button-hover: var(--nav-text-hover-color);
   --search-field-color: var(--header-color);
-  --search-field-border-color: var(--search-field-color);
+  --search-field-border-color: var(--nav-text-hover-color);
 }
 
 /* GLOBAL STYLES */
