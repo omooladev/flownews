@@ -1,14 +1,20 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AppContext } from "./app-context";
+const getAppMode = () => {
+  const appMode = localStorage.getItem("flownews-mode");
+
+  if (appMode) return JSON.parse(appMode);
+  return { display: "light" };
+};
 
 const AppContextProvider = (props) => {
-  const [appDisplayMode, setAppDisplayMode] = useState("light");
+  const [appMode, setAppMode] = useState(getAppMode);
   const [isSearching, setIsSearching] = useState(false);
   const [toggleMenu, setToggleMenu] = useState(false);
-  const changeDisplayMode = (mode) => {
-    document.body.classList.toggle("dark");
-    setAppDisplayMode((prevMode) => {
-      return mode;
+  console.log(appMode);
+  const changeAppDisplayMode = (mode) => {
+    setAppMode((prevMode) => {
+      return { ...prevMode, display: mode };
     });
   };
   const toggleSearchHandler = useCallback(() => {
@@ -29,17 +35,26 @@ const AppContextProvider = (props) => {
       return;
     });
   }, []);
-
+  useEffect(() => {
+    if (appMode.display === "light") {
+      document.body.classList.remove("dark");
+      localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, display: "light" }));
+    }
+    if (appMode.display === "dark") {
+      document.body.classList.add("dark");
+      localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, display: "dark" }));
+    }
+  }, [appMode]);
   return (
     <AppContext.Provider
       value={{
-        appDisplayMode,
+        appMode,
         isSearching,
         toggleMenu,
         onToggleSearch: toggleSearchHandler,
         onToggleMenu: toggleMenuHandler,
         onCloseMenu: closeMenuHandler,
-        onchangeAppDisplayMode: changeDisplayMode,
+        onChangeAppDisplayMode: changeAppDisplayMode,
       }}
     >
       {props.children}

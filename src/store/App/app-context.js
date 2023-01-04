@@ -1,7 +1,7 @@
 import React from "react";
 
 export const AppContext = React.createContext({
-  appDisplayMode: "light",
+  appMode: { display: "light" },
   isSearching: false,
   toggleMenu: false,
   onToggleSearch: () => {},

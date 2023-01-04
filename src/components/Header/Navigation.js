@@ -10,22 +10,22 @@ import Logo from "./Logo";
 const Navigation = (props) => {
   let className = props.className || "";
   const {
-    appDisplayMode,
+    appMode,
     toggleMenu,
     isSearching,
     onToggleMenu,
     onCloseMenu,
-    onchangeAppDisplayMode,
+    onChangeAppDisplayMode,
     onToggleSearch,
   } = useContext(AppContext);
   const { isLoggedIn } = useContext(AuthContext);
 
   const toggleAppDisplayMode = useCallback(() => {
-    if (appDisplayMode === "light") {
-      return onchangeAppDisplayMode("dark");
+    if (appMode.display === "light") {
+      return onChangeAppDisplayMode("dark");
     }
-    return onchangeAppDisplayMode("light");
-  }, [appDisplayMode, onchangeAppDisplayMode]);
+    return onChangeAppDisplayMode("light");
+  }, [appMode, onChangeAppDisplayMode]);
   const onToggleSearchHandler = useCallback(() => {
     onToggleSearch();
   }, [onToggleSearch]);
@@ -79,10 +79,10 @@ const Navigation = (props) => {
                 </li>
                 <button className={styles.login}>Login</button>
                 <div className={styles.darkLight} onClick={toggleAppDisplayMode}>
-                  {appDisplayMode === "light" && (
+                  {appMode.display === "light" && (
                     <BiMoon className={`${styles.icon} ${styles.moon}`} />
                   )}
-                  {appDisplayMode === "dark" && (
+                  {appMode.display === "dark" && (
                     <BiSun className={`${styles.icon} ${styles.sun}`} />
                   )}
                 </div>
@@ -94,8 +94,8 @@ const Navigation = (props) => {
 
       <div className={styles["darkLight-searchBox"]}>
         <div className={styles.darkLight} onClick={toggleAppDisplayMode}>
-          {appDisplayMode === "light" && <BiMoon className={`${styles.icon} ${styles.moon}`} />}
-          {appDisplayMode === "dark" && <BiSun className={`${styles.icon} ${styles.sun}`} />}
+          {appMode.display === "light" && <BiMoon className={`${styles.icon} ${styles.moon}`} />}
+          {appMode.display === "dark" && <BiSun className={`${styles.icon} ${styles.sun}`} />}
         </div>
         <div className={styles.searchBox}>
           <div className={styles.searchToggle} onClick={onToggleSearchHandler}>
