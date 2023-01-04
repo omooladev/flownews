@@ -15,6 +15,7 @@
 }
 .navigation.active .navigation-list {
   left: 0%;
+  height: 100vh;
 }
 .navigation .navigation-list .toggleLogo {
   display: block;
