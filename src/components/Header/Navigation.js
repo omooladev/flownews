@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useCallback, useContext, useRef } from "react";
+import { useCallback, useContext } from "react";
 import { AuthContext } from "../../store/Auth/auth-context";
 import { BiMoon, BiSearch, BiSun, BiX } from "react-icons/bi";
 
@@ -25,10 +25,10 @@ const Navigation = (props) => {
       return onchangeAppDisplayMode("dark");
     }
     return onchangeAppDisplayMode("light");
-  }, []);
+  }, [appDisplayMode, onchangeAppDisplayMode]);
   const onToggleSearchHandler = useCallback(() => {
     onToggleSearch();
-  }, []);
+  }, [onToggleSearch]);
   return (
     <nav className={`${className} ${styles.navigation} ${toggleMenu ? styles.active : ""}`}>
       <div className={styles["navigation-list"]}>
