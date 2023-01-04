@@ -207,10 +207,16 @@
   .navigation .navigation-list ul li a:hover::before {
     opacity: 1;
   }
+  .for_mobile_only .icon {
+    display: none;
+  }
 }
 @media (min-width: 700px) {
   .navigation .navigation-list {
     width: 40vw;
+  }
+  .for_mobile_only {
+    display: none;
   }
 }
 @media (min-width: 1200px) {
