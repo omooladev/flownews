@@ -7,6 +7,7 @@ import styles from "./Navigation.module.css";
 import { AppContext } from "../../store/App/app-context";
 import SearchField from "../../UI/SearchField";
 import Logo from "./Logo";
+import BecomeAContributor from "../PopUp/BecomeAContributor";
 const Navigation = (props) => {
   let className = props.className || "";
   const {
@@ -123,7 +124,11 @@ const Navigation = (props) => {
       {popUp.from === "navigation" && (
         <>
           {popUp.state && popUp.type === "login" && <Login />}
-          {popUp.state && popUp.type === "contributor" && <p>olawole to contribute</p>}
+          {popUp.state && popUp.type === "contributor" && (
+            <p>
+              <BecomeAContributor />
+            </p>
+          )}
         </>
       )}
     </nav>

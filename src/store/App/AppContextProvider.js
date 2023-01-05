@@ -12,7 +12,7 @@ const AppContextProvider = (props) => {
   const [popUp, setPopUp] = useState({ state: false, type: "", from: "" });
   const [isSearching, setIsSearching] = useState(false);
   const [toggleMenu, setToggleMenu] = useState(false);
-  console.log(appMode);
+
   const changeAppDisplayMode = (mode) => {
     setAppMode((prevMode) => {
       return { ...prevMode, display: mode };

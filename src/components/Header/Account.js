@@ -1,6 +1,7 @@
 import { useCallback, useContext, useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { AppContext } from "../../store/App/app-context";
+import BecomeAContributor from "../PopUp/BecomeAContributor";
 import Login from "../PopUp/Login";
 import styles from "./Account.module.css";
 const Account = (props) => {
@@ -53,10 +54,11 @@ const Account = (props) => {
       <button type="button" className={styles.subscribe}>
         subscribe
       </button>
+
       {popUp.from === "account" && (
         <>
           {popUp.state && popUp.type === "login" && <Login />}
-          {popUp.state && popUp.type === "contributor" && <p>olawole to contribute</p>}
+          {popUp.state && popUp.type === "contributor" && <BecomeAContributor />}
         </>
       )}
     </div>

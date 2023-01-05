@@ -4,6 +4,7 @@
   left: 0;
   height: 100vh;
   width: 100vw;
-  background-color: orange;
+  background-color: var(--body-color);
   z-index: 999;
+  opacity: 0.8;
 }
