@@ -9,6 +9,7 @@ const getAppMode = () => {
 
 const AppContextProvider = (props) => {
   const [appMode, setAppMode] = useState(getAppMode);
+  const [popUp, setPopUp] = useState({ state: false, type: "", from: "" });
   const [isSearching, setIsSearching] = useState(false);
   const [toggleMenu, setToggleMenu] = useState(false);
   console.log(appMode);
@@ -24,6 +25,9 @@ const AppContextProvider = (props) => {
   }, []);
 
   const toggleMenuHandler = useCallback(() => {
+    setIsSearching((prevState) => {
+      if (prevState) return !prevState;
+    });
     setToggleMenu((prevState) => {
       return !prevState;
     });
@@ -51,6 +55,12 @@ const AppContextProvider = (props) => {
         appMode,
         isSearching,
         toggleMenu,
+        popUp,
+        onPopUp: (popUpData) => {
+          setPopUp((prevState) => {
+            return { ...prevState, ...popUpData };
+          });
+        },
         onToggleSearch: toggleSearchHandler,
         onToggleMenu: toggleMenuHandler,
         onCloseMenu: closeMenuHandler,

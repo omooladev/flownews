@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useCallback, useContext } from "react";
 import { AuthContext } from "../../store/Auth/auth-context";
 import { BiMoon, BiSearch, BiSun, BiX } from "react-icons/bi";
-
+import Login from "../PopUp/Login";
 import styles from "./Navigation.module.css";
 import { AppContext } from "../../store/App/app-context";
 import SearchField from "../../UI/SearchField";
@@ -11,8 +11,10 @@ const Navigation = (props) => {
   let className = props.className || "";
   const {
     appMode,
+    popUp,
     toggleMenu,
     isSearching,
+    onPopUp,
     onToggleMenu,
     onCloseMenu,
     onChangeAppDisplayMode,
@@ -72,12 +74,19 @@ const Navigation = (props) => {
               </li>
 
               <div className={styles.for_mobile_only}>
-                <li>
-                  <NavLink to="/become-contributor" activeClassName={styles["active-link"]}>
-                    Become a contributor
-                  </NavLink>
-                </li>
-                <button className={styles.login}>Login</button>
+                <button
+                  className={styles.contributor}
+                  onClick={() => onPopUp({ state: true, type: "contributor", from: "navigation" })}
+                >
+                  Become a contributor
+                </button>
+
+                <button
+                  className={styles.login}
+                  onClick={() => onPopUp({ state: true, type: "login", from: "navigation" })}
+                >
+                  Login
+                </button>
                 <div className={styles.darkLight} onClick={toggleAppDisplayMode}>
                   {appMode.display === "light" && (
                     <BiMoon className={`${styles.icon} ${styles.moon}`} />
@@ -110,6 +119,13 @@ const Navigation = (props) => {
           )}
         </div>
       </div>
+
+      {popUp.from === "navigation" && (
+        <>
+          {popUp.state && popUp.type === "login" && <Login />}
+          {popUp.state && popUp.type === "contributor" && <p>olawole to contribute</p>}
+        </>
+      )}
     </nav>
   );
 };

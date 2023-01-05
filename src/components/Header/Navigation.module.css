@@ -170,6 +170,16 @@
   padding: var(--nav-link-padding);
   font-size: var(--nav-link-font-size);
 }
+.for_mobile_only button.contributor {
+  background-color: transparent;
+  color: var(--nav-text-color);
+  font-size: var(--nav-link-font-size);
+  font-weight: var(--nav-link-font-weight);
+  transition: all 0.4s ease;
+}
+.for_mobile_only button.contributor:hover {
+  color: var(--nav-text-hover-color);
+}
 .for_mobile_only button.login {
   color: var(--subscribe-button-color);
   background-color: var(--subscribe-button);
