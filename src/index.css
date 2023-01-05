@@ -1,13 +1,57 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --body-color: #ffffff;
+  --header-color: #ffffff;
+  --side-nav: #ccc;
+  --nav-text-color: black;
+  --nav-text-hover-color: #309b65;
+  --subscribe-button: var(--nav-text-hover-color);
+  --subscribe-button-color: var(--body-color);
+  --subscribe-button-hover: var(--nav-text-hover-color);
+  --search-field-color: var(--header-color);
+  --search-field-border-color: var(--nav-text-hover-color);
+
+  /* fonts */
+  --nav-link-font-family: Verdana, Geneva, Tahoma, sans-serif;
+  --nav-link-font-size: 1rem;
+  --nav-link-font-weight: 500;
+  --nav-link-padding: 0.5rem;
+  --nav-link-margin: 0 5px;
+}
+body {
+  font-family: "Roboto";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--body-color);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body.dark {
+  --body-color: #18191a;
+  --header-color: #242526;
+  --side-nav: #242526;
+  --nav-text-color: #ccc;
+  --nav-text-hover-color: orange;
+  --subscribe-button: var(--nav-text-hover-color);
+  --subscribe-button-color: var(--header-color);
+  --subscribe-button-hover: var(--nav-text-hover-color);
+  --search-field-color: var(--header-color);
+  --search-field-border-color: var(--nav-text-hover-color);
+}
+
+/* GLOBAL STYLES */
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+
+input,
+button {
+  outline: none;
+  border: none;
 }
