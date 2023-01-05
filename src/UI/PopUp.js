@@ -6,7 +6,7 @@ const BackDrop = (props) => {
 };
 
 const PopUpBox = (props) => {
-  return <Card>{props.children}</Card>;
+  return <Card className={`${styles.PopUpBox} ${props.className}`}>{props.children}</Card>;
 };
 
 const PopUp = (props) => {
@@ -14,7 +14,10 @@ const PopUp = (props) => {
   return (
     <>
       {ReactDOM.createPortal(<BackDrop onClick={props.onClick} />, portalElement)}
-      {ReactDOM.createPortal(<PopUpBox>{props.children}</PopUpBox>, portalElement)}
+      {ReactDOM.createPortal(
+        <PopUpBox className={props.className}>{props.children}</PopUpBox>,
+        portalElement
+      )}
     </>
   );
 };
