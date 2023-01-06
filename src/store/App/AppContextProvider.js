@@ -9,7 +9,8 @@ const getAppMode = () => {
 
 const AppContextProvider = (props) => {
   const [appMode, setAppMode] = useState(getAppMode);
-  const [popUp, setPopUp] = useState({ state: false, type: "", from: "" });
+  // const [popUp, setPopUp] = useState({ state: false, type: "", from: "" });
+  const [popUp, setPopUp] = useState({ state: true, type: "login", from: "navigation" });
   const [isSearching, setIsSearching] = useState(false);
   const [toggleMenu, setToggleMenu] = useState(false);
 

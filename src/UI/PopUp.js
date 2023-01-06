@@ -6,9 +6,8 @@ const BackDrop = (props) => {
 };
 
 const PopUpBox = (props) => {
-  return <Card className={`${styles.PopUpBox} ${props.className}`}>{props.children}</Card>;
+  return <Card className={props.className}>{props.children}</Card>;
 };
-
 const PopUp = (props) => {
   const portalElement = document.getElementById("overlays");
   return (
