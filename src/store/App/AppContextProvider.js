@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import {useHistory} from "react-router-dom"
 import { AppContext } from "./app-context";
 const getAppMode = () => {
   const appMode = localStorage.getItem("flownews-mode");
@@ -8,9 +9,10 @@ const getAppMode = () => {
 };
 
 const AppContextProvider = (props) => {
+  const history=useHistory()
   const [appMode, setAppMode] = useState(getAppMode);
-  const [popUp, setPopUp] = useState({ state: false, type: "", from: "" });
-  //const [popUp, setPopUp] = useState({ state: true, type: "login", from: "navigation" });
+ // const [popUp, setPopUp] = useState({ state: false, type: "", from: "" });
+  const [popUp, setPopUp] = useState({ state: true, type: "login", from: "navigation" });
   const [isSearching, setIsSearching] = useState(false);
   const [toggleMenu, setToggleMenu] = useState(false);
 
@@ -50,6 +52,12 @@ const AppContextProvider = (props) => {
       localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, display: "dark" }));
     }
   }, [appMode]);
+
+  useEffect(() => {
+    if(popUp.state && popUp.type==="login"){
+      history.push("/auth/login")
+    }
+  }, [popUp,history]);
   return (
     <AppContext.Provider
       value={{

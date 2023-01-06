@@ -26,10 +26,13 @@
 }
 .login .form {
   width: 100%;
-  background-color: #e8f0fe;
+  background-color: var(--auth-form-color);
   border-radius: 10px;
   padding: 0.5rem 1rem;
   margin: 1rem 0;
+}
+body.dark .login .form {
+  background-color: red;
 }
 
 .login .form .form_control {
@@ -43,6 +46,7 @@
 .login .form .form_control .password_label {
   padding: 0.5rem 0;
   font-size: 1rem;
+  color: var(--auth-form-label-color);
 }
 .login .form .form_control .password_label {
   display: flex;
@@ -62,9 +66,6 @@
 }
 .login .form .form_control input:focus {
   border: 2px solid #81adfa;
-}
-.login .form .form_control .password_label a {
-  font-size: 0.9rem;
 }
 
 .form .form_actions {
@@ -98,11 +99,19 @@
 .login .form_footer p {
   padding: 0 0.3rem;
   font-size: 0.9rem;
+  color: var(--auth-form-label-color);
+}
+.login a {
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 2s ease;
+  color: var(--nav-text-hover-color);
 }
 .login .form_footer a {
   font-size: 0.9rem;
   text-decoration: none;
   transition: all 2s ease;
+  color: var(--nav-text-hover-color);
 }
 
 @media (min-width: 500px) {
