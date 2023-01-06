@@ -13,7 +13,7 @@ const Login = () => {
   }, [onPopUp]);
   return (
     <PopUp onClick={closePopUpHandler} className={`auth_popup ${styles.login}`}>
-      <h1>Sign in to Flownews</h1>
+      <h1>Sign in to FlowNews</h1>
       {/* <Card className={styles.reply}>
         <p>Here is where the reply will appear</p>
         <BiX />

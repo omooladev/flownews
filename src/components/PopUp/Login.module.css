@@ -11,7 +11,7 @@
   font-size: 20px;
   font-weight: normal;
   padding: 0.5rem 1rem;
-  color: var(--nav-text-color);
+  color: var(--nav-text-hover-color);
 }
 .login .reply {
   background-color: rgb(237, 178, 178);
@@ -58,6 +58,7 @@
   border: 2px solid transparent;
   transition: all 0.3s;
   font-size: 0.9rem;
+  outline: 1px solid #ccc;
 }
 .login .form .form_control input:focus {
   border: 2px solid #81adfa;
@@ -100,4 +101,12 @@
 }
 .login .form_footer a {
   font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 2s ease;
+}
+
+@media (min-width: 500px) {
+  .login .form_footer a:hover {
+    text-decoration: underline;
+  }
 }
