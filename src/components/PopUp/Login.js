@@ -14,10 +14,10 @@ const Login = () => {
   return (
     <PopUp onClick={closePopUpHandler} className={`auth_popup ${styles.login}`}>
       <h1>Sign in to Flownews</h1>
-      <Card className={styles.reply}>
+      {/* <Card className={styles.reply}>
         <p>Here is where the reply will appear</p>
         <BiX />
-      </Card>
+      </Card> */}
 
       <form className={styles.form}>
         <div className={styles.form_control}>

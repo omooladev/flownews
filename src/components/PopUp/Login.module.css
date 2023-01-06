@@ -8,7 +8,7 @@
 }
 
 .login h1 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: normal;
   padding: 0.5rem 1rem;
   color: var(--nav-text-color);
@@ -27,7 +27,7 @@
 .login .form {
   width: 100%;
   background-color: #e8f0fe;
-  border-radius: 0.4rem;
+  border-radius: 10px;
   padding: 0.5rem 1rem;
   margin: 1rem 0;
 }
@@ -54,7 +54,7 @@
 .login .form .form_control input {
   width: 100%;
   padding: 0.3rem 0.5rem;
-  border-radius: 6px;
+  border-radius: 5px;
   border: 2px solid transparent;
   transition: all 0.3s;
   font-size: 0.9rem;
@@ -67,7 +67,7 @@
 }
 
 .form .form_actions {
-  margin: 1rem 0;
+  margin: 2rem 0;
 }
 
 .form .form_actions button {
@@ -76,9 +76,9 @@
   background-color: var(--nav-text-hover-color);
   width: 100%;
   font-size: 0.9rem;
-  padding: 0.3rem 0.5rem;
+  padding: 0.6rem 0.5rem;
   color: var(--body-color);
-  border-radius: 6px;
+  border-radius: 5px;
 }
 .form .form_actions button:hover {
   opacity: 0.9;
@@ -91,7 +91,7 @@
   background-color: transparent;
   padding: 0.5rem 0;
   border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 5px;
 }
 
 .login .form_footer p {
