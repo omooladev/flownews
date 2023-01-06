@@ -1,8 +1,8 @@
 import { useCallback, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AppContext } from "../../store/App/app-context";
-import { BiX } from "react-icons/bi";
-import Card from "../../UI/Card";
+// import { BiX } from "react-icons/bi";
+// import Card from "../../UI/Card";
 import PopUp from "../../UI/PopUp";
 import styles from "./Login.module.css";
 
