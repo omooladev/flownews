@@ -30,7 +30,7 @@
   border-radius: 10px;
   padding: 0.5rem 1rem;
   margin: 1rem 0;
-  border: 1px solid rgb(98, 96, 96);
+  border: 1px solid var(--auth-form-border-color);
 }
 
 .login .form .form_control {
@@ -41,7 +41,8 @@
 }
 
 .login .form .form_control label,
-.login .form .form_control .password_label {
+.reset_password,
+.reset_password .login .form .form_control .password_label {
   padding: 0.5rem 0;
   font-size: 1rem;
   color: var(--auth-form-label-color);
@@ -90,7 +91,7 @@
   justify-content: center;
   background-color: transparent;
   padding: 0.5rem 0;
-  border: 1px solid rgb(98, 96, 96);
+  border: 1px solid var(--auth-form-border-color);
   border-radius: 5px;
   width: 100%;
 }

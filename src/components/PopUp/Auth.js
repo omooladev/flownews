@@ -26,7 +26,9 @@ const Auth = () => {
       {forgotPasswordLocation && (
         <>
           <h1>Reset your Password</h1>
-          <label>To reset your password,enter the email address you use to sign in</label>
+          <p className={styles.reset_password}>
+            To reset your password, enter the email address you use to sign in
+          </p>
         </>
       )}
       {/* <Card className={styles.reply}>
