@@ -56,8 +56,8 @@ const Navigation = (props) => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/travel" activeClassName={styles["active-link"]}>
-                  travel
+                <NavLink to="/blog" activeClassName={styles["active-link"]}>
+                  blog
                 </NavLink>
               </li>
               <li>
