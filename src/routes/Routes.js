@@ -22,6 +22,9 @@ const Routes = () => {
           <Route path="/auth/become-contributor" exact>
             <AuthPage />
           </Route>
+          <Route path="/auth/forgot-password" exact>
+            <AuthPage />
+          </Route>
         </Switch>
       )}
     </Suspense>

@@ -14,6 +14,7 @@ const Auth = () => {
   const location = history.location.pathname;
   const loginLocation = location.includes("/login");
   const becomeContributorLocation = location.includes("/become-contributor");
+  const forgotPasswordLocation = location.includes("/forgot-password");
 
   const closePopUpHandler = useCallback(() => {
     return history.replace(lastLocation);
@@ -22,6 +23,12 @@ const Auth = () => {
     <PopUp onClick={closePopUpHandler} className={`auth_popup ${styles.login}`}>
       {loginLocation && <h1>Log in to FlowNews</h1>}
       {becomeContributorLocation && <h1>Create a FlowNews account</h1>}
+      {forgotPasswordLocation && (
+        <>
+          <h1>Reset your Password</h1>
+          <label>To reset your password,enter the email address you use to sign in</label>
+        </>
+      )}
       {/* <Card className={styles.reply}>
         <p>Here is where the reply will appear</p>
         <BiX />
@@ -32,15 +39,25 @@ const Auth = () => {
           <label>Email Address</label>
           <input type="email" />
         </div>
-        <div className={styles.form_control}>
-          <div className={styles.password_label}>
-            <label>Password</label>
-            {loginLocation && <NavLink to="/forgot-password">Forgot password?</NavLink>}
+        {!forgotPasswordLocation && (
+          <div className={styles.form_control}>
+            <div className={styles.password_label}>
+              <label>Password</label>
+              {loginLocation && <NavLink to="/auth/forgot-password">Forgot password?</NavLink>}
+            </div>
+            <input type="password" />
           </div>
-          <input type="password" />
-        </div>
+        )}
         <div className={styles.form_actions}>
-          <button type="submit">{`${loginLocation ? "Log in" : "Sign up"}`}</button>
+          <button type="submit">{`${
+            loginLocation
+              ? "Log in"
+              : becomeContributorLocation
+              ? "Sign up"
+              : forgotPasswordLocation
+              ? "Get reset link"
+              : ""
+          }`}</button>
         </div>
       </form>
       <div className={styles.form_footer}>
@@ -54,6 +71,12 @@ const Auth = () => {
           <>
             <p>Already have an account?</p>
             <NavLink to="/auth/login">Log in</NavLink>
+          </>
+        )}
+        {forgotPasswordLocation && (
+          <>
+            <p>Never mind?</p>
+            <NavLink to="/auth/login">Take me back to login</NavLink>
           </>
         )}
       </div>
