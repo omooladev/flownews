@@ -1,12 +1,12 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
-import { AppContext } from "../../store/App/app-context";
-import BecomeAContributor from "../PopUp/BecomeAContributor";
-import Login from "../PopUp/Login";
+
+
 import styles from "./Account.module.css";
 const Account = (props) => {
+  const history = useHistory();
   const [openAccount, setOpenAccount] = useState(false);
-  const { popUp, onPopUp } = useContext(AppContext);
   let className = props.className || "";
 
   const showOpenAccountContainer = useCallback(() => {
@@ -36,15 +36,12 @@ const Account = (props) => {
           <span>Get into your account</span>
           <hr />
           <div className={styles["my_account_container_button"]}>
-            <button
-              className={styles.login}
-              onClick={() => onPopUp({ state: true, type: "login", from: "account" })}
-            >
+            <button className={styles.login} onClick={() => history.replace("/auth/login")}>
               Login
             </button>
             <button
               className={styles.contributor}
-              onClick={() => onPopUp({ state: true, type: "contributor", from: "account" })}
+              onClick={() => history.replace("/auth/become-contributor")}
             >
               Become a contributor
             </button>
@@ -55,13 +52,10 @@ const Account = (props) => {
         subscribe
       </button>
 
-      {popUp.from === "account" && (
-        <>
-          {popUp.state && popUp.type === "login" && <Login />}
-          {popUp.state && popUp.type === "contributor" && <BecomeAContributor />}
-        </>
-      )}
+      
     </div>
+
+    
   );
 };
 export default Account;

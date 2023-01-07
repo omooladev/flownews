@@ -1,21 +1,23 @@
 import { NavLink } from "react-router-dom";
 import { useCallback, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../store/Auth/auth-context";
 import { BiMoon, BiSearch, BiSun, BiX } from "react-icons/bi";
-import Login from "../PopUp/Login";
+
 import styles from "./Navigation.module.css";
 import { AppContext } from "../../store/App/app-context";
 import SearchField from "../../UI/SearchField";
 import Logo from "./Logo";
-import BecomeAContributor from "../PopUp/BecomeAContributor";
+
 const Navigation = (props) => {
+  const history = useHistory();
   let className = props.className || "";
   const {
     appMode,
-    popUp,
+    
     toggleMenu,
     isSearching,
-    onPopUp,
+    
     onToggleMenu,
     onCloseMenu,
     onChangeAppDisplayMode,
@@ -77,15 +79,12 @@ const Navigation = (props) => {
               <div className={styles.for_mobile_only}>
                 <button
                   className={styles.contributor}
-                  onClick={() => onPopUp({ state: true, type: "contributor", from: "navigation" })}
+                  onClick={() => history.push("/auth/become-contributor")}
                 >
                   Become a contributor
                 </button>
 
-                <button
-                  className={styles.login}
-                  onClick={() => onPopUp({ state: true, type: "login", from: "navigation" })}
-                >
+                <button className={styles.login} onClick={() => history.push("/auth/login")}>
                   Login
                 </button>
                 <div className={styles.darkLight} onClick={toggleAppDisplayMode}>
@@ -121,16 +120,7 @@ const Navigation = (props) => {
         </div>
       </div>
 
-      {popUp.from === "navigation" && (
-        <>
-          {popUp.state && popUp.type === "login" && <Login />}
-          {popUp.state && popUp.type === "contributor" && (
-            <p>
-              <BecomeAContributor />
-            </p>
-          )}
-        </>
-      )}
+     
     </nav>
   );
 };
