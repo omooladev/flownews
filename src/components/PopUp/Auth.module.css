@@ -73,7 +73,6 @@
 
 .form .form_actions button {
   cursor: pointer;
-  background-color: #afbdb3;
   background-color: var(--nav-text-hover-color);
   width: 100%;
   font-size: 0.9rem;

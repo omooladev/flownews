@@ -14,10 +14,10 @@ const Navigation = (props) => {
   let className = props.className || "";
   const {
     appMode,
-    
+
     toggleMenu,
     isSearching,
-    
+
     onToggleMenu,
     onCloseMenu,
     onChangeAppDisplayMode,
@@ -43,40 +43,40 @@ const Navigation = (props) => {
         </div>
 
         <ul>
-          {!isLoggedIn && (
-            <>
-              <li>
-                <NavLink to="/home" activeClassName={styles["active-link"]}>
-                  home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/news" activeClassName={styles["active-link"]}>
-                  news
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/blog" activeClassName={styles["active-link"]}>
-                  blog
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/celebrity" activeClassName={styles["active-link"]}>
-                  celebrity
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/food" activeClassName={styles["active-link"]}>
-                  food
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/make-up" activeClassName={styles["active-link"]}>
-                  make-up
-                </NavLink>
-              </li>
+          <li>
+            <NavLink to="/home" activeClassName={styles["active-link"]}>
+              home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/news" activeClassName={styles["active-link"]}>
+              news
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/blog" activeClassName={styles["active-link"]}>
+              blog
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/celebrity" activeClassName={styles["active-link"]}>
+              celebrity
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/food" activeClassName={styles["active-link"]}>
+              food
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/make-up" activeClassName={styles["active-link"]}>
+              make-up
+            </NavLink>
+          </li>
 
-              <div className={styles.for_mobile_only}>
+          <div className={styles.for_mobile_only}>
+            {!isLoggedIn && (
+              <>
                 <button
                   className={styles.contributor}
                   onClick={() => history.push("/auth/become-contributor")}
@@ -87,17 +87,16 @@ const Navigation = (props) => {
                 <button className={styles.login} onClick={() => history.push("/auth/login")}>
                   Login
                 </button>
-                <div className={styles.darkLight} onClick={toggleAppDisplayMode}>
-                  {appMode.display === "light" && (
-                    <BiMoon className={`${styles.icon} ${styles.moon}`} />
-                  )}
-                  {appMode.display === "dark" && (
-                    <BiSun className={`${styles.icon} ${styles.sun}`} />
-                  )}
-                </div>
-              </div>
-            </>
-          )}
+              </>
+            )}
+
+            <div className={styles.darkLight} onClick={toggleAppDisplayMode}>
+              {appMode.display === "light" && (
+                <BiMoon className={`${styles.icon} ${styles.moon}`} />
+              )}
+              {appMode.display === "dark" && <BiSun className={`${styles.icon} ${styles.sun}`} />}
+            </div>
+          </div>
         </ul>
       </div>
 
@@ -119,8 +118,6 @@ const Navigation = (props) => {
           )}
         </div>
       </div>
-
-     
     </nav>
   );
 };
