@@ -79,12 +79,12 @@ const Navigation = (props) => {
               <>
                 <button
                   className={styles.contributor}
-                  onClick={() => history.push("/auth/become-contributor")}
+                  onClick={() => history.push("/become-contributor")}
                 >
                   Become a contributor
                 </button>
 
-                <button className={styles.login} onClick={() => history.push("/auth/login")}>
+                <button className={styles.login} onClick={() => history.push("/login")}>
                   Login
                 </button>
               </>

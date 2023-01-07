@@ -19,17 +19,17 @@ const Routes = () => {
         </Route>
         {!isLoggedIn && (
           <Switch>
-            <Route path="/auth/login" exact>
+            <Route path="/login" exact>
               <AuthPage />
             </Route>
-            <Route path="/auth/become-contributor" exact>
+            <Route path="/become-contributor" exact>
               <AuthPage />
             </Route>
-            <Route path="/auth/forgot-password" exact>
+            <Route path="/forgot-password" exact>
               <AuthPage />
             </Route>
             <Route path="/account" exact>
-              <Redirect to="/auth/login" />
+              <Redirect to="/login" />
             </Route>
             <Route path="*">
               <NotFoundPage />

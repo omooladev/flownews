@@ -36,12 +36,12 @@ const Account = (props) => {
           <span>Get into your account</span>
           <hr />
           <div className={styles["my_account_container_button"]}>
-            <button className={styles.login} onClick={() => history.replace("/auth/login")}>
+            <button className={styles.login} onClick={() => history.replace("/login")}>
               Login
             </button>
             <button
               className={styles.contributor}
-              onClick={() => history.replace("/auth/become-contributor")}
+              onClick={() => history.replace("/become-contributor")}
             >
               Become a contributor
             </button>

@@ -45,7 +45,7 @@ const Auth = () => {
           <div className={styles.form_control}>
             <div className={styles.password_label}>
               <label>Password</label>
-              {loginLocation && <NavLink to="/auth/forgot-password">Forgot password?</NavLink>}
+              {loginLocation && <NavLink to="/forgot-password">Forgot password?</NavLink>}
             </div>
             <input type="password" />
           </div>
@@ -66,19 +66,19 @@ const Auth = () => {
         {loginLocation && (
           <>
             <p>New to FlowNews?</p>
-            <NavLink to="/auth/become-contributor">Create an account</NavLink>
+            <NavLink to="/become-contributor">Create an account</NavLink>
           </>
         )}
         {becomeContributorLocation && (
           <>
             <p>Already have an account?</p>
-            <NavLink to="/auth/login">Log in</NavLink>
+            <NavLink to="/login">Log in</NavLink>
           </>
         )}
         {forgotPasswordLocation && (
           <>
             <p>Never mind?</p>
-            <NavLink to="/auth/login">Take me back to login</NavLink>
+            <NavLink to="/login">Take me back to login</NavLink>
           </>
         )}
       </div>
