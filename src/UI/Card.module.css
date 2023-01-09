@@ -1,0 +1,5 @@
+.card {
+  border-radius: 5px;
+  box-shadow: 0px 2px 8px var(--nav-text-hover-color);
+  box-shadow: 0px 0px 2px var(--nav-text-hover-color);
+}

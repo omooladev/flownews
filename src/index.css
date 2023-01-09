@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  user-select: none;
 }
 :root {
   --body-color: #ffffff;
@@ -14,6 +15,10 @@
   --subscribe-button-hover: var(--nav-text-hover-color);
   --search-field-color: var(--header-color);
   --search-field-border-color: var(--nav-text-hover-color);
+
+  --auth-form-color: #e8f0fe;
+  --auth-form-label-color: black;
+  --auth-form-border-color: rgb(223, 223, 223);
 
   /* fonts */
   --nav-link-font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -40,6 +45,10 @@ body.dark {
   --subscribe-button-hover: var(--nav-text-hover-color);
   --search-field-color: var(--header-color);
   --search-field-border-color: var(--nav-text-hover-color);
+
+  --auth-form-color: transparent;
+  --auth-form-label-color: var(--nav-text-color);
+  --auth-form-border-color: rgb(98, 96, 96);
 }
 
 /* GLOBAL STYLES */

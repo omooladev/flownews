@@ -1,22 +1,46 @@
 import React, { Suspense, useContext } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
 import { AuthContext } from "../store/Auth/auth-context";
+import { Switch, Route, Redirect } from "react-router-dom";
+import AuthPage from "../pages/Auth/Auth";
+import NotFoundPage from "../pages/NotFound";
+
 const HomePage = React.lazy(() => import("../pages/Home"));
 
 const Routes = () => {
   const { isLoggedIn } = useContext(AuthContext);
   return (
     <Suspense fallback={<p>Loading...</p>}>
-      {!isLoggedIn && (
-        <Switch>
-          <Route path="/">
-            <Redirect to="/home" />
-          </Route>
-          <Route path="/home" exact>
-            <HomePage />
-          </Route>
-        </Switch>
-      )}
+      <Switch>
+        <Route path="/" exact>
+          <Redirect to="/home" />
+        </Route>
+        <Route path="/home" exact>
+          <HomePage />
+        </Route>
+        {!isLoggedIn && (
+          <Switch>
+            <Route path="/login" exact>
+              <AuthPage />
+            </Route>
+            <Route path="/become-contributor" exact>
+              <AuthPage />
+            </Route>
+            <Route path="/forgot-password" exact>
+              <AuthPage />
+            </Route>
+            <Route path="/account" exact>
+              <Redirect to="/login" />
+            </Route>
+            <Route path="*">
+              <NotFoundPage />
+            </Route>
+          </Switch>
+        )}
+
+        <Route path="*">
+          <NotFoundPage />
+        </Route>
+      </Switch>
     </Suspense>
   );
 };

@@ -1,7 +1,11 @@
 import { useCallback, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
+
+
 import styles from "./Account.module.css";
 const Account = (props) => {
+  const history = useHistory();
   const [openAccount, setOpenAccount] = useState(false);
   let className = props.className || "";
 
@@ -32,16 +36,26 @@ const Account = (props) => {
           <span>Get into your account</span>
           <hr />
           <div className={styles["my_account_container_button"]}>
-            <button className={styles.login}>Login</button>
-            <button className={styles.contributor}>Become a contributor</button>
+            <button className={styles.login} onClick={() => history.replace("/login")}>
+              Login
+            </button>
+            <button
+              className={styles.contributor}
+              onClick={() => history.replace("/become-contributor")}
+            >
+              Become a contributor
+            </button>
           </div>
         </div>
       </div>
-
       <button type="button" className={styles.subscribe}>
         subscribe
       </button>
+
+      
     </div>
+
+    
   );
 };
 export default Account;

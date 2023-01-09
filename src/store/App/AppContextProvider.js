@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import { AppContext } from "./app-context";
 const getAppMode = () => {
   const appMode = localStorage.getItem("flownews-mode");
-
   if (appMode) return JSON.parse(appMode);
   return { display: "light" };
 };
@@ -11,7 +10,8 @@ const AppContextProvider = (props) => {
   const [appMode, setAppMode] = useState(getAppMode);
   const [isSearching, setIsSearching] = useState(false);
   const [toggleMenu, setToggleMenu] = useState(false);
-  console.log(appMode);
+  const [lastLocation, setLastLocation] = useState("");
+
   const changeAppDisplayMode = (mode) => {
     setAppMode((prevMode) => {
       return { ...prevMode, display: mode };
@@ -24,6 +24,9 @@ const AppContextProvider = (props) => {
   }, []);
 
   const toggleMenuHandler = useCallback(() => {
+    setIsSearching((prevState) => {
+      if (prevState) return !prevState;
+    });
     setToggleMenu((prevState) => {
       return !prevState;
     });
@@ -45,12 +48,18 @@ const AppContextProvider = (props) => {
       localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, display: "dark" }));
     }
   }, [appMode]);
+
   return (
     <AppContext.Provider
       value={{
         appMode,
         isSearching,
         toggleMenu,
+        lastLocation,
+        onSetLastLocation: (location) => {
+          setLastLocation(location);
+        },
+
         onToggleSearch: toggleSearchHandler,
         onToggleMenu: toggleMenuHandler,
         onCloseMenu: closeMenuHandler,

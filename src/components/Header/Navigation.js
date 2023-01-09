@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useCallback, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../store/Auth/auth-context";
 import { BiMoon, BiSearch, BiSun, BiX } from "react-icons/bi";
 
@@ -7,12 +8,16 @@ import styles from "./Navigation.module.css";
 import { AppContext } from "../../store/App/app-context";
 import SearchField from "../../UI/SearchField";
 import Logo from "./Logo";
+
 const Navigation = (props) => {
+  const history = useHistory();
   let className = props.className || "";
   const {
     appMode,
+
     toggleMenu,
     isSearching,
+
     onToggleMenu,
     onCloseMenu,
     onChangeAppDisplayMode,
@@ -38,57 +43,60 @@ const Navigation = (props) => {
         </div>
 
         <ul>
-          {!isLoggedIn && (
-            <>
-              <li>
-                <NavLink to="/home" activeClassName={styles["active-link"]}>
-                  home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/news" activeClassName={styles["active-link"]}>
-                  news
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/travel" activeClassName={styles["active-link"]}>
-                  travel
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/celebrity" activeClassName={styles["active-link"]}>
-                  celebrity
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/food" activeClassName={styles["active-link"]}>
-                  food
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/make-up" activeClassName={styles["active-link"]}>
-                  make-up
-                </NavLink>
-              </li>
+          <li>
+            <NavLink to="/home" activeClassName={styles["active-link"]}>
+              home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/news" activeClassName={styles["active-link"]}>
+              news
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/blog" activeClassName={styles["active-link"]}>
+              blog
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/celebrity" activeClassName={styles["active-link"]}>
+              celebrity
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/food" activeClassName={styles["active-link"]}>
+              food
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/make-up" activeClassName={styles["active-link"]}>
+              make-up
+            </NavLink>
+          </li>
 
-              <div className={styles.for_mobile_only}>
-                <li>
-                  <NavLink to="/become-contributor" activeClassName={styles["active-link"]}>
-                    Become a contributor
-                  </NavLink>
-                </li>
-                <button className={styles.login}>Login</button>
-                <div className={styles.darkLight} onClick={toggleAppDisplayMode}>
-                  {appMode.display === "light" && (
-                    <BiMoon className={`${styles.icon} ${styles.moon}`} />
-                  )}
-                  {appMode.display === "dark" && (
-                    <BiSun className={`${styles.icon} ${styles.sun}`} />
-                  )}
-                </div>
-              </div>
-            </>
-          )}
+          <div className={styles.for_mobile_only}>
+            {!isLoggedIn && (
+              <>
+                <button
+                  className={styles.contributor}
+                  onClick={() => history.push("/become-contributor")}
+                >
+                  Become a contributor
+                </button>
+
+                <button className={styles.login} onClick={() => history.push("/login")}>
+                  Login
+                </button>
+              </>
+            )}
+
+            <div className={styles.darkLight} onClick={toggleAppDisplayMode}>
+              {appMode.display === "light" && (
+                <BiMoon className={`${styles.icon} ${styles.moon}`} />
+              )}
+              {appMode.display === "dark" && <BiSun className={`${styles.icon} ${styles.sun}`} />}
+            </div>
+          </div>
         </ul>
       </div>
 
