@@ -1,0 +1,31 @@
+.details {
+	position: relative;
+	font-family: var(--nav-link-font-family);
+	font-size: var(--nav-link-font-size);
+}
+.nav-user {
+	position: absolute;
+	width: 300px;
+	top: 30px;
+	right: 0;
+	background-color: white;
+	box-shadow: 2px 3px #ccc, -2px 3px #ccc;
+}
+
+.nav-user-list {
+	margin: 0.5rem 0;
+}
+
+.nav-user-list > li {
+	padding: 0.5rem 1rem;
+	cursor: pointer;
+}
+
+.nav-user-list > li:hover {
+	color: white;
+	background-color: var(--nav-text-hover-color);
+}
+
+.nav-user-list > li:not(.nav-user-list > li:last-of-type) {
+	margin-bottom: 0.5rem;
+}
