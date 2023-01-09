@@ -36,6 +36,8 @@ const Routes = () => {
             </Route>
           </Switch>
         )}
+        {isLoggedIn && <Switch>
+          </Switch>}
 
         <Route path="*">
           <NotFoundPage />

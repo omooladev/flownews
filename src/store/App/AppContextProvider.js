@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+
 import { AppContext } from "./app-context";
 const getAppMode = () => {
   const appMode = localStorage.getItem("flownews-mode");
