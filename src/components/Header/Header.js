@@ -15,6 +15,7 @@ const Header = () => {
       <Logo className={styles.logo} />
       <Navigation className={styles.navigation} />
       {!isLoggedIn && <Account className={styles.account_subscribe} />}
+      {/TODO* {isLoggedIn && add header profile box component here } */} 
     </header>
   );
 };
