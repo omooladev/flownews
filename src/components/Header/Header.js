@@ -17,7 +17,6 @@ const Header = () => {
 			<Navigation className={styles.navigation} />
 			{!isLoggedIn && <Account className={styles.account_subscribe} />}
 			{isLoggedIn && <ProfileBox />}
-			<ProfileBox />
 		</header>
 	);
 };
