@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+
 import { AppContext } from "./app-context";
 const getAppMode = () => {
   const appMode = localStorage.getItem("flownews-mode");
@@ -10,6 +11,7 @@ const AppContextProvider = (props) => {
   const [appMode, setAppMode] = useState(getAppMode);
   const [isSearching, setIsSearching] = useState(false);
   const [toggleMenu, setToggleMenu] = useState(false);
+  const [profileBoxIsActive, setProfileBoxIsActive] = useState(false);
   const [lastLocation, setLastLocation] = useState("");
 
   const changeAppDisplayMode = (mode) => {
@@ -56,6 +58,17 @@ const AppContextProvider = (props) => {
         isSearching,
         toggleMenu,
         lastLocation,
+        profileBoxIsActive,
+        onToggleProfileBox: () => {
+          setProfileBoxIsActive((prevState) => {
+            return !prevState;
+          });
+        },
+        onCloseProfileBox: () => {
+          setProfileBoxIsActive((prevState) => {
+            return false;
+          });
+        },
         onSetLastLocation: (location) => {
           setLastLocation(location);
         },

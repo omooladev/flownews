@@ -2,6 +2,7 @@ import { useCallback, useContext } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 
 import { AppContext } from "../../store/App/app-context";
+import { AuthContext } from "../../store/Auth/auth-context";
 
 // import { BiX } from "react-icons/bi";
 // import Card from "../../UI/Card";
@@ -10,6 +11,7 @@ import styles from "./Auth.module.css";
 
 const Auth = () => {
   const { lastLocation } = useContext(AppContext);
+  const { onLogin } = useContext(AuthContext);
   const history = useHistory();
   const location = history.location.pathname;
   const loginLocation = location.includes("/login");
@@ -19,6 +21,14 @@ const Auth = () => {
   const closePopUpHandler = useCallback(() => {
     return history.replace(lastLocation);
   }, [history, lastLocation]);
+
+  const submitFormHandler = useCallback(
+    (event) => {
+      event.preventDefault();
+      if (loginLocation) onLogin();
+    },
+    [onLogin, loginLocation]
+  );
   return (
     <PopUp onClick={closePopUpHandler} className={`auth_popup ${styles.login}`}>
       {loginLocation && <h1>Log in to FlowNews</h1>}
@@ -36,7 +46,7 @@ const Auth = () => {
         <BiX />
       </Card> */}
 
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={submitFormHandler}>
         <div className={styles.form_control}>
           <label>Email Address</label>
           <input type="email" />

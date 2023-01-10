@@ -1,0 +1,76 @@
+.details {
+  display: none;
+}
+@media (min-width: 500px) {
+  .details {
+    display: block;
+    position: relative;
+    font-family: var(--nav-link-font-family);
+    font-size: var(--nav-link-font-size);
+  }
+  .details .profile_box {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    height: auto;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .details .profile_box p {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    background-color: var(--nav-text-hover-color);
+    color: var(--body-color);
+    margin: 0 0.5rem;
+    text-align: center;
+    font-size: 1.6rem;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .details .profile_box .icon {
+    color: var(--nav-text-color);
+    font-size: 0.8rem;
+  }
+
+  .nav-user {
+    position: absolute;
+    width: 300px;
+    top: 5vh;
+    right: 0;
+    background-color: var(--nav-profile-box-color);
+    /* box-shadow: 2px 3px #ccc, -2px 3px #ccc; */
+    box-shadow: 2px 3px #ccc, -2px -1px #ccc;
+  }
+
+  .nav-user::before {
+    content: "";
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    right: 14px;
+    top: -4px;
+    transform: rotate(-45deg);
+    background-color: var(--nav-text-hover-color);
+    z-index: -1;
+  }
+
+  .nav-user-list {
+    margin: 0.5rem 0;
+  }
+
+  .nav-user-list > li {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+
+  .nav-user-list > li:hover {
+    color: white;
+    background-color: var(--nav-text-hover-color);
+  }
+
+  .nav-user-list > li:not(.nav-user-list > li:last-of-type) {
+    margin-bottom: 0.5rem;
+  }
+}
