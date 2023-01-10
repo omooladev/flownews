@@ -16,8 +16,16 @@ const AuthContextProvider = (props) => {
     history.replace(`/@${dummyContributor.username}`);
   }, [history, appMode]);
 
+  const signOutHandler = useCallback(() => {
+    setIsLoggedIn((prevState) => {
+      return false;
+    });
+    localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, isLoggedIn: false }));
+    history.replace("/home");
+  }, [history, appMode]);
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, onLogin: loginHandler }}>
+    <AuthContext.Provider value={{ isLoggedIn, onLogin: loginHandler, onSignOut: signOutHandler }}>
       {props.children}
     </AuthContext.Provider>
   );
