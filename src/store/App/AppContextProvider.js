@@ -20,13 +20,31 @@ const AppContextProvider = (props) => {
     });
   };
   const toggleSearchHandler = useCallback(() => {
+    setProfileBoxIsActive((prevState) => {
+      if (prevState) return !prevState;
+    });
     setIsSearching((prevState) => {
+      return !prevState;
+    });
+  }, []);
+
+  const toggleProfileBoxHandler = useCallback(() => {
+    setIsSearching((prevState) => {
+      if (prevState) return !prevState;
+    });
+    setToggleMenu((prevState) => {
+      if (prevState) return !prevState;
+    });
+    setProfileBoxIsActive((prevState) => {
       return !prevState;
     });
   }, []);
 
   const toggleMenuHandler = useCallback(() => {
     setIsSearching((prevState) => {
+      if (prevState) return !prevState;
+    });
+    setProfileBoxIsActive((prevState) => {
       if (prevState) return !prevState;
     });
     setToggleMenu((prevState) => {
@@ -41,7 +59,6 @@ const AppContextProvider = (props) => {
     });
   }, []);
 
-  
   useEffect(() => {
     if (appMode.display === "light") {
       document.body.classList.remove("dark");
@@ -61,11 +78,7 @@ const AppContextProvider = (props) => {
         toggleMenu,
         lastLocation,
         profileBoxIsActive,
-        onToggleProfileBox: () => {
-          setProfileBoxIsActive((prevState) => {
-            return !prevState;
-          });
-        },
+        onToggleProfileBox: toggleProfileBoxHandler,
         onCloseProfileBox: () => {
           setProfileBoxIsActive((prevState) => {
             return false;
