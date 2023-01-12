@@ -40,6 +40,8 @@ const AppContextProvider = (props) => {
       return;
     });
   }, []);
+
+  
   useEffect(() => {
     if (appMode.display === "light") {
       document.body.classList.remove("dark");

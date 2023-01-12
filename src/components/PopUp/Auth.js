@@ -4,7 +4,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import { AppContext } from "../../store/App/app-context";
 import { AuthContext } from "../../store/Auth/auth-context";
 
-// import { BiX } from "react-icons/bi";
+import { BiX } from "react-icons/bi";
 // import Card from "../../UI/Card";
 import PopUp from "../../UI/PopUp";
 import styles from "./Auth.module.css";
@@ -31,6 +31,7 @@ const Auth = () => {
   );
   return (
     <PopUp onClick={closePopUpHandler} className={`auth_popup ${styles.login}`}>
+      <BiX className={`${styles.icon} ${styles.cancel}`} onClick={closePopUpHandler} />
       {loginLocation && <h1>Log in to FlowNews</h1>}
       {becomeContributorLocation && <h1>Create a FlowNews account</h1>}
       {forgotPasswordLocation && (
@@ -45,7 +46,6 @@ const Auth = () => {
         <p>Here is where the reply will appear</p>
         <BiX />
       </Card> */}
-
       <form className={styles.form} onSubmit={submitFormHandler}>
         <div className={styles.form_control}>
           <label>Email Address</label>
