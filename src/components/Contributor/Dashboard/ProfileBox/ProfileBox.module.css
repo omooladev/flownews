@@ -17,6 +17,16 @@
     height: auto;
     font-family: Arial, Helvetica, sans-serif;
   }
+  .details .profile_box .profile_picture {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    margin: 0 0.5rem;
+    object-fit: cover;
+    object-position: center;
+    background-color: var(--nav-text-hover-color);
+    color: var(--body-color);
+  }
   .details .profile_box p {
     height: 32px;
     width: 32px;
@@ -37,7 +47,7 @@
   .nav-user {
     position: absolute;
     width: 300px;
-    top: 5vh;
+    top: 3rem;
     right: 0;
     background-color: var(--nav-profile-box-color);
     /* box-shadow: 2px 3px #ccc, -2px 3px #ccc; */

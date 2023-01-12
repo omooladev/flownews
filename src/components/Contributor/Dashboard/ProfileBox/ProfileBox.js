@@ -7,6 +7,7 @@ import styles from "./ProfileBox.module.css";
 const ProfileBox = () => {
   const { profileBoxIsActive, onToggleProfileBox } = useContext(AppContext);
   const { onSignOut, dummy_contributor_data } = useContext(AuthContext);
+
   const contributorProfilePicture = dummy_contributor_data.profile_picture;
   const contributorUsername = dummy_contributor_data.username[0];
 
@@ -17,7 +18,7 @@ const ProfileBox = () => {
           <img
             src={contributorProfilePicture}
             alt="contributor"
-            className={styles.contributor_profile_picture}
+            className={styles.profile_picture}
           />
         ) : (
           <p>{contributorUsername}</p>
