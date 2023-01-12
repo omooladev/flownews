@@ -18,7 +18,8 @@ const Auth = () => {
   const becomeContributorLocation = location.includes("/become-contributor");
   const forgotPasswordLocation = location.includes("/forgot-password");
 
-  const closePopUpHandler = useCallback(() => {
+  const closePopUpHandler = useCallback((event) => {
+    event.stopPropagation()
     return history.replace(lastLocation);
   }, [history, lastLocation]);
 
