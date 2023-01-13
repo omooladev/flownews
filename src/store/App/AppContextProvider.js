@@ -63,11 +63,11 @@ const AppContextProvider = (props) => {
   useEffect(() => {
     const browserLightTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
     const browserDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (appMode.display === "light" || browserLightTheme) {
+    if ( browserLightTheme) {
       document.body.classList.remove("dark");
       localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, display: "light" }));
     }
-    if (appMode.display === "dark" || browserDarkTheme) {
+    if (browserDarkTheme) {
       document.body.classList.add("dark");
       localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, display: "dark" }));
     }
