@@ -60,17 +60,13 @@ const AppContextProvider = (props) => {
     });
   }, []);
   const browserTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
+
   useEffect(() => {
-    const browserLightTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
     const browserDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (browserLightTheme) {
-      document.body.classList.remove("dark");
-      localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, display: "light" }));
-    }
     if (browserDarkTheme) {
-      document.body.classList.add("dark");
-      localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, display: "dark" }));
+      return document.body.classList.add("dark");
     }
+    return document.body.classList.remove("dark");
   }, [browserTheme]);
 
   return (
