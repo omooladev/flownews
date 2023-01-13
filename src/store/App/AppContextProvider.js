@@ -59,11 +59,11 @@ const AppContextProvider = (props) => {
       return;
     });
   }, []);
-
+  const browserTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
   useEffect(() => {
     const browserLightTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
     const browserDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if ( browserLightTheme) {
+    if (browserLightTheme) {
       document.body.classList.remove("dark");
       localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, display: "light" }));
     }
@@ -71,7 +71,7 @@ const AppContextProvider = (props) => {
       document.body.classList.add("dark");
       localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, display: "dark" }));
     }
-  }, [appMode]);
+  }, [browserTheme]);
 
   return (
     <AppContext.Provider
