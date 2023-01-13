@@ -13,6 +13,7 @@ const AppContextProvider = (props) => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [profileBoxIsActive, setProfileBoxIsActive] = useState(false);
   const [lastLocation, setLastLocation] = useState("");
+  // console.log(window.matchMedia('(prefers-color-scheme: light)').matches)
 
   const changeAppDisplayMode = (mode) => {
     setAppMode((prevMode) => {
@@ -41,7 +42,6 @@ const AppContextProvider = (props) => {
     });
   }, []);
 
-  
   useEffect(() => {
     if (appMode.display === "light") {
       document.body.classList.remove("dark");
