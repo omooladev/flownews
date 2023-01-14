@@ -91,6 +91,7 @@
 }
 .profileNavigation li a:hover {
   background-color: var(--nav-text-hover-color);
+  color: white;
 }
 .profileNavigation li a p {
   padding: 0 0.5rem;
