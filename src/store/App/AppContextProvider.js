@@ -4,16 +4,16 @@ import { AppContext } from "./app-context";
 const getAppMode = () => {
   const appMode = localStorage.getItem("flownews-mode");
   if (appMode) return JSON.parse(appMode);
-  return { display: "light" };
+  return {};
 };
 
 const AppContextProvider = (props) => {
+  const browserTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
   const [appMode, setAppMode] = useState(getAppMode);
   const [isSearching, setIsSearching] = useState(false);
   const [toggleMenu, setToggleMenu] = useState(false);
   const [profileBoxIsActive, setProfileBoxIsActive] = useState(false);
   const [lastLocation, setLastLocation] = useState("");
-  // console.log(window.matchMedia('(prefers-color-scheme: light)').matches)
 
   const changeAppDisplayMode = (mode) => {
     setAppMode((prevMode) => {
@@ -59,15 +59,18 @@ const AppContextProvider = (props) => {
       return;
     });
   }, []);
-  const browserTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
+
+  console.log(appMode);
 
   useEffect(() => {
     const browserDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (browserDarkTheme) {
-      return document.body.classList.add("dark");
+    if (browserDarkTheme || appMode.display === "dark") {
+      document.body.classList.add("dark");
+      return localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, display: "dark" }));
     }
-    return document.body.classList.remove("dark");
-  }, [browserTheme]);
+    document.body.classList.remove("dark");
+    return localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, display: "light" }));
+  }, [browserTheme, appMode]);
 
   return (
     <AppContext.Provider
