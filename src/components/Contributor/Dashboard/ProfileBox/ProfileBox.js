@@ -1,7 +1,9 @@
 import { useContext } from "react";
 import { AppContext } from "../../../../store/App/app-context";
 import { AuthContext } from "../../../../store/Auth/auth-context";
-import { FaChevronDown } from "react-icons/fa";
+import { FaChevronDown, FaEdit } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
+
 import styles from "./ProfileBox.module.css";
 
 const ProfileBox = () => {
@@ -28,6 +30,15 @@ const ProfileBox = () => {
 
       {profileBoxIsActive && (
         <nav className={`${styles["nav-user"]}`}>
+          <ul className={styles.profileNavigation}>
+            <li className={styles.write}>
+              <NavLink to="/new-story">
+                <FaEdit className={styles.icon} />
+                <p>Write</p>
+              </NavLink>
+            </li>
+          </ul>
+          <hr />
           <ul className={`${styles["nav-user-list"]}`}>
             <li>Profile</li>
             <li>Lists</li>

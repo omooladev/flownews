@@ -69,6 +69,7 @@
 .nav-user-list > li {
   padding: 0.5rem 1rem;
   cursor: pointer;
+  color: var(--nav-text-color);
 }
 
 .nav-user-list > li:hover {
@@ -78,4 +79,24 @@
 
 .nav-user-list > li:not(.nav-user-list > li:last-of-type) {
   margin-bottom: 0.5rem;
+}
+
+.profileNavigation li a {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  color: var(--nav-text-color);
+  width: 100%;
+  padding: 0.5rem 1rem;
+}
+.profileNavigation li a:hover {
+  background-color: var(--nav-text-hover-color);
+}
+.profileNavigation li a p {
+  padding: 0 0.5rem;
+}
+@media (min-width: 650px) {
+  li.write {
+    display: none;
+  }
 }
