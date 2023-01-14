@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useCallback, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../store/Auth/auth-context";
-import { BiSearch, BiX, BiSun, BiMoon } from "react-icons/bi";
+import { BiSearch, BiX } from "react-icons/bi";
 
 import styles from "./Navigation.module.css";
 import { AppContext } from "../../store/App/app-context";
@@ -14,8 +14,7 @@ const Navigation = (props) => {
   let className = props.className || "";
   const {
     toggleMenu,
-    appMode,
-    onChangeAppDisplayMode,
+  
     isSearching,
 
     onToggleMenu,
@@ -25,12 +24,12 @@ const Navigation = (props) => {
   } = useContext(AppContext);
   const { isLoggedIn } = useContext(AuthContext);
 
-  const toggleAppDisplayMode = useCallback(() => {
-    if (appMode.display === "light") {
-      return onChangeAppDisplayMode("dark");
-    }
-    return onChangeAppDisplayMode("light");
-  }, [appMode, onChangeAppDisplayMode]);
+  // const toggleAppDisplayMode = useCallback(() => {
+  //   if (appMode.display === "light") {
+  //     return onChangeAppDisplayMode("dark");
+  //   }
+  //   return onChangeAppDisplayMode("light");
+  // }, [appMode, onChangeAppDisplayMode]);
   const onToggleSearchHandler = useCallback(() => {
     onToggleSearch();
   }, [onToggleSearch]);
@@ -101,10 +100,10 @@ const Navigation = (props) => {
       </div>
 
       <div className={styles["darkLight-searchBox"]}>
-        <div className={styles.darkLight} onClick={toggleAppDisplayMode}>
+        {/* <div className={styles.darkLight} onClick={toggleAppDisplayMode}>
           {appMode.display === "light" && <BiMoon className={`${styles.icon} ${styles.moon}`} />}
           {appMode.display === "dark" && <BiSun className={`${styles.icon} ${styles.sun}`} />}
-        </div>
+        </div> */}
         <div className={styles.searchBox}>
           <div className={styles.searchToggle} onClick={onToggleSearchHandler}>
             {isSearching && <BiX className={`${styles.icon} ${styles.cancel}`} />}

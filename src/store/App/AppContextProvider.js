@@ -60,11 +60,9 @@ const AppContextProvider = (props) => {
     });
   }, []);
 
-  console.log(appMode);
-
   useEffect(() => {
     const browserDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (browserDarkTheme || appMode.display === "dark") {
+    if (browserDarkTheme) {
       document.body.classList.add("dark");
       return localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, display: "dark" }));
     }
