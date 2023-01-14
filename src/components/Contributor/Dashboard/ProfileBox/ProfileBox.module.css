@@ -70,6 +70,7 @@
   padding: 0.5rem 1rem;
   cursor: pointer;
   color: var(--nav-text-color);
+  color: black;
 }
 
 .nav-user-list > li:hover {
@@ -88,6 +89,7 @@
   color: var(--nav-text-color);
   width: 100%;
   padding: 0.5rem 1rem;
+  color: black;
 }
 .profileNavigation li a:hover {
   background-color: var(--nav-text-hover-color);
