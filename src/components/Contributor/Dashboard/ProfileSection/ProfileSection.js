@@ -23,7 +23,7 @@ const ProfileSection = () => {
             <p className={styles.signed_in_as}>Signed in as</p>
             <label className={styles.username}>{contributorFullUsername}</label>
           </ul>
-
+          <hr />
           <ul className={`${styles["nav-user-list"]}`}>
             <li className={styles.write}>
               <NavLink to="/new-story">
@@ -32,7 +32,7 @@ const ProfileSection = () => {
               </NavLink>
             </li>
           </ul>
-          <hr />
+          <hr className={styles.write_line}/>
           <ul className={`${styles["nav-user-list"]}`}>
             <li>Profile</li>
             <li>Lists</li>
@@ -42,7 +42,6 @@ const ProfileSection = () => {
           <hr />
           <ul className={`${styles["nav-user-list"]}`}>
             <li>Settings</li>
-
             <li>Manage publications</li>
           </ul>
           <hr />

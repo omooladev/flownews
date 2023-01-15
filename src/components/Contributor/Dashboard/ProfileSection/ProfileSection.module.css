@@ -79,11 +79,19 @@
   padding: 0.5rem 1rem;
   color: black;
 }
-.profileNavigation li a:hover {
+.profileNavigation li a:hover,li.write a:hover {
   background-color: var(--nav-text-hover-color);
   color: white;
 }
 .profileNavigation li a p {
+  padding: 0 0.5rem;
+}
+li.write a {
+  display: flex;
+  color: black;
+  align-items: center;
+}
+li.write a p {
   padding: 0 0.5rem;
 }
 @media (min-width: 500px) {
@@ -99,6 +107,9 @@
 }
 @media (min-width: 650px) {
   li.write {
+    display: none;
+  }
+  .write_line {
     display: none;
   }
 }
