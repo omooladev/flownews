@@ -40,6 +40,14 @@
   color: var(--nav-text-color);
   color: black;
 }
+.nav-user-list .signed_in_as {
+  padding: 0 1rem;
+}
+.nav-user-list .username {
+  padding: 0 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+}
 
 .nav-user-list > li:hover {
   color: white;
@@ -48,6 +56,18 @@
 
 .nav-user-list > li:not(.nav-user-list > li:last-of-type) {
   margin-bottom: 0.5rem;
+}
+.sign_out {
+  cursor: pointer;
+  padding: 0 1rem;
+  font-weight: 300;
+  margin: 0;
+}
+.email {
+  cursor: pointer;
+  padding: 0 1rem;
+  font-size: 0.9rem;
+  margin: 0;
 }
 
 .profileNavigation li a {

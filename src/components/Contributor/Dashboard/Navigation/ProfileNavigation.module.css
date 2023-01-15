@@ -33,7 +33,14 @@
   padding: 0 0.5rem;
   margin-top: 0.2rem;
 }
-
+.profile_navigation .navigation .notification {
+  display: none;
+}
+@media (min-width: 350px) {
+  .profile_navigation .navigation .notification {
+    display: block;
+  }
+}
 @media (min-width: 650px) {
   .navigation li.write {
     display: flex;

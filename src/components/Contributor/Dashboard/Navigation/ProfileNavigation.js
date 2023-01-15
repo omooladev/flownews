@@ -13,7 +13,7 @@ const ProfileNavigation = () => {
             <p>Write</p>
           </NavLink>
         </li>
-        <li>
+        <li className={styles.notification}>
           <NavLink to="/me/notifications">
             <FaRegBell className={styles.icon} />
           </NavLink>

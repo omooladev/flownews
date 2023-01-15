@@ -20,10 +20,10 @@ const ProfileSection = () => {
       {profileBoxIsActive && (
         <nav className={`${styles["nav-user"]}`}>
           <ul className={`${styles["nav-user-list"]}`}>
-            <li>Signed in as</li>
-            <li>{contributorFullUsername}</li>
+            <p className={styles.signed_in_as}>Signed in as</p>
+            <label className={styles.username}>{contributorFullUsername}</label>
           </ul>
-          <hr />
+
           <ul className={`${styles["nav-user-list"]}`}>
             <li className={styles.write}>
               <NavLink to="/new-story">
@@ -51,8 +51,12 @@ const ProfileSection = () => {
           </ul>
           <hr />
           <ul className={`${styles["nav-user-list"]}`}>
-            <li onClick={onSignOut}>Sign out</li>
-            <p>{contributorEmailAddress}</p>
+            <li onClick={onSignOut} className={styles.sign_out}>
+              Sign out
+            </li>
+            <label onClick={onSignOut} className={styles.email}>
+              {contributorEmailAddress}
+            </label>
           </ul>
         </nav>
       )}

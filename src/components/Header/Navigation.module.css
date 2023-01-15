@@ -201,7 +201,14 @@
 .navigation .navigation-list ul .profile_box label {
   color: var(--nav-text-color);
 }
-
+.notification {
+  display: block;
+}
+@media (min-width: 350px) {
+  .notification {
+    display: none;
+  }
+}
 @media (min-width: 500px) {
   .navigation .navigation-list {
     width: 50vw;
