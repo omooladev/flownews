@@ -2,35 +2,36 @@ import { NavLink } from "react-router-dom";
 import { useCallback, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../store/Auth/auth-context";
-import { BiMoon, BiSearch, BiSun, BiX } from "react-icons/bi";
+import { BiSearch, BiX } from "react-icons/bi";
+import { FaRegBell} from "react-icons/fa";
 
 import styles from "./Navigation.module.css";
 import { AppContext } from "../../store/App/app-context";
 import SearchField from "../../UI/SearchField";
 import Logo from "./Logo";
+import ProfileBox from "../Contributor/Dashboard/ProfileSection/ProfileBox";
 
 const Navigation = (props) => {
   const history = useHistory();
   let className = props.className || "";
   const {
-    appMode,
-
     toggleMenu,
+
     isSearching,
 
     onToggleMenu,
     onCloseMenu,
-    onChangeAppDisplayMode,
+
     onToggleSearch,
   } = useContext(AppContext);
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, dummy_contributor_data } = useContext(AuthContext);
 
-  const toggleAppDisplayMode = useCallback(() => {
-    if (appMode.display === "light") {
-      return onChangeAppDisplayMode("dark");
-    }
-    return onChangeAppDisplayMode("light");
-  }, [appMode, onChangeAppDisplayMode]);
+  // const toggleAppDisplayMode = useCallback(() => {
+  //   if (appMode.display === "light") {
+  //     return onChangeAppDisplayMode("dark");
+  //   }
+  //   return onChangeAppDisplayMode("light");
+  // }, [appMode, onChangeAppDisplayMode]);
   const onToggleSearchHandler = useCallback(() => {
     onToggleSearch();
   }, [onToggleSearch]);
@@ -79,32 +80,48 @@ const Navigation = (props) => {
               <>
                 <button
                   className={styles.contributor}
-                  onClick={() => history.push("/become-contributor")}
+                  onClick={() => history.replace("/become-contributor")}
                 >
                   Become a contributor
                 </button>
 
-                <button className={styles.login} onClick={() => history.push("/login")}>
+                <button className={styles.login} onClick={() => history.replace("/login")}>
                   Login
                 </button>
               </>
             )}
 
-            <div className={styles.darkLight} onClick={toggleAppDisplayMode}>
+            {/* <div className={styles.darkLight} onClick={toggleAppDisplayMode}>
               {appMode.display === "light" && (
                 <BiMoon className={`${styles.icon} ${styles.moon}`} />
               )}
               {appMode.display === "dark" && <BiSun className={`${styles.icon} ${styles.sun}`} />}
-            </div>
+            </div> */}
           </div>
+
+          {isLoggedIn && (
+            <>
+              <ProfileBox
+                className={styles.profile_box}
+                onClick={() => {
+                  history.replace(`/@${dummy_contributor_data.username}`);
+                }}
+              />
+              <li className={styles.notification}>
+                <NavLink to="/me/notifications">
+                  <FaRegBell className={styles.icon} />
+                </NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </div>
 
       <div className={styles["darkLight-searchBox"]}>
-        <div className={styles.darkLight} onClick={toggleAppDisplayMode}>
+        {/* <div className={styles.darkLight} onClick={toggleAppDisplayMode}>
           {appMode.display === "light" && <BiMoon className={`${styles.icon} ${styles.moon}`} />}
           {appMode.display === "dark" && <BiSun className={`${styles.icon} ${styles.sun}`} />}
-        </div>
+        </div> */}
         <div className={styles.searchBox}>
           <div className={styles.searchToggle} onClick={onToggleSearchHandler}>
             {isSearching && <BiX className={`${styles.icon} ${styles.cancel}`} />}

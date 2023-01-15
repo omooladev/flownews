@@ -193,7 +193,22 @@
 .navigation .darkLight-searchBox .darkLight {
   display: none;
 }
-
+.navigation .navigation-list ul .profile_box {
+  display: flex;
+  width: auto;
+  margin: 0.5rem 0;
+}
+.navigation .navigation-list ul .profile_box label {
+  color: var(--nav-text-color);
+}
+.notification {
+  display: block;
+}
+@media (min-width: 350px) {
+  .notification {
+    display: none;
+  }
+}
 @media (min-width: 500px) {
   .navigation .navigation-list {
     width: 50vw;
@@ -218,6 +233,9 @@
     opacity: 1;
   }
   .for_mobile_only .icon {
+    display: none;
+  }
+  .navigation .navigation-list ul .profile_box {
     display: none;
   }
 }

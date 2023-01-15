@@ -4,10 +4,11 @@ import { AppContext } from "./app-context";
 const getAppMode = () => {
   const appMode = localStorage.getItem("flownews-mode");
   if (appMode) return JSON.parse(appMode);
-  return { display: "light" };
+  return {};
 };
 
 const AppContextProvider = (props) => {
+  const browserTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
   const [appMode, setAppMode] = useState(getAppMode);
   const [isSearching, setIsSearching] = useState(false);
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -20,13 +21,31 @@ const AppContextProvider = (props) => {
     });
   };
   const toggleSearchHandler = useCallback(() => {
+    setProfileBoxIsActive((prevState) => {
+      if (prevState) return !prevState;
+    });
     setIsSearching((prevState) => {
+      return !prevState;
+    });
+  }, []);
+
+  const toggleProfileBoxHandler = useCallback(() => {
+    setIsSearching((prevState) => {
+      if (prevState) return !prevState;
+    });
+    setToggleMenu((prevState) => {
+      if (prevState) return !prevState;
+    });
+    setProfileBoxIsActive((prevState) => {
       return !prevState;
     });
   }, []);
 
   const toggleMenuHandler = useCallback(() => {
     setIsSearching((prevState) => {
+      if (prevState) return !prevState;
+    });
+    setProfileBoxIsActive((prevState) => {
       if (prevState) return !prevState;
     });
     setToggleMenu((prevState) => {
@@ -40,16 +59,16 @@ const AppContextProvider = (props) => {
       return;
     });
   }, []);
+
   useEffect(() => {
-    if (appMode.display === "light") {
-      document.body.classList.remove("dark");
-      localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, display: "light" }));
-    }
-    if (appMode.display === "dark") {
+    const browserDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (browserDarkTheme) {
       document.body.classList.add("dark");
-      localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, display: "dark" }));
+      return localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, display: "dark" }));
     }
-  }, [appMode]);
+    document.body.classList.remove("dark");
+    return localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, display: "light" }));
+  }, [browserTheme, appMode]);
 
   return (
     <AppContext.Provider
@@ -59,11 +78,7 @@ const AppContextProvider = (props) => {
         toggleMenu,
         lastLocation,
         profileBoxIsActive,
-        onToggleProfileBox: () => {
-          setProfileBoxIsActive((prevState) => {
-            return !prevState;
-          });
-        },
+        onToggleProfileBox: toggleProfileBoxHandler,
         onCloseProfileBox: () => {
           setProfileBoxIsActive((prevState) => {
             return false;

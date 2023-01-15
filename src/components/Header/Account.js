@@ -2,7 +2,6 @@ import { useCallback, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
 
-
 import styles from "./Account.module.css";
 const Account = (props) => {
   const history = useHistory();
@@ -51,11 +50,7 @@ const Account = (props) => {
       <button type="button" className={styles.subscribe}>
         subscribe
       </button>
-
-      
     </div>
-
-    
   );
 };
 export default Account;
