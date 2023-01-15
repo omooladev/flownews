@@ -1,36 +1,30 @@
 import { useContext } from "react";
+import { NavLink } from "react-router-dom";
 import { AppContext } from "../../../../store/App/app-context";
 import { AuthContext } from "../../../../store/Auth/auth-context";
-import { FaChevronDown, FaEdit } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { FaEdit } from "react-icons/fa";
 
-import styles from "./ProfileBox.module.css";
+import styles from "./ProfileSection.module.css";
+import ProfileBox from "./ProfileBox";
 
-const ProfileBox = () => {
+const ProfileSection = () => {
   const { profileBoxIsActive, onToggleProfileBox } = useContext(AppContext);
   const { onSignOut, dummy_contributor_data } = useContext(AuthContext);
 
-  const contributorProfilePicture = dummy_contributor_data.profile_picture;
-  const contributorUsername = dummy_contributor_data.username[0];
+  const contributorFullUsername = dummy_contributor_data.username;
+  const contributorEmailAddress = dummy_contributor_data.email;
 
   return (
-    <section className={styles.details}>
-      <div onClick={onToggleProfileBox} className={styles.profile_box}>
-        {contributorProfilePicture ? (
-          <img
-            src={contributorProfilePicture}
-            alt="contributor"
-            className={styles.profile_picture}
-          />
-        ) : (
-          <p>{contributorUsername}</p>
-        )}
-        <FaChevronDown className={styles.icon} />
-      </div>
-
+    <section className={styles.profile_section}>
+      <ProfileBox className={styles.profile_box} onClick={onToggleProfileBox} />
       {profileBoxIsActive && (
         <nav className={`${styles["nav-user"]}`}>
-          <ul className={styles.profileNavigation}>
+          <ul className={`${styles["nav-user-list"]}`}>
+            <li>Signed in as</li>
+            <li>{contributorFullUsername}</li>
+          </ul>
+          <hr />
+          <ul className={`${styles["nav-user-list"]}`}>
             <li className={styles.write}>
               <NavLink to="/new-story">
                 <FaEdit className={styles.icon} />
@@ -48,18 +42,17 @@ const ProfileBox = () => {
           <hr />
           <ul className={`${styles["nav-user-list"]}`}>
             <li>Settings</li>
-            <li>Refine recommendations</li>
+
             <li>Manage publications</li>
           </ul>
           <hr />
           <ul className={`${styles["nav-user-list"]}`}>
             <li>Become a member</li>
-            <li>Apply to the partner program</li>
-            <li>Gift a membership</li>
           </ul>
           <hr />
           <ul className={`${styles["nav-user-list"]}`}>
             <li onClick={onSignOut}>Sign out</li>
+            <p>{contributorEmailAddress}</p>
           </ul>
         </nav>
       )}
@@ -67,4 +60,4 @@ const ProfileBox = () => {
   );
 };
 
-export default ProfileBox;
+export default ProfileSection;

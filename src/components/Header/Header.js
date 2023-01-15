@@ -7,7 +7,7 @@ import Logo from "./Logo";
 import Menu from "./Menu";
 import Navigation from "./Navigation";
 
-import ProfileNavigation from "../Contributor/Dashboard/ProfileNavigation";
+import ProfileNavigation from "../Contributor/Dashboard/Navigation/ProfileNavigation";
 const Header = () => {
   const { toggleMenu } = useContext(AppContext);
   const { isLoggedIn } = useContext(AuthContext);

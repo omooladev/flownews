@@ -1,48 +1,16 @@
-.details {
-  display: block;
+.profile_section {
+  display: none;
   position: relative;
   font-family: var(--nav-link-font-family);
   font-size: var(--nav-link-font-size);
 }
-.details .profile_box {
-  position: relative;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  height: auto;
-  font-family: Arial, Helvetica, sans-serif;
-}
-.details .profile_box .profile_picture {
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
-  margin: 0 0.5rem;
-  object-fit: cover;
-  object-position: center;
-  background-color: var(--nav-text-hover-color);
-  color: var(--body-color);
-}
-.details .profile_box p {
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
-  background-color: var(--nav-text-hover-color);
-  color: var(--body-color);
-  margin: 0 0.5rem;
-  text-align: center;
-  font-size: 1.6rem;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.details .profile_box .icon {
-  color: var(--nav-text-color);
-  font-size: 0.8rem;
+.profile_box {
+  display: none;
 }
 
 .nav-user {
   position: absolute;
-  width: 300px;
+  width: 200px;
   top: 3rem;
   right: 0;
   background-color: var(--nav-profile-box-color);
@@ -97,6 +65,17 @@
 }
 .profileNavigation li a p {
   padding: 0 0.5rem;
+}
+@media (min-width: 500px) {
+  .profile_section {
+    display: block;
+  }
+  .profile_box {
+    display: flex;
+  }
+  .nav-user {
+    width: 300px;
+  }
 }
 @media (min-width: 650px) {
   li.write {

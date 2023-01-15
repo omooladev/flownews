@@ -8,13 +8,14 @@ import styles from "./Navigation.module.css";
 import { AppContext } from "../../store/App/app-context";
 import SearchField from "../../UI/SearchField";
 import Logo from "./Logo";
+import ProfileBox from "../Contributor/Dashboard/ProfileSection/ProfileBox";
 
 const Navigation = (props) => {
   const history = useHistory();
   let className = props.className || "";
   const {
     toggleMenu,
-  
+
     isSearching,
 
     onToggleMenu,
@@ -22,7 +23,7 @@ const Navigation = (props) => {
 
     onToggleSearch,
   } = useContext(AppContext);
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, dummy_contributor_data } = useContext(AuthContext);
 
   // const toggleAppDisplayMode = useCallback(() => {
   //   if (appMode.display === "light") {
@@ -96,6 +97,17 @@ const Navigation = (props) => {
               {appMode.display === "dark" && <BiSun className={`${styles.icon} ${styles.sun}`} />}
             </div> */}
           </div>
+
+          {isLoggedIn && (
+            <>
+              <ProfileBox
+                className={styles.profile_box}
+                onClick={() => {
+                  history.replace(`/@${dummy_contributor_data.username}`);
+                }}
+              />
+            </>
+          )}
         </ul>
       </div>
 

@@ -4,7 +4,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 0.5rem;
 }
 
 .profile_navigation .navigation li {
