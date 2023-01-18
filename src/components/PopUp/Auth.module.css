@@ -32,6 +32,12 @@
   opacity: 0.8;
   border-radius: 0.4rem;
   padding: 0.5rem;
+  width: 100%;
+}
+
+.cancel_icon {
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 .login .form {
   width: 100%;
