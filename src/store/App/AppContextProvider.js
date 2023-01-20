@@ -53,7 +53,8 @@ const AppContextProvider = (props) => {
     });
   }, []);
 
-  const closeMenuHandler = useCallback(() => {
+  const closeMenuHandler = useCallback((event) => {
+    event.stopPropagation();
     setToggleMenu((prevState) => {
       if (prevState) return false;
       return;

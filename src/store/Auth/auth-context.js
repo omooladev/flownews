@@ -13,5 +13,4 @@ export const AuthContext = React.createContext({
   onGetContributorData: () => {},
   onBecomeAContributor: () => {},
   onSignOut: () => {},
-  dummy_contributor_data: {},
 });

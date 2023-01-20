@@ -32,9 +32,6 @@ const AuthContextProvider = (props) => {
 
       if (data) {
         history.replace(`/@${data.user.username}`);
-        setUserData((prevData) => {
-          return { ...prevData, ...data };
-        });
         setIsLoggedIn((prevState) => {
           return !prevState;
         });
@@ -69,29 +66,24 @@ const AuthContextProvider = (props) => {
         method: "GET",
         token,
       });
-      const error = (await response.error) || "";
+      //const error = (await response.error) || "";
       const data = (await response.data) || "";
       if (data) {
         const isSearch = data.isSearch || "";
-        const tokenExpirationTime = data.tokenExpirationTime;
+        //const tokenExpirationTime = data.tokenExpirationTime;
         if (!isSearch) {
-          return setUserData((prevData) => {
+          setUserData((prevData) => {
             return { ...prevData, ...data };
           });
         }
-        return setSearchedContributorData((prevData) => {
-          return { ...prevData, ...data };
-        });
+        if (isSearch) {
+          setSearchedContributorData((prevData) => {
+            return { ...prevData, ...data };
+          });
+        }
       }
-      // isSearch: false;
-      // tokenExpirationTime: "30d";
-      // user: createdAt: "2023-01-16T21:35:42.574Z";
-      // email: "omosuyiadewole@gmail.com";
-      // emailIsVerified: false;
-      // userVerified: false;
-      // username: "omosuyiadewole@gmail.com";
-      // _id: "63c5c32e3099176d5eb34f75";
-      setIsLoading((prevState) => {
+
+      return setIsLoading((prevState) => {
         return !prevState;
       });
     },
