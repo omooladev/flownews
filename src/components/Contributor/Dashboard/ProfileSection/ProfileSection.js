@@ -9,10 +9,10 @@ import ProfileBox from "./ProfileBox";
 
 const ProfileSection = () => {
   const { profileBoxIsActive, onToggleProfileBox } = useContext(AppContext);
-  const { onSignOut, dummy_contributor_data } = useContext(AuthContext);
+  const { onSignOut, userData } = useContext(AuthContext);
 
-  const contributorFullUsername = dummy_contributor_data.username;
-  const contributorEmailAddress = dummy_contributor_data.email;
+  const contributorFullUsername = userData.user.username;
+  const contributorEmailAddress = userData.user.email;
 
   return (
     <section className={styles.profile_section}>
@@ -32,7 +32,7 @@ const ProfileSection = () => {
               </NavLink>
             </li>
           </ul>
-          <hr className={styles.write_line}/>
+          <hr className={styles.write_line} />
           <ul className={`${styles["nav-user-list"]}`}>
             <li>Profile</li>
             <li>Lists</li>

@@ -1,4 +1,4 @@
-import { useCallback, useContext, useRef } from "react";
+import { useCallback, useContext, useEffect, useRef } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 
 import { AppContext } from "../../store/App/app-context";
@@ -11,22 +11,26 @@ import styles from "./Auth.module.css";
 
 const Auth = () => {
   const { lastLocation } = useContext(AppContext);
-  const { onLogin, authMessage, onChangeAuthMessage, onResetAuthMessage } = useContext(AuthContext);
+  const { isLoading, onLogin, authMessage, onChangeAuthMessage, onResetAuthMessage } =
+    useContext(AuthContext);
   const history = useHistory();
   const location = history.location.pathname;
   const loginLocation = location.includes("/login");
   const becomeContributorLocation = location.includes("/become-contributor");
   const forgotPasswordLocation = location.includes("/forgot-password");
-
+  console.log(forgotPasswordLocation);
   const emailRef = useRef();
   const passwordRef = useRef();
 
   const closePopUpHandler = useCallback(
     (event) => {
       event.stopPropagation();
-      return history.replace(lastLocation);
+      history.replace(lastLocation);
+      if (authMessage.type) {
+        return onResetAuthMessage();
+      }
     },
-    [history, lastLocation]
+    [history, lastLocation, authMessage, onResetAuthMessage]
   );
 
   const submitFormHandler = useCallback(
@@ -45,9 +49,16 @@ const Auth = () => {
       onResetAuthMessage();
       if (loginLocation) onLogin({ email, password });
     },
-    [onLogin, loginLocation]
+    [onLogin, loginLocation, onChangeAuthMessage, onResetAuthMessage]
   );
 
+  useEffect(() => {
+    onResetAuthMessage();
+    try {
+      emailRef.current.value = "";
+      passwordRef.current.value = "";
+    } catch (error) {}
+  }, [location, onResetAuthMessage]);
   return (
     <PopUp onClick={closePopUpHandler} className={`auth_popup ${styles.login}`}>
       <BiX className={`${styles.icon} ${styles.cancel}`} onClick={closePopUpHandler} />
@@ -61,7 +72,7 @@ const Auth = () => {
           </p>
         </>
       )}
-      {authMessage && authMessage.type === "error" && (
+      {!isLoading && authMessage && authMessage.type === "error" && (
         <Card className={styles.reply}>
           <p>{authMessage.message}</p>
           <BiX className={styles.cancel_icon} onClick={onResetAuthMessage} />
@@ -82,15 +93,19 @@ const Auth = () => {
           </div>
         )}
         <div className={styles.form_actions}>
-          <button type="submit">{`${
-            loginLocation
-              ? "Log in"
-              : becomeContributorLocation
-              ? "Sign up"
-              : forgotPasswordLocation
-              ? "Get reset link"
-              : ""
-          }`}</button>
+          <button type="submit" disabled={isLoading ? true : false}>
+            {isLoading
+              ? "Loading..."
+              : `${
+                  loginLocation
+                    ? "Log in"
+                    : becomeContributorLocation
+                    ? "Sign up"
+                    : forgotPasswordLocation
+                    ? "Get reset link"
+                    : ""
+                }`}
+          </button>
         </div>
       </form>
       <div className={styles.form_footer}>

@@ -95,6 +95,10 @@
   color: var(--body-color);
   border-radius: 5px;
 }
+.form .form_actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
 .form .form_actions button:hover {
   opacity: 0.9;
 }

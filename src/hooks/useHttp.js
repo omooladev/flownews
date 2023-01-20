@@ -7,13 +7,12 @@ const useHttp = () => {
     try {
       if (method === "POST") {
         const { data } = await axios.post(uri, userData);
-        console.log(data);
+        return { data };
       }
-    } catch (error) {
-    //   const data = error.data;
-    //   console.log(data);
-      console.log(error);
-      return { error };
+    } catch (err) {
+      const response = err.response.data.message || "";
+      if (response) return { error: response };
+      return { error: err.message };
     }
   }, []);
 
