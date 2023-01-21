@@ -9,7 +9,7 @@ import useHttp from "../../hooks/useHttp";
 const HOSTURI = "https://flownews-api.onrender.com/api/v1";
 const AuthContextProvider = (props) => {
   const { sendRequest } = useHttp();
-  const { appMode, onCloseProfileBox } = useContext(AppContext);
+  const { appMode, onCloseProfileBox, onSetLastLocation } = useContext(AppContext);
   const token = appMode.token;
   const [userData, setUserData] = useState({ username: "" });
 
@@ -34,6 +34,7 @@ const AuthContextProvider = (props) => {
 
       if (data) {
         history.replace(`/@${data.user.username}`);
+        onSetLastLocation(`/@${data.user.username}`);
         setIsLoggedIn((prevState) => {
           return !prevState;
         });
@@ -117,7 +118,7 @@ const AuthContextProvider = (props) => {
       "flownews-mode",
       JSON.stringify({ ...appMode, isLoggedIn: false, token: null })
     );
-    // history.replace("/home");
+    history.replace("/home");
   }, [history, appMode, onCloseProfileBox]);
 
   const changeAuthMessage = useCallback((authMessage) => {
@@ -125,7 +126,7 @@ const AuthContextProvider = (props) => {
       return { ...prevMessage, ...authMessage };
     });
   }, []);
-  
+
   const resetAuthMessage = useCallback(() => {
     setAuthMessage((prevMessage) => {
       return { ...prevMessage, type: "", message: "" };

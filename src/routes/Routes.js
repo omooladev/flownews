@@ -29,9 +29,9 @@ const Routes = () => {
             <Route path="/forgot-password" exact>
               <AuthPage />
             </Route>
-            {/* <Route path="/account" exact>
+            <Route path="/account" exact>
               <Redirect to="/login" />
-            </Route> */}
+            </Route>
             <Route path="*">
               <NotFoundPage />
             </Route>
