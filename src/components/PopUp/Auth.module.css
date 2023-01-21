@@ -23,7 +23,6 @@
   color: var(--nav-text-hover-color);
 }
 .login .reply {
-  background-color: rgb(237, 178, 178);
   box-shadow: none;
   display: flex;
   justify-content: space-around;
@@ -33,6 +32,13 @@
   border-radius: 0.4rem;
   padding: 0.5rem;
   width: 100%;
+}
+.login .reply.success {
+  color: var(--body-color);
+  background-color: var(--nav-text-hover-color);
+}
+.login .reply.error {
+  background-color: rgb(237, 178, 178);
 }
 
 .cancel_icon {

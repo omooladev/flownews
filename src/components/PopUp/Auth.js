@@ -11,14 +11,19 @@ import styles from "./Auth.module.css";
 
 const Auth = () => {
   const { lastLocation } = useContext(AppContext);
-  const { isLoading, onLogin, authMessage, onChangeAuthMessage, onResetAuthMessage } =
-    useContext(AuthContext);
+  const {
+    isLoading,
+    on_Login_BecomeContributor,
+    authMessage,
+    onChangeAuthMessage,
+    onResetAuthMessage,
+  } = useContext(AuthContext);
   const history = useHistory();
   const location = history.location.pathname;
   const loginLocation = location.includes("/login");
   const becomeContributorLocation = location.includes("/become-contributor");
   const forgotPasswordLocation = location.includes("/forgot-password");
-  
+
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -34,7 +39,7 @@ const Auth = () => {
   );
 
   const submitFormHandler = useCallback(
-    (event) => {
+    async (event) => {
       event.preventDefault();
       const email = emailRef.current.value;
       const password = passwordRef.current.value;
@@ -47,9 +52,18 @@ const Auth = () => {
         return onChangeAuthMessage({ type: "error", message: "Email or password Invalid" });
       }
       onResetAuthMessage();
-      if (loginLocation) onLogin({ email, password });
+      if (loginLocation || becomeContributorLocation) {
+        const authLocation = loginLocation ? "login" : "become-contributor";
+        on_Login_BecomeContributor(authLocation, { email, password });
+      }
     },
-    [onLogin, loginLocation, onChangeAuthMessage, onResetAuthMessage]
+    [
+      on_Login_BecomeContributor,
+      loginLocation,
+      becomeContributorLocation,
+      onChangeAuthMessage,
+      onResetAuthMessage,
+    ]
   );
 
   useEffect(() => {
@@ -72,8 +86,12 @@ const Auth = () => {
           </p>
         </>
       )}
-      {!isLoading && authMessage && authMessage.type === "error" && (
-        <Card className={styles.reply}>
+      {!isLoading && authMessage && authMessage.type && (
+        <Card
+          className={`${styles.reply} ${
+            authMessage.type === "success" ? styles["success"] : styles["error"]
+          }`}
+        >
           <p>{authMessage.message}</p>
           <BiX className={styles.cancel_icon} onClick={onResetAuthMessage} />
         </Card>

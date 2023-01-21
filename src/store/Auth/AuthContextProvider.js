@@ -1,12 +1,11 @@
 import { useCallback, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "./auth-context";
-import { dummyContributor } from "../../data";
 import { AppContext } from "../App/app-context";
 import useHttp from "../../hooks/useHttp";
 
-//const HOSTURI = "http://localhost:5000/api/v1";
-const HOSTURI = "https://flownews-api.onrender.com/api/v1";
+const HOSTURI = "http://localhost:5000/api/v1";
+//const HOSTURI = "https://flownews-api.onrender.com/api/v1";
 const AuthContextProvider = (props) => {
   const { sendRequest } = useHttp();
   const { appMode, onCloseProfileBox } = useContext(AppContext);
@@ -20,19 +19,23 @@ const AuthContextProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(appMode.isLoggedIn);
   const [authMessage, setAuthMessage] = useState({ type: "", message: "" });
   const history = useHistory();
-  const loginHandler = useCallback(
-    async (userData) => {
+  const changeAuthMessage = useCallback((authMessage) => {
+    setAuthMessage((prevMessage) => {
+      return { ...prevMessage, ...authMessage };
+    });
+  }, []);
+  const login_BecomeContributor = useCallback(
+    async (location, userData) => {
       setIsLoading((prevState) => {
         return !prevState;
       });
-      const response = await sendRequest(`${HOSTURI}/auth/login`, {
+      const response = await sendRequest(`${HOSTURI}/auth/${location}`, {
         method: "POST",
         userData,
       });
       const error = (await response.error) || "";
       const data = (await response.data) || "";
-
-      if (data) {
+      if (location === "login" && data) {
         history.replace(`/@${data.user.username}`);
         setIsLoggedIn((prevState) => {
           return !prevState;
@@ -50,9 +53,16 @@ const AuthContextProvider = (props) => {
           JSON.stringify({
             ...appMode,
             isLoggedIn: true,
+            username: data.user.username,
             token: data.token,
           })
         );
+      }
+      if (location === "become-contributor" && data) {
+        changeAuthMessage({ type: "success", message: "Account created successfully" });
+        setTimeout(() => {
+          history.replace("/login");
+        }, 800);
       }
 
       if (error) {
@@ -64,7 +74,7 @@ const AuthContextProvider = (props) => {
         return !prevState;
       });
     },
-    [history, appMode, sendRequest]
+    [history, appMode, changeAuthMessage, sendRequest]
   );
 
   const getContributorData = useCallback(
@@ -106,8 +116,6 @@ const AuthContextProvider = (props) => {
     [sendRequest, token]
   );
 
-  const becomeAContributor = useCallback(() => {}, []);
-
   const signOutHandler = useCallback(() => {
     setIsLoggedIn((prevState) => {
       return false;
@@ -115,16 +123,10 @@ const AuthContextProvider = (props) => {
     onCloseProfileBox();
     localStorage.setItem(
       "flownews-mode",
-      JSON.stringify({ ...appMode, isLoggedIn: false, token: null })
+      JSON.stringify({ ...appMode, isLoggedIn: false, token: null, username: null })
     );
     history.replace("/home");
   }, [history, appMode, onCloseProfileBox]);
-
-  const changeAuthMessage = useCallback((authMessage) => {
-    setAuthMessage((prevMessage) => {
-      return { ...prevMessage, ...authMessage };
-    });
-  }, []);
 
   const resetAuthMessage = useCallback(() => {
     setAuthMessage((prevMessage) => {
@@ -146,9 +148,7 @@ const AuthContextProvider = (props) => {
           changeAuthMessage(authMessage);
         },
         onResetAuthMessage: resetAuthMessage,
-        dummy_contributor_data: dummyContributor,
-        onLogin: loginHandler,
-        onBecomeAContributor: becomeAContributor,
+        on_Login_BecomeContributor: login_BecomeContributor,
         onSignOut: signOutHandler,
       }}
     >

@@ -9,8 +9,7 @@ export const AuthContext = React.createContext({
   authMessage: { type: "", message: "" },
   onChangeAuthMessage: () => {},
   onResetAuthMessage: () => {},
-  onLogin: () => {},
+  on_Login_BecomeContributor: () => {},
   onGetContributorData: () => {},
-  onBecomeAContributor: () => {},
   onSignOut: () => {},
 });
