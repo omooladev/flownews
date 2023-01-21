@@ -42,6 +42,9 @@ const Routes = () => {
             <Route path="/" exact>
               <Redirect to="/@:username" />
             </Route>
+            <Route path="/become-contributor" exact>
+              <Redirect to="/@:username" />
+            </Route>
             <Route path="/@:username">
               <AccountPage />
             </Route>
