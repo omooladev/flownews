@@ -9,7 +9,7 @@ import useHttp from "../../hooks/useHttp";
 const HOSTURI = "https://flownews-api.onrender.com/api/v1";
 const AuthContextProvider = (props) => {
   const { sendRequest } = useHttp();
-  const { appMode, onCloseProfileBox, onSetLastLocation } = useContext(AppContext);
+  const { appMode, onCloseProfileBox } = useContext(AppContext);
   const token = appMode.token;
   const [userData, setUserData] = useState({ username: "" });
 
@@ -34,7 +34,6 @@ const AuthContextProvider = (props) => {
 
       if (data) {
         history.replace(`/@${data.user.username}`);
-        onSetLastLocation(`/@${data.user.username}`);
         setIsLoggedIn((prevState) => {
           return !prevState;
         });
