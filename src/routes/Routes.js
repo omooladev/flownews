@@ -39,7 +39,7 @@ const Routes = () => {
         )}
         {isLoggedIn && (
           <Switch>
-            <Route path={"/@:username"}>
+            <Route path="/@:username">
               <AccountPage />
             </Route>
           </Switch>
