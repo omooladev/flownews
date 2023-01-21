@@ -32,6 +32,12 @@
   opacity: 0.8;
   border-radius: 0.4rem;
   padding: 0.5rem;
+  width: 100%;
+}
+
+.cancel_icon {
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 .login .form {
   width: 100%;
@@ -88,6 +94,10 @@
   padding: 0.6rem 0.5rem;
   color: var(--body-color);
   border-radius: 5px;
+}
+.form .form_actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 .form .form_actions button:hover {
   opacity: 0.9;

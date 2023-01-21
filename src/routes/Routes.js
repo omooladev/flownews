@@ -5,6 +5,7 @@ import AuthPage from "../pages/Auth/Auth";
 import NotFoundPage from "../pages/NotFound";
 
 const HomePage = React.lazy(() => import("../pages/Home"));
+const AccountPage = React.lazy(() => import("../pages/Contributor/DashBoard/Account"));
 
 const Routes = () => {
   const { isLoggedIn } = useContext(AuthContext);
@@ -36,8 +37,13 @@ const Routes = () => {
             </Route>
           </Switch>
         )}
-        {isLoggedIn && <Switch>
-          </Switch>}
+        {isLoggedIn && (
+          <Switch>
+            <Route path={"/@:username"}>
+              <AccountPage />
+            </Route>
+          </Switch>
+        )}
 
         <Route path="*">
           <NotFoundPage />

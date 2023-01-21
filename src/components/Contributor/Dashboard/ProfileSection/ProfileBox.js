@@ -4,10 +4,10 @@ import { FaChevronDown } from "react-icons/fa";
 import styles from "./ProfileBox.module.css";
 
 const ProfileBox = (props) => {
-  const { dummy_contributor_data } = useContext(AuthContext);
-  const contributorProfilePicture = dummy_contributor_data.profile_picture;
-  const contributorUsernameCut = dummy_contributor_data.username[0];
-  const contributorFullUsername = dummy_contributor_data.username;
+  const { userData } = useContext(AuthContext);
+  const contributorUsernameCut = userData.username[0];
+  const contributorFullUsername = userData.username;
+  const contributorProfilePicture = userData.profilePicture || "";
 
   const className = props.className || "";
   return (
