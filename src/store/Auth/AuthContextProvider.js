@@ -112,15 +112,12 @@ const AuthContextProvider = (props) => {
     setIsLoggedIn((prevState) => {
       return false;
     });
-    // setUserData((prevData) => {
-    //   return { ...prevData, isSearch: null, tokenExpirationTime: null, user: { username: "" } };
-    // });
     onCloseProfileBox();
     localStorage.setItem(
       "flownews-mode",
       JSON.stringify({ ...appMode, isLoggedIn: false, token: null })
     );
-    history.replace("/home");
+    // history.replace("/home");
   }, [history, appMode, onCloseProfileBox]);
 
   const changeAuthMessage = useCallback((authMessage) => {
