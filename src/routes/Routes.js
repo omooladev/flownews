@@ -23,9 +23,9 @@ const Routes = () => {
             <Route path="/login" exact>
               <AuthPage />
             </Route>
-            <Route path="/become-contributor" exact>
+            {/* <Route path="/become-contributor" exact>
               <AuthPage />
-            </Route>
+            </Route> */}
             <Route path="/forgot-password" exact>
               <AuthPage />
             </Route>
