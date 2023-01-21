@@ -18,7 +18,7 @@ const Auth = () => {
   const loginLocation = location.includes("/login");
   const becomeContributorLocation = location.includes("/become-contributor");
   const forgotPasswordLocation = location.includes("/forgot-password");
-  console.log(forgotPasswordLocation);
+  
   const emailRef = useRef();
   const passwordRef = useRef();
 
