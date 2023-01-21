@@ -11,7 +11,7 @@ const Account = () => {
     if (username) {
       onGetContributorData(username);
     }
-  }, [username, token, onGetContributorData]);
+  }, [username, token, onGetContributorData, onSetLastLocation]);
   return;
 };
 
