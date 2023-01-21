@@ -106,8 +106,6 @@ const AuthContextProvider = (props) => {
     [sendRequest, token]
   );
 
-  console.log(userData);
-
   const becomeAContributor = useCallback(() => {}, []);
 
   const signOutHandler = useCallback(() => {
@@ -130,6 +128,7 @@ const AuthContextProvider = (props) => {
       return { ...prevMessage, ...authMessage };
     });
   }, []);
+  
   const resetAuthMessage = useCallback(() => {
     setAuthMessage((prevMessage) => {
       return { ...prevMessage, type: "", message: "" };
