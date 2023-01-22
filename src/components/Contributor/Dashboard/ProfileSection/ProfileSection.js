@@ -6,8 +6,10 @@ import { FaEdit } from "react-icons/fa";
 
 import styles from "./ProfileSection.module.css";
 import ProfileBox from "./ProfileBox";
+import { useHistory } from "react-router-dom";
 
 const ProfileSection = () => {
+  const history = useHistory();
   const { profileBoxIsActive, onToggleProfileBox } = useContext(AppContext);
   const { onSignOut, userData } = useContext(AuthContext);
 
@@ -53,7 +55,7 @@ const ProfileSection = () => {
             <li onClick={onSignOut} className={styles.sign_out}>
               Sign out
             </li>
-            <label onClick={onSignOut} className={styles.email}>
+            <label onClick={() => history.replace("/signout")} className={styles.email}>
               {contributorEmailAddress}
             </label>
           </ul>

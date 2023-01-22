@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import AuthPage from "../pages/Auth/Auth";
 import NotFoundPage from "../pages/NotFound";
 import { AppContext } from "../store/App/app-context";
+import SignOut from "../pages/SignOut";
 
 const HomePage = React.lazy(() => import("../pages/Home"));
 const AccountPage = React.lazy(() => import("../pages/Contributor/DashBoard/Account"));
@@ -48,6 +49,9 @@ const Routes = () => {
             )}
             <Route path="/@:username" exact>
               <AccountPage />
+            </Route>
+            <Route path="/signout" exact>
+              <SignOut />
             </Route>
           </Switch>
         )}

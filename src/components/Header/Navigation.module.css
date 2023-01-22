@@ -196,13 +196,18 @@
 .navigation .navigation-list ul .profile_box {
   display: flex;
   width: auto;
-  margin: 0.5rem 0;
+  margin: 0.5rem;
 }
 .navigation .navigation-list ul .profile_box label {
   color: var(--nav-text-color);
 }
-.notification {
+.navigation .navigation-list .notification {
   display: block;
+  margin: 0.5rem;
+}
+.navigation .navigation-list .sign_out {
+  margin: 0.5rem;
+  text-transform: none;
 }
 @media (min-width: 350px) {
   .notification {

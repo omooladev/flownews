@@ -3,7 +3,7 @@ import { useCallback, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../../store/Auth/auth-context";
 import { BiSearch, BiX } from "react-icons/bi";
-import { FaRegBell} from "react-icons/fa";
+import { FaRegBell } from "react-icons/fa";
 
 import styles from "./Navigation.module.css";
 import { AppContext } from "../../store/App/app-context";
@@ -111,6 +111,9 @@ const Navigation = (props) => {
                 <NavLink to="/me/notifications">
                   <FaRegBell className={styles.icon} />
                 </NavLink>
+              </li>
+              <li className={styles.sign_out}>
+                <NavLink to="/signout">Sign out</NavLink>
               </li>
             </>
           )}
