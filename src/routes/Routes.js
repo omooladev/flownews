@@ -5,6 +5,7 @@ import AuthPage from "../pages/Auth/Auth";
 import NotFoundPage from "../pages/NotFound";
 import { AppContext } from "../store/App/app-context";
 import SignOut from "../pages/SignOut";
+import SuspenseLoader from "../components/Loaders/SuspenseLoader";
 
 const HomePage = React.lazy(() => import("../pages/Home"));
 const AccountPage = React.lazy(() => import("../pages/Contributor/DashBoard/Account"));
@@ -13,7 +14,7 @@ const Routes = () => {
   const { isLoggedIn } = useContext(AuthContext);
   const { appMode } = useContext(AppContext);
   return (
-    <Suspense fallback={<p>Loading...</p>}>
+    <Suspense fallback={<SuspenseLoader />}>
       <Switch>
         <Route path="/home" exact>
           <HomePage />
