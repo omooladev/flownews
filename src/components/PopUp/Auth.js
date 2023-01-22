@@ -8,6 +8,7 @@ import { BiX } from "react-icons/bi";
 import Card from "../../UI/Card";
 import PopUp from "../../UI/PopUp";
 import styles from "./Auth.module.css";
+import AuthLoader from "../Loaders/AuthLoader";
 
 const Auth = () => {
   const { lastLocation } = useContext(AppContext);
@@ -112,17 +113,19 @@ const Auth = () => {
         )}
         <div className={styles.form_actions}>
           <button type="submit" disabled={isLoading ? true : false}>
-            {isLoading
-              ? "Loading..."
-              : `${
-                  loginLocation
-                    ? "Log in"
-                    : becomeContributorLocation
-                    ? "Sign up"
-                    : forgotPasswordLocation
-                    ? "Get reset link"
-                    : ""
-                }`}
+            {isLoading ? (
+              <AuthLoader />
+            ) : (
+              `${
+                loginLocation
+                  ? "Log in"
+                  : becomeContributorLocation
+                  ? "Sign up"
+                  : forgotPasswordLocation
+                  ? "Get reset link"
+                  : ""
+              }`
+            )}
           </button>
         </div>
       </form>
