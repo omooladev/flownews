@@ -55,14 +55,12 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  padding: var(--nav-link-padding);
-  margin: var(--nav-link-padding);
 }
 .searchBox .icon {
   color: var(--nav-text-hover-color);
 }
 .searchBox .searchToggle .icon {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 .searchBox .searchField .icon {
   font-size: 1.3rem;
@@ -72,6 +70,10 @@
   .searchBox .searchField {
     width: 300px;
     right: -5px;
+  }
+  .searchBox .searchToggle {
+    padding: var(--nav-link-padding);
+    margin: var(--nav-link-padding);
   }
 }
 

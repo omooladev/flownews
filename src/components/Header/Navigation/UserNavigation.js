@@ -1,7 +1,7 @@
 //? NOTE---All navigation links here are for the normal users
 import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import DarkLightSearchBox from "./NavigationSections/DarkLightSearchBox";
+
 // import styles from "./UserNavigation.module.css";
 import styles from "../Navigation.module.css";
 const UserNavigation = (props) => {
@@ -19,7 +19,6 @@ const UserNavigation = (props) => {
           </li>
         );
       })}
-      <DarkLightSearchBox />
 
       <div className={styles.for_mobile_only}>
         {!isLoggedIn && (

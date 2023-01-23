@@ -5,6 +5,7 @@ import { AuthContext } from "../../store/Auth/auth-context";
 import Logo from "./Logo";
 import UserNavigation from "./Navigation/UserNavigation";
 import ContributorNavigation from "./Navigation/ContributorNavigation";
+import SearchBox from "./Navigation/NavigationSections/SearchBox";
 import styles from "./Navigation.module.css";
 const Navigation = (props) => {
   let className = props.className || "";
@@ -30,6 +31,7 @@ const Navigation = (props) => {
           <ContributorNavigation isLoggedIn={isLoggedIn} userData={userData} />
         </ul>
       </section>
+      <SearchBox />
     </nav>
   );
 };
