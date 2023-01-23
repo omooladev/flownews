@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { FaEdit, FaRegBell } from "react-icons/fa";
 import styles from "./ProfileNavigation.module.css";
-import ProfileSection from "../ProfileSection/ProfileSection";
+import ProfileSection from "../../Profile/ProfileSection/ProfileSection";
 
 const ProfileNavigation = () => {
   return (

@@ -1,40 +1,38 @@
-.navigation .navigation-list {
+.navigation .navigation-section {
   position: fixed;
   top: 0;
   left: -100%;
   width: 100vw;
   height: 100vh;
-  background-color: var(--side-nav);
-
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: var(--side-nav);
   padding: 0 2.5%;
   transition: all 0.4s ease;
   z-index: 998;
 }
-.navigation.active .navigation-list {
+.navigation.active .navigation-section {
   left: 0%;
 }
-.navigation .navigation-list .toggleLogo {
-  display: block;
+.navigation .navigation-section .toggleLogo {
   height: 10vh;
   width: 100%;
-  padding: 2rem 0;
-
   display: flex;
   align-items: center;
   justify-content: space-around;
+  padding: 2rem 0;
 }
-.navigation.active .logo {
-  display: flex;
-  transition: all 0.4s ease;
-}
-.navigation .logo {
+.navigation .navigation-section .toggleLogo .logo {
   display: none;
 }
 
-.navigation .navigation-list ul,
+.navigation.active .navigation-section .toggleLogo .logo {
+  display: flex;
+  transition: all 0.4s ease;
+}
+
+.navigation .navigation-section .navigation-list,
 .for_mobile_only {
   display: flex;
   flex-direction: column;
@@ -42,13 +40,13 @@
 
   width: 100%;
 }
-.navigation .navigation-list ul li {
+.navigation .navigation-section .navigation-list li {
   margin: 1rem 0;
   text-transform: capitalize;
   width: 100%;
   text-align: center;
 }
-.navigation .navigation-list ul li a {
+.navigation .navigation-section .navigation-list li a {
   position: relative;
   padding: var(--nav-link-padding);
   color: var(--nav-text-color);
@@ -57,7 +55,7 @@
   transition: all 0.4s ease;
 }
 
-.navigation .navigation-list ul li a::before {
+.navigation .navigation-section .navigation-list li a::before {
   content: "";
   position: absolute;
   bottom: 0%;
@@ -71,10 +69,10 @@
   transition: all 0.4s ease;
 }
 
-.navigation .navigation-list ul li a.active-link {
+.navigation .navigation-section .navigation-list li a.active-link {
   color: var(--nav-text-hover-color);
 }
-.navigation .navigation-list ul li a.active-link::before {
+.navigation .navigation-section .navigation-list li a.active-link::before {
   opacity: 1;
   background-color: var(--nav-text-hover-color);
 }
@@ -89,79 +87,6 @@
 .navigation .darkLight-searchBox .icon.cancel {
   font-size: 1.3rem;
 }
-.navigation .darkLight-searchBox {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  margin: var(--nav-link-margin);
-}
-
-.navigation .darkLight-searchBox .darkLight,
-.navigation .darkLight-searchBox .searchBox .searchToggle {
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.navigation .darkLight-searchBox .searchBox {
-  position: relative;
-}
-.navigation .darkLight-searchBox .searchBox .searchField {
-  position: absolute;
-  bottom: -80px;
-  right: -5px;
-  /* left: 5%; */
-
-  height: 2.5rem;
-  width: 80vw;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 0 3px;
-  background-color: var(--search-field-color);
-
-  box-shadow: 0 5px 5px var(--header-color);
-  border-radius: 0.3rem;
-  border: 2px solid var(--search-field-border-color);
-  transition: all 0.3s ease;
-}
-.navigation .darkLight-searchBox .searchBox .searchField::before {
-  content: "";
-  position: absolute;
-  height: 12px;
-  width: 12px;
-  right: 14px;
-  top: -4px;
-  transform: rotate(-45deg);
-  background-color: var(--search-field-border-color);
-  z-index: -1;
-}
-.navigation .darkLight-searchBox .searchBox .searchField .input {
-  height: 100%;
-  width: 100%;
-  padding: 0 45px 0 15px;
-  font-size: 1rem;
-  color: var(--nav-text-color);
-  background-color: transparent;
-  font-weight: 400px;
-  border-radius: 4px;
-}
-
-.navigation .darkLight-searchBox .search,
-.navigation .darkLight-searchBox .cancel {
-  color: var(--nav-text-hover-color);
-}
-.navigation .darkLight-searchBox .searchBox .searchField .search {
-  position: absolute;
-  cursor: pointer;
-  right: 15px;
-}
-
 .for_mobile_only button {
   cursor: pointer;
   margin: 0.5rem 0;
@@ -193,33 +118,33 @@
 .navigation .darkLight-searchBox .darkLight {
   display: none;
 }
-.navigation .navigation-list ul .profile_box {
+.navigation .navigation-section .navigation-list .profile_box {
   display: flex;
   width: auto;
   margin: 0.5rem;
 }
-.navigation .navigation-list ul .profile_box label {
+.navigation .navigation-section .navigation-list .profile_box label {
   color: var(--nav-text-color);
 }
-.navigation .navigation-list .notification {
+.navigation .navigation-section .notification {
   display: block;
   margin: 0.5rem;
 }
-.navigation .navigation-list .sign_out {
+.navigation .navigation-section .sign_out {
   display: block;
   margin: 0.5rem;
   text-transform: none;
 }
 @media (min-width: 350px) {
-  .navigation .navigation-list .notification {
+  .navigation .navigation-section .notification {
     display: none;
   }
-  .navigation .navigation-list .sign_out {
+  .navigation .navigation-section .sign_out {
     display: none;
   }
 }
 @media (min-width: 500px) {
-  .navigation .navigation-list {
+  .navigation .navigation-section {
     width: 50vw;
   }
   .navigation .darkLight-searchBox .darkLight {
@@ -235,21 +160,21 @@
     padding: var(--nav-link-padding);
     margin: var(--nav-link-padding);
   }
-  .navigation .navigation-list ul li a:hover {
+  .navigation .navigation-section .navigation-list li a:hover {
     color: var(--nav-text-hover-color);
   }
-  .navigation .navigation-list ul li a:hover::before {
+  .navigation .navigation-section .navigation-list li a:hover::before {
     opacity: 1;
   }
   .for_mobile_only .icon {
     display: none;
   }
-  .navigation .navigation-list ul .profile_box {
+  .navigation .navigation-section .navigation-list .profile_box {
     display: none;
   }
 }
 @media (min-width: 700px) {
-  .navigation .navigation-list {
+  .navigation .navigation-section {
     width: 40vw;
   }
   .for_mobile_only {
@@ -257,31 +182,23 @@
   }
 }
 @media (min-width: 1200px) {
-  .navigation .navigation-list {
+  .navigation .navigation-section {
     position: static;
     height: auto;
     width: auto;
     padding: 0;
     background-color: var(--header-color);
   }
-  .navigation .navigation-list .toggleLogo {
+  .navigation .navigation-section .toggleLogo {
     display: none;
   }
-  .navigation .navigation-list ul {
+  .navigation .navigation-section .navigation-list {
     position: static;
     flex-direction: row;
     justify-content: space-around;
   }
-  .navigation .navigation-list ul li {
+  .navigation .navigation-section .navigation-list li {
     width: auto;
-    margin: var(--nav-link-margin);
-  }
-
-  .navigation .darkLight-searchBox {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
     margin: var(--nav-link-margin);
   }
 

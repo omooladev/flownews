@@ -1,0 +1,83 @@
+.searchBox {
+  position: relative;
+}
+
+.searchBox .searchField {
+  position: absolute;
+  bottom: -80px;
+  right: -5px;
+  /* left: 5%; */
+
+  height: 2.5rem;
+  width: 80vw;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+  background-color: var(--search-field-color);
+
+  box-shadow: 0 5px 5px var(--header-color);
+  border-radius: 0.3rem;
+  border: 2px solid var(--search-field-border-color);
+  transition: all 0.3s ease;
+}
+.searchBox .searchField::before {
+  content: "";
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  right: 14px;
+  top: -4px;
+  transform: rotate(-45deg);
+  background-color: var(--search-field-border-color);
+  z-index: -1;
+}
+.searchBox .searchField .input {
+  height: 100%;
+  width: 100%;
+  padding: 0 45px 0 15px;
+  font-size: 1rem;
+  color: var(--nav-text-color);
+  background-color: transparent;
+  font-weight: 400px;
+  border-radius: 4px;
+}
+.searchBox .searchField .search {
+  position: absolute;
+  cursor: pointer;
+  right: 15px;
+}
+.searchBox .searchToggle {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  padding: var(--nav-link-padding);
+  margin: var(--nav-link-padding);
+}
+.searchBox .icon {
+  color: var(--nav-text-hover-color);
+}
+.searchBox .searchToggle .icon {
+  font-size: 1.4rem;
+}
+.searchBox .searchField .icon {
+  font-size: 1.3rem;
+}
+
+@media (min-width: 500px) {
+  .searchBox .searchField {
+    width: 300px;
+    right: -5px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .searchBox .searchField {
+    right: 5px;
+    height: 2.5rem;
+  }
+}

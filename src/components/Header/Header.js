@@ -6,8 +6,7 @@ import styles from "./Header.module.css";
 import Logo from "./Logo";
 import Menu from "./Menu";
 import Navigation from "./Navigation";
-
-import ProfileNavigation from "../Contributor/Dashboard/Navigation/ProfileNavigation";
+import ProfileNavigation from "../Contributor/Account/Navigation/ProfileNavigation";
 // import SuspenseLoader from "../Loaders/SuspenseLoader";
 const Header = () => {
   const { toggleMenu } = useContext(AppContext);
