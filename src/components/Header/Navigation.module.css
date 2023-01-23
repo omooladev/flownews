@@ -206,11 +206,15 @@
   margin: 0.5rem;
 }
 .navigation .navigation-list .sign_out {
+  display: block;
   margin: 0.5rem;
   text-transform: none;
 }
 @media (min-width: 350px) {
-  .notification {
+  .navigation .navigation-list .notification {
+    display: none;
+  }
+  .navigation .navigation-list .sign_out {
     display: none;
   }
 }
