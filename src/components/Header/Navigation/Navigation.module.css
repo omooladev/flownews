@@ -1,0 +1,104 @@
+.navigation .navigation-section {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--side-nav);
+  padding: 0 2.5%;
+  transition: all 0.4s ease;
+  z-index: 998;
+}
+.navigation.active .navigation-section {
+  left: 0%;
+}
+.navigation .navigation-section .toggleLogo {
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 2rem 0;
+}
+.navigation .navigation-section .toggleLogo .logo {
+  display: none;
+}
+
+.navigation.active .navigation-section .toggleLogo .logo {
+  display: flex;
+  transition: all 0.4s ease;
+}
+
+.navigation .navigation-section .navigation-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+}
+
+.navigation .navigation-section .toggleLogo .icon {
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--nav-text-color);
+}
+
+.navigation .navigation-section .navigation-list .profile_box {
+  display: flex;
+  width: auto;
+  margin: 0.5rem;
+}
+.navigation .navigation-section .navigation-list .profile_box label {
+  color: var(--nav-text-color);
+}
+.navigation .navigation-section .notification {
+  display: block;
+  margin: 0.5rem;
+}
+.navigation .navigation-section .sign_out {
+  display: block;
+  margin: 0.5rem;
+  text-transform: none;
+}
+@media (min-width: 350px) {
+  .navigation .navigation-section .notification {
+    display: none;
+  }
+  .navigation .navigation-section .sign_out {
+    display: none;
+  }
+}
+@media (min-width: 500px) {
+  .navigation .navigation-section {
+    width: 50vw;
+  }
+
+  .navigation .navigation-section .navigation-list .profile_box {
+    display: none;
+  }
+}
+@media (min-width: 700px) {
+  .navigation .navigation-section {
+    width: 40vw;
+  }
+}
+@media (min-width: 1200px) {
+  .navigation .navigation-section {
+    position: static;
+    height: auto;
+    width: auto;
+    padding: 0;
+    background-color: var(--header-color);
+  }
+  .navigation .navigation-section .toggleLogo {
+    display: none;
+  }
+  .navigation .navigation-section .navigation-list {
+    position: static;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}

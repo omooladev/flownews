@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { AppContext } from "../../store/App/app-context";
 import { AuthContext } from "../../store/Auth/auth-context";
-import Account from "./Account";
-import styles from "./Header.module.css";
-import Logo from "./Logo";
-import Menu from "./Menu";
-import Navigation from "./Navigation";
+import AccountSubscribe from "./Navigation/NavigationSections/AccountSubscribe";
+import Logo from "../../UI/Logo";
+import Menu from "./Menu/Menu";
+import Navigation from "./Navigation/Navigation";
 import ProfileNavigation from "../Contributor/Account/Navigation/ProfileNavigation";
 // import SuspenseLoader from "../Loaders/SuspenseLoader";
+import styles from "./Header.module.css";
 const Header = () => {
   const { toggleMenu } = useContext(AppContext);
   const { isLoggedIn } = useContext(AuthContext);
@@ -17,7 +17,7 @@ const Header = () => {
       {/* <SuspenseLoader/> */}
       <Logo className={styles.logo} />
       <Navigation className={styles.navigation} />
-      {!isLoggedIn && <Account className={styles.account_subscribe} />}
+      {!isLoggedIn && <AccountSubscribe className={styles.account_subscribe} />}
       {isLoggedIn && <ProfileNavigation />}
     </header>
   );

@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
 
-import styles from "./Account.module.css";
+import styles from "./AccountSubscribe.module.css";
 const Account = (props) => {
   const history = useHistory();
   const [openAccount, setOpenAccount] = useState(false);

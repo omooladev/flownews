@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { BiX } from "react-icons/bi";
-import { AppContext } from "../../store/App/app-context";
-import { AuthContext } from "../../store/Auth/auth-context";
-import Logo from "./Logo";
-import UserNavigation from "./Navigation/UserNavigation";
-import ContributorNavigation from "./Navigation/ContributorNavigation";
-import SearchBox from "./Navigation/NavigationSections/SearchBox";
+import { AppContext } from "../../../store/App/app-context";
+import { AuthContext } from "../../../store/Auth/auth-context";
+import Logo from "../../../UI/Logo";
+import UserNavigation from "./UserNavigation";
+import ContributorNavigation from "./ContributorNavigation";
+import SearchBox from "./NavigationSections/SearchBox";
 import styles from "./Navigation.module.css";
 const Navigation = (props) => {
   let className = props.className || "";
