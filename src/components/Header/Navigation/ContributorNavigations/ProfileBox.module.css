@@ -36,6 +36,7 @@
 }
 .profile_box .username {
   display: block;
+  color: var(--nav-text-color);
 }
 @media (min-width: 500px) {
   .profile_box .icon {
