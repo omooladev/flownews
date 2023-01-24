@@ -4,7 +4,7 @@ import { AppContext } from "../../../store/App/app-context";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import Logo from "../../../UI/Logo";
 import UserNavigation from "./UserNavigation";
-import ContributorNavigation from "./Contributor Navigations/ContributorNavigation";
+import ContributorNavigation from "./ContributorNavigations/ContributorNavigation";
 import SearchBox from "./NavigationSections/SearchBox";
 import styles from "./Navigation.module.css";
 const Navigation = (props) => {
