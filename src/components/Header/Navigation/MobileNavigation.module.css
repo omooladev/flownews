@@ -30,8 +30,43 @@
   background-color: var(--subscribe-button-hover);
   opacity: 0.8;
 }
+.for_mobile_only .profile_box {
+  display: flex;
+  width: auto;
+  margin: 0.5rem;
+}
+.for_mobile_only .profile_box label {
+  color: var(--nav-text-color);
+}
+.for_mobile_only .notification {
+  display: block;
+  margin: 0.5rem;
+}
+.for_mobile_only .sign_out {
+  display: block;
+  margin: 0.5rem;
+  text-transform: none;
+  cursor: pointer;
+  padding: 0 1rem;
+  font-weight: 300;
+  color: var(--nav-text-color);
+}
+.for_mobile_only .sign_out a {
+  color: var(--nav-text-color);
+}
+@media (min-width: 350px) {
+  .for_mobile_only .notification {
+    display: none;
+  }
+}
 @media (min-width: 500px) {
   .for_mobile_only .icon {
+    display: none;
+  }
+  .for_mobile_only .profile_box {
+    display: none;
+  }
+  .for_mobile_only .sign_out {
     display: none;
   }
 }

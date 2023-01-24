@@ -1,0 +1,16 @@
+.write {
+  display: none;
+}
+.notification {
+  display: none;
+}
+@media (min-width: 350px) {
+  .notification {
+    display: block;
+  }
+}
+@media (min-width: 650px) {
+  .write {
+    display: flex;
+  }
+}

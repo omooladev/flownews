@@ -5,7 +5,6 @@ import AccountSubscribe from "./Navigation/NavigationSections/AccountSubscribe";
 import Logo from "../../UI/Logo";
 import Menu from "./Menu/Menu";
 import Navigation from "./Navigation/Navigation";
-import ProfileNavigation from "../Contributor/Account/Navigation/ProfileNavigation";
 // import SuspenseLoader from "../Loaders/SuspenseLoader";
 import styles from "./Header.module.css";
 const Header = () => {
@@ -18,7 +17,6 @@ const Header = () => {
       <Logo className={styles.logo} />
       <Navigation className={styles.navigation} />
       {!isLoggedIn && <AccountSubscribe className={styles.account_subscribe} />}
-      {isLoggedIn && <ProfileNavigation />}
     </header>
   );
 };

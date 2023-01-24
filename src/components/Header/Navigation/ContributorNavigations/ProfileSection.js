@@ -1,12 +1,11 @@
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
 import { AppContext } from "../../../../store/App/app-context";
 import { AuthContext } from "../../../../store/Auth/auth-context";
-import { FaEdit } from "react-icons/fa";
 
 import styles from "./ProfileSection.module.css";
 import ProfileBox from "./ProfileBox";
 import { useHistory } from "react-router-dom";
+import Write from "./Write";
 
 const ProfileSection = () => {
   const history = useHistory();
@@ -27,12 +26,7 @@ const ProfileSection = () => {
           </ul>
           <hr />
           <ul className={`${styles["nav-user-list"]}`}>
-            <li className={styles.write}>
-              <NavLink to="/new-story">
-                <FaEdit className={styles.icon} />
-                <p>Write</p>
-              </NavLink>
-            </li>
+            <Write className={styles.write} />
           </ul>
           <hr className={styles.write_line} />
           <ul className={`${styles["nav-user-list"]}`}>

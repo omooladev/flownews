@@ -1,0 +1,11 @@
+.write {
+  padding: var(--nav-link-padding);
+  margin: var(--nav-link-margin);
+}
+.write a {
+  display: flex;
+  justify-content: center;
+}
+.write p {
+  padding: 0 0.2rem;
+}

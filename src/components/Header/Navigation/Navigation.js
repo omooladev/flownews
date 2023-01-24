@@ -4,7 +4,7 @@ import { AppContext } from "../../../store/App/app-context";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import Logo from "../../../UI/Logo";
 import UserNavigation from "./UserNavigation";
-import ContributorNavigation from "./ContributorNavigation";
+import ContributorNavigation from "./Contributor Navigations/ContributorNavigation";
 import SearchBox from "./NavigationSections/SearchBox";
 import styles from "./Navigation.module.css";
 const Navigation = (props) => {
@@ -28,10 +28,10 @@ const Navigation = (props) => {
         </div>
         <ul className={styles["navigation-list"]}>
           <UserNavigation isLoggedIn={isLoggedIn} />
-          <ContributorNavigation isLoggedIn={isLoggedIn} userData={userData} />
         </ul>
       </section>
       <SearchBox />
+      {isLoggedIn && <ContributorNavigation isLoggedIn={isLoggedIn} userData={userData} />}
     </nav>
   );
 };

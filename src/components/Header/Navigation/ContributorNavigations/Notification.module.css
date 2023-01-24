@@ -1,0 +1,13 @@
+.notification {
+  display: none;
+  padding: var(--nav-link-padding);
+  margin: var(--nav-link-margin);
+}
+.notification a .icon {
+  font-size: 1.2rem;
+}
+@media (min-width: 350px) {
+  .notification {
+    display: block;
+  }
+}

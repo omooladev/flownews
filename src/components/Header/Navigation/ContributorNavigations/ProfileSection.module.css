@@ -57,12 +57,7 @@
 .nav-user-list > li:not(.nav-user-list > li:last-of-type) {
   margin-bottom: 0.5rem;
 }
-.sign_out {
-  cursor: pointer;
-  padding: 0 1rem;
-  font-weight: 300;
-  margin: 0;
-}
+
 .email {
   cursor: pointer;
   padding: 0 1rem;
@@ -79,19 +74,22 @@
   padding: 0.5rem 1rem;
   color: black;
 }
-.profileNavigation li a:hover,li.write a:hover {
+.profileNavigation li a:hover,
+li.write a:hover {
   background-color: var(--nav-text-hover-color);
   color: white;
 }
 .profileNavigation li a p {
   padding: 0 0.5rem;
 }
-li.write a {
+.write {
   display: flex;
+}
+.write a {
   color: black;
   align-items: center;
 }
-li.write a p {
+.write a p {
   padding: 0 0.5rem;
 }
 @media (min-width: 500px) {
@@ -106,7 +104,7 @@ li.write a p {
   }
 }
 @media (min-width: 650px) {
-  li.write {
+  .write {
     display: none;
   }
   .write_line {
