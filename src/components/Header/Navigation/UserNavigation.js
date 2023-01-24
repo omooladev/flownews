@@ -8,7 +8,7 @@ const UserNavigation = (props) => {
     <>
       {userLinks.map((link) => {
         return (
-          <li className={styles["navigation-link"]}>
+          <li className={styles["navigation-link"]} key={link}>
             <NavLink to={`/${link}`} activeClassName={styles["active-link"]}>
               {link}
             </NavLink>
