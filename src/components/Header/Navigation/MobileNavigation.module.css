@@ -37,6 +37,7 @@
 }
 .for_mobile_only .profile_box label {
   color: var(--nav-text-color);
+  cursor: pointer;
 }
 .for_mobile_only .notification {
   display: block;

@@ -5,6 +5,7 @@
 .write a {
   display: flex;
   justify-content: center;
+  color:var(--nav-text-color)
 }
 .write p {
   padding: 0 0.2rem;

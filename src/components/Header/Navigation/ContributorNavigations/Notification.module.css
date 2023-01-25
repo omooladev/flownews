@@ -3,6 +3,9 @@
   padding: var(--nav-link-padding);
   margin: var(--nav-link-margin);
 }
+.notification a {
+  color: var(--nav-text-color);
+}
 .notification a .icon {
   font-size: 1.2rem;
 }

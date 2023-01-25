@@ -1,9 +1,9 @@
-import { useCallback, useContext, useEffect, useRef } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 
 import { AppContext } from "../../store/App/app-context";
 import { AuthContext } from "../../store/Auth/auth-context";
-
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { BiX } from "react-icons/bi";
 import Card from "../../UI/Card";
 import PopUp from "../../UI/PopUp";
@@ -11,6 +11,7 @@ import styles from "./Auth.module.css";
 import AuthLoader from "../Loaders/AuthLoader";
 
 const Auth = () => {
+  const [viewPassword, setViewPassword] = useState(false);
   const { lastLocation } = useContext(AppContext);
   const {
     isLoading,
@@ -39,18 +40,35 @@ const Auth = () => {
     [history, lastLocation, authMessage, onResetAuthMessage]
   );
 
+  const toggleViewPasswordHandler = useCallback(() => {
+    setViewPassword((prevState) => !prevState);
+  }, []);
+
   const submitFormHandler = useCallback(
     async (event) => {
       event.preventDefault();
       const email = emailRef.current.value;
+      const emailLength = email.trim().length;
       const password = passwordRef.current.value;
-      const formIsValid =
-        email.trim().length > 0 &&
-        email.includes("@") &&
-        password.trim().length > 5 &&
-        password.trim().length < 13;
-      if (!formIsValid) {
-        return onChangeAuthMessage({ type: "error", message: "Email or password Invalid" });
+      const passwordLength = password.trim().length;
+
+      if (emailLength === 0 || passwordLength === 0) {
+        return onChangeAuthMessage({ type: "error", message: "Please provide Email or Password" });
+      }
+      if (!email.includes("@")) {
+        return onChangeAuthMessage({ type: "error", message: "Email Address is Invalid" });
+      }
+      if (becomeContributorLocation && passwordLength < 8) {
+        return onChangeAuthMessage({
+          type: "error",
+          message: "Password Length must be at least 8 characters",
+        });
+      }
+      if (becomeContributorLocation && passwordLength > 16) {
+        return onChangeAuthMessage({
+          type: "error",
+          message: "Password Length must be less than 16 characters",
+        });
       }
       onResetAuthMessage();
       if (loginLocation || becomeContributorLocation) {
@@ -108,7 +126,15 @@ const Auth = () => {
               <label>Password</label>
               {loginLocation && <NavLink to="/forgot-password">Forgot password?</NavLink>}
             </div>
-            <input type="password" ref={passwordRef} />
+            <div className={styles.input_container}>
+              <input type={viewPassword ? "text" : "password"} ref={passwordRef} />
+              {!viewPassword && (
+                <FaEyeSlash className={styles.password_icon} onClick={toggleViewPasswordHandler} />
+              )}
+              {viewPassword && (
+                <FaEye className={styles.password_icon} onClick={toggleViewPasswordHandler} />
+              )}
+            </div>
           </div>
         )}
         <div className={styles.form_actions}>

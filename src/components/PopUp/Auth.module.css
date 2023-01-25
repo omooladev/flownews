@@ -74,10 +74,13 @@
   justify-content: space-between;
   width: 100%;
 }
-
+.login .form .form_control .input_container {
+  position: relative;
+  width: 100%;
+}
 .login .form .form_control input {
   width: 100%;
-  padding: 0.3rem 0.5rem;
+  padding: 0.4rem 0.5rem;
   border-radius: 3px;
   border: 1px solid transparent;
   transition: all 0.3s;
@@ -86,6 +89,16 @@
 }
 .login .form .form_control input:focus {
   border: 1px solid var(--nav-text-hover-color);
+}
+.login .form .form_control .input_container input {
+  padding-right: 30px;
+}
+.login .form .form_control .input_container .password_icon {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  color: var(--nav-text-color);
+  cursor: pointer;
 }
 
 .form .form_actions {
@@ -105,9 +118,7 @@
   cursor: not-allowed;
   opacity: 0.5;
 }
-.form .form_actions button:hover {
-  opacity: 0.5;
-}
+
 .login .form_footer {
   display: flex;
   flex-direction: row;
@@ -148,5 +159,8 @@
 
   .login .form_footer a:hover {
     text-decoration: underline;
+  }
+  .form .form_actions button:hover {
+    opacity: 0.5;
   }
 }
