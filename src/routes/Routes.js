@@ -4,9 +4,10 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import AuthPage from "../pages/Auth/Auth";
 import NotFoundPage from "../pages/NotFound";
 import SuspenseLoader from "../components/Loaders/SuspenseLoader";
+import ContributorHomePage from "../pages/Contributor/Home";
 
 const UserHomePage = React.lazy(() => import("../pages/User/Home"));
-const ContributorHomePage = React.lazy(() => import("../pages/Contributor/Home"));
+// const ContributorHomePage = React.lazy(() => import("../pages/Contributor/Home"));
 // const AccountPage = React.lazy(() => import("../pages/Contributor/DashBoard/Account"));
 const ProfilePage = React.lazy(() => import("../pages/Contributor/Profile/Profile"));
 
