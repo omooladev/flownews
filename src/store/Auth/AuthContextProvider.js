@@ -16,8 +16,10 @@ const AuthContextProvider = (props) => {
     user: { username: "" },
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [headerIsLoading, setHeaderIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(appMode.isLoggedIn);
   const [authMessage, setAuthMessage] = useState({ type: "", message: "" });
+  const [contributorError, setContributorError] = useState({ ref: "", message: "" });
   const history = useHistory();
   const changeAuthMessage = useCallback((authMessage) => {
     setAuthMessage((prevMessage) => {
@@ -36,7 +38,8 @@ const AuthContextProvider = (props) => {
       const error = (await response.error) || "";
       const data = (await response.data) || "";
       if (location === "login" && data) {
-        history.replace("/home");
+        console.log("user data gotten");
+
         // history.replace(`/${data.user.username}`);
         setIsLoggedIn((prevState) => {
           return !prevState;
@@ -58,6 +61,7 @@ const AuthContextProvider = (props) => {
             token: data.token,
           })
         );
+        history.replace("/home");
       }
       if (location === "become-contributor" && data) {
         changeAuthMessage({ type: "success", message: "Account created successfully" });
@@ -80,19 +84,20 @@ const AuthContextProvider = (props) => {
 
   const getContributorData = useCallback(
     async (username) => {
-      // setIsLoading((prevState) => {
-      //   return !prevState;
-      // });
-      if (!token) {
+      if (userData.username) {
         return;
       }
+      setHeaderIsLoading((prevState) => {
+        return !prevState;
+      });
+
       const response = await sendRequest(`${HOSTURI}/${username}`, {
         method: "GET",
         token,
       });
-      //const error = (await response.error) || "";
+      const error = (await response.error) || "";
       const data = (await response.data) || "";
-
+      console.log(error);
       if (data) {
         const isSearch = data.isSearch || "";
         const user = data.user;
@@ -109,12 +114,17 @@ const AuthContextProvider = (props) => {
           });
         }
       }
+      if (error) {
+        setContributorError((prevError) => {
+          return { ...prevError, ref: "home", message: error };
+        });
+      }
 
-      // return setIsLoading((prevState) => {
-      //   return !prevState;
-      // });
+      return setHeaderIsLoading((prevState) => {
+        return !prevState;
+      });
     },
-    [sendRequest, token]
+    [sendRequest, token, userData.username]
   );
 
   const signOutHandler = useCallback(() => {
@@ -142,8 +152,10 @@ const AuthContextProvider = (props) => {
         userData,
         searchedContributorData,
         isLoading,
+        headerIsLoading,
         isLoggedIn,
         authMessage,
+        contributorError,
         onGetContributorData: getContributorData,
         onChangeAuthMessage: (authMessage) => {
           changeAuthMessage(authMessage);

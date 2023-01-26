@@ -5,7 +5,8 @@ import AuthPage from "../pages/Auth/Auth";
 import NotFoundPage from "../pages/NotFound";
 import SuspenseLoader from "../components/Loaders/SuspenseLoader";
 
-const HomePage = React.lazy(() => import("../pages/Home"));
+const UserHomePage = React.lazy(() => import("../pages/User/Home"));
+const ContributorHomePage = React.lazy(() => import("../pages/Contributor/Home"));
 // const AccountPage = React.lazy(() => import("../pages/Contributor/DashBoard/Account"));
 const ProfilePage = React.lazy(() => import("../pages/Contributor/Profile/Profile"));
 
@@ -14,13 +15,13 @@ const Routes = () => {
   return (
     <Suspense fallback={<SuspenseLoader />}>
       <Switch>
-        <Route path="/home" exact>
-          <HomePage />
-        </Route>
         {!isLoggedIn && (
           <Switch>
             <Route path="/" exact>
               <Redirect to="/home" />
+            </Route>
+            <Route path="/home" exact>
+              <UserHomePage />
             </Route>
             <Route path="/login" exact>
               <AuthPage />
@@ -41,12 +42,21 @@ const Routes = () => {
         )}
         {isLoggedIn && (
           <Switch>
+            <Route path="/" exact>
+              <Redirect to="/home" />
+            </Route>
+            <Route path="/home" exact>
+              <ContributorHomePage />
+            </Route>
             <Route path="/:username" exact>
               <ProfilePage />
             </Route>
+            <Route path="*">
+              <NotFoundPage />
+            </Route>
           </Switch>
         )}
-        
+
         <Route path="*">
           <NotFoundPage />
         </Route>

@@ -7,17 +7,27 @@ import Menu from "./Menu/Menu";
 import Navigation from "./Navigation/Navigation";
 // import SuspenseLoader from "../Loaders/SuspenseLoader";
 import styles from "./Header.module.css";
+import SuspenseLoader from "../Loaders/SuspenseLoader";
 const Header = () => {
   const { toggleMenu } = useContext(AppContext);
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, contributorError, headerIsLoading } = useContext(AuthContext);
+  console.log(contributorError);
   return (
-    <header className={`${styles.header} ${toggleMenu ? styles.active : ""}`}>
-      <Menu />
-      {/* <SuspenseLoader/> */}
-      <Logo className={styles.logo} />
-      <Navigation className={styles.navigation} />
-      {!isLoggedIn && <AccountSubscribe className={styles.account_subscribe} />}
-    </header>
+    <>
+      {!headerIsLoading && !contributorError.ref && (
+        <header className={`${styles.header} ${toggleMenu ? styles.active : ""}`}>
+          <Menu />
+          {/* <SuspenseLoader/> */}
+          <Logo className={styles.logo} />
+          <Navigation className={styles.navigation} />
+          {!isLoggedIn && <AccountSubscribe className={styles.account_subscribe} />}
+        </header>
+      )}
+      {!headerIsLoading && contributorError.ref && (
+        <p className={`error ${styles.error}`}>{contributorError.message}</p>
+      )}
+      {headerIsLoading && <SuspenseLoader />}
+    </>
   );
 };
 

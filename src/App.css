@@ -6,6 +6,9 @@
 .main-container {
   padding: 0 5%;
 }
+.error {
+  color: red;
+}
 .auth_popup {
   position: absolute;
   top: 0%;
