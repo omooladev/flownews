@@ -4,8 +4,8 @@ import { AuthContext } from "./auth-context";
 import { AppContext } from "../App/app-context";
 import useHttp from "../../hooks/useHttp";
 
-const HOSTURI = "http://localhost:5000/api/v1";
-//const HOSTURI = "https://flownews-api.onrender.com/api/v1";
+//const HOSTURI = "http://localhost:5000/api/v1";
+const HOSTURI = "https://flownews-api.onrender.com/api/v1";
 const AuthContextProvider = (props) => {
   const { sendRequest } = useHttp();
   const { appMode, onCloseProfileBox } = useContext(AppContext);
