@@ -3,16 +3,14 @@ import { AuthContext } from "../store/Auth/auth-context";
 import { Switch, Route, Redirect } from "react-router-dom";
 import AuthPage from "../pages/Auth/Auth";
 import NotFoundPage from "../pages/NotFound";
-import { AppContext } from "../store/App/app-context";
-import SignOut from "../pages/SignOut";
 import SuspenseLoader from "../components/Loaders/SuspenseLoader";
 
 const HomePage = React.lazy(() => import("../pages/Home"));
-const AccountPage = React.lazy(() => import("../pages/Contributor/DashBoard/Account"));
+// const AccountPage = React.lazy(() => import("../pages/Contributor/DashBoard/Account"));
+const ProfilePage = React.lazy(() => import("../pages/Contributor/Profile/Profile"));
 
 const Routes = () => {
   const { isLoggedIn } = useContext(AuthContext);
-  const { appMode } = useContext(AppContext);
   return (
     <Suspense fallback={<SuspenseLoader />}>
       <Switch>
@@ -43,19 +41,12 @@ const Routes = () => {
         )}
         {isLoggedIn && (
           <Switch>
-            {appMode.username && (
-              <Route path="/" exact>
-                <Redirect to={`/@${appMode.username}`} />
-              </Route>
-            )}
-            <Route path="/@:username" exact>
-              <AccountPage />
-            </Route>
-            <Route path="/signout" exact>
-              <SignOut />
+            <Route path="/:username" exact>
+              <ProfilePage />
             </Route>
           </Switch>
         )}
+        
         <Route path="*">
           <NotFoundPage />
         </Route>

@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { useHistory, NavLink } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import Notification from "./ContributorNavigations/Notification";
 import ProfileBox from "./ContributorNavigations/ProfileBox";
 import styles from "./MobileNavigation.module.css";
 const MobileNavigation = () => {
-  const { isLoggedIn, userData } = useContext(AuthContext);
+  const { isLoggedIn, userData, onSignOut } = useContext(AuthContext);
   const history = useHistory();
   return (
     <div className={styles.for_mobile_only}>
@@ -28,12 +28,14 @@ const MobileNavigation = () => {
           <ProfileBox
             className={styles.profile_box}
             onClick={() => {
-              history.replace(`/@${userData.username}`);
+              history.replace(`/${userData.username}`);
             }}
           />
           <Notification className={styles.notification} />
           <li className={styles.sign_out}>
-            <NavLink to="/signout">Sign out</NavLink>
+            <Link to="/" onClick={onSignOut}>
+              Sign out
+            </Link>
           </li>
         </>
       )}

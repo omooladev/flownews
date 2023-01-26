@@ -30,7 +30,7 @@ const ProfileSection = () => {
           </ul>
           <hr className={styles.write_line} />
           <ul className={`${styles["nav-user-list"]}`}>
-            <li>Profile</li>
+            <li onClick={() => history.push(`/${userData.username}`)}>Profile</li>
             <li>Lists</li>
             <li>Stories</li>
             <li>Stats</li>
@@ -49,7 +49,7 @@ const ProfileSection = () => {
             <li onClick={onSignOut} className={styles.sign_out}>
               Sign out
             </li>
-            <label onClick={() => history.replace("/signout")} className={styles.email}>
+            <label onClick={onSignOut} className={styles.email}>
               {contributorEmailAddress}
             </label>
           </ul>

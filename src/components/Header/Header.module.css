@@ -49,6 +49,9 @@
   .header {
     justify-content: space-between;
   }
+  .header .logo {
+    margin-left: 0rem;
+  }
   .header.active .logo {
     opacity: 1;
   }
