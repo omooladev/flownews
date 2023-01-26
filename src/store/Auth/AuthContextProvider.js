@@ -21,6 +21,7 @@ const AuthContextProvider = (props) => {
   const [authMessage, setAuthMessage] = useState({ type: "", message: "" });
   const [contributorError, setContributorError] = useState({ ref: "", message: "" });
   const history = useHistory();
+
   const changeAuthMessage = useCallback((authMessage) => {
     setAuthMessage((prevMessage) => {
       return { ...prevMessage, ...authMessage };
@@ -144,6 +145,8 @@ const AuthContextProvider = (props) => {
       return { ...prevMessage, type: "", message: "" };
     });
   }, []);
+
+  
 
   return (
     <AuthContext.Provider

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { AppContext } from "../../../../store/App/app-context";
 import { AuthContext } from "../../../../store/Auth/auth-context";
 
@@ -9,12 +9,17 @@ import Write from "./Write";
 
 const ProfileSection = () => {
   const history = useHistory();
-  const { profileBoxIsActive, onToggleProfileBox } = useContext(AppContext);
+  const { profileBoxIsActive, onToggleProfileBox, onCloseProfileBox } = useContext(AppContext);
   const { onSignOut, userData } = useContext(AuthContext);
 
   const contributorFullUsername = userData.username;
   const contributorEmailAddress = userData.email;
-
+  const viewProfilePage = useCallback(() => {
+    if (profileBoxIsActive) {
+      onCloseProfileBox();
+    }
+    history.push(`/${userData.username}`);
+  }, [history, onCloseProfileBox, profileBoxIsActive, userData]);
   return (
     <section className={styles.profile_section}>
       <ProfileBox className={styles.profile_box} onClick={onToggleProfileBox} />
@@ -30,7 +35,7 @@ const ProfileSection = () => {
           </ul>
           <hr className={styles.write_line} />
           <ul className={`${styles["nav-user-list"]}`}>
-            <li onClick={() => history.push(`/${userData.username}`)}>Profile</li>
+            <li onClick={viewProfilePage}>Profile</li>
             <li>Lists</li>
             <li>Stories</li>
             <li>Stats</li>
