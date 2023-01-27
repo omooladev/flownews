@@ -18,7 +18,7 @@ const ProfileSection = () => {
     if (profileBoxIsActive) {
       onCloseProfileBox();
     }
-    history.push(`/${userData.username}`);
+    history.push(`/@${userData.username}`);
   }, [history, onCloseProfileBox, profileBoxIsActive, userData]);
   return (
     <section className={styles.profile_section}>

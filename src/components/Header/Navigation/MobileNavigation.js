@@ -28,7 +28,7 @@ const MobileNavigation = () => {
           <ProfileBox
             className={styles.profile_box}
             onClick={() => {
-              history.replace(`/${userData.username}`);
+              history.replace(`/@${userData.username}`);
             }}
           />
           <Notification className={styles.notification} />
