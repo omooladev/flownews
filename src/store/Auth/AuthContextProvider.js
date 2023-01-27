@@ -92,7 +92,7 @@ const AuthContextProvider = (props) => {
         return !prevState;
       });
 
-      const response = await sendRequest(`${HOSTURI}/${username}`, {
+      const response = await sendRequest(`${HOSTURI}/@${username}`, {
         method: "GET",
         token,
       });
