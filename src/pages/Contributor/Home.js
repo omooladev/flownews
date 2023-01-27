@@ -4,13 +4,18 @@ import { AuthContext } from "../../store/Auth/auth-context";
 const Home = () => {
   const {
     appMode: { isLoggedIn, username },
+    onCloseMenu,
+    toggleMenu,
   } = useContext(AppContext);
   const { onGetContributorData } = useContext(AuthContext);
   useEffect(() => {
     if (isLoggedIn) {
       onGetContributorData(username);
     }
-  }, [username, isLoggedIn, onGetContributorData]);
+    if (toggleMenu) {
+      onCloseMenu();
+    }
+  }, [username, isLoggedIn, onGetContributorData, toggleMenu, onCloseMenu]);
   return;
 };
 
