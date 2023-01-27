@@ -52,9 +52,9 @@ const Routes = () => {
             <Route path="/@:username" exact>
               <ProfilePage />
             </Route>
-            <Route path="*">
+            {/* <Route path="*">
               <NotFoundPage />
-            </Route>
+            </Route> */}
           </Switch>
         )}
 
