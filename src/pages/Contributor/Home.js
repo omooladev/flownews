@@ -12,9 +12,6 @@ const Home = () => {
     if (isLoggedIn) {
       onGetContributorData(username);
     }
-    if (toggleMenu) {
-      onCloseMenu();
-    }
   }, [username, isLoggedIn, onGetContributorData, toggleMenu, onCloseMenu]);
   return;
 };
