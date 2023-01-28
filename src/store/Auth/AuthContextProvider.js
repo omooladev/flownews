@@ -39,9 +39,6 @@ const AuthContextProvider = (props) => {
       const error = (await response.error) || "";
       const data = (await response.data) || "";
       if (location === "login" && data) {
-        console.log("user data gotten");
-
-        // history.replace(`/${data.user.username}`);
         setIsLoggedIn((prevState) => {
           return !prevState;
         });
@@ -98,7 +95,7 @@ const AuthContextProvider = (props) => {
       });
       const error = (await response.error) || "";
       const data = (await response.data) || "";
-      console.log(error);
+
       if (data) {
         const isSearch = data.isSearch || "";
         const user = data.user;
@@ -145,8 +142,6 @@ const AuthContextProvider = (props) => {
       return { ...prevMessage, type: "", message: "" };
     });
   }, []);
-
-  
 
   return (
     <AuthContext.Provider

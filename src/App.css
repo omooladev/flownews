@@ -3,9 +3,7 @@
   background-color: var(--body-color);
   padding-top: 10vh;
 }
-.main-container {
-  padding: 0 5%;
-}
+
 .error {
   color: red;
 }

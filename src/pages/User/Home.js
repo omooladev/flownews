@@ -4,14 +4,12 @@ import { AppContext } from "../../store/App/app-context";
 
 const Home = () => {
   const location = useLocation();
-  const { onSetLastLocation, onCloseMenu } = useContext(AppContext);
+  const { onSetLastLocation } = useContext(AppContext);
 
   useEffect(() => {
     onSetLastLocation(location.pathname);
   }, [location.pathname, onSetLastLocation]);
-  useEffect(() => {
-    onCloseMenu();
-  }, [onCloseMenu]);
+  
   return;
 };
 

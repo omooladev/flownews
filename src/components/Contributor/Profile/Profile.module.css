@@ -1,4 +1,33 @@
 .profile {
   background-color: black;
-  padding: 1rem 0;
+  padding-top: 1rem;
+  overflow: hidden;
+}
+.profile_text_container {
+  background-color: white;
+  padding: 1rem 5%;
+  margin-top: 1rem;
+  position: relative;
+}
+/* configure profile box */
+.profile_box {
+  cursor:default;
+  position: absolute;
+  top: -1rem;
+  left: 5%;
+}
+.profile_box p {
+  height: 45px;
+  width: 45px;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; */
+  font-size: 2.25rem;
+}
+.profile .profile_box label {
+  display: none;
+}
+
+@media (min-width: 700px) {
 }
