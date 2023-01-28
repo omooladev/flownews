@@ -13,6 +13,8 @@ const ProfilePage = React.lazy(() => import("../pages/Contributor/Profile/Profil
 
 const Routes = () => {
   const { isLoggedIn } = useContext(AuthContext);
+  
+
   return (
     <Suspense fallback={<SuspenseLoader />}>
       <Switch>

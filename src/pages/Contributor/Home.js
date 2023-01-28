@@ -5,14 +5,17 @@ const Home = () => {
   const {
     appMode: { isLoggedIn, username },
     onCloseMenu,
-    toggleMenu,
   } = useContext(AppContext);
   const { onGetContributorData } = useContext(AuthContext);
   useEffect(() => {
     if (isLoggedIn) {
       onGetContributorData(username);
     }
-  }, [username, isLoggedIn, onGetContributorData, toggleMenu, onCloseMenu]);
+  }, [username, isLoggedIn, onGetContributorData]);
+
+  useEffect(() => {
+    onCloseMenu();
+  }, [onCloseMenu]);
   return;
 };
 
