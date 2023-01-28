@@ -38,9 +38,9 @@ const Routes = () => {
             <Route path="/account" exact>
               <Redirect to="/login" />
             </Route>
-            <Route path="*">
+            {/* <Route path="*">
               <NotFoundPage />
-            </Route>
+            </Route> */}
           </Switch>
         )}
         {isLoggedIn && (

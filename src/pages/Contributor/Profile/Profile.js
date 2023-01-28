@@ -14,6 +14,7 @@ const Profile = () => {
       onGetContributorData(username);
     }
   }, [username, isLoggedIn, onGetContributorData]);
+
   return <ProfileCmp />;
 };
 

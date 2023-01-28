@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import { useHistory, Link } from "react-router-dom";
+import { AppContext } from "../../../store/App/app-context";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import Notification from "./ContributorNavigations/Notification";
 import ProfileBox from "./ContributorNavigations/ProfileBox";
 import styles from "./MobileNavigation.module.css";
 const MobileNavigation = () => {
+  const { onCloseMenu } = useContext(AppContext);
   const { isLoggedIn, userData, onSignOut } = useContext(AuthContext);
   const history = useHistory();
   return (
@@ -13,12 +15,21 @@ const MobileNavigation = () => {
         <>
           <button
             className={styles.contributor}
-            onClick={() => history.replace("/become-contributor")}
+            onClick={() => {
+              onCloseMenu();
+              history.replace("/become-contributor");
+            }}
           >
             Become a contributor
           </button>
 
-          <button className={styles.login} onClick={() => history.replace("/login")}>
+          <button
+            className={styles.login}
+            onClick={() => {
+              onCloseMenu();
+              history.replace("/login");
+            }}
+          >
             Login
           </button>
         </>
@@ -28,12 +39,19 @@ const MobileNavigation = () => {
           <ProfileBox
             className={styles.profile_box}
             onClick={() => {
+              onCloseMenu();
               history.replace(`/@${userData.username}`);
             }}
           />
           <Notification className={styles.notification} />
           <li className={styles.sign_out}>
-            <Link to="/" onClick={onSignOut}>
+            <Link
+              to="#"
+              onClick={() => {
+                onCloseMenu();
+                onSignOut();
+              }}
+            >
               Sign out
             </Link>
           </li>

@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { AppContext } from "../../store/App/app-context";
 import { AuthContext } from "../../store/Auth/auth-context";
@@ -97,7 +97,7 @@ const Auth = () => {
     } catch (error) {}
   }, [location, onResetAuthMessage]);
   return (
-    <PopUp onClick={isLoading ? "" : closePopUpHandler} className={`auth_popup ${styles.login}`}>
+    <PopUp onClick={isLoading ? Nil : closePopUpHandler} className={`auth_popup ${styles.login}`}>
       <BiX
         className={`${styles.icon} ${styles.cancel}`}
         onClick={isLoading ? Nil : closePopUpHandler}
@@ -132,7 +132,7 @@ const Auth = () => {
             <div className={styles.password_label}>
               <label>Password</label>
               {loginLocation && (
-                <NavLink to={`${isLoading ? "#" : "/forgot-password"}`}>Forgot password?</NavLink>
+                <Link to={`${isLoading ? "#" : "/forgot-password"}`}>Forgot password?</Link>
               )}
             </div>
             <div className={styles.input_container}>
@@ -168,19 +168,19 @@ const Auth = () => {
         {loginLocation && (
           <>
             <p>New to FlowNews?</p>
-            <NavLink to={`${isLoading ? "#" : "/become-contributor"}`}>Create an account</NavLink>
+            <Link to={`${isLoading ? "#" : "/become-contributor"}`}>Create an account</Link>
           </>
         )}
         {becomeContributorLocation && (
           <>
             <p>Already have an account?</p>
-            <NavLink to="/login">Log in</NavLink>
+            <Link to="/login">Log in</Link>
           </>
         )}
         {forgotPasswordLocation && (
           <>
             <p>Never mind?</p>
-            <NavLink to="/login">Take me back to login</NavLink>
+            <Link to="/login">Take me back to login</Link>
           </>
         )}
       </div>
