@@ -6,6 +6,8 @@ import ProfileDate from "./ProfileDate";
 import styles from "./ProfileInfo.module.css";
 import ProfileEmail from "./ProfileEmail";
 import { BiBadgeCheck } from "react-icons/bi";
+import ProfileEducationWork from "./ProfileEducationWork";
+import ProfileMoreInfo from "./ProfileMoreInfo";
 const ProfileInfo = () => {
   const {
     userData: {
@@ -39,22 +41,8 @@ const ProfileInfo = () => {
         <ProfileEmail email={email} emailIsVerified={emailIsVerified} />
       </div>
       <hr />
-      {(education || work) && (
-        <div className={styles.education_work}>
-          {education && (
-            <div className={styles.education}>
-              <label>Education</label>
-              <p>{education}</p>
-            </div>
-          )}
-          {work && (
-            <div className={styles.work}>
-              <label>Work</label>
-              <p>{work}</p>
-            </div>
-          )}
-        </div>
-      )}
+      <ProfileEducationWork education={education} work={work} />
+      <ProfileMoreInfo username={username} />
     </section>
   );
 };

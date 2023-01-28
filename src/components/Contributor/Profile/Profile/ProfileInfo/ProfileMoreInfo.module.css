@@ -1,0 +1,9 @@
+.more_info {
+  padding: 0.5rem 5%;
+  text-align: center;
+}
+.more_info div {
+  cursor: pointer;
+  padding: 0.5rem 0;
+  border: 1px solid grey;
+}
