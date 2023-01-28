@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: left;
-  padding: 0.2rem 0;
+  padding: 0.2rem 5%;
 }
 .contributor_info h2 {
   margin-bottom: 0.4rem;
@@ -14,7 +14,7 @@
 }
 .contributor_info .bio {
   font-weight: normal;
-  padding: 0.5rem 0;
+  padding: 0.5rem 5%;
   text-align: left;
 }
 .contributor_location_email_joinedDate {
@@ -22,4 +22,40 @@
   align-items: flex-start;
   justify-content: left;
   flex-wrap: wrap;
+  padding: 0 5%;
+  padding-bottom: 1.5rem;
+}
+.education_work {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 5%;
+}
+.education_work .education,
+.education_work .work {
+  margin-top: 0.5rem;
+  padding-right: 1.5rem;
+}
+.education_work .education label,
+.education_work .work label {
+  color: grey;
+  font-size: 1rem;
+}
+
+@media (min-width: 650px) {
+  .education_work {
+    flex-direction: row;
+    padding: 0 5%;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+@media (min-width: 800px) {
+  .education_work {
+    width: 60%;
+    margin: 0 auto;
+  }
+  .education_work .education,
+  .education_work .work {
+    text-align: center;
+  }
 }

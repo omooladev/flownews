@@ -8,9 +8,21 @@ import ProfileEmail from "./ProfileEmail";
 import { BiBadgeCheck } from "react-icons/bi";
 const ProfileInfo = () => {
   const {
-    userData: { location, bio, username, createdAt, email, userVerified, emailIsVerified },
+    userData: {
+      location,
+      bio,
+      username,
+      createdAt,
+      email,
+      userVerified,
+      emailIsVerified,
+      // education,
+      // work,
+    },
   } = useContext(AuthContext);
   // const { bio, location } = dummyContributor;
+  const education = "Federal University of Technology, Akure";
+  const work = "Student";
 
   return (
     <section className={styles["contributor_info"]}>
@@ -26,6 +38,23 @@ const ProfileInfo = () => {
         <ProfileDate createdAt={createdAt} />
         <ProfileEmail email={email} emailIsVerified={emailIsVerified} />
       </div>
+      <hr />
+      {(education || work) && (
+        <div className={styles.education_work}>
+          {education && (
+            <div className={styles.education}>
+              <label>Education</label>
+              <p>{education}</p>
+            </div>
+          )}
+          {work && (
+            <div className={styles.work}>
+              <label>Work</label>
+              <p>{work}</p>
+            </div>
+          )}
+        </div>
+      )}
     </section>
   );
 };

@@ -24,7 +24,7 @@ const Profile = () => {
           <Card className={styles.profile_text_container}>
             <ProfileBox className={styles.profile_box} />
             <ProfileButton />
-            <ProfileInfo/>
+            <ProfileInfo />
           </Card>
         </section>
       )}
