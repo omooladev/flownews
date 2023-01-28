@@ -93,8 +93,11 @@ const Auth = () => {
     } catch (error) {}
   }, [location, onResetAuthMessage]);
   return (
-    <PopUp onClick={closePopUpHandler} className={`auth_popup ${styles.login}`}>
-      <BiX className={`${styles.icon} ${styles.cancel}`} onClick={closePopUpHandler} />
+    <PopUp onClick={isLoading ? "" : closePopUpHandler} className={`auth_popup ${styles.login}`}>
+      <BiX
+        className={`${styles.icon} ${styles.cancel}`}
+        onClick={isLoading ? "" : closePopUpHandler}
+      />
       {loginLocation && <h1>Log in to FlowNews</h1>}
       {becomeContributorLocation && <h1>Create a FlowNews account</h1>}
       {forgotPasswordLocation && (
@@ -124,7 +127,9 @@ const Auth = () => {
           <div className={styles.form_control}>
             <div className={styles.password_label}>
               <label>Password</label>
-              {loginLocation && <NavLink to="/forgot-password">Forgot password?</NavLink>}
+              {loginLocation && (
+                <NavLink to={`${isLoading ? "#" : "/forgot-password"}`}>Forgot password?</NavLink>
+              )}
             </div>
             <div className={styles.input_container}>
               <input type={viewPassword ? "text" : "password"} ref={passwordRef} />
@@ -159,7 +164,7 @@ const Auth = () => {
         {loginLocation && (
           <>
             <p>New to FlowNews?</p>
-            <NavLink to="/become-contributor">Create an account</NavLink>
+            <NavLink to={`${isLoading ? "#" : "/become-contributor"}`}>Create an account</NavLink>
           </>
         )}
         {becomeContributorLocation && (
