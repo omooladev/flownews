@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { dummyContributor } from "../../../../../data";
+// import { dummyContributor } from "../../../../../data";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
 import ProfileLocation from "./ProfileLocation";
 import ProfileDate from "./ProfileDate";
@@ -8,9 +8,9 @@ import ProfileEmail from "./ProfileEmail";
 import { BiBadgeCheck } from "react-icons/bi";
 const ProfileInfo = () => {
   const {
-    userData: { username, createdAt, email, userVerified, emailIsVerified },
+    userData: { location, bio, username, createdAt, email, userVerified, emailIsVerified },
   } = useContext(AuthContext);
-  const { bio, location } = dummyContributor;
+  // const { bio, location } = dummyContributor;
 
   return (
     <section className={styles["contributor_info"]}>
@@ -18,7 +18,9 @@ const ProfileInfo = () => {
         <h2>{username}</h2>
         {userVerified && <BiBadgeCheck className={styles.badge} />}
       </div>
-      <p className={styles.bio}>{bio}</p>
+      <p className={styles.bio}>
+        {bio || "Tell people what they should know about you, please update your bio"}
+      </p>
       <div className={styles.contributor_location_email_joinedDate}>
         <ProfileLocation location={location} />
         <ProfileDate createdAt={createdAt} />
