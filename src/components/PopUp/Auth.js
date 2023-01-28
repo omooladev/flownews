@@ -85,6 +85,10 @@ const Auth = () => {
     ]
   );
 
+  const Nil = useCallback((event) => {
+    event.stopPropagation();
+  });
+
   useEffect(() => {
     onResetAuthMessage();
     try {
@@ -96,7 +100,7 @@ const Auth = () => {
     <PopUp onClick={isLoading ? "" : closePopUpHandler} className={`auth_popup ${styles.login}`}>
       <BiX
         className={`${styles.icon} ${styles.cancel}`}
-        onClick={isLoading ? "" : closePopUpHandler}
+        onClick={isLoading ? Nil : closePopUpHandler}
       />
       {loginLocation && <h1>Log in to FlowNews</h1>}
       {becomeContributorLocation && <h1>Create a FlowNews account</h1>}
