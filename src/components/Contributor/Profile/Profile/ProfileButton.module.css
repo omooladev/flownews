@@ -1,0 +1,12 @@
+.edit_profile_button_container {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  padding: 1rem 0;
+}
+.edit_profile_button_container .edit_profile_button {
+  cursor: pointer;
+  background-color: var(--nav-text-hover-color);
+  color: var(--body-color);
+  padding: 0.5rem 0.6rem;
+}

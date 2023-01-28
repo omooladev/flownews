@@ -1,0 +1,20 @@
+.email {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.email p {
+  padding: 0 0.5rem;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.email .not_verified {
+  color: rgb(208, 111, 111);
+}
+.email .verified {
+  color: var(--nav-text-hover-color);
+}
