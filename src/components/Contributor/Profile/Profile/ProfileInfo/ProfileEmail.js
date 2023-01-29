@@ -1,4 +1,4 @@
-import { BiEnvelope, BiXCircle, BiCheckCircle } from "react-icons/bi";
+import { BiEnvelope, BiXCircle } from "react-icons/bi";
 import styles from "./ProfileEmail.module.css";
 const ProfileEmail = (props) => {
   let { email, emailIsVerified } = props;
