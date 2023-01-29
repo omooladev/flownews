@@ -33,7 +33,7 @@ const ProfileInfo = () => {
         {userVerified && <BiBadgeCheck className={styles.badge} />}
       </div>
       <p className={styles.bio}>
-        {bio || "Tell people what they should know about you, please update your bio"}
+        {bio}
       </p>
       <div className={styles.contributor_location_email_joinedDate}>
         <ProfileLocation location={location} />

@@ -15,6 +15,4 @@
 .email .not_verified {
   color: rgb(208, 111, 111);
 }
-.email .verified {
-  color: var(--nav-text-hover-color);
-}
+
