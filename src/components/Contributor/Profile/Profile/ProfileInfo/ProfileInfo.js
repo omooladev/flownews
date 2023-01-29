@@ -18,14 +18,12 @@ const ProfileInfo = () => {
       email,
       userVerified,
       emailIsVerified,
-      // education,
-      // work,
+      education,
+      work,
     },
   } = useContext(AuthContext);
   // const { bio, location } = dummyContributor;
-  const education = "Federal University of Technology, Akure";
-  const work = "Student";
-
+  
   return (
     <section className={styles["contributor_info"]}>
       <div className={styles.username}>
