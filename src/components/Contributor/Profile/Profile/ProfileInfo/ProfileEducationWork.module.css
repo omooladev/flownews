@@ -5,8 +5,8 @@
 }
 .education_work .education,
 .education_work .work {
-  margin-top: 0.5rem;
-  padding-right: 1.5rem;
+  margin: 0.5rem 0;
+  padding-right: 1rem;
 }
 .education_work .education label,
 .education_work .work label {

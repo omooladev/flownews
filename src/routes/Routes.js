@@ -10,10 +10,9 @@ const UserHomePage = React.lazy(() => import("../pages/User/Home"));
 // const ContributorHomePage = React.lazy(() => import("../pages/Contributor/Home"));
 // const AccountPage = React.lazy(() => import("../pages/Contributor/DashBoard/Account"));
 const ProfilePage = React.lazy(() => import("../pages/Contributor/Profile/Profile"));
-
+const SettingPage = React.lazy(() => import("../pages/Contributor/Setting/Setting"));
 const Routes = () => {
   const { isLoggedIn } = useContext(AuthContext);
-  
 
   return (
     <Suspense fallback={<SuspenseLoader />}>
@@ -53,6 +52,9 @@ const Routes = () => {
             </Route>
             <Route path="/@:username" exact>
               <ProfilePage />
+            </Route>
+            <Route path="/settings" exact>
+              <SettingPage />
             </Route>
             {/* <Route path="*">
               <NotFoundPage />
