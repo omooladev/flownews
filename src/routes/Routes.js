@@ -53,7 +53,7 @@ const Routes = () => {
             <Route path="/@:username" exact>
               <ProfilePage />
             </Route>
-            <Route path="/settings" exact>
+            <Route path="/settings">
               <SettingPage />
             </Route>
             {/* <Route path="*">

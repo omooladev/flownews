@@ -1,0 +1,25 @@
+.setting {
+  padding: 1rem 5%;
+}
+
+/* configure profile box */
+.setting .profile_box {
+  cursor: default;
+}
+.setting .profile_box p {
+  height: 45px;
+  width: 45px;
+  font-size: 2.25rem;
+}
+.setting .profile_box div {
+  padding: 0 1rem;
+}
+.setting .profile_box div label {
+  font-weight: bold;
+  padding: 0.3rem 0;
+  font-size: 1.2rem;
+}
+.setting .profile_box div h5 {
+  font-weight: normal;
+  font-size: 1rem;
+}

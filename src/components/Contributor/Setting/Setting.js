@@ -1,9 +1,9 @@
 import ProfileBox from "../../Header/Navigation/ContributorNavigations/ProfileBox";
-// import styles from "./Setting.module.css"
+import styles from "./Setting.module.css"
 const Setting = () => {
   return (
-    <section>
-      <ProfileBox />
+    <section className={styles.setting}>
+      <ProfileBox className={styles.profile_box} location={"setting"}/>
     </section>
   );
 };

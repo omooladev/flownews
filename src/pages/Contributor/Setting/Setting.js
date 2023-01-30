@@ -5,6 +5,7 @@ import { AuthContext } from "../../../store/Auth/auth-context";
 import SettingCmp from "../../../components/Contributor/Setting/Setting";
 import EditProfile from "./EditProfile/EditProfile";
 const Setting = () => {
+  console.log("olawole");
   const {
     appMode: { isLoggedIn, username },
   } = useContext(AppContext);
@@ -15,12 +16,14 @@ const Setting = () => {
     }
   }, [username, isLoggedIn, onGetContributorData]);
   return (
-    <Switch>
+    <>
       <SettingCmp />
-      <Route to="/profile" exact>
-        <EditProfile />
-      </Route>
-    </Switch>
+      <Switch>
+        <Route to="/profile" exact>
+          <EditProfile />
+        </Route>
+      </Switch>
+    </>
   );
 };
 
