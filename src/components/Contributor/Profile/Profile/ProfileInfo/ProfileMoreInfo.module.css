@@ -7,3 +7,9 @@
   padding: 0.5rem 0;
   border: 1px solid grey;
 }
+
+@media (min-width: 700px) {
+  .more_info {
+    display: none;
+  }
+}
