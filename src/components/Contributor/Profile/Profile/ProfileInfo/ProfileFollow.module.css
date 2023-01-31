@@ -1,0 +1,28 @@
+.follow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: left;
+  flex-wrap: wrap;
+  padding: 0.5rem 5%;
+}
+
+.follow .followers,
+.follow .following {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 1rem;
+  cursor: pointer;
+}
+.follow .followers h4 {
+  padding-left: 0.5rem;
+}
+
+.follow h4 {
+  padding-right: 0.5rem;
+}
+@media (min-width: 700px) {
+  .follow {
+    justify-content: center;
+  }
+}

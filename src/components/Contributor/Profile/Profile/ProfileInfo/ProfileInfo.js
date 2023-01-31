@@ -8,6 +8,7 @@ import ProfileEmail from "./ProfileEmail";
 import { BiBadgeCheck } from "react-icons/bi";
 import ProfileEducationWork from "./ProfileEducationWork";
 import ProfileMoreInfo from "./ProfileMoreInfo";
+import ProfileFollow from "./ProfileFollow";
 const ProfileInfo = () => {
   const {
     userData: {
@@ -20,19 +21,20 @@ const ProfileInfo = () => {
       emailIsVerified,
       education,
       work,
+      followers,
+      following,
     },
   } = useContext(AuthContext);
   // const { bio, location } = dummyContributor;
-  
+
   return (
     <section className={styles["contributor_info"]}>
       <div className={styles.username}>
         <h2>{username}</h2>
         {userVerified && <BiBadgeCheck className={styles.badge} />}
       </div>
-      <p className={styles.bio}>
-        {bio}
-      </p>
+      <ProfileFollow followers={followers} following={following} />
+      <p className={styles.bio}>{bio}</p>
       <div className={styles.contributor_location_email_joinedDate}>
         <ProfileLocation location={location} />
         <ProfileDate createdAt={createdAt} />
