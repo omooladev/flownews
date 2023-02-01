@@ -8,7 +8,7 @@ const Setting = () => {
     <>
       {userData.username && (
         <section className={styles.setting}>
-          <ProfileBox className={styles.profile_box} location={"setting"} />
+          <ProfileBox className="Setting__ProfileBox" location={"setting"} />
         </section>
       )}
     </>

@@ -30,15 +30,7 @@
   background-color: var(--subscribe-button-hover);
   opacity: 0.8;
 }
-.for_mobile_only .profile_box {
-  display: flex;
-  width: auto;
-  margin: 0.5rem;
-}
-.for_mobile_only .profile_box label {
-  color: var(--nav-text-color);
-  cursor: pointer;
-}
+
 .for_mobile_only .notification {
   display: block;
   margin: 0.5rem;
@@ -61,12 +53,6 @@
   }
 }
 @media (min-width: 500px) {
-  .for_mobile_only .icon {
-    display: none;
-  }
-  .for_mobile_only .profile_box {
-    display: none;
-  }
   .for_mobile_only .sign_out {
     display: none;
   }

@@ -4,9 +4,6 @@
   font-family: var(--nav-link-font-family);
   font-size: var(--nav-link-font-size);
 }
-.profile_box {
-  display: none;
-}
 
 .nav-user {
   position: absolute;
@@ -96,9 +93,7 @@ li.write a:hover {
   .profile_section {
     display: block;
   }
-  .profile_box {
-    display: flex;
-  }
+
   .nav-user {
     width: 300px;
   }

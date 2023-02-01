@@ -10,7 +10,8 @@ const ProfileBox = (props) => {
   const contributorFullUsername = userData.username;
   const contributorProfilePicture = userData.profilePicture || "";
 
-  const className = props.className || "";
+  const className = `${styles[props.className]}` || "";
+
   return (
     <div onClick={props.onClick} className={`${styles.profile_box} ${className}`}>
       {contributorProfilePicture ? (

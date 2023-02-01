@@ -13,7 +13,7 @@ const Profile = () => {
       {userData.username && (
         <section className={` main-container ${styles.profile} `}>
           <Card className={styles.profile_text_container}>
-            <ProfileBox className={styles.profile_box} />
+            <ProfileBox className="Profile__ProfileBox" />
             <ProfileButton />
             <ProfileInfo />
           </Card>

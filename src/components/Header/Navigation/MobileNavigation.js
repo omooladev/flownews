@@ -37,7 +37,7 @@ const MobileNavigation = () => {
       {isLoggedIn && (
         <>
           <ProfileBox
-            className={styles.profile_box}
+            className="MobileNavigation__ProfileBox"
             onClick={() => {
               onCloseMenu();
               history.replace(`/@${userData.username}`);

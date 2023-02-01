@@ -22,7 +22,7 @@ const ProfileSection = () => {
   }, [history, onCloseProfileBox, profileBoxIsActive, userData]);
   return (
     <section className={styles.profile_section}>
-      <ProfileBox className={styles.profile_box} onClick={onToggleProfileBox} />
+      <ProfileBox className="Header-ProfileSection__ProfileBox" onClick={onToggleProfileBox} />
       {profileBoxIsActive && (
         <nav className={`${styles["nav-user"]}`}>
           <ul className={`${styles["nav-user-list"]}`}>

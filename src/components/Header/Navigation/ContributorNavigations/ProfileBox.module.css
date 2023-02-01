@@ -1,3 +1,4 @@
+/** Default profileBox configuration */
 .profile_box {
   position: relative;
   cursor: pointer;
@@ -30,7 +31,6 @@
 }
 
 .profile_box .icon {
-  display: none;
   color: var(--nav-text-color);
   font-size: 0.8rem;
 }
@@ -41,16 +41,95 @@
   justify-content: center;
 }
 .profile_box .profile_box_text .username {
-  display: block;
   color: var(--nav-text-color);
 }
-/* .profile_box .profile_box_text .your_personal_account {
-} */
+/*? ProfileBox configuration for Header Profile Section */
+.Header-ProfileSection__ProfileBox {
+  display: none;
+}
+/*? ProfileBox configuration for Mobile Navigation */
+.MobileNavigation__ProfileBox {
+  display: flex;
+  width: auto;
+  margin: 0.5rem;
+}
+.MobileNavigation__ProfileBox .username {
+  cursor: pointer;
+}
+.MobileNavigation__ProfileBox .icon {
+  display: none;
+}
+/*? ProfileBox configuration for Profile */
+.Profile__ProfileBox {
+  cursor: default;
+  position: absolute;
+  top: -1rem;
+  left: 5%;
+}
+.Profile__ProfileBox p {
+  height: 45px;
+  width: 45px;
+  font-size: 2.25rem;
+}
+.Profile__ProfileBox .username,
+.Profile__ProfileBox .icon {
+  display: none;
+}
+/*? ProfileBox configuration for Setting */
+.Setting__ProfileBox {
+  cursor: default;
+}
+.Setting__ProfileBox p {
+  height: 45px;
+  width: 45px;
+  font-size: 2.25rem;
+}
+.Setting__ProfileBox .profile_box_text {
+  padding: 0 0.5rem;
+}
+.Setting__ProfileBox .profile_box_text .username {
+  font-weight: bold;
+  padding: 0.3rem 0;
+  font-size: 1.2rem;
+}
+.Setting__ProfileBox .icon {
+  display: none;
+}
+.Setting__ProfileBox .profile_box_text .your_personal_account {
+  font-weight: normal;
+  font-size: 1rem;
+}
+
 @media (min-width: 500px) {
-  .profile_box .icon {
-    display: block;
+  /*? ProfileBox configuration for Header Profile Section */
+  .Header-ProfileSection__ProfileBox {
+    display: flex;
   }
-  .profile_box .profile_box_text {
+  .Header-ProfileSection__ProfileBox .username {
+    display: none;
+  }
+  /*? ProfileBox configuration for Mobile Navigation */
+  .MobileNavigation__ProfileBox {
+    display: none;
+  }
+}
+
+@media (min-width: 700px) {
+  /*? ProfileBox configuration for Profile */
+  .Profile__ProfileBox {
+    cursor: default;
+    position: absolute;
+    top: -2.5rem;
+    left: 50%;
+    margin-left: -50px;
+  }
+  .Profile__ProfileBox p {
+    height: 100px;
+    width: 100px;
+    font-size: 4rem;
+    border: 8px solid black;
+  }
+  .Profile__ProfileBox .icon {
     display: none;
   }
 }
