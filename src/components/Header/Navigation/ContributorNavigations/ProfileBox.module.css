@@ -34,15 +34,23 @@
   color: var(--nav-text-color);
   font-size: 0.8rem;
 }
-.profile_box .username {
+.profile_box .profile_box_text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.profile_box .profile_box_text .username {
   display: block;
   color: var(--nav-text-color);
 }
+/* .profile_box .profile_box_text .your_personal_account {
+} */
 @media (min-width: 500px) {
   .profile_box .icon {
     display: block;
   }
-  .profile_box .username {
+  .profile_box .profile_box_text {
     display: none;
   }
 }

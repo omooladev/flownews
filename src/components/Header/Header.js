@@ -10,10 +10,10 @@ import styles from "./Header.module.css";
 import SuspenseLoader from "../Loaders/SuspenseLoader";
 const Header = () => {
   const { toggleMenu } = useContext(AppContext);
-  const { isLoggedIn, contributorError, headerIsLoading ,userData} = useContext(AuthContext);
+  const { isLoggedIn, contributorError, headerIsLoading, userData } = useContext(AuthContext);
   return (
     <>
-      {userData.username && !contributorError.ref && (
+      {(userData.username || !isLoggedIn) && !contributorError.ref && (
         <header className={`${styles.header} ${toggleMenu ? styles.active : ""}`}>
           <Menu />
           {/* <SuspenseLoader/> */}
