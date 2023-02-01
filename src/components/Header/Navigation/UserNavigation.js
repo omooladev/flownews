@@ -13,7 +13,7 @@ const UserNavigation = () => {
       {userLinks.map((link) => {
         return (
           <li className={styles["navigation-link"]} key={link}>
-            <NavLink to={`${link}`} onClick={onCloseMenu} activeClassName={styles["active-link"]}>
+            <NavLink to={`/${link}`} onClick={onCloseMenu} activeClassName={styles["active-link"]}>
               {link}
             </NavLink>
           </li>
