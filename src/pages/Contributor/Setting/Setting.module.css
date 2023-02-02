@@ -1,0 +1,10 @@
+.setting_page {
+  padding: 1rem 5%;
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 750px) {
+  .setting_page {
+    flex-direction: row;
+  }
+}

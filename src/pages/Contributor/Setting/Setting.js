@@ -4,6 +4,7 @@ import { AppContext } from "../../../store/App/app-context";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import SettingCmp from "../../../components/Contributor/Setting/Setting";
 import EditProfile from "./EditProfile/EditProfile";
+import styles from "./Setting.module.css"
 const Setting = () => {
   const {
     appMode: { isLoggedIn, username },
@@ -15,14 +16,14 @@ const Setting = () => {
     }
   }, [username, isLoggedIn, onGetContributorData]);
   return (
-    <>
+    <section className={styles.setting_page}>
       <SettingCmp />
       <Switch>
         <Route to="/profile" exact>
           <EditProfile />
         </Route>
       </Switch>
-    </>
+    </section>
   );
 };
 
