@@ -22,12 +22,7 @@
   transition: all 0.4s ease;
   border-radius: 0.3rem;
 }
-.setting_navigation-links ul li a:hover {
-  color: var(--body-color);
-  transition: all 0.4s ease;
-  background-color: var(--nav-text-hover-color);
-  opacity: 0.8;
-}
+
 .setting_navigation-links ul li a span {
   padding: 0 0.5rem;
 }
@@ -36,4 +31,12 @@
   color: var(--body-color);
   font-weight: bold;
   background-color: var(--nav-text-hover-color);
+}
+@media (min-width: 500px) {
+  .setting_navigation-links ul li a:hover {
+    color: var(--body-color);
+    transition: all 0.4s ease;
+    background-color: var(--nav-text-hover-color);
+    opacity: 0.8;
+  }
 }
