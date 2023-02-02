@@ -90,14 +90,14 @@
 .Setting__ProfileBox .profile_box_text .username {
   font-weight: bold;
   padding: 0.3rem 0;
-  font-size: 1.2rem;
+  font-size: 1.0rem;
 }
 .Setting__ProfileBox .icon {
   display: none;
 }
 .Setting__ProfileBox .profile_box_text .your_personal_account {
   font-weight: normal;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 @media (min-width: 500px) {
