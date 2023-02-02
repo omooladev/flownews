@@ -1,7 +1,7 @@
 import styles from "./EmailMessage.module.css";
 const EmailMessage = (props) => {
-  const { email, emailRequestChange } = props;
-  const emailIsVerified = false;
+  const { email, emailRequestChange, emailIsVerified } = props;
+  
 
   return (
     <div className={styles.email_verification}>
