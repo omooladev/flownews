@@ -5,7 +5,6 @@ import { AuthContext } from "../../../store/Auth/auth-context";
 import SettingCmp from "../../../components/Contributor/Setting/Setting";
 import EditProfile from "./EditProfile/EditProfile";
 const Setting = () => {
-  console.log("olawole");
   const {
     appMode: { isLoggedIn, username },
   } = useContext(AppContext);

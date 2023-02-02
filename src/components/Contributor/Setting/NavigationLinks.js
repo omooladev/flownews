@@ -1,5 +1,6 @@
 const NavigationLinks = () => {
   const links = ["Public profile", "Account", "Appearance", "Notifications"];
+  console.log(links);
   const linksIcon = {};
   return (
     <section>
@@ -7,7 +8,7 @@ const NavigationLinks = () => {
         {links.map((link) => {
           return (
             <li>
-              <NavLink/>
+              <NavLink />
             </li>
           );
         })}
