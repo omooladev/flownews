@@ -1,15 +1,27 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../../store/Auth/auth-context";
 import styles from "./EditProfile.module.css";
+import EmailMessage from "./UI/EmailMessage";
 const EditProfile = () => {
-  const { userData } = useContext(AuthContext);
+  const {
+    userData: { username, email, emailIsVerified },
+  } = useContext(AuthContext);
+
+  const emailRequestChange = true;
 
   return (
     <>
-      {userData.username && (
+      {username && (
         <section className={styles.edit_profile}>
-          <h2>Public Profile</h2>
+          <h2 className={styles.public_profile}>Public Profile</h2>
           <hr />
+          {(!emailIsVerified || emailRequestChange) && (
+            <EmailMessage
+              email={email}
+              emailIsVerified={emailIsVerified}
+              emailRequestChange={emailRequestChange}
+            />
+          )}
         </section>
       )}
     </>

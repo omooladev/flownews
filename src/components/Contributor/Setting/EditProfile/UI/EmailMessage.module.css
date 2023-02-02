@@ -1,0 +1,14 @@
+.email_verification {
+  padding: 1rem 0;
+}
+
+.email_verification p {
+  padding: 0.5rem 0;
+}
+.email_verification .send_email {
+  cursor: pointer;
+  padding: 0.5rem 0.6rem;
+  background-color: var(--nav-text-hover-color);
+  color: var(--body-color);
+  margin: 0.5rem 0;
+}
