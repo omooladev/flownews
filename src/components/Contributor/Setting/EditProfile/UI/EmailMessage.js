@@ -1,8 +1,7 @@
-import Card from "../../../../../UI/Card"
+import Card from "../../../../../UI/Card";
 import styles from "./EmailMessage.module.css";
 const EmailMessage = (props) => {
   const { email, emailRequestChange, emailIsVerified } = props;
-  
 
   return (
     <Card className={styles.email_verification}>
@@ -15,10 +14,7 @@ const EmailMessage = (props) => {
       )}
       {(!emailIsVerified || (!emailIsVerified && emailRequestChange)) && (
         <>
-          <p>
-            Please verify your email address to have access to all
-            features of flownews
-          </p>
+          <p>Please verify your email address to have access to all features of flownews</p>
           <button className={styles.verify_email}>Verify Email</button>
         </>
       )}

@@ -1,13 +1,15 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../../store/Auth/auth-context";
 import styles from "./EditProfile.module.css";
+import ConnectAccount from "./UI/ConnectAccount";
 import EmailMessage from "./UI/EmailMessage";
+import User from "./UI/User";
 const EditProfile = () => {
   const {
     userData: { username, email, emailIsVerified },
   } = useContext(AuthContext);
 
-  const emailRequestChange = true;
+  const emailRequestChange = false;
 
   return (
     <>
@@ -22,6 +24,8 @@ const EditProfile = () => {
               emailRequestChange={emailRequestChange}
             />
           )}
+          <ConnectAccount />
+          <User />
         </section>
       )}
     </>

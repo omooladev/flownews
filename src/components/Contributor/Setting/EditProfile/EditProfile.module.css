@@ -6,3 +6,8 @@
 .edit_profile h2 {
   padding: 0.5rem 0;
 }
+@media (min-width: 750px) {
+  .edit_profile {
+    width: 80%;
+  }
+}
