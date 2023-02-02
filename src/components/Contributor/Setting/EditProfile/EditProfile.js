@@ -1,4 +1,4 @@
-import styles from "./EditProfile.module.css";
+// import styles from "./EditProfile.module.css";
 const EditProfile = () => {
   return;
 };
