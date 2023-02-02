@@ -16,8 +16,9 @@ const EmailMessage = (props) => {
         <>
           <p>
             Please verify your email address and activate your account to have access to all
-            features of flownews <button className={styles.send_email}>Send Email</button>
+            features of flownews
           </p>
+          <button className={styles.send_email}>Send Email</button>
         </>
       )}
     </div>
