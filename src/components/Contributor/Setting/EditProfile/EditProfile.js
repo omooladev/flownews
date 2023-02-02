@@ -7,7 +7,7 @@ const EditProfile = () => {
     userData: { username, email, emailIsVerified },
   } = useContext(AuthContext);
 
-  const emailRequestChange = false;
+  const emailRequestChange = true;
 
   return (
     <>
