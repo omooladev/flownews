@@ -44,7 +44,7 @@ const UserForm = () => {
         </div>
       </div>
       <div className={styles.form_actions}>
-        <button type="submit">Save Profile Information</button>
+        {/* <button type="submit">Save Profile Information</button> */}
       </div>
     </form>
   );
