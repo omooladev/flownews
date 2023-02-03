@@ -95,15 +95,11 @@ const AuthContextProvider = (props) => {
       });
       const error = (await response.error) || "";
       const data = (await response.data) || "";
-
       if (data) {
         const isSearch = data.isSearch || "";
-        const user = data.user;
-        const tokenExpirationTime = data.tokenExpirationTime;
-        //const tokenExpirationTime = data.tokenExpirationTime;
         if (!isSearch) {
           setUserData((prevData) => {
-            return { isSearch, ...user, tokenExpirationTime };
+            return { ...prevData, ...data };
           });
         }
         if (isSearch) {
@@ -143,6 +139,27 @@ const AuthContextProvider = (props) => {
     });
   }, []);
 
+  const requestEmailChangeHandler = useCallback(
+    async (email, emailAddress) => {
+      const response = await sendRequest(`${HOSTURI}/request-email-change`, {
+        method: "PATCH",
+        userData: { email, defaultEmail: emailAddress },
+        token,
+      });
+      const error = (await response.error) || "";
+      const data = (await response.data) || "";
+      if (data) {
+        setUserData((prevData) => {
+          return { ...prevData, ...data };
+        });
+        return data
+      }
+      if (error) {
+        return response;
+      }
+    },
+    [sendRequest, token]
+  );
   return (
     <AuthContext.Provider
       value={{
@@ -154,6 +171,7 @@ const AuthContextProvider = (props) => {
         isLoggedIn,
         authMessage,
         contributorError,
+        onRequestEmailChangeHandler: requestEmailChangeHandler,
         onGetContributorData: getContributorData,
         onChangeAuthMessage: (authMessage) => {
           changeAuthMessage(authMessage);

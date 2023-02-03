@@ -1,6 +1,6 @@
 import Card from "../../../../../UI/Card";
 import styles from "./User.module.css";
-import UserForm from "./UserForm";
+import UserForm from "./UserForm/UserForm";
 const User = () => {
   return (
     <Card className={styles.user}>

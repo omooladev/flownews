@@ -6,11 +6,8 @@ import EmailMessage from "./UI/EmailMessage";
 import User from "./UI/User";
 const EditProfile = () => {
   const {
-    userData: { username, email, emailIsVerified },
+    userData: { username, email, emailIsVerified, emailRequestChange, emailRequestChangeAddress },
   } = useContext(AuthContext);
-
-  const emailRequestChange = false;
-
   return (
     <>
       {username && (
@@ -22,6 +19,7 @@ const EditProfile = () => {
               email={email}
               emailIsVerified={emailIsVerified}
               emailRequestChange={emailRequestChange}
+              emailRequestChangeAddress={emailRequestChangeAddress}
             />
           )}
           <ConnectAccount />

@@ -3,8 +3,17 @@ import axios from "axios";
 const useHttp = () => {
   const sendRequest = useCallback(async (uri, config) => {
     const { method, userData, token } = config;
-
     try {
+      if (method === "PATCH") {
+        const { data } = await axios.patch(uri, userData, {
+          "Content-Type": "application/json",
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
+
+        return { data };
+      }
       if (method === "POST") {
         const { data } = await axios.post(uri, userData);
         return { data };
