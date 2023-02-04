@@ -14,12 +14,16 @@ const ProfileSection = () => {
 
   const contributorFullUsername = userData.username;
   const contributorEmailAddress = userData.email;
-  const viewProfilePage = useCallback(() => {
-    if (profileBoxIsActive) {
-      onCloseProfileBox();
-    }
-    history.push(`/@${userData.username}`);
-  }, [history, onCloseProfileBox, profileBoxIsActive, userData]);
+
+  const goToPage = useCallback(
+    (location) => {
+      if (profileBoxIsActive) {
+        onCloseProfileBox();
+      }
+      history.push(location);
+    },
+    [history, onCloseProfileBox, profileBoxIsActive]
+  );
   return (
     <section className={styles.profile_section}>
       <ProfileBox className="Header-ProfileSection__ProfileBox" onClick={onToggleProfileBox} />
@@ -35,14 +39,14 @@ const ProfileSection = () => {
           </ul>
           <hr className={styles.write_line} />
           <ul className={`${styles["nav-user-list"]}`}>
-            <li onClick={viewProfilePage}>Profile</li>
+            <li onClick={() => goToPage(`/@${userData.username}`)}>Profile</li>
             <li>Lists</li>
             <li>Stories</li>
             <li>Stats</li>
           </ul>
           <hr />
           <ul className={`${styles["nav-user-list"]}`}>
-            <li>Settings</li>
+            <li onClick={() => goToPage("/settings/profile")}>Settings</li>
             <li>Manage publications</li>
           </ul>
           <hr />
