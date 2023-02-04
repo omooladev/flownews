@@ -4,8 +4,8 @@ import { AuthContext } from "./auth-context";
 import { AppContext } from "../App/app-context";
 import useHttp from "../../hooks/useHttp";
 
-//const HOSTURI = "http://localhost:5000/api/v1";
-const HOSTURI = "https://flownews-api.onrender.com/api/v1";
+const HOSTURI = "http://localhost:5000/api/v1";
+//const HOSTURI = "https://flownews-api.onrender.com/api/v1";
 const AuthContextProvider = (props) => {
   const { sendRequest } = useHttp();
   const { appMode, onCloseProfileBox } = useContext(AppContext);
@@ -152,7 +152,7 @@ const AuthContextProvider = (props) => {
         setUserData((prevData) => {
           return { ...prevData, ...data };
         });
-        return data
+        return data;
       }
       if (error) {
         return response;
@@ -163,6 +163,7 @@ const AuthContextProvider = (props) => {
   return (
     <AuthContext.Provider
       value={{
+        HOSTURI,
         token,
         userData,
         searchedContributorData,
@@ -171,6 +172,11 @@ const AuthContextProvider = (props) => {
         isLoggedIn,
         authMessage,
         contributorError,
+        onSetUserData: (data) => {
+          setUserData((prevData) => {
+            return { ...prevData, ...data };
+          });
+        },
         onRequestEmailChangeHandler: requestEmailChangeHandler,
         onGetContributorData: getContributorData,
         onChangeAuthMessage: (authMessage) => {

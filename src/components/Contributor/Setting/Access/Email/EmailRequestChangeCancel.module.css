@@ -17,3 +17,9 @@
 .email_request_change_cancel .cancel {
   background-color: rgba(255, 0, 0, 0.7);
 }
+
+
+.email_request_change_cancel .verify_email:disabled,
+.email_request_change_cancel .cancel:disabled{
+  cursor: not-allowed;
+}
