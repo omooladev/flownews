@@ -61,7 +61,7 @@ const Email = (props) => {
       />
       <p>
         Your email address is set to public by default. To toggle email privacy, go to
-        <Link to="#"> email </Link>
+        <Link to="email"> email </Link>
         settings and check "keep my email address private"
       </p>
       {/* <p>

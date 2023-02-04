@@ -32,6 +32,14 @@
   font-weight: bold;
   background-color: var(--nav-text-hover-color);
 }
+
+.setting_navigation-links ul .access {
+  margin: 1rem 0;
+}
+.setting_navigation-links ul .access h4 {
+  padding: 0rem 0.5rem;
+  font-weight: normal;
+}
 @media (min-width: 500px) {
   .setting_navigation-links ul li a:hover {
     color: var(--body-color);

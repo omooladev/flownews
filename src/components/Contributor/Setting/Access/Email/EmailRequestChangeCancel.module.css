@@ -1,0 +1,19 @@
+.email_request_change_cancel {
+  padding: 0.5rem;
+  box-shadow: none;
+}
+.email_request_change_cancel p {
+  padding: 0.5rem 0;
+}
+.email_request_change_cancel .verify_email,
+.email_request_change_cancel .cancel {
+  cursor: pointer;
+  padding: 0.5rem 0.6rem;
+  background-color: var(--nav-text-hover-color);
+  color: var(--body-color);
+  margin: 0.5rem 0;
+  margin-right: 1rem;
+}
+.email_request_change_cancel .cancel {
+  background-color: rgba(255, 0, 0, 0.7);
+}

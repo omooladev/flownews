@@ -1,29 +1,34 @@
-import { Route, Switch } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { AppContext } from "../../../store/App/app-context";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import SettingCmp from "../../../components/Contributor/Setting/Setting";
 import EditProfile from "./EditProfile/EditProfile";
-import styles from "./Setting.module.css"
+import Email from "./Access/Email/Email";
+import styles from "./Setting.module.css";
+
 const Setting = () => {
+  const { path } = useParams();
+
   const {
     appMode: { isLoggedIn, username },
   } = useContext(AppContext);
-  const { onGetContributorData } = useContext(AuthContext);
+  const { onGetContributorData,userData } = useContext(AuthContext);
   useEffect(() => {
     if (isLoggedIn) {
       onGetContributorData(username);
     }
   }, [username, isLoggedIn, onGetContributorData]);
   return (
-    <section className={styles.setting_page}>
-      <SettingCmp />
-      <Switch>
-        <Route to="/profile" exact>
-          <EditProfile />
-        </Route>
-      </Switch>
-    </section>
+    <>
+      {userData.username && (
+        <section className={styles.setting_page}>
+          <SettingCmp />
+          {path === "profile" && <EditProfile />}
+          {path === "email" && <Email />}
+        </section>
+      )}
+    </>
   );
 };
 

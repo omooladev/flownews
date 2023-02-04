@@ -6,27 +6,23 @@ import EmailMessage from "./UI/EmailMessage";
 import User from "./UI/User";
 const EditProfile = () => {
   const {
-    userData: { username, email, emailIsVerified, emailRequestChange, emailRequestChangeAddress },
+    userData: {email, emailIsVerified, emailRequestChange, emailRequestChangeAddress },
   } = useContext(AuthContext);
   return (
-    <>
-      {username && (
-        <section className={styles.edit_profile}>
-          <h2 className={styles.public_profile}>Public Profile</h2>
-          <hr />
-          {(!emailIsVerified || emailRequestChange) && (
-            <EmailMessage
-              email={email}
-              emailIsVerified={emailIsVerified}
-              emailRequestChange={emailRequestChange}
-              emailRequestChangeAddress={emailRequestChangeAddress}
-            />
-          )}
-          <ConnectAccount />
-          <User />
-        </section>
+    <section className={styles.edit_profile}>
+      <h2 className={styles.public_profile}>Public Profile</h2>
+      <hr />
+      {(!emailIsVerified || emailRequestChange) && (
+        <EmailMessage
+          email={email}
+          emailIsVerified={emailIsVerified}
+          emailRequestChange={emailRequestChange}
+          emailRequestChangeAddress={emailRequestChangeAddress}
+        />
       )}
-    </>
+      <ConnectAccount />
+      <User />
+    </section>
   );
 };
 
