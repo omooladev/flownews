@@ -11,6 +11,7 @@ const EmailState = () => {
     onSetUserData,
     userData: { email, emailIsPrivate },
   } = useContext(AuthContext);
+  const [emailPrivacy, setEmailPrivacy] = useState(emailIsPrivate);
   const [error, setError] = useState("");
 
   const changeEmailPrivacyHandler = useCallback(
@@ -18,18 +19,24 @@ const EmailState = () => {
       event.stopPropagation();
       setError("");
       const checked = event.target.checked;
+      setEmailPrivacy((prevState) => {
+        return checked;
+      });
       const response = await sendRequest(`${HOSTURI}/email/privacy`, {
         method: "PATCH",
         userData: { contributorEmail: email, makeEmailPrivate: checked },
         token,
       });
-      const error = (await response.error) || "";
-      const data = (await response.data) || "";
+      const error =response.error || "";
+      const data = response.data || "";
       if (data) {
         onSetUserData(data);
       }
       if (error) {
         setError(error);
+        setEmailPrivacy((prevState) => {
+          return !prevState;
+        });
       }
     },
     [token, sendRequest, HOSTURI, onSetUserData, email]
@@ -42,18 +49,18 @@ const EmailState = () => {
           <input
             type="checkbox"
             id="emailState_checkbox"
-            checked={emailIsPrivate}
+            checked={emailPrivacy}
             onChange={changeEmailPrivacyHandler}
           />
           <label htmlFor="emailState_checkbox">Keep my email address private</label>
         </div>
-        {emailIsPrivate && (
+        {emailPrivacy && (
           <p>
-            Your email address is set to private therefore it will be only visible on your profile
+            Your email address is set to private therefore it will be visible only on your profile
             page.
           </p>
         )}
-        {!emailIsPrivate && (
+        {!emailPrivacy && (
           <p>
             Your email address is set to public therefore it will appear everywhere on flownews when
             you comment or post a content
