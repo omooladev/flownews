@@ -1,7 +1,7 @@
 import { useCallback, useContext, useState } from "react";
 import useHttp from "../../../../../hooks/useHttp";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
-import styles from "./EmailState.module.css";
+import styles from "./EmailPrivacy.module.css";
 
 const EmailState = () => {
   const { sendRequest } = useHttp();
