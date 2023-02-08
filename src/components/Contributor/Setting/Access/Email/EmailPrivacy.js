@@ -9,17 +9,18 @@ const EmailState = () => {
     HOSTURI,
     token,
     onSetUserData,
-    userData: {email, emailIsPrivate },
+    userData: { email, emailIsPrivate },
   } = useContext(AuthContext);
   const [error, setError] = useState("");
 
   const changeEmailPrivacyHandler = useCallback(
     async (event) => {
       event.stopPropagation();
+      setError("");
       const checked = event.target.checked;
       const response = await sendRequest(`${HOSTURI}/email/privacy`, {
         method: "PATCH",
-        userData: { email, makeEmailPrivate: checked },
+        userData: { contributorEmail: email, makeEmailPrivate: checked },
         token,
       });
       const error = (await response.error) || "";
@@ -31,7 +32,7 @@ const EmailState = () => {
         setError(error);
       }
     },
-    [token, sendRequest,HOSTURI,onSetUserData,email]
+    [token, sendRequest, HOSTURI, onSetUserData, email]
   );
   return (
     <>

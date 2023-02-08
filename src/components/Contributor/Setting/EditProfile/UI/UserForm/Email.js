@@ -4,7 +4,7 @@ import { AuthContext } from "../../../../../../store/Auth/auth-context";
 import styles from "./UserForm.module.css";
 const Email = (props) => {
   const {
-    userData: { email: emailAddress },
+    userData: { email: emailAddress, emailIsPrivate },
     onRequestEmailChangeHandler,
   } = useContext(AuthContext);
   let { onGetEmail } = props;
@@ -59,15 +59,19 @@ const Email = (props) => {
         required={true}
         onBlur={blurHandler}
       />
-      <p>
-        Your email address is set to public by default. To toggle email privacy, go to
-        <Link to="email"> email </Link>
-        settings and check "keep my email address private"
-      </p>
-      {/* <p>
-        You have set your email address to private. To toggle email privacy, go to email settings
-        and uncheck "Keep my email address private."
-      </p> */}
+      {!emailIsPrivate && (
+        <p>
+          Your email address is set to public by default. To toggle email privacy, go to
+          <Link to="email"> email </Link>
+          settings and check "keep my email address private"
+        </p>
+      )}
+      {emailIsPrivate && (
+        <p>
+          You have set your email address to private. To toggle email privacy, go to
+          <Link to="email"> email </Link> settings and uncheck "Keep my email address private."
+        </p>
+      )}
     </div>
   );
 };
