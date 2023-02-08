@@ -68,7 +68,7 @@ const EmailRequestChangeCancel = (props) => {
           </>
         )}
       </div>
-      {(!emailIsVerified || emailRequestChange) && <hr />}
+      <hr />
     </>
   );
 };

@@ -36,8 +36,8 @@ const SettingNavigationLinks = () => {
           );
         })}
         <hr />
-        <div className={styles.access}>
-          <h4>Access</h4>
+        <div className={styles.link_section}>
+          <h4 className={styles.link_header}>Access</h4>
           {accessLinks.map((link) => {
             return (
               <li key={link.text}>
