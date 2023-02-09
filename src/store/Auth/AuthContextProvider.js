@@ -37,6 +37,7 @@ const AuthContextProvider = (props) => {
         method: "POST",
         userData,
       });
+  
       const error = (await response.error) || "";
       const data = (await response.data) || "";
       if (location === "login" && data) {
@@ -45,10 +46,7 @@ const AuthContextProvider = (props) => {
         });
         setUserData((prevData) => {
           return {
-            isSearch: null,
-            ...data.user,
-            token: data.token,
-            tokenExpirationTime: data.tokenExpirationTime,
+            ...data,
           };
         });
         localStorage.setItem(
@@ -56,7 +54,7 @@ const AuthContextProvider = (props) => {
           JSON.stringify({
             ...appMode,
             isLoggedIn: true,
-            username: data.user.username,
+            username: data.username,
             token: data.token,
           })
         );
