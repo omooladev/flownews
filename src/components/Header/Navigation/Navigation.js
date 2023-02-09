@@ -9,7 +9,7 @@ import SearchBox from "./NavigationSections/SearchBox";
 import styles from "./Navigation.module.css";
 const Navigation = (props) => {
   let className = props.className || "";
-  const { toggleMenu, onToggleMenu } = useContext(AppContext);
+  const { menuIsActive, onToggleMenu } = useContext(AppContext);
   const { isLoggedIn, userData } = useContext(AuthContext);
 
   // const toggleAppDisplayMode = useCallback(() => {
@@ -20,7 +20,7 @@ const Navigation = (props) => {
   // }, [appMode, onChangeAppDisplayMode]);
 
   return (
-    <nav className={`${className} ${styles.navigation} ${toggleMenu ? styles.active : ""}`}>
+    <nav className={`${className} ${styles.navigation} ${menuIsActive ? styles.active : ""}`}>
       <section className={styles["navigation-section"]}>
         <div className={styles.toggleLogo}>
           <Logo className={styles.logo} />

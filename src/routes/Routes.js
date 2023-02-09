@@ -1,9 +1,9 @@
 import React, { Suspense, useContext } from "react";
 import { AuthContext } from "../store/Auth/auth-context";
 import { Switch, Route, Redirect } from "react-router-dom";
+import SuspenseLoader from "../components/Loaders/SuspenseLoader";
 import AuthPage from "../pages/Auth/Auth";
 import NotFoundPage from "../pages/NotFound";
-import SuspenseLoader from "../components/Loaders/SuspenseLoader";
 import ContributorHomePage from "../pages/Contributor/Home";
 import SettingPage from "../pages/Contributor/Setting/Setting";
 const UserHomePage = React.lazy(() => import("../pages/User/Home"));
@@ -34,9 +34,6 @@ const Routes = () => {
             <Route path="/forgot-password" exact>
               <AuthPage />
             </Route>
-            <Route path="/account" exact>
-              <Redirect to="/login" />
-            </Route>
             {/* <Route path="*">
               <NotFoundPage />
             </Route> */}
@@ -53,7 +50,7 @@ const Routes = () => {
             <Route path="/@:username" exact>
               <ProfilePage />
             </Route>
-            <Route path="/settings/:path">
+            <Route path="/settings/:path" exact>
               <SettingPage />
             </Route>
             {/* <Route path="*">

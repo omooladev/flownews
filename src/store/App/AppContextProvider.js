@@ -11,7 +11,7 @@ const AppContextProvider = (props) => {
   const browserTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
   const [appMode, setAppMode] = useState(getAppMode);
   const [isSearching, setIsSearching] = useState(false);
-  const [toggleMenu, setToggleMenu] = useState(false);
+  const [menuIsActive, setMenuIsActive] = useState(false);
   const [profileBoxIsActive, setProfileBoxIsActive] = useState(false);
   const [lastLocation, setLastLocation] = useState("");
 
@@ -33,7 +33,7 @@ const AppContextProvider = (props) => {
     setIsSearching((prevState) => {
       if (prevState) return !prevState;
     });
-    setToggleMenu((prevState) => {
+    setMenuIsActive((prevState) => {
       if (prevState) return !prevState;
     });
     setProfileBoxIsActive((prevState) => {
@@ -42,19 +42,20 @@ const AppContextProvider = (props) => {
   }, []);
 
   const toggleMenuHandler = useCallback(() => {
-    setIsSearching((prevState) => {
-      if (prevState) return !prevState;
-    });
+    console.log(isSearching)
+    // setIsSearching((prevState) => {
+    //   if (prevState) return !prevState;
+    // });
     setProfileBoxIsActive((prevState) => {
       if (prevState) return !prevState;
     });
-    setToggleMenu((prevState) => {
+    setMenuIsActive((prevState) => {
       return !prevState;
     });
   }, []);
 
   const closeMenuHandler = useCallback((event) => {
-    setToggleMenu((prevState) => {
+    setMenuIsActive((prevState) => {
       return false;
     });
   }, []);
@@ -74,7 +75,7 @@ const AppContextProvider = (props) => {
       value={{
         appMode,
         isSearching,
-        toggleMenu,
+        menuIsActive,
         lastLocation,
         profileBoxIsActive,
         onToggleProfileBox: toggleProfileBoxHandler,
