@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-
 import { AppContext } from "./app-context";
 const getAppMode = () => {
   const appMode = localStorage.getItem("flownews-mode");
@@ -21,9 +20,6 @@ const AppContextProvider = (props) => {
     });
   };
   const toggleSearchHandler = useCallback(() => {
-    setProfileBoxIsActive((prevState) => {
-      if (prevState) return !prevState;
-    });
     setIsSearching((prevState) => {
       return !prevState;
     });
@@ -42,13 +38,13 @@ const AppContextProvider = (props) => {
   }, []);
 
   const toggleMenuHandler = useCallback(() => {
-    console.log(isSearching)
+    // console.log(isSearching);
     // setIsSearching((prevState) => {
     //   if (prevState) return !prevState;
     // });
-    setProfileBoxIsActive((prevState) => {
-      if (prevState) return !prevState;
-    });
+    // setProfileBoxIsActive((prevState) => {
+    //   if (prevState) return !prevState;
+    // });
     setMenuIsActive((prevState) => {
       return !prevState;
     });
@@ -59,6 +55,9 @@ const AppContextProvider = (props) => {
       return false;
     });
   }, []);
+
+
+  
 
   useEffect(() => {
     const browserDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
