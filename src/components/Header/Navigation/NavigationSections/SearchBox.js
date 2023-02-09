@@ -5,12 +5,16 @@ import SearchField from "../../../../UI/SearchField";
 import styles from "./SearchBox.module.css";
 const SearchBox = () => {
   const { onToggleSearch, isSearching, onCloseMenu, menuIsActive } = useContext(AppContext);
-  const toggleSearchHandler = useCallback(() => {
-    if (menuIsActive) {
-      onCloseMenu();
-    }
-    onToggleSearch();
-  }, [menuIsActive, onToggleSearch, onCloseMenu]);
+  const toggleSearchHandler = useCallback(
+    (event) => {
+      event.stopPropagation();
+      if (menuIsActive) {
+        onCloseMenu();
+      }
+      onToggleSearch();
+    },
+    [menuIsActive, onToggleSearch, onCloseMenu]
+  );
   const closeMenuHandler = useCallback(() => {
     if (menuIsActive) {
       onCloseMenu();

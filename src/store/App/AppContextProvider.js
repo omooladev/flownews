@@ -7,7 +7,8 @@ const getAppMode = () => {
 };
 
 const AppContextProvider = (props) => {
-  const browserTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
+  const browserDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const browserLightTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
   const [appMode, setAppMode] = useState(getAppMode);
   const [isSearching, setIsSearching] = useState(false);
   const [menuIsActive, setMenuIsActive] = useState(false);
@@ -38,13 +39,6 @@ const AppContextProvider = (props) => {
   }, []);
 
   const toggleMenuHandler = useCallback(() => {
-    // console.log(isSearching);
-    // setIsSearching((prevState) => {
-    //   if (prevState) return !prevState;
-    // });
-    // setProfileBoxIsActive((prevState) => {
-    //   if (prevState) return !prevState;
-    // });
     setMenuIsActive((prevState) => {
       return !prevState;
     });
@@ -56,18 +50,19 @@ const AppContextProvider = (props) => {
     });
   }, []);
 
-
-  
-
   useEffect(() => {
-    const browserDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (browserLightTheme) {
+      document.body.classList.remove("dark");
+      return localStorage.setItem(
+        "flownews-mode",
+        JSON.stringify({ ...appMode, display: "light" })
+      );
+    }
     if (browserDarkTheme) {
       document.body.classList.add("dark");
       return localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, display: "dark" }));
     }
-    document.body.classList.remove("dark");
-    return localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, display: "light" }));
-  }, [browserTheme, appMode]);
+  }, [browserDarkTheme, browserLightTheme, appMode]);
 
   return (
     <AppContext.Provider
@@ -83,11 +78,17 @@ const AppContextProvider = (props) => {
             return false;
           });
         },
+
         onSetLastLocation: (location) => {
           setLastLocation(location);
         },
 
         onToggleSearch: toggleSearchHandler,
+        onCloseSearch: () => {
+          setIsSearching((prevState) => {
+            return false;
+          });
+        },
         onToggleMenu: toggleMenuHandler,
         onCloseMenu: closeMenuHandler,
         onChangeAppDisplayMode: changeAppDisplayMode,

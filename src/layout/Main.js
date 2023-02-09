@@ -2,15 +2,20 @@ import { useCallback, useContext } from "react";
 import Routes from "../routes/Routes";
 import { AppContext } from "../store/App/app-context";
 const Main = () => {
-  const { onCloseMenu, onCloseProfileBox, profileBoxIsActive,toggleMenu } = useContext(AppContext);
-  const closeComponentsHandler = useCallback(() => {
-    if (profileBoxIsActive) {
-      onCloseProfileBox();
-    }
-    if(toggleMenu){
-      onCloseMenu()
-    }
-  }, [onCloseProfileBox,onCloseMenu,profileBoxIsActive,toggleMenu]);
+  const { onCloseMenu, onCloseProfileBox, profileBoxIsActive, menuIsActive } =
+    useContext(AppContext);
+  const closeComponentsHandler = useCallback(
+    (event) => {
+      event.stopPropagation();
+      if (profileBoxIsActive) {
+        onCloseProfileBox();
+      }
+      if (menuIsActive) {
+        onCloseMenu();
+      }
+    },
+    [onCloseProfileBox, onCloseMenu, profileBoxIsActive, menuIsActive]
+  );
   return (
     <main className="main" onClick={closeComponentsHandler}>
       <Routes />

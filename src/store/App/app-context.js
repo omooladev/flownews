@@ -4,6 +4,7 @@ export const AppContext = React.createContext({
   appMode: { display: "light", isLoggedIn: false, username: "" },
   onchangeAppDisplayMode: () => {},
   isSearching: false,
+  onCloseSearch: () => {},
   onToggleSearch: () => {},
   menuIsActive: false,
   onToggleMenu: () => {},
