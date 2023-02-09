@@ -11,6 +11,7 @@ export const AuthContext = React.createContext({
   contributorError: { ref: "", message: "" },
   authMessage: { type: "", message: "" },
   onSetUserData: () => {},
+  onUpdateContributorProfile:()=>{},
   onRequestEmailChangeHandler: () => {},
   onChangeAuthMessage: () => {},
   onResetAuthMessage: () => {},

@@ -4,9 +4,7 @@ import { AuthContext } from "../../../../../../store/Auth/auth-context";
 import styles from "./UserForm.module.css";
 const Email = (props) => {
   const {
-    userData: { email: emailAddress, emailIsPrivate },
-    onRequestEmailChangeHandler,
-  } = useContext(AuthContext);
+    userData: { email: emailAddress, emailIsPrivate },} = useContext(AuthContext);
   let { onGetEmail } = props;
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -21,22 +19,7 @@ const Email = (props) => {
     }
     setEmailError("");
   }, []);
-  const blurHandler = useCallback(async () => {
-    const emailIsValid = email.includes("@");
-    if (!emailIsValid) {
-      return;
-    }
-    if (email !== emailAddress) {
-      const response = (await onRequestEmailChangeHandler(email, emailAddress)) || "";
-      if (!response) {
-        return;
-      }
-      const error = response.error || "";
-      if (error) {
-        return setEmailError(error);
-      }
-    }
-  }, [email, emailAddress, onRequestEmailChangeHandler]);
+
   useEffect(() => {
     if (emailAddress) {
       setEmail((prevValue) => emailAddress);
@@ -57,7 +40,6 @@ const Email = (props) => {
         value={email}
         onChange={changeEmailHandler}
         required={true}
-        onBlur={blurHandler}
       />
       {!emailIsPrivate && (
         <p>

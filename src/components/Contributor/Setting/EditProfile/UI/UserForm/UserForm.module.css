@@ -37,3 +37,24 @@
   font-size: 0.9rem;
   padding: 0.2rem 0;
 }
+.form .form_actions {
+  padding: 1rem 0;
+}
+.form .form_actions .update_profile {
+  cursor: pointer;
+  background-color: var(--nav-text-hover-color);
+  color: var(--body-color);
+  padding: 0.5rem 0.6rem;
+  margin: 0.5rem 0;
+}
+.form .form_actions .update_profile:disabled {
+  cursor:not-allowed
+}
+.form .form_actions p {
+  font-size: 0.9rem;
+  padding: 0.4rem 0;
+}
+
+.form .form_controls .form_control p a,.form .form_actions p a {
+  color: blue;
+}

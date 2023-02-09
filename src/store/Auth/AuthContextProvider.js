@@ -18,6 +18,7 @@ const AuthContextProvider = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [headerIsLoading, setHeaderIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(appMode.isLoggedIn);
+  const [profileUpdated, setProfileUpdated] = useState(false);
   const [authMessage, setAuthMessage] = useState({ type: "", message: "" });
   const [contributorError, setContributorError] = useState({ ref: "", message: "" });
   const history = useHistory();
@@ -160,18 +161,48 @@ const AuthContextProvider = (props) => {
     },
     [sendRequest, token]
   );
+
+  const updateContributorProfileHandler = useCallback(
+    async (updateProperties) => {
+      const response = await sendRequest(`${HOSTURI}/update-profile`, {
+        method: "PATCH",
+        userData: { contributorEmail: userData.email, updateProperties },
+        token,
+      });
+      const error = response.error || "";
+      const data = response.data || "";
+
+      if (data) {
+        const message = data.message || "";
+        if (!message) {
+          setUserData((prevData) => {
+            return { ...prevData, ...data };
+          });
+          setProfileUpdated(true);
+        }
+      }
+      if (error) {
+        setProfileUpdated(false);
+      }
+      return;
+    },
+    [token, sendRequest, userData]
+  );
   return (
     <AuthContext.Provider
       value={{
         HOSTURI,
         token,
         userData,
+        profileUpdated,
         searchedContributorData,
         isLoading,
         headerIsLoading,
         isLoggedIn,
         authMessage,
         contributorError,
+        onUpdateContributorProfile: (updateProperties) =>
+          updateContributorProfileHandler(updateProperties),
         onSetUserData: (data) => {
           setUserData((prevData) => {
             return { ...prevData, ...data };

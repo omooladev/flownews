@@ -6,14 +6,14 @@ import SettingCmp from "../../../components/Contributor/Setting/Setting";
 import EditProfile from "./EditProfile/EditProfile";
 import Email from "./Access/Email/Email";
 import styles from "./Setting.module.css";
+import { BiX } from "react-icons/bi";
 
 const Setting = () => {
   const { path } = useParams();
-
   const {
     appMode: { isLoggedIn, username },
   } = useContext(AppContext);
-  const { onGetContributorData,userData } = useContext(AuthContext);
+  const { onGetContributorData, userData, profileUpdated } = useContext(AuthContext);
   useEffect(() => {
     if (isLoggedIn) {
       onGetContributorData(username);
@@ -22,11 +22,19 @@ const Setting = () => {
   return (
     <>
       {userData.username && (
-        <section className={styles.setting_page}>
-          <SettingCmp />
-          {path === "profile" && <EditProfile />}
-          {path === "email" && <Email />}
-        </section>
+        <>
+          {profileUpdated && (
+            <div className={styles.profile_updated}>
+              <p>Your Profile has been updated</p>
+              <BiX className={styles.icon} />
+            </div>
+          )}
+          <section className={styles.setting_page}>
+            <SettingCmp />
+            {path === "profile" && <EditProfile />}
+            {path === "email" && <Email />}
+          </section>
+        </>
       )}
     </>
   );

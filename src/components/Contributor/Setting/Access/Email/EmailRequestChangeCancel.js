@@ -19,7 +19,7 @@ const EmailRequestChangeCancel = (props) => {
       setIsLoading((prevState) => {
         return !prevState;
       });
-      const response = await sendRequest(`${HOSTURI}/cancel-request-email-change`, {
+      const response = await sendRequest(`${HOSTURI}/email/cancel-email-change-request`, {
         method: "PATCH",
         userData: { email },
         token,
