@@ -30,15 +30,16 @@ const UserForm = () => {
       const userDataEmail = userData.email;
 
       let updateProperties;
-      if (userDetailsFullName !== userDataFullName) {
-        updateProperties = { ...updateProperties, fullname: userDetailsFullName };
-      }
-      if (userDetailsEmail !== userDataEmail) {
-        updateProperties = { ...updateProperties, email: userDetailsEmail };
-      }
-      if (!updateProperties) {
-        return;
-      }
+      // if (userDetailsFullName !== userDataFullName) {
+      //   updateProperties = { ...updateProperties, fullname: userDetailsFullName };
+      // }
+      // if (userDetailsEmail !== userDataEmail) {
+      //   updateProperties = { ...updateProperties, email: userDetailsEmail };
+      // }
+      // if (!updateProperties) {
+      //   return;
+      // }
+      updateProperties = {fullname: userDetailsFullName,email: userDetailsEmail}
       setIsLoading(true);
       await onUpdateContributorProfile(updateProperties);
       setIsLoading(false);

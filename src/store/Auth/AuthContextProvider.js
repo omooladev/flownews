@@ -37,9 +37,9 @@ const AuthContextProvider = (props) => {
         method: "POST",
         userData,
       });
-  
-      const error = (await response.error) || "";
-      const data = (await response.data) || "";
+
+      const error = response.error || "";
+      const data = response.data || "";
       if (location === "login" && data) {
         setIsLoggedIn((prevState) => {
           return !prevState;
@@ -193,6 +193,9 @@ const AuthContextProvider = (props) => {
         token,
         userData,
         profileUpdated,
+        onCloseProfileUpdated: () => {
+          setProfileUpdated((prevState) => false);
+        },
         searchedContributorData,
         isLoading,
         headerIsLoading,

@@ -3,16 +3,26 @@ import { BiMenu } from "react-icons/bi";
 import { AppContext } from "../../../store/App/app-context";
 import styles from "./Menu.module.css";
 const Menu = () => {
-  const { onToggleMenu, menuIsActive, isSearching, onCloseSearch } = useContext(AppContext);
+  const {
+    onToggleMenu,
+    menuIsActive,
+    isSearching,
+    onCloseSearch,
+    profileBoxIsActive,
+    onCloseProfileBox,
+  } = useContext(AppContext);
   const toggleMenuHandler = useCallback(
     (event) => {
       event.stopPropagation();
       if (isSearching) {
         onCloseSearch();
       }
+      if (profileBoxIsActive) {
+        onCloseProfileBox();
+      }
       onToggleMenu();
     },
-    [isSearching, onCloseSearch, onToggleMenu]
+    [isSearching, onCloseSearch, onToggleMenu, profileBoxIsActive, onCloseProfileBox]
   );
   return (
     <BiMenu

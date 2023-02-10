@@ -16,16 +16,17 @@ const EmailRequestChangeCancel = (props) => {
   const cancelEmailRequestChangeHandler = useCallback(
     async (event) => {
       event.stopPropagation();
+      setError("")
       setIsLoading((prevState) => {
         return !prevState;
       });
       const response = await sendRequest(`${HOSTURI}/email/cancel-email-change-request`, {
         method: "PATCH",
-        userData: { email },
+        userData: { contributorEmail: email },
         token,
       });
-      const error = (await response.error) || "";
-      const data = (await response.data) || "";
+      const error = response.error || "";
+      const data = response.data || "";
       if (data) {
         onSetUserData(data);
       }
