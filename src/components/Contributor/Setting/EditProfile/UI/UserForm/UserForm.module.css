@@ -48,13 +48,31 @@
   margin: 0.5rem 0;
 }
 .form .form_actions .update_profile:disabled {
-  cursor:not-allowed
+  cursor: not-allowed;
 }
 .form .form_actions p {
   font-size: 0.9rem;
   padding: 0.4rem 0;
 }
 
-.form .form_controls .form_control p a,.form .form_actions p a {
+.form .form_controls .form_control p a,
+.form .form_actions p a {
   color: blue;
+}
+
+.form .error {
+  background-color: rgba(255, 0, 0, 0.2);
+  padding: 1rem 0.5rem;
+}
+
+.form .error h4 {
+  color: red;
+}
+.form .error ul {
+  padding: 1rem 0;
+}
+
+.form .error li {
+  list-style: circle;
+  margin-left: 2rem;
 }

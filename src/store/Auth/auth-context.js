@@ -1,7 +1,7 @@
 import React from "react";
 
 export const AuthContext = React.createContext({
-  HOSTURI:"",
+  HOSTURI: "",
   token: "",
   userData: {},
   searchedContributorData: {},
@@ -10,11 +10,11 @@ export const AuthContext = React.createContext({
   isLoggedIn: false,
   contributorError: { ref: "", message: "" },
   authMessage: { type: "", message: "" },
-  profileUpdated:false,
-  onCloseProfileUpdated:()=>{},
+  profileUpdated: false,
+  onCloseProfileUpdated: () => {},
   onSetUserData: () => {},
-  onUpdateContributorProfile:()=>{},
-  onRequestEmailChangeHandler: () => {},
+  onUpdateContributorProfile: () => {},
+
   onChangeAuthMessage: () => {},
   onResetAuthMessage: () => {},
   on_Login_BecomeContributor: () => {},

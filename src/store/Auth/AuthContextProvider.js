@@ -138,28 +138,6 @@ const AuthContextProvider = (props) => {
     });
   }, []);
 
-  const requestEmailChangeHandler = useCallback(
-    async (email, emailAddress) => {
-      const response = await sendRequest(`${HOSTURI}/request-email-change`, {
-        method: "PATCH",
-        userData: { email, defaultEmail: emailAddress },
-        token,
-      });
-      const error = (await response.error) || "";
-      const data = (await response.data) || "";
-      if (data) {
-        setUserData((prevData) => {
-          return { ...prevData, ...data };
-        });
-        return data;
-      }
-      if (error) {
-        return response;
-      }
-    },
-    [sendRequest, token]
-  );
-
   const updateContributorProfileHandler = useCallback(
     async (updateProperties) => {
       const response = await sendRequest(`${HOSTURI}/update-profile`, {
@@ -181,6 +159,7 @@ const AuthContextProvider = (props) => {
       }
       if (error) {
         setProfileUpdated(false);
+        return error;
       }
       return;
     },
@@ -209,7 +188,7 @@ const AuthContextProvider = (props) => {
             return { ...prevData, ...data };
           });
         },
-        onRequestEmailChangeHandler: requestEmailChangeHandler,
+
         onGetContributorData: getContributorData,
         onChangeAuthMessage: (authMessage) => {
           changeAuthMessage(authMessage);
