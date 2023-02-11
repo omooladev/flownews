@@ -46,8 +46,9 @@ const UserForm = () => {
       let error = await onUpdateContributorProfile(updateProperties);
       setIsLoading(false);
       if (error) {
-        setError(error);
+        return setError(error);
       }
+      return setError("");
       // console.log(userDataFullName, userDetailsFullName, userDataEmail, userDetailsEmail);
     },
     [userDetails, userData, onUpdateContributorProfile]

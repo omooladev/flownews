@@ -15,11 +15,11 @@ const AppContextProvider = (props) => {
   const [profileBoxIsActive, setProfileBoxIsActive] = useState(false);
   const [lastLocation, setLastLocation] = useState("");
 
-  const changeAppDisplayMode = (mode) => {
+  const changeAppMode = useCallback((properties) => {
     setAppMode((prevMode) => {
-      return { ...prevMode, display: mode };
+      return { ...prevMode, ...properties };
     });
-  };
+  }, []);
   const toggleSearchHandler = useCallback(() => {
     setIsSearching((prevState) => {
       return !prevState;
@@ -53,21 +53,27 @@ const AppContextProvider = (props) => {
   useEffect(() => {
     if (browserLightTheme) {
       document.body.classList.remove("dark");
-      return localStorage.setItem(
-        "flownews-mode",
-        JSON.stringify({ ...appMode, display: "light" })
-      );
+      changeAppMode({ display: "light" });
     }
     if (browserDarkTheme) {
       document.body.classList.add("dark");
-      return localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode, display: "dark" }));
+      changeAppMode({display: "dark" });
     }
-  }, [browserDarkTheme, browserLightTheme, appMode]);
+  }, [browserDarkTheme, browserLightTheme,changeAppMode]);
+
+  useEffect(() => {
+    if (appMode) {
+      return localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode }));
+    }
+  }, [appMode]);
 
   return (
     <AppContext.Provider
       value={{
         appMode,
+        onChangeAppMode: (properties) => {
+          changeAppMode(properties);
+        },
         isSearching,
         menuIsActive,
         lastLocation,
@@ -91,7 +97,6 @@ const AppContextProvider = (props) => {
         },
         onToggleMenu: toggleMenuHandler,
         onCloseMenu: closeMenuHandler,
-        onChangeAppDisplayMode: changeAppDisplayMode,
       }}
     >
       {props.children}

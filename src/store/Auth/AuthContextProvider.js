@@ -8,16 +8,17 @@ const HOSTURI = "http://localhost:5000/api/v1";
 //const HOSTURI = "https://flownews-api.onrender.com/api/v1";
 const AuthContextProvider = (props) => {
   const { sendRequest } = useHttp();
-  const { appMode, onCloseProfileBox } = useContext(AppContext);
-  const token = appMode.token;
+  const { appMode, onCloseProfileBox, onChangeAppMode } = useContext(AppContext);
+
   const [userData, setUserData] = useState({ username: "" });
+  const token = appMode.token;
 
   const [searchedContributorData, setSearchedContributorData] = useState({
     user: { username: "" },
   });
   const [isLoading, setIsLoading] = useState(false);
   const [headerIsLoading, setHeaderIsLoading] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(appMode.isLoggedIn);
+  const isLoggedIn=appMode.isLoggedIn;
   const [profileUpdated, setProfileUpdated] = useState(false);
   const [authMessage, setAuthMessage] = useState({ type: "", message: "" });
   const [contributorError, setContributorError] = useState({ ref: "", message: "" });
@@ -41,23 +42,17 @@ const AuthContextProvider = (props) => {
       const error = response.error || "";
       const data = response.data || "";
       if (location === "login" && data) {
-        setIsLoggedIn((prevState) => {
-          return !prevState;
-        });
         setUserData((prevData) => {
           return {
             ...data,
           };
         });
-        localStorage.setItem(
-          "flownews-mode",
-          JSON.stringify({
-            ...appMode,
-            isLoggedIn: true,
-            username: data.username,
-            token: data.token,
-          })
-        );
+        onChangeAppMode({
+          username:data.username,
+          token: data.token,
+          isLoggedIn: true,
+          tokenExpirationTime: data.tokenExpirationTime,
+        });
         history.replace("/home");
       }
       if (location === "become-contributor" && data) {
@@ -76,7 +71,7 @@ const AuthContextProvider = (props) => {
         return !prevState;
       });
     },
-    [history, appMode, changeAuthMessage, sendRequest]
+    [history, changeAuthMessage, sendRequest,onChangeAppMode]
   );
 
   const getContributorData = useCallback(
@@ -121,16 +116,10 @@ const AuthContextProvider = (props) => {
   );
 
   const signOutHandler = useCallback(() => {
-    setIsLoggedIn((prevState) => {
-      return false;
-    });
+    onChangeAppMode({ isLoggedIn: false, token: null, username: null,tokenExpirationTime:null });
     onCloseProfileBox();
-    localStorage.setItem(
-      "flownews-mode",
-      JSON.stringify({ ...appMode, isLoggedIn: false, token: null, username: null })
-    );
     history.replace("/home");
-  }, [history, appMode, onCloseProfileBox]);
+  }, [history, onCloseProfileBox, onChangeAppMode]);
 
   const resetAuthMessage = useCallback(() => {
     setAuthMessage((prevMessage) => {
@@ -163,8 +152,9 @@ const AuthContextProvider = (props) => {
       }
       return;
     },
-    [token, sendRequest, userData]
+    [sendRequest, userData, token]
   );
+
   return (
     <AuthContext.Provider
       value={{

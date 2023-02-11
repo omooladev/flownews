@@ -6,7 +6,7 @@ const EmailMessage = (props) => {
   return (
     <Card className={styles.email_verification}>
       <h3>Email Verification</h3>
-      {emailRequestChange && emailIsVerified && (
+      {emailRequestChange && !emailIsVerified && (
         <>
           <p>
             You have requested to change your email to{" "}
@@ -16,7 +16,7 @@ const EmailMessage = (props) => {
           <button className={styles.verify_email}>Verify Email</button>
         </>
       )}
-      {(!emailIsVerified || (!emailIsVerified && emailRequestChange)) && (
+      {!emailIsVerified && !emailRequestChange && (
         <>
           <p>Please verify your email address to have access to all features of flownews</p>
           <button className={styles.verify_email}>Verify Email</button>

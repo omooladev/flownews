@@ -42,7 +42,7 @@ const EmailRequestChangeCancel = (props) => {
   return (
     <>
       <div className={styles.email_request_change_cancel}>
-        {emailRequestChange && emailIsVerified && (
+        {emailRequestChange && !emailIsVerified && (
           <>
             <p>
               You have requested to change your email to{" "}
@@ -62,7 +62,7 @@ const EmailRequestChangeCancel = (props) => {
             </button>
           </>
         )}
-        {(!emailIsVerified || (!emailIsVerified && emailRequestChange)) && (
+        {!emailRequestChange && !emailIsVerified && (
           <>
             <p>Please verify your email address to have access to all features of flownews</p>
             <button className={styles.verify_email}>Verify Email</button>

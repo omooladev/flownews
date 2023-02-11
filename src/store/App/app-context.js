@@ -2,7 +2,7 @@ import React from "react";
 
 export const AppContext = React.createContext({
   appMode: { display: "light", isLoggedIn: false, username: "" },
-  onchangeAppDisplayMode: () => {},
+  onChangeAppMode: () => {},
   isSearching: false,
   onCloseSearch: () => {},
   onToggleSearch: () => {},
