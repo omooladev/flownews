@@ -1,10 +1,11 @@
 import { useContext, useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../../../../store/Auth/auth-context";
-import Card from "../../../../../../UI/Card"
+import Card from "../../../../../../UI/Card";
 import Email from "./Email";
 import FullName from "./FullName";
 import styles from "./UserForm.module.css";
+import Username from "./Username";
 const UserForm = () => {
   const { userData, onUpdateContributorProfile } = useContext(AuthContext);
   const [userDetails, setUserDetails] = useState("");
@@ -20,16 +21,23 @@ const UserForm = () => {
       return { ...prevValue, email };
     });
   }, []);
+  const getUserNameHandler = useCallback((username) => {
+    setUserDetails((prevValue) => {
+      return { ...prevValue, username };
+    });
+  }, []);
 
   const submitFormHandler = useCallback(
     async (event) => {
       event.preventDefault();
       const userDetailsFullName = userDetails.fullname;
       const userDetailsEmail = userDetails.email;
+      const userDetailsUsername = userDetails.username;
 
       //?user data
       const userDataFullName = userData.fullname;
       const userDataEmail = userData.email;
+      const userDataUsername = userData.username;
 
       let updateProperties;
       // if (userDetailsFullName !== userDataFullName) {
@@ -41,7 +49,11 @@ const UserForm = () => {
       // if (!updateProperties) {
       //   return;
       // }
-      updateProperties = { fullname: userDetailsFullName, email: userDetailsEmail };
+      updateProperties = {
+        fullname: userDetailsFullName,
+        email: userDetailsEmail,
+        username: userDetailsUsername,
+      };
       setIsLoading(true);
       let error = await onUpdateContributorProfile(updateProperties);
       setIsLoading(false);
@@ -67,6 +79,7 @@ const UserForm = () => {
       <div className={styles.form_controls}>
         <FullName fullname={userData.fullname} onGetFullName={getFullNameHandler} />
         <Email email={userData.email} onGetEmail={getEmailHandler} />
+        <Username username={userData.username} onGetUsername={getUserNameHandler} />
       </div>
       <div className={styles.form_actions}>
         <p>
