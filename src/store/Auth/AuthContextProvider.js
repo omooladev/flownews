@@ -18,7 +18,7 @@ const AuthContextProvider = (props) => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [headerIsLoading, setHeaderIsLoading] = useState(false);
-  const isLoggedIn=appMode.isLoggedIn;
+  const isLoggedIn = appMode.isLoggedIn;
   const [profileUpdated, setProfileUpdated] = useState(false);
   const [authMessage, setAuthMessage] = useState({ type: "", message: "" });
   const [contributorError, setContributorError] = useState({ ref: "", message: "" });
@@ -48,7 +48,7 @@ const AuthContextProvider = (props) => {
           };
         });
         onChangeAppMode({
-          username:data.username,
+          username: data.username,
           token: data.token,
           isLoggedIn: true,
           tokenExpirationTime: data.tokenExpirationTime,
@@ -71,7 +71,7 @@ const AuthContextProvider = (props) => {
         return !prevState;
       });
     },
-    [history, changeAuthMessage, sendRequest,onChangeAppMode]
+    [history, changeAuthMessage, sendRequest, onChangeAppMode]
   );
 
   const getContributorData = useCallback(
@@ -103,6 +103,9 @@ const AuthContextProvider = (props) => {
         }
       }
       if (error) {
+        if (error === "cannot find your account") {
+          return onChangeAppMode({ token: null, isLoggedIn: false, username: null });
+        }
         setContributorError((prevError) => {
           return { ...prevError, ref: "home", message: error };
         });
@@ -112,13 +115,13 @@ const AuthContextProvider = (props) => {
         return !prevState;
       });
     },
-    [sendRequest, token, userData.username]
+    [sendRequest, token, userData.username, onChangeAppMode]
   );
 
   const signOutHandler = useCallback(() => {
-    onChangeAppMode({ isLoggedIn: false, token: null, username: null,tokenExpirationTime:null });
+    onChangeAppMode({ isLoggedIn: false, token: null, username: null, tokenExpirationTime: null });
     onCloseProfileBox();
-    setProfileUpdated(false)
+    setProfileUpdated(false);
     history.replace("/home");
   }, [history, onCloseProfileBox, onChangeAppMode]);
 
@@ -172,7 +175,7 @@ const AuthContextProvider = (props) => {
         isLoggedIn,
         authMessage,
         contributorError,
-        onUpdateContributorProfile: async(updateProperties) =>
+        onUpdateContributorProfile: async (updateProperties) =>
           updateContributorProfileHandler(updateProperties),
         onSetUserData: (data) => {
           setUserData((prevData) => {
