@@ -1,37 +1,39 @@
 import { useCallback, useEffect, useState } from "react";
 import styles from "./UserForm.module.css";
-const Username = (props) => {
-  let { username: user_name, onGetValue } = props;
-  const [username, setUsername] = useState("");
+const Location = (props) => {
+  let { location: defaultLocation, onGetValue } = props;
+  const [location, setLocation] = useState("");
 
-  const changeUsernameHandler = useCallback((event) => {
-    setUsername((prevValue) => {
+  const changeLocationHandler = useCallback((event) => {
+    setLocation((prevValue) => {
       return event.target.value;
     });
   }, []);
 
   useEffect(() => {
-    if (user_name) {
-      setUsername((prevValue) => user_name);
+    if (defaultLocation) {
+      setLocation((prevValue) => defaultLocation);
     }
-  }, [user_name]);
+  }, [defaultLocation]);
   useEffect(() => {
-    if (username) {
-      onGetValue({ type: "username", value: username });
+    if (location) {
+      onGetValue({ type: "location", value: location });
     }
-  }, [username, onGetValue]);
+  }, [location, onGetValue]);
   return (
     <div className={styles.form_control}>
-      <label htmlFor="userFormControl__username">Username</label>
+      <label htmlFor="userFormControl__location">Location</label>
       <input
         type="text"
-        id="userFormControl__username"
-        placeholder="Please enter your username"
-        value={username}
-        onChange={changeUsernameHandler}
+        id="userFormControl__location"
+        placeholder="Please enter your location"
+        value={location}
+        onChange={changeLocationHandler}
+        maxLength="100"
       />
+      <span>{`${location.length} / 100`}</span>
     </div>
   );
 };
 
-export default Username;
+export default Location;
