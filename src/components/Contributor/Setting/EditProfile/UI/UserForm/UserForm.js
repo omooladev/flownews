@@ -5,6 +5,7 @@ import Card from "../../../../../../UI/Card";
 import Bio from "./Bio";
 import Email from "./Email";
 import FullName from "./FullName";
+import Location from "./Location";
 import styles from "./UserForm.module.css";
 import Username from "./Username";
 const UserForm = () => {
@@ -26,6 +27,7 @@ const UserForm = () => {
       const userDetailsEmail = userDetails.email;
       const userDetailsUsername = userDetails.username;
       const userDetailsBio = userDetails.bio;
+      const userDetailsLocation = userDetails.location;
       return console.log(userDetails);
 
       //?user data
@@ -47,7 +49,8 @@ const UserForm = () => {
         fullname: userDetailsFullName,
         email: userDetailsEmail,
         username: userDetailsUsername,
-        bio:userDetailsBio
+        bio: userDetailsBio,
+        location: userDetailsLocation,
       };
       setIsLoading(true);
       let error = await onUpdateContributorProfile(updateProperties);
@@ -76,6 +79,7 @@ const UserForm = () => {
         <Email email={userData.email} onGetValue={getValueHandler} />
         <Username username={userData.username} onGetValue={getValueHandler} />
         <Bio bio={userData.bio} onGetValue={getValueHandler} />
+        <Location location={userData.location} onGetValue={getValueHandler} />
       </div>
       <div className={styles.form_actions}>
         <p>
