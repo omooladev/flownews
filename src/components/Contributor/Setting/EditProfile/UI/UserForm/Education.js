@@ -30,6 +30,7 @@ const Education = (props) => {
         value={education}
         onChange={changeEducationHandler}
         maxLength="100"
+        spellCheck="false"
       />
       <span>{`${education.length} / 100`}</span>
     </div>

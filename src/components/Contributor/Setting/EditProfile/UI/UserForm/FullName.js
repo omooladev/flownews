@@ -29,6 +29,7 @@ const FullName = (props) => {
         placeholder="Please enter your fullname"
         value={fullname}
         onChange={changeFullNameHandler}
+        spellCheck="false"
       />
       <p>
         Your name may appear around flownews where you contribute or are mentioned. You can remove

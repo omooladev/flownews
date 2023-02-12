@@ -28,6 +28,10 @@
   border-radius: 5px;
   resize: vertical;
 }
+.form .form_controls .form_control textarea {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
 .form .form_controls .form_control input:focus,
 .form .form_controls .form_control textarea:focus {
   border: 2px solid var(--nav-text-hover-color);
@@ -82,3 +86,5 @@
   list-style: circle;
   margin-left: 2rem;
 }
+
+/* My name is omosuyi olawole adewole and i am a 400 level student of the federal univeristy of technology akure. My hobbies are programming and  */

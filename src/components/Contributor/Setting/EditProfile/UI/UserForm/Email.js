@@ -40,6 +40,7 @@ const Email = (props) => {
         value={email}
         onChange={changeEmailHandler}
         required={true}
+        spellCheck="false"
       />
       {!emailIsPrivate && (
         <p>

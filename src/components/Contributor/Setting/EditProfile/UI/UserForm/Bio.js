@@ -29,6 +29,7 @@ const Bio = (props) => {
         value={bio}
         onChange={changeBioHandler}
         maxLength="200"
+        spellCheck="false"
       />
       <span>{`${bio.length} / 200`}</span>
     </div>

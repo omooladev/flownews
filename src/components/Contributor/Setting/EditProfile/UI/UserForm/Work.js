@@ -30,6 +30,7 @@ const Work = (props) => {
         value={work}
         onChange={changeWorkHandler}
         maxLength="100"
+        spellCheck="false"
       />
       <span>{`${work.length} / 100`}</span>
     </div>

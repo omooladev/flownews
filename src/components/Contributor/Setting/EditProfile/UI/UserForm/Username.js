@@ -29,6 +29,7 @@ const Username = (props) => {
         placeholder="Please enter your username"
         value={username}
         onChange={changeUsernameHandler}
+        spellCheck="false"
       />
     </div>
   );

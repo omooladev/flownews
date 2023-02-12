@@ -30,6 +30,7 @@ const Location = (props) => {
         value={location}
         onChange={changeLocationHandler}
         maxLength="100"
+        spellCheck="false"
       />
       <span>{`${location.length} / 100`}</span>
     </div>
