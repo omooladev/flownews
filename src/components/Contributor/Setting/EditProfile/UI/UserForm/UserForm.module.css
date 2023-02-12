@@ -16,26 +16,32 @@
   font-weight: bold;
 }
 
-.form .form_controls .form_control input {
+.form .form_controls .form_control input,
+.form .form_controls .form_control textarea {
   width: 100%;
   padding: 0.4rem 0.5rem;
-
   border: 2px solid rgba(48, 155, 101, 0.2);
   transition: all 0.3s;
   font-size: 0.9rem;
   outline: 2px solid transparent;
   background-color: rgba(48, 155, 101, 0.1);
   border-radius: 5px;
+  resize: vertical;
 }
-.form .form_controls .form_control input:focus {
+.form .form_controls .form_control input:focus,
+.form .form_controls .form_control textarea:focus {
   border: 2px solid var(--nav-text-hover-color);
   caret-color: var(--nav-text-hover-color);
   background-color: var(--body-color);
 }
 
-.form .form_controls .form_control p {
+.form .form_controls .form_control p,
+.form .form_controls .form_control span {
   font-size: 0.9rem;
   padding: 0.2rem 0;
+}
+.form .form_controls .form_control span {
+  text-align: right;
 }
 .form .form_actions {
   padding: 1rem 0;

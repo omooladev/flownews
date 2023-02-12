@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import styles from "./UserForm.module.css";
 const FullName = (props) => {
-  let { fullname:name, onGetFullName } = props;
+  let { fullname: name, onGetValue } = props;
   const [fullname, setFullname] = useState("");
 
   const changeFullNameHandler = useCallback((event) => {
@@ -17,9 +17,9 @@ const FullName = (props) => {
   }, [name]);
   useEffect(() => {
     if (fullname) {
-      onGetFullName(fullname);
+      onGetValue({ type: "fullname", value: fullname });
     }
-  }, [fullname, onGetFullName]);
+  }, [fullname, onGetValue]);
   return (
     <div className={styles.form_control}>
       <label htmlFor="userFormControl__name">Name</label>

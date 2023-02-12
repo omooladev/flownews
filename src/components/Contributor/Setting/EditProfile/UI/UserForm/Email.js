@@ -5,7 +5,7 @@ import styles from "./UserForm.module.css";
 const Email = (props) => {
   const {
     userData: { email: emailAddress, emailIsPrivate },} = useContext(AuthContext);
-  let { onGetEmail } = props;
+  let { onGetValue } = props;
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
 
@@ -27,9 +27,9 @@ const Email = (props) => {
   }, [emailAddress]);
   useEffect(() => {
     if (email) {
-      onGetEmail(email);
+      onGetValue({ type: "email", value: email });
     }
-  }, [email, onGetEmail]);
+  }, [email, onGetValue]);
   return (
     <div className={styles.form_control}>
       <label>Public Email</label>

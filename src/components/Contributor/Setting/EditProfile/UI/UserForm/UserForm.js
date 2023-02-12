@@ -2,6 +2,7 @@ import { useContext, useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../../../../store/Auth/auth-context";
 import Card from "../../../../../../UI/Card";
+import Bio from "./Bio";
 import Email from "./Email";
 import FullName from "./FullName";
 import styles from "./UserForm.module.css";
@@ -11,19 +12,10 @@ const UserForm = () => {
   const [userDetails, setUserDetails] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const getFullNameHandler = useCallback((fullname) => {
+
+  const getValueHandler = useCallback(({ type, value }) => {
     setUserDetails((prevValue) => {
-      return { ...prevValue, fullname };
-    });
-  }, []);
-  const getEmailHandler = useCallback((email) => {
-    setUserDetails((prevValue) => {
-      return { ...prevValue, email };
-    });
-  }, []);
-  const getUserNameHandler = useCallback((username) => {
-    setUserDetails((prevValue) => {
-      return { ...prevValue, username };
+      return { ...prevValue, [type]: value };
     });
   }, []);
 
@@ -33,6 +25,8 @@ const UserForm = () => {
       const userDetailsFullName = userDetails.fullname;
       const userDetailsEmail = userDetails.email;
       const userDetailsUsername = userDetails.username;
+      const userDetailsBio = userDetails.bio;
+      return console.log(userDetails);
 
       //?user data
       // const userDataFullName = userData.fullname;
@@ -53,6 +47,7 @@ const UserForm = () => {
         fullname: userDetailsFullName,
         email: userDetailsEmail,
         username: userDetailsUsername,
+        bio:userDetailsBio
       };
       setIsLoading(true);
       let error = await onUpdateContributorProfile(updateProperties);
@@ -66,7 +61,6 @@ const UserForm = () => {
     [userDetails, onUpdateContributorProfile]
   );
 
-  
   return (
     <form className={styles.form} onSubmit={submitFormHandler}>
       {error && (
@@ -78,9 +72,10 @@ const UserForm = () => {
         </Card>
       )}
       <div className={styles.form_controls}>
-        <FullName fullname={userData.fullname} onGetFullName={getFullNameHandler} />
-        <Email email={userData.email} onGetEmail={getEmailHandler} />
-        <Username username={userData.username} onGetUsername={getUserNameHandler} />
+        <FullName fullname={userData.fullname} onGetValue={getValueHandler} />
+        <Email email={userData.email} onGetValue={getValueHandler} />
+        <Username username={userData.username} onGetValue={getValueHandler} />
+        <Bio bio={userData.bio} onGetValue={getValueHandler} />
       </div>
       <div className={styles.form_actions}>
         <p>
