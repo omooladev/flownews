@@ -35,9 +35,9 @@ const UserForm = () => {
       const userDetailsUsername = userDetails.username;
 
       //?user data
-      const userDataFullName = userData.fullname;
-      const userDataEmail = userData.email;
-      const userDataUsername = userData.username;
+      // const userDataFullName = userData.fullname;
+      // const userDataEmail = userData.email;
+      // const userDataUsername = userData.username;
 
       let updateProperties;
       // if (userDetailsFullName !== userDataFullName) {
@@ -63,7 +63,7 @@ const UserForm = () => {
       return setError("");
       // console.log(userDataFullName, userDetailsFullName, userDataEmail, userDetailsEmail);
     },
-    [userDetails, userData, onUpdateContributorProfile]
+    [userDetails, onUpdateContributorProfile]
   );
 
   
