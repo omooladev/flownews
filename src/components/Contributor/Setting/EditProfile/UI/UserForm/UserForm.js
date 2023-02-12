@@ -9,6 +9,7 @@ import FullName from "./FullName";
 import Location from "./Location";
 import styles from "./UserForm.module.css";
 import Username from "./Username";
+import Work from "./Work";
 const UserForm = () => {
   const { userData, onUpdateContributorProfile } = useContext(AuthContext);
   const [userDetails, setUserDetails] = useState("");
@@ -30,7 +31,7 @@ const UserForm = () => {
       const userDetailsBio = userDetails.bio;
       const userDetailsLocation = userDetails.location;
       const userDetailsEducation = userDetails.education;
-      return console.log(userDetails);
+      const userDetailsWork = userDetails.work;
 
       //?user data
       // const userDataFullName = userData.fullname;
@@ -54,6 +55,7 @@ const UserForm = () => {
         bio: userDetailsBio,
         location: userDetailsLocation,
         education: userDetailsEducation,
+        work: userDetailsWork,
       };
       setIsLoading(true);
       let error = await onUpdateContributorProfile(updateProperties);
@@ -84,6 +86,7 @@ const UserForm = () => {
         <Bio bio={userData.bio} onGetValue={getValueHandler} />
         <Location location={userData.location} onGetValue={getValueHandler} />
         <Education education={userData.education} onGetValue={getValueHandler} />
+        <Work work={userData.work} onGetValue={getValueHandler} />
       </div>
       <div className={styles.form_actions}>
         <p>
