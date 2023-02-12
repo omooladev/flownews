@@ -1,39 +1,39 @@
 import { useCallback, useEffect, useState } from "react";
 import styles from "./UserForm.module.css";
-const Location = (props) => {
-  let { location: defaultLocation, onGetValue } = props;
-  const [location, setLocation] = useState("");
+const Education = (props) => {
+  let { education: defaultEducation, onGetValue } = props;
+  const [education, setEducation] = useState("");
 
-  const changeLocationHandler = useCallback((event) => {
-    setLocation((prevValue) => {
+  const changeEducationHandler = useCallback((event) => {
+    setEducation((prevValue) => {
       return event.target.value;
     });
   }, []);
 
   useEffect(() => {
-    if (defaultLocation) {
-      setLocation((prevValue) => defaultLocation);
+    if (defaultEducation) {
+      setEducation((prevValue) => defaultEducation);
     }
-  }, [defaultLocation]);
+  }, [defaultEducation]);
   useEffect(() => {
-    if (location) {
-      onGetValue({ type: "location", value: location });
+    if (education) {
+      onGetValue({ type: "education", value: education });
     }
-  }, [location, onGetValue]);
+  }, [education, onGetValue]);
   return (
     <div className={styles.form_control}>
-      <label htmlFor="userFormControl__location">Location</label>
+      <label htmlFor="userFormControl__education">Education</label>
       <input
         type="text"
-        id="userFormControl__location"
-        placeholder="Please enter your location"
-        value={location}
-        onChange={changeLocationHandler}
+        id="userFormControl__education"
+        placeholder="Please enter your education"
+        value={education}
+        onChange={changeEducationHandler}
         maxLength="100"
       />
-      <span>{`${location.length} / 100`}</span>
+      <span>{`${education.length} / 100`}</span>
     </div>
   );
 };
 
-export default Location;
+export default Education;

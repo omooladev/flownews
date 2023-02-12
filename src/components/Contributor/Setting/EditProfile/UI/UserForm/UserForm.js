@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../../../../store/Auth/auth-context";
 import Card from "../../../../../../UI/Card";
 import Bio from "./Bio";
+import Education from "./Education";
 import Email from "./Email";
 import FullName from "./FullName";
 import Location from "./Location";
@@ -28,6 +29,7 @@ const UserForm = () => {
       const userDetailsUsername = userDetails.username;
       const userDetailsBio = userDetails.bio;
       const userDetailsLocation = userDetails.location;
+      const userDetailsEducation = userDetails.education;
       return console.log(userDetails);
 
       //?user data
@@ -51,6 +53,7 @@ const UserForm = () => {
         username: userDetailsUsername,
         bio: userDetailsBio,
         location: userDetailsLocation,
+        education: userDetailsEducation,
       };
       setIsLoading(true);
       let error = await onUpdateContributorProfile(updateProperties);
@@ -80,6 +83,7 @@ const UserForm = () => {
         <Username username={userData.username} onGetValue={getValueHandler} />
         <Bio bio={userData.bio} onGetValue={getValueHandler} />
         <Location location={userData.location} onGetValue={getValueHandler} />
+        <Education education={userData.education} onGetValue={getValueHandler} />
       </div>
       <div className={styles.form_actions}>
         <p>
