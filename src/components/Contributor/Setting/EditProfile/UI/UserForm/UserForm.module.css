@@ -29,7 +29,6 @@
   resize: vertical;
 }
 .form .form_controls .form_control textarea {
-  font-size: 1rem;
   line-height: 1.5rem;
 }
 .form .form_controls .form_control input:focus,
