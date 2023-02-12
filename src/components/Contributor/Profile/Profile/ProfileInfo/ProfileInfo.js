@@ -34,7 +34,9 @@ const ProfileInfo = () => {
         {userVerified && <BiBadgeCheck className={styles.badge} />}
       </div>
       <ProfileFollow followers={followers} following={following} />
-      <p className={styles.bio}>{bio}</p>
+      <p className={styles.bio}>
+        {bio || "Tell people what they should know about you, please update your bio"}
+      </p>
       <div className={styles.contributor_location_email_joinedDate}>
         <ProfileLocation location={location} />
         <ProfileDate createdAt={createdAt} />

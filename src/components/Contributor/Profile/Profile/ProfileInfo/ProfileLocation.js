@@ -1,18 +1,14 @@
 import { BiLocationPlus } from "react-icons/bi";
 import styles from "./ProfileLocation.module.css";
-const ProfileDate = (props) => {
-  let { location } = props;
+const ProfileLocation = (props) => {
+  const { location } = props;
 
   return (
-    <>
-      {location && (
-        <div className={styles.location}>
-          <BiLocationPlus />
-          <p>{location}</p>
-        </div>
-      )}
-    </>
+    <div className={styles.location}>
+      <BiLocationPlus />
+      <p>{location || "Somewhere around the world"}</p>
+    </div>
   );
 };
 
-export default ProfileDate;
+export default ProfileLocation;

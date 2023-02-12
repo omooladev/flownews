@@ -118,6 +118,7 @@ const AuthContextProvider = (props) => {
   const signOutHandler = useCallback(() => {
     onChangeAppMode({ isLoggedIn: false, token: null, username: null,tokenExpirationTime:null });
     onCloseProfileBox();
+    setProfileUpdated(false)
     history.replace("/home");
   }, [history, onCloseProfileBox, onChangeAppMode]);
 
@@ -171,7 +172,7 @@ const AuthContextProvider = (props) => {
         isLoggedIn,
         authMessage,
         contributorError,
-        onUpdateContributorProfile: (updateProperties) =>
+        onUpdateContributorProfile: async(updateProperties) =>
           updateContributorProfileHandler(updateProperties),
         onSetUserData: (data) => {
           setUserData((prevData) => {

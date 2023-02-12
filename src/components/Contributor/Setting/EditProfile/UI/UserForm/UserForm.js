@@ -66,6 +66,7 @@ const UserForm = () => {
     [userDetails, userData, onUpdateContributorProfile]
   );
 
+  
   return (
     <form className={styles.form} onSubmit={submitFormHandler}>
       {error && (
