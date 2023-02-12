@@ -103,8 +103,7 @@ const AuthContextProvider = (props) => {
         }
       }
       if (error) {
-        console.log(error)
-        if (error === "cannot find your account") {
+        if (error === "Cannot find your account") {
           return onChangeAppMode({ token: null, isLoggedIn: false, username: null });
         }
         setContributorError((prevError) => {
