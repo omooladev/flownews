@@ -8,14 +8,13 @@ const Appearance = () => {
   } = useContext(AuthContext);
   return (
     <section className={styles.appearance}>
-      <h2 className={styles.public_profile}>Public Profile</h2>
+      {(!emailIsVerified || emailRequestChange) && <EmailVerify />}
+      <h2 className={styles.public_profile}>Theme preferences</h2>
       <hr />
-      {(!emailIsVerified || emailRequestChange) && (
-        <>
-          <EmailVerify />
-          <hr />
-        </>
-      )}
+      <p>
+        Choose how Flownews looks to you. Select a single theme,the default value is the browser
+        theme
+      </p>
     </section>
   );
 };
