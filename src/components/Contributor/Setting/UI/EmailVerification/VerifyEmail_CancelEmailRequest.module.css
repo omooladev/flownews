@@ -1,6 +1,9 @@
 .email_request_change_cancel {
   padding: 0.5rem;
   box-shadow: none;
+  background-color: rgba(246, 160, 12, 10%);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 .email_request_change_cancel p {
   padding: 0.5rem 0;
@@ -18,8 +21,7 @@
   background-color: rgba(255, 0, 0, 0.7);
 }
 
-
 .email_request_change_cancel .verify_email:disabled,
-.email_request_change_cancel .cancel:disabled{
+.email_request_change_cancel .cancel:disabled {
   cursor: not-allowed;
 }

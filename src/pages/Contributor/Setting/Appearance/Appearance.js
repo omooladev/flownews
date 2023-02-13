@@ -1,6 +1,6 @@
+import AppearanceCmp from "../../../../components/Contributor/Setting/Appearance/Appearance";
 const Appearance = () => {
-  console.log("appearance");
-  return;
+  return <AppearanceCmp />;
 };
 
 export default Appearance;
