@@ -7,6 +7,7 @@ import EditProfile from "./EditProfile/EditProfile";
 import Email from "./Access/Email/Email";
 import styles from "./Setting.module.css";
 import ProfileUpdated from "../../../components/Contributor/Setting/EditProfile/UI/ProfileUpdated";
+import Appearance from "./Appearance/Appearance";
 
 const Setting = () => {
   const { path } = useParams();
@@ -27,6 +28,7 @@ const Setting = () => {
           <section className={styles.setting_page}>
             <SettingCmp />
             {path === "profile" && <EditProfile />}
+            {path === "appearance" && <Appearance />}
             {path === "email" && <Email />}
           </section>
         </>
