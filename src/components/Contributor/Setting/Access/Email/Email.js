@@ -5,13 +5,19 @@ import { AuthContext } from "../../../../../store/Auth/auth-context";
 import EmailVerify from "../../UI/EmailVerification/VerifyEmail_CancelEmailRequest";
 
 const Email = () => {
-  const {userData:{emailIsVerified,emailRequestChange}}=useContext(AuthContext)
+  const {
+    userData: { emailIsVerified, emailRequestChange },
+  } = useContext(AuthContext);
   return (
     <section className={styles.email}>
       <h2>Email</h2>
       <hr />
-      {(!emailIsVerified || emailRequestChange) && <EmailVerify />}
-
+      {(!emailIsVerified || emailRequestChange) && (
+        <>
+          <EmailVerify />
+          <hr />
+        </>
+      )}
       <EmailPrivacy />
     </section>
   );
