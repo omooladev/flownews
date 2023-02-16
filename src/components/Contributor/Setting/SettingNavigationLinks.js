@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
-import { BiUser, BiCog, BiAccessibility, BiEnvelope } from "react-icons/bi";
-import { FaPaintBrush, FaRegBell} from "react-icons/fa";
+import { BiUser, BiCog, BiAccessibility, BiEnvelope, BiShieldX } from "react-icons/bi";
+import { FaPaintBrush, FaRegBell } from "react-icons/fa";
 
 import styles from "./SettingNavigationLinks.module.css";
 const SettingNavigationLinks = () => {
@@ -21,6 +21,11 @@ const SettingNavigationLinks = () => {
   ];
   const accessLinks = [
     { text: "Email", icon: <BiEnvelope className={styles.icon} />, to: "email" },
+    {
+      text: "Password and authentication",
+      icon: <BiShieldX className={styles.icon} />,
+      to: "security",
+    },
   ];
   return (
     <section className={styles["setting_navigation-links"]}>
