@@ -3,13 +3,20 @@ import { AuthContext } from "../../../../../store/Auth/auth-context";
 import EmailVerify from "../../UI/EmailVerification/VerifyEmail_CancelEmailRequest";
 import styles from "../../EditProfile/UI/UserForm/UserForm.module.css";
 import { Link } from "react-router-dom";
+import { useRef } from "react";
 const PasswordAuthentication = () => {
   const {
     userData: { emailIsVerified, emailRequestChange },
   } = useContext(AuthContext);
 
+  const oldPasswordRef = useRef();
+  const newPasswordRef = useRef();
+  const confirmNewPasswordRef = useRef();
   const submitFormHandler = useCallback((event) => {
     event.preventDefault();
+    // const oldPassword = oldPasswordRef.current.value;
+    // const newPassword = newPasswordRef.current.value;
+    // const confirmNewPassword = confirmNewPasswordRef.current.value;
   }, []);
   return (
     <section>
@@ -20,15 +27,21 @@ const PasswordAuthentication = () => {
         <div className={styles.form_controls}>
           <div className={styles.form_control}>
             <label>Old Password</label>
-            <input type="password" required />
+            <input type="password" required ref={oldPasswordRef} />
           </div>
           <div className={styles.form_control}>
             <label>New password</label>
-            <input type="password" required minLength="8" maxLength="16" />
+            <input type="password" required minLength="8" maxLength="16" ref={newPasswordRef} />
           </div>
           <div className={styles.form_control}>
             <label>Confirm new password</label>
-            <input type="password" required minLength="8" maxLength="16" />
+            <input
+              type="password"
+              required
+              minLength="8"
+              maxLength="16"
+              ref={confirmNewPasswordRef}
+            />
           </div>
           <p>Make sure it's at least 8 characters including a number and a lowercase letter.</p>
         </div>
