@@ -2,7 +2,9 @@ import { useCallback, useEffect, useState } from "react";
 import { AppContext } from "./app-context";
 const getAppMode = () => {
   const appMode = localStorage.getItem("flownews-mode");
-  if (appMode) return JSON.parse(appMode);
+  if (appMode) {
+    return JSON.parse(appMode);
+  }
   return {};
 };
 
