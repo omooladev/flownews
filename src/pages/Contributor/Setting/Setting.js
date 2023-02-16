@@ -28,10 +28,12 @@ const Setting = () => {
           <ProfileUpdated />
           <section className={styles.setting_page}>
             <SettingCmp />
-            {path === "profile" && <EditProfile />}
-            {path === "appearance" && <Appearance />}
-            {path === "email" && <Email />}
-            {path === "security" && <PasswordAuthentication />}
+            <div className={styles.links}>
+              {path === "profile" && <EditProfile />}
+              {path === "appearance" && <Appearance />}
+              {path === "email" && <Email />}
+              {path === "security" && <PasswordAuthentication />}
+            </div>
           </section>
         </>
       )}
