@@ -12,7 +12,6 @@ import PasswordAuthentication from "./Access/PasswordAuthentication";
 
 const Setting = () => {
   const { path } = useParams();
-  console.log(path);
   const {
     appMode: { isLoggedIn, username },
   } = useContext(AppContext);
