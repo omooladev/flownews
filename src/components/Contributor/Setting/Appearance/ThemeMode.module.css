@@ -1,0 +1,24 @@
+.theme_mode {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 2rem 0;
+}
+
+.theme_mode .single_theme {
+  border: 1px solid grey;
+  background-color: transparent;
+  cursor: pointer;
+  overflow: hidden;
+}
+.theme_mode .single_theme.active {
+  border: 1px solid blue;
+}
+
+.theme_mode .single_theme .theme_details {
+  padding: 1rem;
+  display: flex;
+}
+.theme_mode .single_theme .theme_details label {
+  padding: 0 0.5rem;
+}
