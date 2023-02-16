@@ -8,9 +8,11 @@ import Email from "./Access/Email";
 import styles from "./Setting.module.css";
 import ProfileUpdated from "../../../components/Contributor/Setting/EditProfile/UI/ProfileUpdated";
 import Appearance from "./Appearance/Appearance";
+import PasswordAuthentication from "./Access/PasswordAuthentication";
 
 const Setting = () => {
   const { path } = useParams();
+  console.log(path);
   const {
     appMode: { isLoggedIn, username },
   } = useContext(AppContext);
@@ -30,6 +32,7 @@ const Setting = () => {
             {path === "profile" && <EditProfile />}
             {path === "appearance" && <Appearance />}
             {path === "email" && <Email />}
+            {path === "security" && <PasswordAuthentication />}
           </section>
         </>
       )}
