@@ -48,7 +48,7 @@ const ThemeMode = () => {
   return (
     <>
       <label>Theme Mode</label>
-      <form className={styles.theme_mode}>
+      <section className={styles.theme_mode}>
         {themes.map((theme) => {
           return (
             <Card
@@ -70,7 +70,7 @@ const ThemeMode = () => {
             </Card>
           );
         })}
-      </form>
+      </section>
     </>
   );
 };

@@ -1,6 +1,6 @@
 .theme_mode {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   padding: 2rem 0;
 }
@@ -10,6 +10,12 @@
   background-color: transparent;
   cursor: pointer;
   overflow: hidden;
+  margin: 1rem auto;
+  height: auto;
+  width: 80%;
+}
+.theme_mode .single_theme img {
+  width: 100%;
 }
 .theme_mode .single_theme.active {
   border: 1px solid blue;
@@ -21,4 +27,14 @@
 }
 .theme_mode .single_theme .theme_details label {
   padding: 0 0.5rem;
+}
+
+@media (min-width: 500px) {
+  .theme_mode {
+    flex-direction: row;
+  }
+  .theme_mode .single_theme {
+    margin: 0rem 1rem;
+    width: auto;
+  }
 }
