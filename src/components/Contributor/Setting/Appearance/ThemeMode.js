@@ -18,28 +18,28 @@ const ThemeMode = () => {
     {
       name: "Light Default",
       image: LightDefaultMode,
-      modeName: mode === "light-default-theme" ? styles.lightMode : "",
-      active: mode === "light-default-theme" ? styles.active : "",
-      checked: mode === "light-default-theme",
+      modeName: mode === "light-default" ? styles.lightMode : "",
+      active: mode === "light-default" ? styles.active : "",
+      checked: mode === "light-default",
     },
     {
       name: "Dark Default",
       image: DarkDefaultMode,
-      modeName: mode === "dark-default-theme" ? styles.darkMode : "",
-      active: mode === "dark-default-theme" ? styles.active : "",
-      checked: mode === "dark-default-theme",
+      modeName: mode === "dark-default" ? styles.darkMode : "",
+      active: mode === "dark-default" ? styles.active : "",
+      checked: mode === "dark-default",
     },
   ];
 
   const changeModeHandler = useCallback(
     (name) => {
       if (name === "Dark Default") {
-        setMode("dark-default-theme");
-        onChangeAppMode({ theme: "dark-default-theme" });
+        setMode("dark-default");
+        onChangeAppMode({ theme: "dark-default" });
       }
       if (name === "Light Default") {
-        setMode("light-default-theme");
-        onChangeAppMode({ theme: "light-default-theme" });
+        setMode("light-default");
+        onChangeAppMode({ theme: "light-default" });
       }
     },
     [onChangeAppMode]
@@ -47,7 +47,7 @@ const ThemeMode = () => {
 
   return (
     <>
-      <label>Theme Mode</label>
+      <label className={styles.theme_mode_text}>Theme Mode</label>
       <section className={styles.theme_mode}>
         {themes.map((theme) => {
           return (

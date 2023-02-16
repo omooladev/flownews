@@ -53,13 +53,13 @@ const AppContextProvider = (props) => {
   }, []);
 
   useEffect(() => {
-    if (browserLightTheme || appMode.theme === "light-default-theme") {
+    if (browserLightTheme || appMode.theme === "light-default") {
       document.body.classList.remove("dark");
-      changeAppMode({ theme: "light-default-theme" });
+      changeAppMode({ theme: "light-default" });
     }
-    if (browserDarkTheme || appMode.theme === "dark-default-theme") {
+    if (browserDarkTheme || appMode.theme === "dark-default") {
       document.body.classList.add("dark");
-      changeAppMode({ theme: "dark-default-theme" });
+      changeAppMode({ theme: "dark-default" });
     }
   }, [browserDarkTheme, browserLightTheme, changeAppMode, appMode.theme]);
 
