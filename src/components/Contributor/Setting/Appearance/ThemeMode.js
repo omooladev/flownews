@@ -5,13 +5,15 @@ import styles from "./ThemeMode.module.css";
 import LightDefaultMode from "../../../../assets/light_preview.svg";
 import DarkDefaultMode from "../../../../assets/dark_preview.svg";
 import { useState } from "react";
+import { useCallback } from "react";
 
 const ThemeMode = () => {
   const {
-    appMode: { display },
+    appMode: { theme },
+    onChangeAppMode,
   } = useContext(AppContext);
-  const [mode, setMode] = useState(display);
-  console.log(mode);
+  const [mode, setMode] = useState(theme);
+
   const themes = [
     {
       name: "Light Default",
@@ -29,14 +31,20 @@ const ThemeMode = () => {
     },
   ];
 
-  const changeModeHandler = (name) => {
-    if (name === "Dark Default") {
-      setMode("dark-default-theme");
-    }
-    if (name === "Light Default") {
-      setMode("light-default-theme");
-    }
-  };
+  const changeModeHandler = useCallback(
+    (name) => {
+      if (name === "Dark Default") {
+        setMode("dark-default-theme");
+        onChangeAppMode({ theme: "dark-default-theme" });
+      }
+      if (name === "Light Default") {
+        setMode("light-default-theme");
+        onChangeAppMode({ theme: "light-default-theme" });
+      }
+    },
+    [onChangeAppMode]
+  );
+
   return (
     <>
       <label>Theme Mode</label>
