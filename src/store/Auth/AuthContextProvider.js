@@ -4,8 +4,8 @@ import { AuthContext } from "./auth-context";
 import { AppContext } from "../App/app-context";
 import useHttp from "../../hooks/useHttp";
 
-//const HOSTURI = "http://localhost:5000/api/v1";
-const HOSTURI = "https://flownews-api.onrender.com/api/v1";
+const HOSTURI = "http://localhost:5000/api/v1";
+//const HOSTURI = "https://flownews-api.onrender.com/api/v1";
 const AuthContextProvider = (props) => {
   const { sendRequest } = useHttp();
   const { appMode, onCloseProfileBox, onChangeAppMode } = useContext(AppContext);
@@ -157,9 +157,12 @@ const AuthContextProvider = (props) => {
       }
       return;
     },
-    [sendRequest, userData, token,onChangeAppMode]
+    [sendRequest, userData, token, onChangeAppMode]
   );
 
+  const update_ResetPasswordHandler = useCallback(async (passwordProperties) => {
+    console.log(passwordProperties);
+  }, []);
   return (
     <AuthContext.Provider
       value={{
@@ -191,6 +194,8 @@ const AuthContextProvider = (props) => {
         onResetAuthMessage: resetAuthMessage,
         on_Login_BecomeContributor: login_BecomeContributor,
         onSignOut: signOutHandler,
+
+        onUpdate_ResetPassword: update_ResetPasswordHandler,
       }}
     >
       {props.children}

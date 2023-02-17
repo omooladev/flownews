@@ -14,10 +14,11 @@ export const AuthContext = React.createContext({
   onCloseProfileUpdated: () => {},
   onSetUserData: () => {},
   onUpdateContributorProfile: () => {},
-
   onChangeAuthMessage: () => {},
   onResetAuthMessage: () => {},
   on_Login_BecomeContributor: () => {},
   onGetContributorData: () => {},
   onSignOut: () => {},
+
+  onUpdate_ResetPassword: async () => {},
 });
