@@ -10,7 +10,7 @@ const PasswordAuthentication = () => {
     onUpdate_ResetPassword,
   } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [message, setMessage] = useState({ type: "", text: "" });
 
   const oldPasswordRef = useRef();
   const newPasswordRef = useRef();
@@ -18,17 +18,27 @@ const PasswordAuthentication = () => {
   const submitFormHandler = useCallback(
     async (event) => {
       event.preventDefault();
-      setError("");
+      setMessage({ type: "", text: "" });
       const oldPassword = oldPasswordRef.current.value;
       const newPassword = newPasswordRef.current.value;
       const confirmNewPassword = confirmNewPasswordRef.current.value;
-      // const result = validatePassword(oldPassword, newPassword, confirmNewPassword);
-      // if (result) {
-      //   return setError(result);
-      // }
+      const result = validatePassword(oldPassword, newPassword, confirmNewPassword);
+      if (result) {
+        return setMessage({ type: "error", text: result });
+      }
       const passwordProperties = { oldPassword, newPassword, confirmNewPassword };
       setIsLoading(true);
-      const response = await onUpdate_ResetPassword(passwordProperties);
+      const response = await onUpdate_ResetPassword("update", passwordProperties);
+      const error = response.error;
+      const data = response.data;
+      if (data) {
+        if (data.message === "Password has been updated successfully") {
+          setMessage({ type: "success", text: data.message });
+        }
+      }
+      if (error) {
+        setMessage({ type: "error", text: error });
+      }
       setIsLoading(false);
     },
     [onUpdate_ResetPassword]
@@ -54,10 +64,9 @@ const PasswordAuthentication = () => {
   return (
     <section>
       {(!emailIsVerified || emailRequestChange) && <EmailVerify />}
-
       <h2>Change Password</h2>
       <hr />
-      {error && <p className="error">{error}</p>}
+      {message.type && <p className={message.type}>{message.text}</p>}
       <form className={styles.form} onSubmit={submitFormHandler}>
         <div className={styles.form_controls}>
           <div className={styles.form_control}>
