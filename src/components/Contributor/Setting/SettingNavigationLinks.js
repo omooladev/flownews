@@ -9,11 +9,6 @@ const SettingNavigationLinks = () => {
     { text: "Account", icon: <BiCog className={styles.icon} />, to: "admin" },
     { text: "Appearance", icon: <FaPaintBrush className={styles.icon} />, to: "appearance" },
     {
-      text: "Accessibility",
-      icon: <BiAccessibility className={styles.icon} />,
-      to: "accessibility",
-    },
-    {
       text: "Notifications",
       icon: <FaRegBell className={styles.icon} />,
       to: "notifications",
