@@ -53,6 +53,9 @@ const Routes = () => {
             <Route path="/settings/:path" exact>
               <SettingPage />
             </Route>
+            <Route path="/forgot-password" exact>
+              <AuthPage />
+            </Route>
             {/* <Route path="*">
               <NotFoundPage />
             </Route> */}

@@ -19,6 +19,7 @@ const Auth = () => {
     authMessage,
     onChangeAuthMessage,
     onResetAuthMessage,
+    isLoggedIn,
   } = useContext(AuthContext);
   const history = useHistory();
   const location = history.location.pathname;
@@ -102,7 +103,7 @@ const Auth = () => {
         <>
           <h1>Reset your Password</h1>
           <p className={styles.reset_password}>
-            To reset your password, enter the email address you use to sign in
+            Enter your user account's email address and we will send you a password reset link.
           </p>
         </>
       )}
@@ -151,33 +152,35 @@ const Auth = () => {
                   : becomeContributorLocation
                   ? "Sign up"
                   : forgotPasswordLocation
-                  ? "Get reset link"
+                  ? "Send me password reset email"
                   : ""
               }`
             )}
           </button>
         </div>
       </form>
-      <div className={styles.form_footer}>
-        {loginLocation && (
-          <>
-            <p>New to FlowNews?</p>
-            <Link to={`${isLoading ? "#" : "/become-contributor"}`}>Create an account</Link>
-          </>
-        )}
-        {becomeContributorLocation && (
-          <>
-            <p>Already have an account?</p>
-            <Link to="/login">Log in</Link>
-          </>
-        )}
-        {forgotPasswordLocation && (
-          <>
-            <p>Never mind?</p>
-            <Link to="/login">Take me back to login</Link>
-          </>
-        )}
-      </div>
+      {!isLoggedIn && (
+        <div className={styles.form_footer}>
+          {loginLocation && (
+            <>
+              <p>New to FlowNews?</p>
+              <Link to={`${isLoading ? "#" : "/become-contributor"}`}>Create an account</Link>
+            </>
+          )}
+          {becomeContributorLocation && (
+            <>
+              <p>Already have an account?</p>
+              <Link to="/login">Log in</Link>
+            </>
+          )}
+          {forgotPasswordLocation && (
+            <>
+              <p>Never mind?</p>
+              <Link to="/login">Take me back to login</Link>
+            </>
+          )}
+        </div>
+      )}
     </PopUp>
   );
 };

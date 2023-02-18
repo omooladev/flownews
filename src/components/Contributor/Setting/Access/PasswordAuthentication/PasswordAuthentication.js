@@ -102,7 +102,7 @@ const PasswordAuthentication = () => {
             Update password
           </button>
           <p>
-            <Link to="/password_reset">Forgot my password?</Link>
+            <Link to="/forgot-password">Forgot my password?</Link>
           </p>
         </div>
       </form>

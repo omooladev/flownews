@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { useTitle } from "../../hooks/useTitle";
 import { AppContext } from "./app-context";
 const getAppMode = () => {
   const appMode = localStorage.getItem("flownews-mode");
@@ -9,6 +10,7 @@ const getAppMode = () => {
 };
 
 const AppContextProvider = (props) => {
+  useTitle("Flownews");
   const browserDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const browserLightTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
   const [appMode, setAppMode] = useState(getAppMode);
