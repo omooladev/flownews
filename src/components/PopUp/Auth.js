@@ -64,7 +64,6 @@ const Auth = () => {
       const emailLength = email.trim().length;
       const password = !forgotPasswordLocation && passwordRef.current.value;
       const passwordLength = !forgotPasswordLocation && password.trim().length;
-      console.log(email);
 
       if (emailLength === 0 || passwordLength === 0) {
         return onChangeAuthMessage({ type: "error", message: "Please provide Email or Password" });
