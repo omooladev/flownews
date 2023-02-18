@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
-import { BiUser, BiCog, BiAccessibility, BiEnvelope, BiShieldX } from "react-icons/bi";
+import { BiUser, BiCog, BiEnvelope, BiShieldX } from "react-icons/bi";
 import { FaPaintBrush, FaRegBell } from "react-icons/fa";
 
 import styles from "./SettingNavigationLinks.module.css";
 const SettingNavigationLinks = () => {
   const links = [
     { text: "Public profile", icon: <BiUser className={styles.icon} />, to: "profile" },
-    { text: "Account", icon: <BiCog className={styles.icon} />, to: "admin" },
+    { text: "Account", icon: <BiCog className={styles.icon} />, to: "account" },
     { text: "Appearance", icon: <FaPaintBrush className={styles.icon} />, to: "appearance" },
     {
       text: "Notifications",

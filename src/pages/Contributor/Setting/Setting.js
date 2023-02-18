@@ -9,6 +9,7 @@ import styles from "./Setting.module.css";
 import ProfileUpdated from "../../../components/Contributor/Setting/EditProfile/UI/ProfileUpdated";
 import Appearance from "./Appearance/Appearance";
 import PasswordAuthentication from "./Access/PasswordAuthentication";
+import Account from "./Account/Account";
 
 const Setting = () => {
   const { path } = useParams();
@@ -31,6 +32,7 @@ const Setting = () => {
             <div className={styles.links}>
               {path === "profile" && <EditProfile />}
               {path === "appearance" && <Appearance />}
+              {path === "account" && <Account/>}
               {path === "email" && <Email />}
               {path === "security" && <PasswordAuthentication />}
             </div>
