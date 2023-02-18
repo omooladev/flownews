@@ -3,14 +3,20 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
 import EmailVerify from "../../UI/EmailVerification/VerifyEmail_CancelEmailRequest";
 import styles from "../../EditProfile/UI/UserForm/UserForm.module.css";
+import styles2 from "./PasswordAuthentication.module.css";
+import { useTitle } from "../../../../../hooks/useTitle";
 
 const PasswordAuthentication = () => {
+  useTitle("Account Security");
   const {
     userData: { emailIsVerified, emailRequestChange },
     onUpdate_ResetPassword,
   } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState({ type: "", text: "" });
+  const [message, setMessage] = useState({
+    type: "",
+    text: "",
+  });
 
   const oldPasswordRef = useRef();
   const newPasswordRef = useRef();
@@ -18,7 +24,7 @@ const PasswordAuthentication = () => {
   const submitFormHandler = useCallback(
     async (event) => {
       event.preventDefault();
-      setMessage({ type: "", text: "" });
+
       const oldPassword = oldPasswordRef.current.value;
       const newPassword = newPasswordRef.current.value;
       const confirmNewPassword = confirmNewPasswordRef.current.value;
@@ -61,29 +67,33 @@ const PasswordAuthentication = () => {
       return "Password does not match";
     }
   };
+
+  const focusInputHandler = useCallback(() => {
+    setMessage({ type: "", text: "" });
+  }, []);
   return (
-    <section>
+    <section className={styles2.password}>
       {(!emailIsVerified || emailRequestChange) && <EmailVerify />}
       <h2>Change Password</h2>
       <hr />
-      {message.type && <p className={message.type}>{message.text}</p>}
-      <form className={styles.form} onSubmit={submitFormHandler}>
+      {message.type && <p className={`${message.type} ${styles2[message.type]}`}>{message.text}</p>}
+      <form className={`${styles.form}`} onSubmit={submitFormHandler}>
         <div className={styles.form_controls}>
           <div className={styles.form_control}>
             <label>Old Password</label>
-            <input type="password" ref={oldPasswordRef} />
+            <input type="password" ref={oldPasswordRef} onFocus={focusInputHandler} />
           </div>
           <div className={styles.form_control}>
             <label>New password</label>
-            <input type="password" ref={newPasswordRef} />
+            <input type="password" ref={newPasswordRef} onFocus={focusInputHandler} />
           </div>
           <div className={styles.form_control}>
             <label>Confirm new password</label>
-            <input type="password" ref={confirmNewPasswordRef} />
+            <input type="password" ref={confirmNewPasswordRef} onFocus={focusInputHandler} />
           </div>
           <p>Make sure it's at least 8 characters including a number and a lowercase letter.</p>
         </div>
-        <div className={styles.form_actions}>
+        <div className={`${styles.form_actions} ${styles2.form_actions}`}>
           <button
             type="submit"
             className={styles.update_profile}

@@ -64,12 +64,6 @@ const Auth = () => {
           message: "Password Length must be at least 8 characters",
         });
       }
-      if (becomeContributorLocation && passwordLength > 16) {
-        return onChangeAuthMessage({
-          type: "error",
-          message: "Password Length must be less than 16 characters",
-        });
-      }
       onResetAuthMessage();
       if (loginLocation || becomeContributorLocation) {
         const authLocation = loginLocation ? "login" : "become-contributor";
