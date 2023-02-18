@@ -9,6 +9,7 @@ import Card from "../../UI/Card";
 import PopUp from "../../UI/PopUp";
 import styles from "./Auth.module.css";
 import AuthLoader from "../Loaders/AuthLoader";
+import { useTitle } from "../../hooks/useTitle";
 
 const Auth = () => {
   const [viewPassword, setViewPassword] = useState(false);
@@ -28,6 +29,15 @@ const Auth = () => {
   const loginLocation = location.includes("/login");
   const becomeContributorLocation = location.includes("/become-contributor");
   const forgotPasswordLocation = location.includes("/forgot-password");
+  useTitle(
+    loginLocation
+      ? "Login"
+      : becomeContributorLocation
+      ? "Become Contributor"
+      : forgotPasswordLocation
+      ? "Forgot Your Password"
+      : ""
+  );
 
   const emailRef = useRef();
   const passwordRef = useRef();
