@@ -1,0 +1,22 @@
+.delete_account {
+}
+
+.delete_account .delete_account_list li {
+  padding: 0.3rem 0;
+}
+
+.delete_account .delete_account_list li.example {
+  margin: 0 2rem;
+  list-style: circle;
+}
+
+.delete_account .delete_account_button {
+  cursor: pointer;
+  padding: 0.9rem 1rem;
+  border-radius: 5px;
+  color: black;
+  background-color: red;
+  font-weight: bold;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
