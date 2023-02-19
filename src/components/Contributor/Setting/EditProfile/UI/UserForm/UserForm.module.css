@@ -88,3 +88,8 @@
   list-style: circle;
   margin-left: 2rem;
 }
+@media (min-width: 750px) {
+  .form .form_controls .form_control {
+    width: 30rem;
+  }
+}

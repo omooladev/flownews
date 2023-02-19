@@ -1,4 +1,6 @@
-.delete_account {
+
+.delete_account h3 {
+  padding: 0.5rem 0;
 }
 
 .delete_account .delete_account_list li {
