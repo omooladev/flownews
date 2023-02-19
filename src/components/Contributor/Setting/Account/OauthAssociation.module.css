@@ -1,4 +1,18 @@
-.remove_oauth {
+.oauth_association {
+  padding: 0.5rem 0;
+}
+
+.oauth_association h3 {
+  padding: 0.5rem 0;
+}
+.oauth_association ul li {
+  padding: 0.3rem 0;
+}
+.oauth_association ul li.example {
+  margin: 0 2rem;
+  list-style: circle;
+}
+.oauth_association .remove_oauth {
   display: flex;
   flex-direction: column;
   width: 200px;

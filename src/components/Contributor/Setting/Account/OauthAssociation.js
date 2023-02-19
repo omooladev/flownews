@@ -17,7 +17,7 @@ const OauthAssociation = () => {
   return (
     <>
       {(facebook || twitter) && (
-        <div>
+        <div className={styles.oauth_association}>
           <h3>Remove OAuth Associations</h3>
           <ul>
             <li>
@@ -25,8 +25,8 @@ const OauthAssociation = () => {
               authenticate you.
             </li>
             <li>Removing an OAuth association will:</li>
-            <li>remove your ability to sign in with that account</li>
-            <li>remove the associated URL from your profile</li>
+            <li className={styles.example}>Remove your ability to sign in with that account</li>
+            <li className={styles.example}>Remove the associated URL from your profile</li>
             <li>
               Note that this does not revoke our OAuth app access; you will have to do so in your
               settings for the specific provider:
