@@ -9,7 +9,7 @@ const EmailVerify = (props) => {
     HOSTURI,
     token,
     onSetUserData,
-    userData: { emailRequestChange, emailRequestChangeAddress, emailIsVerified, email },
+    userData: { emailRequestChange, emailRequestChangeAddress, emailIsVerified },
   } = useContext(AuthContext);
   const { sendRequest } = useHttp();
 
@@ -18,11 +18,10 @@ const EmailVerify = (props) => {
       event.stopPropagation();
       setError("");
       setIsLoading((prevState) => {
-        return !prevState;
+        return true;
       });
       const response = await sendRequest(`${HOSTURI}/email/cancel-email-change-request`, {
         method: "PATCH",
-        userData: { contributorEmail: email },
         token,
       });
       const error = response.error || "";
@@ -34,10 +33,34 @@ const EmailVerify = (props) => {
         setError(error);
       }
       setIsLoading((prevState) => {
-        return !prevState;
+        return false;
       });
     },
-    [sendRequest, email, HOSTURI, token, onSetUserData]
+    [sendRequest, HOSTURI, token, onSetUserData]
+  );
+  const verifyEmailHandler = useCallback(
+    async (event) => {
+      event.stopPropagation();
+      setIsLoading((prevState) => {
+        return true;
+      });
+      const response = await sendRequest(`${HOSTURI}/email/sendVerificationLink`, {
+        method: "PATCH",
+        token,
+      });
+      const error = response.error || "";
+      const status = response.status || "";
+      if (status === 200) {
+        console.log("sent");
+      }
+      if (error) {
+        setError(error);
+      }
+      setIsLoading((prevState) => {
+        return false;
+      });
+    },
+    [sendRequest, HOSTURI, token]
   );
   return (
     <div className={styles.email_request_change_cancel}>
@@ -50,7 +73,11 @@ const EmailVerify = (props) => {
             now to finalize the change or cancel the request
           </p>
           {error && <p className="error">{error}</p>}
-          <button className={styles.verify_email} disabled={isLoading ? true : false}>
+          <button
+            className={styles.verify_email}
+            disabled={isLoading ? true : false}
+            onClick={verifyEmailHandler}
+          >
             Verify
           </button>
           <button
@@ -65,7 +92,9 @@ const EmailVerify = (props) => {
       {!emailRequestChange && !emailIsVerified && (
         <>
           <p>Please verify your email address to have access to all features of flownews</p>
-          <button className={styles.verify_email}>Verify Email</button>
+          <button className={styles.verify_email} onClick={verifyEmailHandler}>
+            Verify Email
+          </button>
         </>
       )}
     </div>

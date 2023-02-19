@@ -5,14 +5,14 @@ const useHttp = () => {
     const { method, userData, token } = config;
     try {
       if (method === "PATCH") {
-        const { data } = await axios.patch(uri, userData, {
+        const { data, status } = await axios.patch(uri, userData && userData, {
           "Content-Type": "application/json",
           headers: {
             authorization: `Bearer ${token}`,
           },
         });
 
-        return { data };
+        return { data, status };
       }
       if (method === "POST") {
         const { data } = await axios.post(uri, userData);
