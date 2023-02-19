@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../../store/Auth/auth-context";
 import { FaTwitter, FaFacebook } from "react-icons/fa";
 import OauthPermission from "./OauthPermission";
+import styles from "./OauthAssociation.module.css";
 const OauthAssociation = () => {
   const {
     userData: {
@@ -9,8 +10,8 @@ const OauthAssociation = () => {
     },
   } = useContext(AuthContext);
   const oauthButtons = [
-    { name: facebook && "Remove Facebook", icon: <FaFacebook /> },
-    { name: twitter && "Remove Twitter", icon: <FaTwitter /> },
+    { name: facebook && "Remove Facebook", icon: <FaFacebook className={styles.icon} /> },
+    { name: twitter && "Remove Twitter", icon: <FaTwitter className={styles.icon} /> },
   ];
 
   return (
@@ -33,7 +34,7 @@ const OauthAssociation = () => {
           </ul>
 
           <OauthPermission />
-          <div>
+          <div className={styles.remove_oauth}>
             {oauthButtons.map((button) => {
               if (!button.name) {
                 return null;
@@ -41,7 +42,7 @@ const OauthAssociation = () => {
               return (
                 <button key={button.name}>
                   {button.icon}
-                  {button.name}
+                  <label> {button.name}</label>
                 </button>
               );
             })}
