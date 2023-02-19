@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import OauthAssociation from "./OauthAssociation";
 import styles from "./DeleteAccount.module.css";
+import OauthPermission from "./OauthPermission";
 const DeleteAccount = () => {
   return (
     <section>
@@ -14,14 +14,7 @@ const DeleteAccount = () => {
         <li>
           Delete your profile, along with your authentication associations. This does not include
           applications permissions. You will have to remove them yourself:
-          <ul>
-            <li>
-              <Link to="https://github.com/settings/applications">GitHub profile settings</Link>
-            </li>
-            <li>
-              <Link to="https://twitter.com/settings/applications">Twitter profile settings</Link>
-            </li>
-          </ul>
+          <OauthPermission />
         </li>
       </ul>
 
