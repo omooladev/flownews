@@ -10,20 +10,24 @@ const ConnectAccount = () => {
     },
   } = useContext(AuthContext);
   return (
-    <Card className={styles.connect_account}>
-      {!facebook && (
-        <button className={styles.facebook}>
-          <FaFacebook className={styles.icon} />
-          <label>Connect Facebook</label>
-        </button>
+    <>
+      {(!facebook || !twitter) && (
+        <Card className={styles.connect_account}>
+          {!facebook && (
+            <button className={styles.facebook}>
+              <FaFacebook className={styles.icon} />
+              <label>Connect Facebook</label>
+            </button>
+          )}
+          {!twitter && (
+            <button className={styles.twitter}>
+              <FaTwitter className={styles.icon} />
+              <label>Connect Twitter</label>
+            </button>
+          )}
+        </Card>
       )}
-      {!twitter && (
-        <button className={styles.twitter}>
-          <FaTwitter className={styles.icon} />
-          <label>Connect Twitter</label>
-        </button>
-      )}
-    </Card>
+    </>
   );
 };
 

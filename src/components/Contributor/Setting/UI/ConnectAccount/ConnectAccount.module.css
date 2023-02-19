@@ -2,6 +2,7 @@
   padding: 1rem;
   display: flex;
   flex-direction: column;
+
   /* align-items: flex-start; */
   /* justify-content: left; */
 }
@@ -11,11 +12,12 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 0.6rem 0.6rem;
-  width: 200px;
+  justify-content: left;
+  padding: 0.6rem 1rem;
   border-radius: 5px;
   color: white;
+  font-weight: bold;
+  width: 200px;
 }
 .connect_account button.facebook {
   background-color: #1877f2;
@@ -25,9 +27,11 @@
 }
 
 .connect_account button .icon {
+  cursor: pointer;
   font-size: 1.2rem;
 }
 .connect_account button label {
+  font-size: 0.9rem;
   margin: 0 0.5rem;
   cursor: pointer;
 }
