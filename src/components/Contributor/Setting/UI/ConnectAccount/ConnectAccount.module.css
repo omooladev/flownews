@@ -1,0 +1,33 @@
+.connect_account {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
+  /* justify-content: left; */
+}
+
+.connect_account button {
+  margin: 0.5rem 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 0.6rem;
+  width: 200px;
+  border-radius: 5px;
+  color: white;
+}
+.connect_account button.facebook {
+  background-color: #1877f2;
+}
+.connect_account button.twitter {
+  background-color: #1da1f2;
+}
+
+.connect_account button .icon {
+  font-size: 1.2rem;
+}
+.connect_account button label {
+  margin: 0 0.5rem;
+  cursor: pointer;
+}

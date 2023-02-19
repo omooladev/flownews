@@ -1,17 +1,21 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../../store/Auth/auth-context";
-import { FaTwitter, FaFacebook, FaMedium } from "react-icons/fa";
+import { FaTwitter, FaFacebook } from "react-icons/fa";
 import OauthPermission from "./OauthPermission";
 const OauthAssociation = () => {
   const {
     userData: {
-      socialMediaHandles: { facebook, twitter, medium },
+      socialMediaHandles: { facebook, twitter },
     },
   } = useContext(AuthContext);
+  const oauthButtons = [
+    { name: facebook && "Remove Facebook", icon: <FaFacebook /> },
+    { name: twitter && "Remove Twitter", icon: <FaTwitter /> },
+  ];
 
   return (
     <>
-      {(facebook || twitter || medium) && (
+      {(facebook || twitter) && (
         <div>
           <h3>Remove OAuth Associations</h3>
           <ul>
@@ -30,24 +34,17 @@ const OauthAssociation = () => {
 
           <OauthPermission />
           <div>
-            {facebook && (
-              <button>
-                <FaFacebook />
-                Remove facebook
-              </button>
-            )}
-            {twitter && (
-              <button>
-                <FaTwitter />
-                Remove twitter
-              </button>
-            )}
-            {medium && (
-              <button>
-                <FaMedium />
-                Remove medium
-              </button>
-            )}
+            {oauthButtons.map((button) => {
+              if (!button.name) {
+                return null;
+              }
+              return (
+                <button key={button.name}>
+                  {button.icon}
+                  {button.name}
+                </button>
+              );
+            })}
           </div>
         </div>
       )}
