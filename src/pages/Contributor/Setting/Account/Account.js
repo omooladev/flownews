@@ -1,5 +1,6 @@
+import AccountCmp from "../../../../components/Contributor/Setting/Account/Account";
 const Account = () => {
-  return;
+  return <AccountCmp />;
 };
 
 export default Account;

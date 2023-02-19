@@ -1,24 +1,20 @@
 import { useContext } from "react";
+import { useTitle } from "../../../../hooks/useTitle";
 import { AuthContext } from "../../../../store/Auth/auth-context";
-import EmailVerify from "../UI/EmailVerification/VerifyEmail_CancelEmailRequest";
-import {useTitle} from "../../../../hooks/useTitle"
 import ConnectAccount from "../UI/ConnectAccount/ConnectAccount";
+import EmailVerify from "../UI/EmailVerification/VerifyEmail_CancelEmailRequest";
 
-import User from "./UI/User";
-const EditProfile = () => {
-  useTitle("Your Profile")
+const Account = () => {
+  useTitle("Account Settings");
   const {
     userData: { emailIsVerified, emailRequestChange },
   } = useContext(AuthContext);
   return (
     <section>
-      <h2>Public Profile</h2>
-      <hr />
       {(!emailIsVerified || emailRequestChange) && <EmailVerify />}
       <ConnectAccount />
-      <User />
     </section>
   );
 };
 
-export default EditProfile;
+export default Account;
