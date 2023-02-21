@@ -2,6 +2,7 @@ import { useCallback, useContext, useState } from "react";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
 import useHttp from "../../../../../hooks/useHttp";
 import styles from "./SendVerificationEmail_CancelEmailChangeRequest.module.css";
+import EmailLinkSentPopUp from "./EmailLinkSentPopUp";
 const EmailVerify = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -52,7 +53,7 @@ const EmailVerify = (props) => {
     const error = response.error || "";
     const status = response.status || "";
     if (status === 200) {
-      console.log("sent");
+      return <EmailLinkSentPopUp/>
     }
     if (error) {
       setError(error);
