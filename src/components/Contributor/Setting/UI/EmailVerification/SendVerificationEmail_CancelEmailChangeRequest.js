@@ -100,7 +100,9 @@ const EmailVerify = (props) => {
           <button
             className={styles.verify_email}
             disabled={isLoading.type === "verify" ? true : false}
-            onClick={verifyEmailHandler}
+            onClick={(event) => {
+              verifyEmailHandler(event, { type: "verify" });
+            }}
           >
             {isLoading.type === "verify" ? "Sending verification link" : "Verify"}
           </button>
@@ -118,11 +120,12 @@ const EmailVerify = (props) => {
           <p>Please verify your email address to have access to all features of flownews</p>
           <button
             className={styles.verify_email}
+            disabled={isLoading.type === "verify" ? true : false}
             onClick={(event) => {
               verifyEmailHandler(event, { type: "verify" });
             }}
           >
-            Verify Email
+            {isLoading.type === "verify" ? "Sending verification link" : "Verify"}
           </button>
         </>
       )}
