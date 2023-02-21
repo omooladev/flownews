@@ -4,9 +4,9 @@ import useHttp from "../../../../../hooks/useHttp";
 import styles from "./SendVerificationEmail_CancelEmailChangeRequest.module.css";
 import EmailLinkSentPopUp from "./EmailLinkSentPopUp";
 const EmailVerify = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState({ type: "" });
   const [error, setError] = useState("");
-  const [emailSent, setEmailSent] = useState(true);
+  const [emailSent, setEmailSent] = useState(false);
   const [resentSuccess, setRecentSuccess] = useState(false);
   const {
     HOSTURI,
@@ -21,7 +21,7 @@ const EmailVerify = (props) => {
       event.stopPropagation();
       setError("");
       setIsLoading((prevState) => {
-        return true;
+        return { ...prevState, type: "cancel" };
       });
       const response = await sendRequest(`${HOSTURI}/email/cancel-email-change-request`, {
         method: "PATCH",
@@ -36,43 +36,46 @@ const EmailVerify = (props) => {
         setError(error);
       }
       setIsLoading((prevState) => {
-        return false;
+        return { ...prevState, type: "" };
       });
     },
     [sendRequest, HOSTURI, token, onSetUserData]
   );
-  const verifyEmailHandler = useCallback(async (event, Type) => {
-    event.stopPropagation();
-    setError("");
-    setIsLoading((prevState) => {
-      return true;
-    });
-    const response = await sendRequest(`${HOSTURI}/email/sendVerificationLink`, {
-      method: "PATCH",
-      token,
-    });
+  const verifyEmailHandler = useCallback(
+    async (event, Type) => {
+      event.stopPropagation();
+      setError("");
+      setIsLoading((prevState) => {
+        return { ...prevState, type: "verify" };
+      });
+      const response = await sendRequest(`${HOSTURI}/email/sendVerificationLink`, {
+        method: "PATCH",
+        token,
+      });
 
-    const error = response.error || "";
-    const status = response.status || "";
+      const error = response.error || "";
+      const status = response.status || "";
 
-    if (status === 200) {
-      setEmailSent(true);
-      const { type } = Type || "";
-      if (type === "resend") {
-        setRecentSuccess(true);
-        setTimeout(() => {
-          setRecentSuccess(false);
-        }, 1000);
+      if (status === 200) {
+        setEmailSent(true);
+        const { type } = Type || "";
+        if (type === "resend") {
+          setRecentSuccess(true);
+          setTimeout(() => {
+            setRecentSuccess(false);
+          }, 2000);
+        }
       }
-    }
-    if (error) {
-      setError(error);
-      setEmailSent(false);
-    }
-    setIsLoading((prevState) => {
-      return false;
-    });
-  }, []);
+      if (error) {
+        setError(error);
+        setEmailSent(false);
+      }
+      setIsLoading((prevState) => {
+        return { ...prevState, type: "" };
+      });
+    },
+    [HOSTURI, sendRequest, token]
+  );
   return (
     <div className={styles.email_request_change_cancel}>
       {(emailSent || resentSuccess) && (
@@ -96,17 +99,17 @@ const EmailVerify = (props) => {
           {error && <p className="error">{error}</p>}
           <button
             className={styles.verify_email}
-            disabled={isLoading ? true : false}
+            disabled={isLoading.type === "verify" ? true : false}
             onClick={verifyEmailHandler}
           >
-            Verify
+            {isLoading.type === "verify" ? "Sending verification link" : "Verify"}
           </button>
           <button
             className={styles.cancel}
             onClick={cancelEmailRequestChangeHandler}
-            disabled={isLoading ? true : false}
+            disabled={isLoading.type === "cancel" ? true : false}
           >
-            Cancel
+            {isLoading.type === "cancel" ? "Cancelling email change request" : "Cancel"}
           </button>
         </>
       )}
