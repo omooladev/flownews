@@ -1,7 +1,7 @@
 import EmailPrivacy from "./EmailPrivacy";
 import { useContext } from "react";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
-import EmailVerify from "../../UI/EmailVerification/VerifyEmail_CancelEmailRequest";
+import EmailVerify from "../../UI/EmailVerification/SendVerificationEmail_CancelEmailChangeRequest";
 import { useTitle } from "../../../../../hooks/useTitle";
 
 const Email = () => {

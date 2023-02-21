@@ -1,7 +1,7 @@
 import { useCallback, useContext, useState } from "react";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
 import useHttp from "../../../../../hooks/useHttp";
-import styles from "./VerifyEmail_CancelEmailRequest.module.css";
+import styles from "./SendVerificationEmail_CancelEmailChangeRequest.module.css";
 const EmailVerify = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -38,30 +38,29 @@ const EmailVerify = (props) => {
     },
     [sendRequest, HOSTURI, token, onSetUserData]
   );
-  const verifyEmailHandler = useCallback(
-    async (event) => {
-      event.stopPropagation();
-      setIsLoading((prevState) => {
-        return true;
-      });
-      const response = await sendRequest(`${HOSTURI}/email/sendVerificationLink`, {
-        method: "PATCH",
-        token,
-      });
-      const error = response.error || "";
-      const status = response.status || "";
-      if (status === 200) {
-        console.log("sent");
-      }
-      if (error) {
-        setError(error);
-      }
-      setIsLoading((prevState) => {
-        return false;
-      });
-    },
-    [sendRequest, HOSTURI, token]
-  );
+  const verifyEmailHandler = useCallback(async (event) => {
+    event.stopPropagation();
+    setError("");
+    setIsLoading((prevState) => {
+      return true;
+    });
+    // const response = await sendRequest(`${HOSTURI}/email/sendVerificationLink`, {
+    //   method: "PATCH",
+    //   token,
+    // });
+    const response = { status: 200 };
+    const error = response.error || "";
+    const status = response.status || "";
+    if (status === 200) {
+      console.log("sent");
+    }
+    if (error) {
+      setError(error);
+    }
+    setIsLoading((prevState) => {
+      return false;
+    });
+  }, []);
   return (
     <div className={styles.email_request_change_cancel}>
       <h3>Email Verification</h3>

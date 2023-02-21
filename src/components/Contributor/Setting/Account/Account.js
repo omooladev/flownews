@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useTitle } from "../../../../hooks/useTitle";
 import { AuthContext } from "../../../../store/Auth/auth-context";
 import ConnectAccount from "../UI/ConnectAccount/ConnectAccount";
-import EmailVerify from "../UI/EmailVerification/VerifyEmail_CancelEmailRequest";
+import EmailVerify from "../UI/EmailVerification/SendVerificationEmail_CancelEmailChangeRequest";
 import DeleteAccount from "./DeleteAccount";
 
 const Account = () => {

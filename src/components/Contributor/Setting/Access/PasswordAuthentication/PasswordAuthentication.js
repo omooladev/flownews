@@ -1,7 +1,7 @@
 import { useCallback, useContext, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
-import EmailVerify from "../../UI/EmailVerification/VerifyEmail_CancelEmailRequest";
+import EmailVerify from "../../UI/EmailVerification/SendVerificationEmail_CancelEmailChangeRequest";
 import styles from "../../EditProfile/UI/UserForm/UserForm.module.css";
 import styles2 from "./PasswordAuthentication.module.css";
 import { useTitle } from "../../../../../hooks/useTitle";
