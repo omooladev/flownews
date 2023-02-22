@@ -49,12 +49,11 @@ const EmailVerify = () => {
       setIsLoading((prevState) => {
         return { ...prevState, type: "verify" };
       });
+
       const response = await sendRequest(`${HOSTURI}/email/sendVerificationLink`, {
         method: "PATCH",
         token,
       });
-      
-
       const error = response.error || "";
       const status = response.status || "";
 

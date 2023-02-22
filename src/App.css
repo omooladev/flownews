@@ -12,7 +12,7 @@
   background-color: var(--nav-text-hover-color);
 }
 .auth_popup {
-  position: absolute;
+  position: static;
   top: 0%;
   width: 100vw;
   height: 100vh;
@@ -28,6 +28,7 @@
 
 @media (min-width: 500px) {
   .auth_popup {
+    position: fixed;
     top: 50%;
     left: 50%;
     width: 25rem;

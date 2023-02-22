@@ -38,7 +38,7 @@ const EmailLinkSentPopUp = (props) => {
       <div className={styles.resend_verification}>
         {!resentSuccess && (
           <>
-            <BiEnvelope className={styles.email} />
+            {isLoading.type !== "verify" && <BiEnvelope className={styles.email} />}
             <button
               type="button"
               onClick={(event) => {
