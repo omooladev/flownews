@@ -5,6 +5,7 @@ import SuspenseLoader from "../components/Loaders/SuspenseLoader";
 import AuthPage from "../pages/Auth/Auth";
 import NotFoundPage from "../pages/NotFound";
 import ContributorHomePage from "../pages/Contributor/Home";
+import EmailVerification from "../pages/EmailVerification/EmailVerification";
 //import SettingPage from "../pages/Contributor/Setting/Setting";
 const UserHomePage = React.lazy(() => import("../pages/User/Home"));
 // const ContributorHomePage = React.lazy(() => import("../pages/Contributor/Home"));
@@ -34,6 +35,9 @@ const Routes = () => {
             <Route path="/forgot-password" exact>
               <AuthPage />
             </Route>
+            <Route path="/:_id/verify/:token" exact>
+              <EmailVerification />
+            </Route>
             {/* <Route path="*">
               <NotFoundPage />
             </Route> */}
@@ -56,6 +60,10 @@ const Routes = () => {
             <Route path="/forgot-password" exact>
               <AuthPage />
             </Route>
+            <Route path="/:_id/verify/:token" exact>
+              <EmailVerification />
+            </Route>
+
             {/* <Route path="*">
               <NotFoundPage />
             </Route> */}
