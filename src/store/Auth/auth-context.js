@@ -21,4 +21,6 @@ export const AuthContext = React.createContext({
   onSignOut: () => {},
 
   onUpdate_ResetPassword: async () => {},
+  showEmailLinkSentPopUp: false,
+  onSetShowEmailLinkSentPopUp: (bool) => {},
 });

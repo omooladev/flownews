@@ -1,15 +1,15 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "./auth-context";
 import { AppContext } from "../App/app-context";
 import useHttp from "../../hooks/useHttp";
 
-//const HOSTURI = "http://localhost:5000/api/v1";
-const HOSTURI = "https://flownews-api.onrender.com/api/v1";
+const HOSTURI = "http://localhost:5000/api/v1";
+//const HOSTURI = "https://flownews-api.onrender.com/api/v1";
 const AuthContextProvider = (props) => {
   const { sendRequest } = useHttp();
   const { appMode, onCloseProfileBox, onChangeAppMode } = useContext(AppContext);
-
+  const [showEmailLinkSentPopUp, setShowEmailLinkSentPopUp] = useState(false);
   const [userData, setUserData] = useState({ username: "" });
   const token = appMode.token;
 
@@ -171,6 +171,13 @@ const AuthContextProvider = (props) => {
     },
     [sendRequest, token]
   );
+
+  useEffect(() => {
+    if (showEmailLinkSentPopUp) {
+      return document.body.classList.add("fixed-body");
+    }
+    return document.body.classList.remove("fixed-body");
+  }, [showEmailLinkSentPopUp]);
   return (
     <AuthContext.Provider
       value={{
@@ -204,6 +211,8 @@ const AuthContextProvider = (props) => {
         onSignOut: signOutHandler,
 
         onUpdate_ResetPassword: update_ResetPasswordHandler,
+        showEmailLinkSentPopUp: showEmailLinkSentPopUp,
+        onSetShowEmailLinkSentPopUp: (bool) => setShowEmailLinkSentPopUp(bool),
       }}
     >
       {props.children}

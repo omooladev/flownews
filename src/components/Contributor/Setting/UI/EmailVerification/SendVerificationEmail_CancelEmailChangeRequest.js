@@ -3,7 +3,7 @@ import { AuthContext } from "../../../../../store/Auth/auth-context";
 import useHttp from "../../../../../hooks/useHttp";
 import styles from "./SendVerificationEmail_CancelEmailChangeRequest.module.css";
 import EmailLinkSentPopUp from "./EmailLinkSentPopUp";
-const EmailVerify = (props) => {
+const EmailVerify = () => {
   const [isLoading, setIsLoading] = useState({ type: "" });
   const [error, setError] = useState("");
   const [emailSent, setEmailSent] = useState(false);
@@ -12,6 +12,7 @@ const EmailVerify = (props) => {
     HOSTURI,
     token,
     onSetUserData,
+    onSetShowEmailLinkSentPopUp,
     userData: { emailRequestChange, emailRequestChangeAddress, emailIsVerified },
   } = useContext(AuthContext);
   const { sendRequest } = useHttp();
@@ -48,43 +49,51 @@ const EmailVerify = (props) => {
       setIsLoading((prevState) => {
         return { ...prevState, type: "verify" };
       });
-      const response = await sendRequest(`${HOSTURI}/email/sendVerificationLink`, {
-        method: "PATCH",
-        token,
-      });
+      // const response = await sendRequest(`${HOSTURI}/email/sendVerificationLink`, {
+      //   method: "PATCH",
+      //   token,s
+      // });
+      const response = { status: 200 };
 
       const error = response.error || "";
       const status = response.status || "";
 
       if (status === 200) {
         setEmailSent(true);
+        onSetShowEmailLinkSentPopUp(true);
         const { type } = Type || "";
         if (type === "resend") {
           setRecentSuccess(true);
           setTimeout(() => {
             setRecentSuccess(false);
           }, 2000);
+          return;
         }
       }
       if (error) {
         setError(error);
         setEmailSent(false);
+        onSetShowEmailLinkSentPopUp(false);
       }
       setIsLoading((prevState) => {
         return { ...prevState, type: "" };
       });
     },
-    [HOSTURI, sendRequest, token]
+    [HOSTURI, sendRequest, token, onSetShowEmailLinkSentPopUp]
   );
   return (
     <div className={styles.email_request_change_cancel}>
-      {(emailSent || resentSuccess) && (
+      {emailSent && (
         <EmailLinkSentPopUp
+          isLoading={isLoading}
           resentSuccess={resentSuccess}
           emailRequestChangeAddress={emailRequestChangeAddress}
           onResendEmailLink={verifyEmailHandler}
           onSetEmailSent={(bool) => {
             setEmailSent(bool);
+          }}
+          onSetShowEmailLinkSentPopUp={(bool) => {
+           onSetShowEmailLinkSentPopUp(bool);
           }}
         />
       )}

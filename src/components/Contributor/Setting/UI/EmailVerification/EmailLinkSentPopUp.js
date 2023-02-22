@@ -4,14 +4,21 @@ import PopUp from "../../../../../UI/PopUp";
 import styles from "./EmailLinkSentPopUp.module.css";
 
 const EmailLinkSentPopUp = (props) => {
-  const { resentSuccess, onSetEmailSent, onResendEmailLink, emailRequestChangeAddress } = props;
-
+  const {
+    isLoading,
+    resentSuccess,
+    onSetEmailSent,
+    onResendEmailLink,
+    emailRequestChangeAddress,
+    onSetShowEmailLinkSentPopUp,
+  } = props;
   const closePopUpHandler = useCallback(
     (event) => {
       event.stopPropagation();
       onSetEmailSent(false);
+      onSetShowEmailLinkSentPopUp(false);
     },
-    [onSetEmailSent]
+    [onSetEmailSent, onSetShowEmailLinkSentPopUp]
   );
   return (
     <PopUp className={`auth_popup ${styles.email_link_sent}`} onClick={closePopUpHandler}>
@@ -38,7 +45,9 @@ const EmailLinkSentPopUp = (props) => {
                 onResendEmailLink(event, { type: "resend" });
               }}
             >
-              RESEND ACCOUNT VERIFICATION
+              {isLoading.type === "verify"
+                ? "Sending verification link"
+                : "RESEND ACCOUNT VERIFICATION"}
             </button>
           </>
         )}
