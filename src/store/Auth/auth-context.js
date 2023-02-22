@@ -23,4 +23,5 @@ export const AuthContext = React.createContext({
   onUpdate_ResetPassword: async () => {},
   showEmailLinkSentPopUp: false,
   onSetShowEmailLinkSentPopUp: (bool) => {},
+  onVerifyEmailAddress: async () => {},
 });
