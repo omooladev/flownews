@@ -54,6 +54,7 @@ const EmailVerify = () => {
         method: "PATCH",
         token,
       });
+      // const response={status:200} //* for testing
       const error = response.error || "";
       const status = response.status || "";
 

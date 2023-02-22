@@ -12,11 +12,10 @@
   background-color: var(--nav-text-hover-color);
 }
 .auth_popup {
-  position: static;
+  position: fixed;
   top: 0%;
   width: 100vw;
   height: 100vh;
-
   padding: 1rem 5%;
   z-index: 999;
 

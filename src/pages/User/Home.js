@@ -1,16 +1,10 @@
-import { useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { AppContext } from "../../store/App/app-context";
+import useNewLocation from "../../hooks/useNewLocation";
 
 const Home = () => {
   const location = useLocation();
-  const { onSetLastLocation } = useContext(AppContext);
-
-  useEffect(() => {
-    onSetLastLocation(location.pathname);
-  }, [location.pathname, onSetLastLocation]);
-  
-  return;
+  useNewLocation(location.pathname);
+  return <div></div>;
 };
 
 export default Home;

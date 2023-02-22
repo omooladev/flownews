@@ -1,13 +1,17 @@
-import { useCallback, useContext, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useCallback, useContext, useState, useRef} from "react";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
 import EmailVerify from "../../UI/EmailVerification/SendVerificationEmail_CancelEmailChangeRequest";
 import styles from "../../EditProfile/UI/UserForm/UserForm.module.css";
 import styles2 from "./PasswordAuthentication.module.css";
 import { useTitle } from "../../../../../hooks/useTitle";
+import useNewLocation from "../../../../../hooks/useNewLocation";
 
 const PasswordAuthentication = () => {
   useTitle("Account Security");
+  const location = useLocation();
+  useNewLocation(location.pathname);
+
   const {
     userData: { emailIsVerified, emailRequestChange },
     onUpdate_ResetPassword,
