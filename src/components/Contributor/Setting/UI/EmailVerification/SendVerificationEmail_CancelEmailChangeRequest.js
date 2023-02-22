@@ -49,11 +49,11 @@ const EmailVerify = () => {
       setIsLoading((prevState) => {
         return { ...prevState, type: "verify" };
       });
-      // const response = await sendRequest(`${HOSTURI}/email/sendVerificationLink`, {
-      //   method: "PATCH",
-      //   token,s
-      // });
-      const response = { status: 200 };
+      const response = await sendRequest(`${HOSTURI}/email/sendVerificationLink`, {
+        method: "PATCH",
+        token,
+      });
+      
 
       const error = response.error || "";
       const status = response.status || "";
@@ -67,7 +67,6 @@ const EmailVerify = () => {
           setTimeout(() => {
             setRecentSuccess(false);
           }, 2000);
-          return;
         }
       }
       if (error) {
@@ -93,7 +92,7 @@ const EmailVerify = () => {
             setEmailSent(bool);
           }}
           onSetShowEmailLinkSentPopUp={(bool) => {
-           onSetShowEmailLinkSentPopUp(bool);
+            onSetShowEmailLinkSentPopUp(bool);
           }}
         />
       )}
