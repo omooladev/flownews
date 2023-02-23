@@ -16,16 +16,15 @@
   padding: 0.5rem 0;
   color: var(--nav-text-color);
 }
+.email_verification h4 {
+  font-weight: 600;
+}
 
 .email_verification button {
-  padding: 0.5rem 0.6rem;
+  padding: 0.8rem 1rem;
   background-color: var(--nav-text-hover-color);
   color: var(--body-color);
   margin: 1rem 0;
   cursor: pointer;
-}
-
-
-.email_verification button:disabled {
-  cursor: not-allowed;
+  font-size: 0.9rem;
 }

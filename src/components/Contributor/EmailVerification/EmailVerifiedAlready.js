@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { useContext } from "react";
 import { AppContext } from "../../../store/App/app-context";
-const EmailVerified = () => {
+const EmailVerifiedAlready = () => {
   const {
     appMode: { isLoggedIn },
   } = useContext(AppContext);
@@ -9,8 +9,10 @@ const EmailVerified = () => {
   const history = useHistory();
   return (
     <>
-      <h3>You're all set</h3>
-      <h4>Thanks for confirming your email address</h4>
+      <h3>Your Email Address has been verified</h3>
+      <h4>
+        Your request to verify your email was unsuccessful because it has already been verified
+      </h4>
       {!isLoggedIn && (
         <>
           <h4>Please login to continue</h4>
@@ -27,4 +29,4 @@ const EmailVerified = () => {
   );
 };
 
-export default EmailVerified;
+export default EmailVerifiedAlready;
