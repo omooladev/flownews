@@ -7,7 +7,7 @@ const EmailVerify = () => {
   const [isLoading, setIsLoading] = useState({ type: "" });
   const [error, setError] = useState("");
   const [emailSent, setEmailSent] = useState(false);
-  const [resentSuccess, setRecentSuccess] = useState(false);
+  const [resentSuccess, setResentSuccess] = useState(false);
   const {
     HOSTURI,
     token,
@@ -63,9 +63,9 @@ const EmailVerify = () => {
         onSetShowEmailLinkSentPopUp(true);
         const { type } = Type || "";
         if (type === "resend") {
-          setRecentSuccess(true);
+          setResentSuccess(true);
           setTimeout(() => {
-            setRecentSuccess(false);
+            setResentSuccess(false);
           }, 2000);
         }
       }

@@ -172,9 +172,15 @@ const AuthContextProvider = (props) => {
     [sendRequest, token]
   );
 
-  const verifyEmailHandler = useCallback((uri) => {
-    console.log(uri);
-  }, []);
+  const verifyEmailHandler = useCallback(
+    async (uri) => {
+      const response = await sendRequest(`${HOSTURI}/auth${uri}`, {
+        method: "PATCH",
+      });
+      return response;
+    },
+    [sendRequest]
+  );
 
   useEffect(() => {
     if (showEmailLinkSentPopUp) {

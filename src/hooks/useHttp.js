@@ -8,7 +8,7 @@ const useHttp = () => {
         const { data, status } = await axios.patch(uri, userData && userData, {
           "Content-Type": "application/json",
           headers: {
-            authorization: `Bearer ${token}`,
+            authorization: token && `Bearer ${token}`,
           },
         });
 
