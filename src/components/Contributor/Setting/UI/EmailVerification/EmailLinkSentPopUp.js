@@ -32,7 +32,7 @@ const EmailLinkSentPopUp = (props) => {
           <BiEnvelope className={styles.email_icon} />
         </div>
         <p className={styles.message}>
-          {`We sent a message to ${emailRequestChangeAddress}. Tap the verify button in that email to verify your account`}
+          {`We sent a message to ${emailRequestChangeAddress}. Tap the verify button in that email to verify your account. If it doesn't appear within a few minutes, check your spam folder`}
         </p>
       </div>
       <div className={styles.resend_verification}>
