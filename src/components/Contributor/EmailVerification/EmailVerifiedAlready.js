@@ -9,7 +9,7 @@ const EmailVerifiedAlready = () => {
   const history = useHistory();
   return (
     <>
-      <h3>Your Email Address has been verified</h3>
+      <h3>Your Email Address has been verified already</h3>
       <h4>
         Your request to verify your email was unsuccessful because it has already been verified
       </h4>

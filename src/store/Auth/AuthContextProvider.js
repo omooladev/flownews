@@ -4,8 +4,8 @@ import { AuthContext } from "./auth-context";
 import { AppContext } from "../App/app-context";
 import useHttp from "../../hooks/useHttp";
 
-//const HOSTURI = "http://localhost:5000/api/v1";
-const HOSTURI = "https://flownews-api.onrender.com/api/v1";
+const HOSTURI = "http://localhost:5000/api/v1";
+//const HOSTURI = "https://flownews-api.onrender.com/api/v1";
 const AuthContextProvider = (props) => {
   const { sendRequest } = useHttp();
   const { appMode, onCloseProfileBox, onChangeAppMode } = useContext(AppContext);
@@ -182,6 +182,12 @@ const AuthContextProvider = (props) => {
     [sendRequest]
   );
 
+  const setUserDataHandler = useCallback((data) => {
+    setUserData((prevData) => {
+      return { ...prevData, ...data };
+    });
+  }, []);
+
   useEffect(() => {
     if (showEmailLinkSentPopUp) {
       return document.body.classList.add("fixed-body");
@@ -206,12 +212,7 @@ const AuthContextProvider = (props) => {
         contributorError,
         onUpdateContributorProfile: async (updateProperties) =>
           updateContributorProfileHandler(updateProperties),
-        onSetUserData: (data) => {
-          setUserData((prevData) => {
-            return { ...prevData, ...data };
-          });
-        },
-
+        onSetUserData: setUserDataHandler,
         onGetContributorData: getContributorData,
         onChangeAuthMessage: (authMessage) => {
           changeAuthMessage(authMessage);

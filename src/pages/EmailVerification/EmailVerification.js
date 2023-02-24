@@ -1,5 +1,5 @@
 import { useEffect, useCallback, useContext, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import EmailTokenExpired from "../../components/Contributor/EmailVerification/EmailVerificationExpired";
 import EmailVerified from "../../components/Contributor/EmailVerification/EmailVerified";
 import EmailVerifiedAlready from "../../components/Contributor/EmailVerification/EmailVerifiedAlready";
@@ -9,15 +9,14 @@ import { AuthContext } from "../../store/Auth/auth-context";
 import styles from "./EmailVerification.module.css";
 const EmailVerification = () => {
   useFetchContributorData();
-  const { _id, token } = useParams();
   const { onVerifyEmailAddress, onSetUserData } = useContext(AuthContext);
-  const location = useLocation();
+  const { pathname } = useLocation();
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const verifyEmailHandler = useCallback(async () => {
     setIsLoading(true);
-    const response = await onVerifyEmailAddress(location.pathname);
+    const response = await onVerifyEmailAddress(pathname);
     const data = response.data || "";
     const error = response.error || "";
     setIsLoading(false);
@@ -35,20 +34,24 @@ const EmailVerification = () => {
       }
     }
     if (error) {
-      setMessage("error");
+      if (error === "invalid link") {
+        setMessage("invalid link");
+      } else {
+        setMessage(error);
+      }
     }
-  }, [location, onVerifyEmailAddress, onSetUserData]);
+  }, [pathname, onVerifyEmailAddress, onSetUserData]);
 
   useEffect(() => {
-    if (_id && token) {
+    if (pathname) {
       verifyEmailHandler();
     }
-  }, [_id, token, verifyEmailHandler]);
+  }, [pathname, verifyEmailHandler]);
 
   return (
     <div className={styles.email_verification}>
       {isLoading && <SuspenseLoader />}
-      {!isLoading && message === "error" && <EmailTokenExpired />}
+      {!isLoading && message === "invalid link" && <EmailTokenExpired />}
       {!isLoading && message === "email address already verified" && <EmailVerifiedAlready />}
       {!isLoading && message === "email address has been verified successfully" && (
         <EmailVerified />
