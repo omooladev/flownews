@@ -8,13 +8,13 @@ import User from "./UI/User";
 const EditProfile = () => {
   useTitle("Your Profile")
   const {
-    userData: { emailIsVerified, emailRequestChange },
+    userData: { emailRequestChangeAddressIsVerified, emailRequestChange },
   } = useContext(AuthContext);
   return (
     <section>
       <h2>Public Profile</h2>
       <hr />
-      {(!emailIsVerified || emailRequestChange) && <EmailVerify />}
+      {(!emailRequestChangeAddressIsVerified || emailRequestChange) && <EmailVerify />}
       <ConnectAccount />
       <User />
     </section>

@@ -7,13 +7,13 @@ import { useTitle } from "../../../../../hooks/useTitle";
 const Email = () => {
   useTitle("Email Settings");
   const {
-    userData: { emailIsVerified, emailRequestChange },
+    userData: { emailRequestChangeAddressIsVerified, emailRequestChange },
   } = useContext(AuthContext);
   return (
     <section>
       <h2>Email</h2>
       <hr />
-      {(!emailIsVerified || emailRequestChange) && (
+      {(!emailRequestChangeAddressIsVerified || emailRequestChange) && (
         <>
           <EmailVerify />
           <hr />

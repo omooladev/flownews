@@ -13,7 +13,7 @@ const PasswordAuthentication = () => {
   useNewLocation(location.pathname);
 
   const {
-    userData: { emailIsVerified, emailRequestChange },
+    userData: { emailRequestChangeAddressIsVerified, emailRequestChange },
     onUpdate_ResetPassword,
   } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
@@ -77,7 +77,7 @@ const PasswordAuthentication = () => {
   }, []);
   return (
     <section className={styles2.password}>
-      {(!emailIsVerified || emailRequestChange) && <EmailVerify />}
+      {(!emailRequestChangeAddressIsVerified || emailRequestChange) && <EmailVerify />}
       <h2>Change Password</h2>
       <hr />
       {message.type && <p className={`${message.type} ${styles2[message.type]}`}>{message.text}</p>}

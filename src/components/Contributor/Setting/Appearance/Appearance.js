@@ -7,11 +7,11 @@ import ThemeMode from "./ThemeMode";
 const Appearance = () => {
   useTitle("Appearance");
   const {
-    userData: { emailIsVerified, emailRequestChange },
+    userData: { emailRequestChangeAddressIsVerified, emailRequestChange },
   } = useContext(AuthContext);
   return (
     <section>
-      {(!emailIsVerified || emailRequestChange) && <EmailVerify />}
+      {(!emailRequestChangeAddressIsVerified || emailRequestChange) && <EmailVerify />}
       <h2>Theme preferences</h2>
       <hr />
       <p>

@@ -13,7 +13,11 @@ const EmailVerify = () => {
     token,
     onSetUserData,
     onSetShowEmailLinkSentPopUp,
-    userData: { emailRequestChange, emailRequestChangeAddress, emailIsVerified },
+    userData: {
+      emailRequestChange,
+      emailRequestChangeAddress,
+      emailRequestChangeAddressIsVerified,
+    },
   } = useContext(AuthContext);
   const { sendRequest } = useHttp();
 
@@ -97,7 +101,7 @@ const EmailVerify = () => {
         />
       )}
       <h3>Email Verification</h3>
-      {emailRequestChange && !emailIsVerified && (
+      {emailRequestChange && !emailRequestChangeAddressIsVerified && (
         <>
           <p>
             You have requested to change your email to{" "}
@@ -123,7 +127,7 @@ const EmailVerify = () => {
           </button>
         </>
       )}
-      {!emailRequestChange && !emailIsVerified && (
+      {!emailRequestChange && !emailRequestChangeAddressIsVerified && (
         <>
           <p>Please verify your email address to have access to all features of flownews</p>
           <button

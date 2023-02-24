@@ -8,11 +8,11 @@ import DeleteAccount from "./DeleteAccount";
 const Account = () => {
   useTitle("Account Settings");
   const {
-    userData: { emailIsVerified, emailRequestChange },
+    userData: { emailRequestChangeAddressIsVerified, emailRequestChange },
   } = useContext(AuthContext);
   return (
     <section>
-      {(!emailIsVerified || emailRequestChange) && <EmailVerify />}
+      {(!emailRequestChangeAddressIsVerified || emailRequestChange) && <EmailVerify />}
       <ConnectAccount />
       <DeleteAccount />
     </section>
