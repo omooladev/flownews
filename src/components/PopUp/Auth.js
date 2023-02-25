@@ -13,6 +13,7 @@ import { useTitle } from "../../hooks/useTitle";
 
 const Auth = () => {
   const [viewPassword, setViewPassword] = useState(false);
+  const [passwordResetLinkSent, setPasswordResetLinkSent] = useState(false);
   const { lastLocation } = useContext(AppContext);
   const {
     isLoading,
@@ -21,6 +22,7 @@ const Auth = () => {
     onChangeAuthMessage,
     onResetAuthMessage,
     isLoggedIn,
+    onGetPasswordResetEmail,
 
     userData: { email, username },
   } = useContext(AuthContext);
@@ -65,8 +67,17 @@ const Auth = () => {
       const password = !forgotPasswordLocation && passwordRef.current.value;
       const passwordLength = !forgotPasswordLocation && password.trim().length;
 
+      if (forgotPasswordLocation && emailLength === 0) {
+        return onChangeAuthMessage({
+          type: "error",
+          message: "Please provide Email Address",
+        });
+      }
       if (emailLength === 0 || passwordLength === 0) {
-        return onChangeAuthMessage({ type: "error", message: "Please provide Email or Password" });
+        return onChangeAuthMessage({
+          type: "error",
+          message: "Please provide Email or Password",
+        });
       }
       if (!email.includes("@")) {
         return onChangeAuthMessage({ type: "error", message: "Email Address is Invalid" });
@@ -82,6 +93,12 @@ const Auth = () => {
         const authLocation = loginLocation ? "login" : "become-contributor";
         on_Login_BecomeContributor(authLocation, { email, password });
       }
+      if (forgotPasswordLocation) {
+        const response = await onGetPasswordResetEmail(email, "sendPasswordResetLink");
+        if (response === "password reset link sent") {
+          setPasswordResetLinkSent(true);
+        }
+      }
     },
     [
       on_Login_BecomeContributor,
@@ -90,6 +107,7 @@ const Auth = () => {
       forgotPasswordLocation,
       onChangeAuthMessage,
       onResetAuthMessage,
+      onGetPasswordResetEmail,
     ]
   );
 
@@ -126,7 +144,8 @@ const Auth = () => {
             <>
               <h1>Reset your Password</h1>
               <p className={styles.reset_password}>
-                Enter your user account's email address and we will send you a password reset link.
+                {!passwordResetLinkSent &&
+                  "Enter your user account's email address and we will send you a password reset link."}
               </p>
             </>
           )}
@@ -141,10 +160,19 @@ const Auth = () => {
             </Card>
           )}
           <form className={styles.form} onSubmit={submitFormHandler}>
-            <div className={styles.form_control}>
-              <label>Email Address</label>
-              <input type="email" ref={emailRef} autoComplete="on" />
-            </div>
+            {passwordResetLinkSent && (
+              <p className={styles.reset_password}>
+                Check your email for a link to reset your password. If it doesn't appear within a
+                few minutes, check your spam folder
+              </p>
+            )}
+
+            {!passwordResetLinkSent && (
+              <div className={styles.form_control}>
+                <label>Email Address</label>
+                <input type="email" ref={emailRef} autoComplete="on" />
+              </div>
+            )}
             {!forgotPasswordLocation && (
               <div className={styles.form_control}>
                 <div className={styles.password_label}>
@@ -168,44 +196,63 @@ const Auth = () => {
               </div>
             )}
             <div className={styles.form_actions}>
-              <button type="submit" disabled={isLoading ? true : false}>
-                {isLoading ? (
-                  <AuthLoader />
-                ) : (
-                  `${
-                    loginLocation
-                      ? "Log in"
-                      : becomeContributorLocation
-                      ? "Sign up"
-                      : forgotPasswordLocation
-                      ? "Send me password reset email"
-                      : ""
-                  }`
-                )}
-              </button>
+              {!passwordResetLinkSent && (
+                <button type="submit" disabled={isLoading ? true : false}>
+                  {isLoading ? (
+                    <AuthLoader />
+                  ) : (
+                    `${
+                      loginLocation
+                        ? "Log in"
+                        : becomeContributorLocation
+                        ? "Sign up"
+                        : forgotPasswordLocation
+                        ? "Send me password reset email"
+                        : ""
+                    }`
+                  )}
+                </button>
+              )}
+              {passwordResetLinkSent && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPasswordResetLinkSent(false);
+                    history.push("/login");
+                  }}
+                >
+                  Return to sign in
+                </button>
+              )}
             </div>
           </form>
-          {!isLoggedIn && (
-            <div className={styles.form_footer}>
-              {loginLocation && (
-                <>
-                  <p>New to FlowNews?</p>
-                  <Link to={`${isLoading ? "#" : "/become-contributor"}`}>Create an account</Link>
-                </>
+          {!passwordResetLinkSent && (
+            <>
+              {!isLoggedIn && (
+                <div className={styles.form_footer}>
+                  {loginLocation && (
+                    <>
+                      <p>New to FlowNews?</p>
+                      <Link to={`${isLoading ? "#" : "/become-contributor"}`}>
+                        Create an account
+                      </Link>
+                    </>
+                  )}
+                  {becomeContributorLocation && (
+                    <>
+                      <p>Already have an account?</p>
+                      <Link to="/login">Log in</Link>
+                    </>
+                  )}
+                  {forgotPasswordLocation && (
+                    <>
+                      <p>Never mind?</p>
+                      <Link to="/login">Take me back to login</Link>
+                    </>
+                  )}
+                </div>
               )}
-              {becomeContributorLocation && (
-                <>
-                  <p>Already have an account?</p>
-                  <Link to="/login">Log in</Link>
-                </>
-              )}
-              {forgotPasswordLocation && (
-                <>
-                  <p>Never mind?</p>
-                  <Link to="/login">Take me back to login</Link>
-                </>
-              )}
-            </div>
+            </>
           )}
         </PopUp>
       )}

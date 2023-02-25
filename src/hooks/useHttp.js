@@ -15,8 +15,8 @@ const useHttp = () => {
         return { data, status };
       }
       if (method === "POST") {
-        const { data } = await axios.post(uri, userData);
-        return { data };
+        const { data,status } = await axios.post(uri, userData);
+        return { data,status };
       }
       if (method === "GET") {
         const { data } = await axios.get(uri, {

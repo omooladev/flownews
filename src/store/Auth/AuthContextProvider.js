@@ -32,7 +32,7 @@ const AuthContextProvider = (props) => {
   const login_BecomeContributor = useCallback(
     async (location, userData) => {
       setIsLoading((prevState) => {
-        return !prevState;
+        return true;
       });
       const response = await sendRequest(`${HOSTURI}/auth/${location}`, {
         method: "POST",
@@ -68,7 +68,7 @@ const AuthContextProvider = (props) => {
         });
       }
       setIsLoading((prevState) => {
-        return !prevState;
+        return false;
       });
     },
     [history, changeAuthMessage, sendRequest, onChangeAppMode]
@@ -188,6 +188,33 @@ const AuthContextProvider = (props) => {
     });
   }, []);
 
+  const getPasswordResetEmailHandler = useCallback(
+    async (email, title) => {
+      setIsLoading((prevState) => {
+        return true;
+      });
+      // const response = await sendRequest(`${HOSTURI}/auth/password/${title}`, {
+      //   method: "POST",
+      //   userData: { email },
+      // });
+      const response={status:200}
+      const error = response.error || "";
+      const status = response.status || "";
+      setIsLoading((prevState) => {
+        return false;
+      });
+      if (status === 200) {
+        return "password reset link sent"
+      }
+      if (error) {
+        setAuthMessage((prevMessage) => {
+          return { ...prevMessage, type: "error", message: error };
+        });
+      }
+      
+    },
+    [sendRequest]
+  );
   useEffect(() => {
     if (showEmailLinkSentPopUp) {
       return document.body.classList.add("fixed-body");
@@ -225,6 +252,7 @@ const AuthContextProvider = (props) => {
         showEmailLinkSentPopUp: showEmailLinkSentPopUp,
         onSetShowEmailLinkSentPopUp: (bool) => setShowEmailLinkSentPopUp(bool),
         onVerifyEmailAddress: verifyEmailHandler,
+        onGetPasswordResetEmail: getPasswordResetEmailHandler,
       }}
     >
       {props.children}
