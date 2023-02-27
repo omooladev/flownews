@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { AppContext } from "../../../store/App/app-context";
 import { AuthContext } from "../../../store/Auth/auth-context";
@@ -15,14 +15,8 @@ const Auth = () => {
   const { lastLocation } = useContext(AppContext);
   const [authReply, setAuthReply] = useState({ type: null, message: "" });
   const {
-    isLoading,
-    on_Login_BecomeContributor,
-
-    onResetAuthMessage,
     isLoggedIn,
-    onGetPasswordResetEmail,
-
-    userData: { email, username },
+    userData: { username },
   } = useContext(AuthContext);
   const history = useHistory();
   const location = history.location.pathname;
@@ -48,62 +42,6 @@ const Auth = () => {
 
   const toggleViewPasswordHandler = useCallback(() => {
     setViewPassword((prevState) => !prevState);
-  }, []);
-
-  // const submitFormHandler = useCallback(
-  //   async (event) => {
-  //     event.preventDefault();
-  //     const email = emailRef.current.value || "";
-  //     const emailLength = email.trim().length;
-  //     const password = !forgotPasswordLocation && passwordRef.current.value;
-  //     const passwordLength = !forgotPasswordLocation && password.trim().length;
-
-  //     if (forgotPasswordLocation && emailLength === 0) {
-  //       return onChangeAuthMessage({
-  //         type: "error",
-  //         message: "Please provide Email Address",
-  //       });
-  //     }
-  //     if (emailLength === 0 || passwordLength === 0) {
-  //       return onChangeAuthMessage({
-  //         type: "error",
-  //         message: "Please provide Email or Password",
-  //       });
-  //     }
-  //     if (!email.includes("@")) {
-  //       return onChangeAuthMessage({ type: "error", message: "Email Address is Invalid" });
-  //     }
-  //     if (becomeContributorLocation && passwordLength < 8) {
-  //       return onChangeAuthMessage({
-  //         type: "error",
-  //         message: "Password Length must be at least 8 characters",
-  //       });
-  //     }
-  //     onResetAuthMessage();
-  //     if (loginLocation || becomeContributorLocation) {
-  //       const authLocation = loginLocation ? "login" : "become-contributor";
-  //       on_Login_BecomeContributor(authLocation, { email, password });
-  //     }
-  //     if (forgotPasswordLocation) {
-  //       const response = await onGetPasswordResetEmail(email, "sendPasswordResetLink");
-  //       if (response === "password reset link sent") {
-  //         setPasswordResetLinkSent(true);
-  //       }
-  //     }
-  //   },
-  //   [
-  //     on_Login_BecomeContributor,
-  //     loginLocation,
-  //     becomeContributorLocation,
-  //     forgotPasswordLocation,
-  //     onChangeAuthMessage,
-  //     onResetAuthMessage,
-  //     onGetPasswordResetEmail,
-  //   ]
-  // );
-
-  const Nil = useCallback((event) => {
-    event.stopPropagation();
   }, []);
 
   const validateEmailHandler = useCallback(({ validationType, email }) => {
@@ -160,18 +98,11 @@ const Auth = () => {
   return (
     <>
       {(!isLoggedIn || username) && (
-        <PopUp
-          onClick={isLoading ? Nil : closePopUpHandler}
-          className={`auth_popup ${styles.auth}`}
-        >
-          <BiX
-            className={`${styles.icon} ${styles.cancel}`}
-            onClick={isLoading ? Nil : closePopUpHandler}
-          />
+        <PopUp onClick={closePopUpHandler} className={`auth_popup ${styles.auth}`}>
+          <BiX className={`${styles.icon} ${styles.cancel}`} onClick={closePopUpHandler} />
 
           {loginLocation && (
             <Login
-              isLoading={isLoading}
               viewPassword={viewPassword}
               toggleViewPasswordHandler={toggleViewPasswordHandler}
               authReply={authReply}
@@ -182,7 +113,6 @@ const Auth = () => {
           )}
           {becomeContributorLocation && (
             <BecomeContributor
-              isLoading={isLoading}
               viewPassword={viewPassword}
               toggleViewPasswordHandler={toggleViewPasswordHandler}
               authReply={authReply}
@@ -191,7 +121,6 @@ const Auth = () => {
           )}
           {forgotPasswordLocation && (
             <ForgotPassword
-              isLoading={isLoading}
               viewPassword={viewPassword}
               toggleViewPasswordHandler={toggleViewPasswordHandler}
               authReply={authReply}

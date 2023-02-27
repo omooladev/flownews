@@ -34,7 +34,7 @@ const Login = (props) => {
       }
       onResetAuthReply();
     },
-    [onValidateEmail, onValidatePassword]
+    [onValidateEmail, onValidatePassword, onResetAuthReply]
   );
 
   useEffect(() => {
