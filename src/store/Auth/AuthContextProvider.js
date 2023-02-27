@@ -193,11 +193,10 @@ const AuthContextProvider = (props) => {
       setIsLoading((prevState) => {
         return true;
       });
-      // const response = await sendRequest(`${HOSTURI}/auth/password/${title}`, {
-      //   method: "POST",
-      //   userData: { email },
-      // });
-      const response={status:200}
+      const response = await sendRequest(`${HOSTURI}/auth/password/${title}`, {
+        method: "POST",
+        userData: { email },
+      });
       const error = response.error || "";
       const status = response.status || "";
       setIsLoading((prevState) => {
