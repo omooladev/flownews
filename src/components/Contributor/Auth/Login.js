@@ -32,6 +32,7 @@ const Login = (props) => {
       if (!passwordIsValid) {
         return;
       }
+      onResetAuthReply();
     },
     [onValidateEmail, onValidatePassword]
   );

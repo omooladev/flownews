@@ -128,9 +128,33 @@ const Auth = () => {
         return false;
       }
     }
+    return true;
   }, []);
   const validatePasswordHandler = useCallback(({ validationType, password }) => {
-    console.log(validationType, password);
+    let checkAllLogic;
+    if (validationType === "check_full") {
+      checkAllLogic = true;
+    }
+    if (validationType === "check_length" || checkAllLogic) {
+      const passwordLength = password.trim().length;
+      if (passwordLength === 0) {
+        setAuthReply((prevReply) => {
+          return { ...prevReply, type: "error", message: "Please provide your password" };
+        });
+        return false;
+      }
+      if (passwordLength < 8) {
+        setAuthReply((prevReply) => {
+          return {
+            ...prevReply,
+            type: "error",
+            message: "Password Length must be at least 8 characters",
+          };
+        });
+        return false;
+      }
+    }
+    return true;
   }, []);
 
   return (
