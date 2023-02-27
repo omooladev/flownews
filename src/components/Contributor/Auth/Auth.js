@@ -1,15 +1,15 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 
-import { AppContext } from "../../store/App/app-context";
-import { AuthContext } from "../../store/Auth/auth-context";
+import { AppContext } from "../../../store/App/app-context";
+import { AuthContext } from "../../../store/Auth/auth-context";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { BiX } from "react-icons/bi";
-import Card from "../../UI/Card";
-import PopUp from "../../UI/PopUp";
+import Card from "../../../UI/Card";
+import PopUp from "../../../UI/PopUp";
 import styles from "./Auth.module.css";
-import AuthLoader from "../Loaders/AuthLoader";
-import { useTitle } from "../../hooks/useTitle";
+import AuthLoader from "../../Loaders/AuthLoader";
+import { useTitle } from "../../../hooks/useTitle";
 
 const Auth = () => {
   const [viewPassword, setViewPassword] = useState(false);
