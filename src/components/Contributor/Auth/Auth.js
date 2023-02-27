@@ -10,6 +10,10 @@ import PopUp from "../../../UI/PopUp";
 import styles from "./Auth.module.css";
 import AuthLoader from "../../Loaders/AuthLoader";
 import { useTitle } from "../../../hooks/useTitle";
+import Login from "./Login";
+import Reply from "./Reply";
+import BecomeContributor from "./BecomeContributor";
+import ForgotPassword from "./ForgotPassword";
 
 const Auth = () => {
   const [viewPassword, setViewPassword] = useState(false);
@@ -127,39 +131,39 @@ const Auth = () => {
       passwordRef.current.value = "";
     } catch (error) {}
   }, [location, onResetAuthMessage, email, isLoggedIn]);
+
+  const loginHandler = useCallback((event) => {
+    event.preventDefault();
+    return onChangeAuthMessage({
+      type: "error",
+      message: "Password Length must be at least 8 characters",
+    });
+  }, []);
   return (
     <>
       {(!isLoggedIn || username) && (
         <PopUp
           onClick={isLoading ? Nil : closePopUpHandler}
-          className={`auth_popup ${styles.login}`}
+          className={`auth_popup ${styles.auth}`}
         >
           <BiX
             className={`${styles.icon} ${styles.cancel}`}
             onClick={isLoading ? Nil : closePopUpHandler}
           />
-          {loginLocation && <h1>Log in to FlowNews</h1>}
-          {becomeContributorLocation && <h1>Create a FlowNews account</h1>}
-          {forgotPasswordLocation && (
-            <>
-              <h1>Reset your Password</h1>
-              <p className={styles.reset_password}>
-                {!passwordResetLinkSent &&
-                  "Enter your user account's email address and we will send you a password reset link."}
-              </p>
-            </>
+
+          {loginLocation && (
+            <Login
+              isLoading={isLoading}
+              loginHandler={loginHandler}
+              viewPassword={viewPassword}
+              toggleViewPasswordHandler={toggleViewPasswordHandler}
+              authMessage={authMessage}
+              onResetAuthMessage={onResetAuthMessage}
+            />
           )}
-          {!isLoading && authMessage && authMessage.type && (
-            <Card
-              className={`${styles.reply} ${
-                authMessage.type === "success" ? styles["success"] : styles["error"]
-              }`}
-            >
-              <p>{authMessage.message}</p>
-              <BiX className={styles.cancel_icon} onClick={onResetAuthMessage} />
-            </Card>
-          )}
-          <form className={styles.form} onSubmit={submitFormHandler}>
+          {becomeContributorLocation && <BecomeContributor />}
+          {forgotPasswordLocation && <ForgotPassword />}
+          {/* <form className={styles.form} onSubmit={submitFormHandler}>
             {passwordResetLinkSent && (
               <p className={styles.reset_password}>
                 Check your email for a link to reset your password. If it doesn't appear within a
@@ -225,19 +229,10 @@ const Auth = () => {
                 </button>
               )}
             </div>
-          </form>
-          {!passwordResetLinkSent && (
+          </form> */}
+          {/* {!passwordResetLinkSent && (
             <>
               {!isLoggedIn && (
-                <div className={styles.form_footer}>
-                  {loginLocation && (
-                    <>
-                      <p>New to FlowNews?</p>
-                      <Link to={`${isLoading ? "#" : "/become-contributor"}`}>
-                        Create an account
-                      </Link>
-                    </>
-                  )}
                   {becomeContributorLocation && (
                     <>
                       <p>Already have an account?</p>
@@ -253,7 +248,7 @@ const Auth = () => {
                 </div>
               )}
             </>
-          )}
+          )} */}
         </PopUp>
       )}
     </>

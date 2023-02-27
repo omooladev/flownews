@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { AppContext } from "../../store/App/app-context";
 import { AuthContext } from "../../store/Auth/auth-context";
-import AuthPopUp from "../../components/PopUp/Auth";
+import AuthPopUp from "../../components/Contributor/Auth/Auth";
 const Auth = () => {
   const {
     appMode: { isLoggedIn, username },
