@@ -16,7 +16,8 @@ export const AuthContext = React.createContext({
   onUpdateContributorProfile: () => {},
   onChangeAuthMessage: () => {},
   onResetAuthMessage: () => {},
-  on_Login_BecomeContributor: () => {},
+  //? auth functions
+  onLoginOrBecomeContributor: async () => {},
   onGetContributorData: () => {},
   onSignOut: () => {},
 
@@ -25,4 +26,5 @@ export const AuthContext = React.createContext({
   onSetShowEmailLinkSentPopUp: (bool) => {},
   onVerifyEmailAddress: async () => {},
   onGetPasswordResetEmail: async () => {},
+  changeAppMode: () => {},
 });

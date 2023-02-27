@@ -1,26 +1,31 @@
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { useCallback, useEffect, useRef } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import AuthLoader from "../../Loaders/AuthLoader";
 import styles from "./Auth.module.css";
 import Reply from "./Reply";
 import { useTitle } from "../../../hooks/useTitle";
+import { AuthContext } from "../../../store/Auth/auth-context";
 const Login = (props) => {
   useTitle("Login");
   const {
-    isLoading,
     viewPassword,
     toggleViewPasswordHandler,
     authReply,
+    onChangeAuthReply,
     onResetAuthReply,
     onValidateEmail,
     onValidatePassword,
   } = props;
+  const history = useHistory();
+  const { changeAppMode, onLoginOrBecomeContributor, onSetUserData } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();
   const loginHandler = useCallback(
     async (event) => {
       event.preventDefault();
+      onResetAuthReply();
       const email = emailRef.current.value;
       const password = passwordRef.current.value;
       //? validations
@@ -32,9 +37,43 @@ const Login = (props) => {
       if (!passwordIsValid) {
         return;
       }
-      onResetAuthReply();
+
+      setIsLoading(true);
+      const response = await onLoginOrBecomeContributor({
+        location: "login",
+        contributorAuthData: { email, password },
+      });
+      const data = response.data || "";
+      const error = response.error || "";
+      if (data) {
+        onSetUserData((prevData) => {
+          return {
+            ...data,
+          };
+        });
+        changeAppMode({
+          username: data.username,
+          token: data.token,
+          isLoggedIn: true,
+          tokenExpirationTime: data.tokenExpirationTime,
+        });
+        history.replace("/home");
+      }
+      if (error) {
+        onChangeAuthReply({ type: "error", message: error });
+      }
+      setIsLoading(false);
     },
-    [onValidateEmail, onValidatePassword, onResetAuthReply]
+    [
+      history,
+      changeAppMode,
+      onValidateEmail,
+      onValidatePassword,
+      onChangeAuthReply,
+      onResetAuthReply,
+      onSetUserData,
+      onLoginOrBecomeContributor,
+    ]
   );
 
   useEffect(() => {

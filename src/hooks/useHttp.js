@@ -2,10 +2,10 @@ import { useCallback } from "react";
 import axios from "axios";
 const useHttp = () => {
   const sendRequest = useCallback(async (uri, config) => {
-    const { method, userData, token } = config;
+    const { method, contributorData, token } = config;
     try {
       if (method === "PATCH") {
-        const { data, status } = await axios.patch(uri, userData && userData, {
+        const { data, status } = await axios.patch(uri, contributorData && contributorData, {
           "Content-Type": "application/json",
           headers: {
             authorization: token && `Bearer ${token}`,
@@ -15,7 +15,7 @@ const useHttp = () => {
         return { data, status };
       }
       if (method === "POST") {
-        const { data,status } = await axios.post(uri, userData);
+        const { data,status } = await axios.post(uri, contributorData);
         return { data,status };
       }
       if (method === "GET") {

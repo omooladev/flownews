@@ -24,8 +24,14 @@ const Auth = () => {
   const becomeContributorLocation = location.includes("/become-contributor");
   const forgotPasswordLocation = location.includes("/forgot-password");
   const resetAuthReply = useCallback(() => {
-    setAuthReply((prevReply) => {
+    return setAuthReply((prevReply) => {
       return { ...prevReply, type: null, message: "" };
+    });
+  }, []);
+
+  const changeAuthReply = useCallback((reply) => {
+    return setAuthReply((prevReply) => {
+      return { ...prevReply, ...reply };
     });
   }, []);
 
@@ -106,6 +112,7 @@ const Auth = () => {
               viewPassword={viewPassword}
               toggleViewPasswordHandler={toggleViewPasswordHandler}
               authReply={authReply}
+              onChangeAuthReply={changeAuthReply}
               onResetAuthReply={resetAuthReply}
               onValidateEmail={validateEmailHandler}
               onValidatePassword={validatePasswordHandler}

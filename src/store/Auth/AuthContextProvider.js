@@ -29,49 +29,22 @@ const AuthContextProvider = (props) => {
       return { ...prevMessage, ...authMessage };
     });
   }, []);
-  const login_BecomeContributor = useCallback(
-    async (location, userData) => {
-      setIsLoading((prevState) => {
-        return true;
-      });
+  const loginOrBecomeContributor = useCallback(
+    async ({ location, contributorAuthData }) => {
       const response = await sendRequest(`${HOSTURI}/auth/${location}`, {
         method: "POST",
-        userData,
+        contributorData: contributorAuthData,
       });
+      return response;
 
-      const error = response.error || "";
-      const data = response.data || "";
-      if (location === "login" && data) {
-        setUserData((prevData) => {
-          return {
-            ...data,
-          };
-        });
-        onChangeAppMode({
-          username: data.username,
-          token: data.token,
-          isLoggedIn: true,
-          tokenExpirationTime: data.tokenExpirationTime,
-        });
-        history.replace("/home");
-      }
-      if (location === "become-contributor" && data) {
-        changeAuthMessage({ type: "success", message: "Account created successfully" });
-        setTimeout(() => {
-          history.replace("/login");
-        }, 800);
-      }
-
-      if (error) {
-        setAuthMessage((prevMessage) => {
-          return { ...prevMessage, type: "error", message: error };
-        });
-      }
-      setIsLoading((prevState) => {
-        return false;
-      });
+      // if (location === "become-contributor" && data) {
+      //   changeAuthMessage({ type: "success", message: "Account created successfully" });
+      //   setTimeout(() => {
+      //     history.replace("/login");
+      //   }, 800);
+      // }
     },
-    [history, changeAuthMessage, sendRequest, onChangeAppMode]
+    [sendRequest]
   );
 
   const getContributorData = useCallback(
@@ -203,14 +176,13 @@ const AuthContextProvider = (props) => {
         return false;
       });
       if (status === 200) {
-        return "password reset link sent"
+        return "password reset link sent";
       }
       if (error) {
         setAuthMessage((prevMessage) => {
           return { ...prevMessage, type: "error", message: error };
         });
       }
-      
     },
     [sendRequest]
   );
@@ -244,7 +216,7 @@ const AuthContextProvider = (props) => {
           changeAuthMessage(authMessage);
         },
         onResetAuthMessage: resetAuthMessage,
-        on_Login_BecomeContributor: login_BecomeContributor,
+        onLoginOrBecomeContributor: loginOrBecomeContributor,
         onSignOut: signOutHandler,
 
         onUpdate_ResetPassword: update_ResetPasswordHandler,
@@ -252,6 +224,8 @@ const AuthContextProvider = (props) => {
         onSetShowEmailLinkSentPopUp: (bool) => setShowEmailLinkSentPopUp(bool),
         onVerifyEmailAddress: verifyEmailHandler,
         onGetPasswordResetEmail: getPasswordResetEmailHandler,
+
+        changeAppMode: onChangeAppMode,
       }}
     >
       {props.children}
