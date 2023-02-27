@@ -1,17 +1,13 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { AppContext } from "../../../store/App/app-context";
 import { AuthContext } from "../../../store/Auth/auth-context";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { BiX } from "react-icons/bi";
-import Card from "../../../UI/Card";
 import PopUp from "../../../UI/PopUp";
 import styles from "./Auth.module.css";
-import AuthLoader from "../../Loaders/AuthLoader";
 import { useTitle } from "../../../hooks/useTitle";
 import Login from "./Login";
-import Reply from "./Reply";
 import BecomeContributor from "./BecomeContributor";
 import ForgotPassword from "./ForgotPassword";
 
@@ -171,93 +167,18 @@ const Auth = () => {
               onResetAuthMessage={onResetAuthMessage}
             />
           )}
-          {forgotPasswordLocation && <ForgotPassword />}
-          {/* <form className={styles.form} onSubmit={submitFormHandler}>
-            {passwordResetLinkSent && (
-              <p className={styles.reset_password}>
-                Check your email for a link to reset your password. If it doesn't appear within a
-                few minutes, check your spam folder
-              </p>
-            )}
-
-            {!passwordResetLinkSent && (
-              <div className={styles.form_control}>
-                <label>Email Address</label>
-                <input type="email" ref={emailRef} autoComplete="on" />
-              </div>
-            )}
-            {!forgotPasswordLocation && (
-              <div className={styles.form_control}>
-                <div className={styles.password_label}>
-                  <label>Password</label>
-                  {loginLocation && (
-                    <Link to={`${isLoading ? "#" : "/forgot-password"}`}>Forgot password?</Link>
-                  )}
-                </div>
-                <div className={styles.input_container}>
-                  <input type={viewPassword ? "text" : "password"} ref={passwordRef} />
-                  {!viewPassword && (
-                    <FaEyeSlash
-                      className={styles.password_icon}
-                      onClick={toggleViewPasswordHandler}
-                    />
-                  )}
-                  {viewPassword && (
-                    <FaEye className={styles.password_icon} onClick={toggleViewPasswordHandler} />
-                  )}
-                </div>
-              </div>
-            )}
-            <div className={styles.form_actions}>
-              {!passwordResetLinkSent && (
-                <button type="submit" disabled={isLoading ? true : false}>
-                  {isLoading ? (
-                    <AuthLoader />
-                  ) : (
-                    `${
-                      loginLocation
-                        ? "Log in"
-                        : becomeContributorLocation
-                        ? "Sign up"
-                        : forgotPasswordLocation
-                        ? "Send me password reset email"
-                        : ""
-                    }`
-                  )}
-                </button>
-              )}
-              {passwordResetLinkSent && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setPasswordResetLinkSent(false);
-                    history.push("/login");
-                  }}
-                >
-                  Return to sign in
-                </button>
-              )}
-            </div>
-          </form> */}
-          {/* {!passwordResetLinkSent && (
-            <>
-              {!isLoggedIn && (
-                  {becomeContributorLocation && (
-                    <>
-                      <p>Already have an account?</p>
-                      <Link to="/login">Log in</Link>
-                    </>
-                  )}
-                  {forgotPasswordLocation && (
-                    <>
-                      <p>Never mind?</p>
-                      <Link to="/login">Take me back to login</Link>
-                    </>
-                  )}
-                </div>
-              )}
-            </>
-          )} */}
+          {forgotPasswordLocation && (
+            <ForgotPassword
+              isLoading={isLoading}
+              loginHandler={loginHandler}
+              viewPassword={viewPassword}
+              toggleViewPasswordHandler={toggleViewPasswordHandler}
+              authMessage={authMessage}
+              onResetAuthMessage={onResetAuthMessage}
+              passwordResetLinkSent={passwordResetLinkSent}
+              setPasswordResetLinkSent={setPasswordResetLinkSent}
+            />
+          )}
         </PopUp>
       )}
     </>
