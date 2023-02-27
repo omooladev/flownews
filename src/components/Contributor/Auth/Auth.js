@@ -161,7 +161,16 @@ const Auth = () => {
               onResetAuthMessage={onResetAuthMessage}
             />
           )}
-          {becomeContributorLocation && <BecomeContributor />}
+          {becomeContributorLocation && (
+            <BecomeContributor
+              isLoading={isLoading}
+              loginHandler={loginHandler}
+              viewPassword={viewPassword}
+              toggleViewPasswordHandler={toggleViewPasswordHandler}
+              authMessage={authMessage}
+              onResetAuthMessage={onResetAuthMessage}
+            />
+          )}
           {forgotPasswordLocation && <ForgotPassword />}
           {/* <form className={styles.form} onSubmit={submitFormHandler}>
             {passwordResetLinkSent && (
