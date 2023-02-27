@@ -2,17 +2,17 @@ import { BiX } from "react-icons/bi";
 import Card from "../../../UI/Card";
 import styles from "./Auth.module.css";
 const Reply = (props) => {
-  const { isLoading, authMessage, onResetAuthMessage } = props;
+  const { isLoading, authReply, onResetAuthReply } = props;
   return (
     <>
-      {!isLoading && authMessage && authMessage.type && (
+      {!isLoading && authReply && authReply.type && (
         <Card
           className={`${styles.reply} ${
-            authMessage.type === "success" ? styles["success"] : styles["error"]
+            authReply.type === "success" ? styles["success"] : styles["error"]
           }`}
         >
-          <p>{authMessage.message}</p>
-          <BiX className={styles.cancel_icon} onClick={onResetAuthMessage} />
+          <p>{authReply.message}</p>
+          <BiX className={styles.cancel_icon} onClick={onResetAuthReply} />
         </Card>
       )}
     </>

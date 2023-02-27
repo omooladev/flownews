@@ -1,29 +1,49 @@
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import AuthLoader from "../../Loaders/AuthLoader";
 import styles from "./Auth.module.css";
 import Reply from "./Reply";
+import { useTitle } from "../../../hooks/useTitle";
 const Login = (props) => {
+  useTitle("Login");
   const {
     isLoading,
-    loginHandler,
     viewPassword,
     toggleViewPasswordHandler,
-    authMessage,
-    onResetAuthMessage,
+    authReply,
+    onResetAuthReply,
+    onValidateEmail,
+    onValidatePassword,
   } = props;
   const emailRef = useRef();
   const passwordRef = useRef();
+  const loginHandler = useCallback(
+    async (event) => {
+      event.preventDefault();
+      const email = emailRef.current.value;
+      const password = passwordRef.current.value;
+      //? validations
+      const emailIsValid = onValidateEmail({ validationType: "check_full", email });
+      if (!emailIsValid) {
+        return;
+      }
+      const passwordIsValid = onValidatePassword({ validationType: "check_length", password });
+      if (!passwordIsValid) {
+        return;
+      }
+    },
+    [onValidateEmail, onValidatePassword]
+  );
+
+  useEffect(() => {
+    onResetAuthReply();
+  }, [onResetAuthReply]);
 
   return (
     <>
       <h1>Log in to FlowNews</h1>
-      <Reply
-        isLoading={isLoading}
-        authMessage={authMessage}
-        onResetAuthMessage={onResetAuthMessage}
-      />
+      <Reply isLoading={isLoading} authReply={authReply} onResetAuthReply={onResetAuthReply} />
       <form className={styles.form} onSubmit={loginHandler}>
         <div className={styles.form_control}>
           <label>Email Address</label>

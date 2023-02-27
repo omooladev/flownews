@@ -1,28 +1,30 @@
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import AuthLoader from "../../Loaders/AuthLoader";
 import styles from "./Auth.module.css";
 import Reply from "./Reply";
+import { useTitle } from "../../../hooks/useTitle";
 const BecomeContributor = (props) => {
+  useTitle("Become Contributor");
   const {
     isLoading,
     loginHandler,
     viewPassword,
     toggleViewPasswordHandler,
-    authMessage,
-    onResetAuthMessage,
+    authReply,
+    onResetAuthReply,
   } = props;
   const emailRef = useRef();
   const passwordRef = useRef();
+  useEffect(() => {
+    onResetAuthReply();
+  }, [onResetAuthReply]);
+
   return (
     <>
       <h1>Create a FlowNews account</h1>
-      <Reply
-        isLoading={isLoading}
-        authMessage={authMessage}
-        onResetAuthMessage={onResetAuthMessage}
-      />
+      <Reply isLoading={isLoading} authReply={authReply} onResetAuthReply={onResetAuthReply} />
       <form className={styles.form} onSubmit={loginHandler}>
         <div className={styles.form_control}>
           <label>Email Address</label>
