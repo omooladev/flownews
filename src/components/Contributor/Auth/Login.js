@@ -1,5 +1,5 @@
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import AuthLoader from "../../Loaders/AuthLoader";
 import styles from "./Auth.module.css";
@@ -17,8 +17,8 @@ const Login = (props) => {
     onValidateEmail,
     onValidatePassword,
   } = props;
-  const history = useHistory();
-  const { changeAppMode, onLoginOrBecomeContributor, onSetUserData } = useContext(AuthContext);
+  const { changeAppMode, onLoginOrBecomeContributor, onSetUserData, history } =
+    useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();

@@ -3,6 +3,7 @@ import React from "react";
 export const AuthContext = React.createContext({
   HOSTURI: "",
   token: "",
+  history:"",
   userData: {},
   searchedContributorData: {},
   isLoading: false,

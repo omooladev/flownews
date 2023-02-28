@@ -36,13 +36,6 @@ const AuthContextProvider = (props) => {
         contributorData: contributorAuthData,
       });
       return response;
-
-      // if (location === "become-contributor" && data) {
-      //   changeAuthMessage({ type: "success", message: "Account created successfully" });
-      //   setTimeout(() => {
-      //     history.replace("/login");
-      //   }, 800);
-      // }
     },
     [sendRequest]
   );
@@ -197,6 +190,7 @@ const AuthContextProvider = (props) => {
       value={{
         HOSTURI,
         token,
+        history,
         userData,
         profileUpdated,
         onCloseProfileUpdated: () => {

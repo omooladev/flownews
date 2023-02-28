@@ -1,5 +1,4 @@
 import { useCallback, useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
 import { AppContext } from "../../../store/App/app-context";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import { BiX } from "react-icons/bi";
@@ -16,9 +15,9 @@ const Auth = () => {
   const [authReply, setAuthReply] = useState({ type: null, message: "" });
   const {
     isLoggedIn,
+    history,
     userData: { username },
   } = useContext(AuthContext);
-  const history = useHistory();
   const location = history.location.pathname;
   const loginLocation = location.includes("/login");
   const becomeContributorLocation = location.includes("/become-contributor");
@@ -87,7 +86,7 @@ const Auth = () => {
         });
         return false;
       }
-      if (passwordLength < 8) {
+      if (passwordLength < 8 && checkAllLogic) {
         setAuthReply((prevReply) => {
           return {
             ...prevReply,
@@ -123,7 +122,10 @@ const Auth = () => {
               viewPassword={viewPassword}
               toggleViewPasswordHandler={toggleViewPasswordHandler}
               authReply={authReply}
+              onChangeAuthReply={changeAuthReply}
               onResetAuthReply={resetAuthReply}
+              onValidateEmail={validateEmailHandler}
+              onValidatePassword={validatePasswordHandler}
             />
           )}
           {forgotPasswordLocation && (

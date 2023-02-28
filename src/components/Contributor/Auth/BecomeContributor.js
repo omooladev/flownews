@@ -1,22 +1,68 @@
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import AuthLoader from "../../Loaders/AuthLoader";
 import styles from "./Auth.module.css";
 import Reply from "./Reply";
 import { useTitle } from "../../../hooks/useTitle";
+import { AuthContext } from "../../../store/Auth/auth-context";
 const BecomeContributor = (props) => {
   useTitle("Become Contributor");
   const {
-    isLoading,
-    loginHandler,
     viewPassword,
     toggleViewPasswordHandler,
     authReply,
+    onChangeAuthReply,
     onResetAuthReply,
+    onValidateEmail,
+    onValidatePassword,
   } = props;
+  const { onLoginOrBecomeContributor, history } = useContext(AuthContext);
+
+  const [isLoading, setIsLoading] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();
+  const becomeContributorHandler = useCallback(
+    async (event) => {
+      event.preventDefault();
+      onResetAuthReply();
+      const email = emailRef.current.value;
+      const password = passwordRef.current.value;
+      const emailIsValid = onValidateEmail({ validationType: "check_full", email });
+      if (!emailIsValid) {
+        return;
+      }
+      const passwordIsValid = onValidatePassword({ validationType: "check_full", password });
+      if (!passwordIsValid) {
+        return;
+      }
+      setIsLoading(true);
+      const response = await onLoginOrBecomeContributor({
+        location: "become-contributor",
+        contributorAuthData: { email, password },
+      });
+      const data = response.data || "";
+      const error = response.error || "";
+      if (data) {
+        onChangeAuthReply({ type: "success", message: "Account created successfully" });
+        setTimeout(() => {
+          history.replace("/login");
+        }, 800);
+      }
+      if (error) {
+        onChangeAuthReply({ type: "error", message: error });
+      }
+      setIsLoading(false);
+    },
+    [
+      history,
+      onValidateEmail,
+      onValidatePassword,
+      onChangeAuthReply,
+      onResetAuthReply,
+      onLoginOrBecomeContributor,
+    ]
+  );
   useEffect(() => {
     onResetAuthReply();
   }, [onResetAuthReply]);
@@ -25,7 +71,7 @@ const BecomeContributor = (props) => {
     <>
       <h1>Create a FlowNews account</h1>
       <Reply isLoading={isLoading} authReply={authReply} onResetAuthReply={onResetAuthReply} />
-      <form className={styles.form} onSubmit={loginHandler}>
+      <form className={styles.form} onSubmit={becomeContributorHandler}>
         <div className={styles.form_control}>
           <label>Email Address</label>
           <input type="email" ref={emailRef} autoComplete="on" />
