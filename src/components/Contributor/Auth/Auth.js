@@ -7,20 +7,18 @@ import styles from "./Auth.module.css";
 import Login from "./Login";
 import BecomeContributor from "./BecomeContributor";
 import ForgotPassword from "./ForgotPassword";
+import ResetPassword from "./ResetPassword";
 
 const Auth = () => {
   const [viewPassword, setViewPassword] = useState(false);
   const { lastLocation } = useContext(AppContext);
   const [authReply, setAuthReply] = useState({ type: null, message: "" });
-  const {
-    isLoggedIn,
-    history,
-    userData: { username },
-  } = useContext(AuthContext);
+  const { history } = useContext(AuthContext);
   const location = history.location.pathname;
   const loginLocation = location.includes("/login");
   const becomeContributorLocation = location.includes("/become-contributor");
   const forgotPasswordLocation = location.includes("/forgot-password");
+  const resetPasswordLocation = location.includes("reset_password");
   const resetAuthReply = useCallback(() => {
     return setAuthReply((prevReply) => {
       return { ...prevReply, type: null, message: "" };
@@ -101,42 +99,41 @@ const Auth = () => {
 
   return (
     <>
-      {(!isLoggedIn || username) && (
-        <PopUp onClick={closePopUpHandler} className={`auth_popup ${styles.auth}`}>
-          <BiX className={`${styles.icon} ${styles.cancel}`} onClick={closePopUpHandler} />
+      <PopUp onClick={closePopUpHandler} className={`auth_popup ${styles.auth}`}>
+        <BiX className={`${styles.icon} ${styles.cancel}`} onClick={closePopUpHandler} />
 
-          {loginLocation && (
-            <Login
-              viewPassword={viewPassword}
-              toggleViewPasswordHandler={toggleViewPasswordHandler}
-              authReply={authReply}
-              onChangeAuthReply={changeAuthReply}
-              onResetAuthReply={resetAuthReply}
-              onValidateEmail={validateEmailHandler}
-              onValidatePassword={validatePasswordHandler}
-            />
-          )}
-          {becomeContributorLocation && (
-            <BecomeContributor
-              viewPassword={viewPassword}
-              toggleViewPasswordHandler={toggleViewPasswordHandler}
-              authReply={authReply}
-              onChangeAuthReply={changeAuthReply}
-              onResetAuthReply={resetAuthReply}
-              onValidateEmail={validateEmailHandler}
-              onValidatePassword={validatePasswordHandler}
-            />
-          )}
-          {forgotPasswordLocation && (
-            <ForgotPassword
-              authReply={authReply}
-              onChangeAuthReply={changeAuthReply}
-              onResetAuthReply={resetAuthReply}
-              onValidateEmail={validateEmailHandler}
-            />
-          )}
-        </PopUp>
-      )}
+        {loginLocation && (
+          <Login
+            viewPassword={viewPassword}
+            toggleViewPasswordHandler={toggleViewPasswordHandler}
+            authReply={authReply}
+            onChangeAuthReply={changeAuthReply}
+            onResetAuthReply={resetAuthReply}
+            onValidateEmail={validateEmailHandler}
+            onValidatePassword={validatePasswordHandler}
+          />
+        )}
+        {becomeContributorLocation && (
+          <BecomeContributor
+            viewPassword={viewPassword}
+            toggleViewPasswordHandler={toggleViewPasswordHandler}
+            authReply={authReply}
+            onChangeAuthReply={changeAuthReply}
+            onResetAuthReply={resetAuthReply}
+            onValidateEmail={validateEmailHandler}
+            onValidatePassword={validatePasswordHandler}
+          />
+        )}
+        {forgotPasswordLocation && (
+          <ForgotPassword
+            authReply={authReply}
+            onChangeAuthReply={changeAuthReply}
+            onResetAuthReply={resetAuthReply}
+            onValidateEmail={validateEmailHandler}
+          />
+        )}
+        {resetPasswordLocation && <ResetPassword />}
+      </PopUp>
     </>
   );
 };

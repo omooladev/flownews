@@ -18,6 +18,9 @@ const Routes = () => {
   return (
     <Suspense fallback={<SuspenseLoader />}>
       <Switch>
+        <Route path="/:_id/reset_password/:token" exact>
+          <AuthPage />
+        </Route>
         {!isLoggedIn && (
           <Switch>
             <Route path="/" exact>

@@ -164,6 +164,15 @@ const AuthContextProvider = (props) => {
     },
     [sendRequest]
   );
+  const verifyPasswordResetLink = useCallback(
+    async (uri) => {
+      const response = await sendRequest(`${HOSTURI}/auth/${uri}`, {
+        method: "POST",
+      });
+      return response;
+    },
+    [sendRequest]
+  );
   useEffect(() => {
     if (showEmailLinkSentPopUp) {
       return document.body.classList.add("fixed-body");
@@ -203,6 +212,7 @@ const AuthContextProvider = (props) => {
         onSetShowEmailLinkSentPopUp: (bool) => setShowEmailLinkSentPopUp(bool),
         onVerifyEmailAddress: verifyEmailHandler,
         onSendPasswordResetEmail: sendPasswordResetEmail,
+        onVerifyPasswordResetLink: verifyPasswordResetLink,
 
         changeAppMode: onChangeAppMode,
       }}
