@@ -3,7 +3,7 @@ import React from "react";
 export const AuthContext = React.createContext({
   HOSTURI: "",
   token: "",
-  history:"",
+  history: "",
   userData: {},
   searchedContributorData: {},
   isLoading: false,
@@ -26,6 +26,6 @@ export const AuthContext = React.createContext({
   showEmailLinkSentPopUp: false,
   onSetShowEmailLinkSentPopUp: (bool) => {},
   onVerifyEmailAddress: async () => {},
-  onGetPasswordResetEmail: async () => {},
+  onSendPasswordResetEmail: async () => {},
   changeAppMode: () => {},
 });

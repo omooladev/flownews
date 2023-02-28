@@ -10,7 +10,6 @@ import ForgotPassword from "./ForgotPassword";
 
 const Auth = () => {
   const [viewPassword, setViewPassword] = useState(false);
-  const [passwordResetLinkSent, setPasswordResetLinkSent] = useState(false);
   const { lastLocation } = useContext(AppContext);
   const [authReply, setAuthReply] = useState({ type: null, message: "" });
   const {
@@ -130,12 +129,10 @@ const Auth = () => {
           )}
           {forgotPasswordLocation && (
             <ForgotPassword
-              viewPassword={viewPassword}
-              toggleViewPasswordHandler={toggleViewPasswordHandler}
               authReply={authReply}
+              onChangeAuthReply={changeAuthReply}
               onResetAuthReply={resetAuthReply}
-              passwordResetLinkSent={passwordResetLinkSent}
-              setPasswordResetLinkSent={setPasswordResetLinkSent}
+              onValidateEmail={validateEmailHandler}
             />
           )}
         </PopUp>

@@ -154,28 +154,13 @@ const AuthContextProvider = (props) => {
     });
   }, []);
 
-  const getPasswordResetEmailHandler = useCallback(
+  const sendPasswordResetEmail = useCallback(
     async (email, title) => {
-      setIsLoading((prevState) => {
-        return true;
-      });
       const response = await sendRequest(`${HOSTURI}/auth/password/${title}`, {
         method: "POST",
-        userData: { email },
+        contributorData: { email },
       });
-      const error = response.error || "";
-      const status = response.status || "";
-      setIsLoading((prevState) => {
-        return false;
-      });
-      if (status === 200) {
-        return "password reset link sent";
-      }
-      if (error) {
-        setAuthMessage((prevMessage) => {
-          return { ...prevMessage, type: "error", message: error };
-        });
-      }
+      return response;
     },
     [sendRequest]
   );
@@ -217,7 +202,7 @@ const AuthContextProvider = (props) => {
         showEmailLinkSentPopUp: showEmailLinkSentPopUp,
         onSetShowEmailLinkSentPopUp: (bool) => setShowEmailLinkSentPopUp(bool),
         onVerifyEmailAddress: verifyEmailHandler,
-        onGetPasswordResetEmail: getPasswordResetEmailHandler,
+        onSendPasswordResetEmail: sendPasswordResetEmail,
 
         changeAppMode: onChangeAppMode,
       }}
