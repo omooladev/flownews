@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useRef, useEffect, useContext, useState } from "react";
 import AuthLoader from "../../Loaders/AuthLoader";
 import Reply from "./Reply";
@@ -27,7 +26,6 @@ const ForgotPassword = (props) => {
       const response = await onSendPasswordResetEmail(email, "sendPasswordResetLink");
       const error = response.error || "";
       const status = response.status || "";
-      console.log(error);
       if (status === 200) {
         setPasswordResetLinkSent(true);
       }
@@ -83,11 +81,6 @@ const ForgotPassword = (props) => {
           )}
         </div>
       </form>
-
-      <div className={styles.form_footer}>
-        <p>Never mind?</p>
-        <Link to="/login">Take me back to login</Link>
-      </div>
     </>
   );
 };
