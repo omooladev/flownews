@@ -27,13 +27,12 @@ const ForgotPassword = (props) => {
       const response = await onSendPasswordResetEmail(email, "sendPasswordResetLink");
       const error = response.error || "";
       const status = response.status || "";
+      console.log(error);
       if (status === 200) {
         setPasswordResetLinkSent(true);
       }
       if (error) {
-        onChangeAuthReply((prevMessage) => {
-          return { ...prevMessage, type: "error", message: error };
-        });
+       onChangeAuthReply({ type: "error", message: error });
       }
       setIsLoading(false);
     },
