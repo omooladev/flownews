@@ -4,6 +4,10 @@
     Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   text-align: center;
 }
+.auth .username {
+  font-size: 1.3rem;
+  padding-bottom: 0.3rem;
+}
 
 .auth .icon {
   color: var(--nav-text-color);
@@ -115,6 +119,11 @@
 .form .form_actions button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
+}
+.form .form_actions p {
+  padding-bottom: 0.5rem;
+  width: 100%;
+  text-align: left;
 }
 
 .auth .form_footer {
