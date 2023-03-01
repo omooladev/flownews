@@ -9,15 +9,17 @@ const ResetPassword = (props) => {
   useTitle("Reset Password");
   const { authReply, onChangeAuthReply, onResetAuthReply, onValidateEmail, onValidatePassword } =
     props;
-  const { onVerifyPasswordResetLink, history } = useContext(AuthContext);
+  const { onResetPassword, onVerifyPasswordResetLink, history } = useContext(AuthContext);
   const location = history.location;
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState({ type: null });
   const [linkIsValid, setLinkIsValid] = useState(null);
   const [username, setUsername] = useState("");
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
   const verifyPasswordResetLink = useCallback(async () => {
-    setIsLoading(true);
+    setIsLoading((prevValue) => {
+      return { ...prevValue, type: "link" };
+    });
     const response = await onVerifyPasswordResetLink(location.pathname);
     const status = response.status || "";
     const data = response.data || "";
@@ -33,7 +35,9 @@ const ResetPassword = (props) => {
         message: error,
       });
     }
-    setIsLoading(false);
+    setIsLoading((prevValue) => {
+      return { ...prevValue, type: null };
+    });
   }, [location, onVerifyPasswordResetLink, onChangeAuthReply]);
 
   const changePasswordHandler = useCallback(
@@ -60,8 +64,26 @@ const ResetPassword = (props) => {
         confirmPasswordRef.current.focus();
         return onChangeAuthReply({ type: "error", message: "Password does not match" });
       }
+      setIsLoading((prevValue) => {
+        return { ...prevValue, type: true };
+      });
+      const response = await onResetPassword(username, { password, confirmPassword });
+      const status = response.status || "";
+      const data = response.data || "";
+      const error = response.error || "";
+      if (status === 200 && data) {
+      }
+      if (error) {
+        onChangeAuthReply({
+          type: "error",
+          message: error,
+        });
+      }
+      setIsLoading((prevValue) => {
+        return { ...prevValue, type: false };
+      });
     },
-    [onResetAuthReply, onValidatePassword, onChangeAuthReply]
+    [username, onResetPassword, onResetAuthReply, onValidatePassword, onChangeAuthReply]
   );
   useEffect(() => {
     verifyPasswordResetLink();
@@ -71,8 +93,8 @@ const ResetPassword = (props) => {
   }, [onResetAuthReply]);
   return (
     <>
-      {isLoading && <h3>Checking Link....</h3>}
-      {!isLoading && !linkIsValid && linkIsValid !== null && (
+      {isLoading.type === "link" && <h3>Checking Link....</h3>}
+      {isLoading.type !== "link" && !linkIsValid && linkIsValid !== null && (
         <ForgotPassword
           linkIsValid={linkIsValid}
           authReply={authReply}
@@ -81,11 +103,13 @@ const ResetPassword = (props) => {
           onValidateEmail={onValidateEmail}
         />
       )}
-      {!isLoading && linkIsValid && (
+      {isLoading.type !== "link" && linkIsValid && (
         <>
           <h1>Change password for</h1>
           <p className={styles.username}>{`@${username}`}</p>
-          <Reply isLoading={isLoading} authReply={authReply} onResetAuthReply={onResetAuthReply} />
+          {isLoading.type === false && (
+            <Reply authReply={authReply} onResetAuthReply={onResetAuthReply} />
+          )}
           <form className={styles.form} onSubmit={changePasswordHandler}>
             <div className={styles.form_control}>
               <div className={styles.password_label}>
@@ -105,7 +129,7 @@ const ResetPassword = (props) => {
             </div>
             <div className={styles.form_actions}>
               <p>Make sure it is at least 8 characters including a number and a lowercase letter</p>
-              <button type="submit" disabled={isLoading ? true : false}>
+              <button type="submit" disabled={isLoading.type === true ? true : false}>
                 {isLoading ? <AuthLoader /> : "Change password"}
               </button>
             </div>

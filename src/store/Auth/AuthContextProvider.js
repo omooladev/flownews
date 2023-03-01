@@ -149,10 +149,10 @@ const AuthContextProvider = (props) => {
   );
 
   const resetPasswordHandler = useCallback(
-    async (uri, passwordProperties) => {
-      const response = await sendRequest(`${HOSTURI}/auth${uri}`, {
+    async (username, passwordProperties) => {
+      const response = await sendRequest(`${HOSTURI}/auth/${username}/reset_password`, {
         method: "PATCH",
-        userData: { passwordProperties },
+        contributorData: passwordProperties,
       });
       return response;
     },
