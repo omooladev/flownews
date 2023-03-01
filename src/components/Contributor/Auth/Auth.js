@@ -99,50 +99,51 @@ const Auth = () => {
 
   return (
     <>
-     
-        <PopUp onClick={closePopUpHandler} className={`auth_popup ${styles.auth}`}>
-          <BiX className={`${styles.icon} ${styles.cancel}`} onClick={closePopUpHandler} />
+      <PopUp onClick={closePopUpHandler} className={`auth_popup ${styles.auth}`}>
+        <BiX className={`${styles.icon} ${styles.cancel}`} onClick={closePopUpHandler} />
 
-          {loginLocation && (
-            <Login
-              viewPassword={viewPassword}
-              toggleViewPasswordHandler={toggleViewPasswordHandler}
-              authReply={authReply}
-              onChangeAuthReply={changeAuthReply}
-              onResetAuthReply={resetAuthReply}
-              onValidateEmail={validateEmailHandler}
-              onValidatePassword={validatePasswordHandler}
-            />
-          )}
-          {becomeContributorLocation && (
-            <BecomeContributor
-              viewPassword={viewPassword}
-              toggleViewPasswordHandler={toggleViewPasswordHandler}
-              authReply={authReply}
-              onChangeAuthReply={changeAuthReply}
-              onResetAuthReply={resetAuthReply}
-              onValidateEmail={validateEmailHandler}
-              onValidatePassword={validatePasswordHandler}
-            />
-          )}
-          {forgotPasswordLocation && (
-            <ForgotPassword
-              authReply={authReply}
-              onChangeAuthReply={changeAuthReply}
-              onResetAuthReply={resetAuthReply}
-              onValidateEmail={validateEmailHandler}
-            />
-          )}
-          {resetPasswordLocation && (
-            <ResetPassword
-              authReply={authReply}
-              onChangeAuthReply={changeAuthReply}
-              onResetAuthReply={resetAuthReply}
-              onValidatePassword={validatePasswordHandler}
-               onValidateEmail={validateEmailHandler}
-            />
-          )}
-        </PopUp>
+        {loginLocation && (
+          <Login
+            viewPassword={viewPassword}
+            toggleViewPasswordHandler={toggleViewPasswordHandler}
+            authReply={authReply}
+            onChangeAuthReply={changeAuthReply}
+            onResetAuthReply={resetAuthReply}
+            onValidateEmail={validateEmailHandler}
+            onValidatePassword={validatePasswordHandler}
+          />
+        )}
+        {becomeContributorLocation && (
+          <BecomeContributor
+            viewPassword={viewPassword}
+            toggleViewPasswordHandler={toggleViewPasswordHandler}
+            authReply={authReply}
+            onChangeAuthReply={changeAuthReply}
+            onResetAuthReply={resetAuthReply}
+            onValidateEmail={validateEmailHandler}
+            onValidatePassword={validatePasswordHandler}
+          />
+        )}
+        {forgotPasswordLocation && (
+          <ForgotPassword
+            authReply={authReply}
+            onChangeAuthReply={changeAuthReply}
+            onResetAuthReply={resetAuthReply}
+            onValidateEmail={validateEmailHandler}
+          />
+        )}
+        {resetPasswordLocation && (
+          <ResetPassword
+            viewPassword={viewPassword}
+            toggleViewPasswordHandler={toggleViewPasswordHandler}
+            authReply={authReply}
+            onChangeAuthReply={changeAuthReply}
+            onResetAuthReply={resetAuthReply}
+            onValidateEmail={validateEmailHandler}
+            onValidatePassword={validatePasswordHandler}
+          />
+        )}
+      </PopUp>
     </>
   );
 };

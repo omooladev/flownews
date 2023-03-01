@@ -5,15 +5,24 @@ import AuthLoader from "../../Loaders/AuthLoader";
 import styles from "./Auth.module.css";
 import Reply from "./Reply";
 import { useTitle } from "../../../hooks/useTitle";
+import Login from "./Login";
 const ResetPassword = (props) => {
   useTitle("Reset Password");
-  const { authReply, onChangeAuthReply, onResetAuthReply, onValidateEmail, onValidatePassword } =
-    props;
+  const {
+    viewPassword,
+    toggleViewPasswordHandler,
+    authReply,
+    onChangeAuthReply,
+    onResetAuthReply,
+    onValidateEmail,
+    onValidatePassword,
+  } = props;
   const { onResetPassword, onVerifyPasswordResetLink, history } = useContext(AuthContext);
   const location = history.location;
   const [isLoading, setIsLoading] = useState({ type: null });
   const [linkIsValid, setLinkIsValid] = useState(null);
   const [username, setUsername] = useState("");
+  const [passwordChanged, setPasswordChanged] = useState(false);
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
   const verifyPasswordResetLink = useCallback(async () => {
@@ -69,9 +78,10 @@ const ResetPassword = (props) => {
       });
       const response = await onResetPassword(username, { password, confirmPassword });
       const status = response.status || "";
-      const data = response.data || "";
       const error = response.error || "";
-      if (status === 200 && data) {
+      if (status === 200) {
+        setPasswordChanged(true);
+        onChangeAuthReply({ type: "success", message: "New password set successfully" });
       }
       if (error) {
         onChangeAuthReply({
@@ -94,46 +104,64 @@ const ResetPassword = (props) => {
   return (
     <>
       {isLoading.type === "link" && <h3>Checking Link....</h3>}
-      {isLoading.type !== "link" && !linkIsValid && linkIsValid !== null && (
-        <ForgotPassword
-          linkIsValid={linkIsValid}
+      {passwordChanged && (
+        <Login
+          passwordChanged={passwordChanged}
+          viewPassword={viewPassword}
+          toggleViewPasswordHandler={toggleViewPasswordHandler}
           authReply={authReply}
           onChangeAuthReply={onChangeAuthReply}
           onResetAuthReply={onResetAuthReply}
           onValidateEmail={onValidateEmail}
+          onValidatePassword={onValidatePassword}
         />
       )}
-      {isLoading.type !== "link" && linkIsValid && (
+      {!passwordChanged && (
         <>
-          <h1>Change password for</h1>
-          <p className={styles.username}>{`@${username}`}</p>
-          {isLoading.type === false && (
-            <Reply authReply={authReply} onResetAuthReply={onResetAuthReply} />
+          {isLoading.type !== "link" && !linkIsValid && linkIsValid !== null && (
+            <ForgotPassword
+              linkIsValid={linkIsValid}
+              authReply={authReply}
+              onChangeAuthReply={onChangeAuthReply}
+              onResetAuthReply={onResetAuthReply}
+              onValidateEmail={onValidateEmail}
+            />
           )}
-          <form className={styles.form} onSubmit={changePasswordHandler}>
-            <div className={styles.form_control}>
-              <div className={styles.password_label}>
-                <label>Password</label>
-              </div>
-              <div className={styles.input_container}>
-                <input type="password" ref={passwordRef} />
-              </div>
-            </div>
-            <div className={styles.form_control}>
-              <div className={styles.password_label}>
-                <label>Confirm Password</label>
-              </div>
-              <div className={styles.input_container}>
-                <input type="password" ref={confirmPasswordRef} />
-              </div>
-            </div>
-            <div className={styles.form_actions}>
-              <p>Make sure it is at least 8 characters including a number and a lowercase letter</p>
-              <button type="submit" disabled={isLoading.type === true ? true : false}>
-                {isLoading ? <AuthLoader /> : "Change password"}
-              </button>
-            </div>
-          </form>
+          {isLoading.type !== "link" && linkIsValid && (
+            <>
+              <h1>Change password for</h1>
+              <p className={styles.username}>{`@${username}`}</p>
+              {isLoading.type === false && (
+                <Reply authReply={authReply} onResetAuthReply={onResetAuthReply} />
+              )}
+              <form className={styles.form} onSubmit={changePasswordHandler}>
+                <div className={styles.form_control}>
+                  <div className={styles.password_label}>
+                    <label>Password</label>
+                  </div>
+                  <div className={styles.input_container}>
+                    <input type="password" ref={passwordRef} />
+                  </div>
+                </div>
+                <div className={styles.form_control}>
+                  <div className={styles.password_label}>
+                    <label>Confirm Password</label>
+                  </div>
+                  <div className={styles.input_container}>
+                    <input type="password" ref={confirmPasswordRef} />
+                  </div>
+                </div>
+                <div className={styles.form_actions}>
+                  <p>
+                    Make sure it is at least 8 characters including a number and a lowercase letter
+                  </p>
+                  <button type="submit" disabled={isLoading.type === true ? true : false}>
+                    {isLoading.type === true ? <AuthLoader /> : "Change password"}
+                  </button>
+                </div>
+              </form>
+            </>
+          )}
         </>
       )}
     </>

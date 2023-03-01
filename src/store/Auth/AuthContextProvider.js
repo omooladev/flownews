@@ -16,7 +16,6 @@ const AuthContextProvider = (props) => {
   const [searchedContributorData, setSearchedContributorData] = useState({
     user: { username: "" },
   });
-  const [isLoading, setIsLoading] = useState(false);
   const [headerIsLoading, setHeaderIsLoading] = useState(false);
   const isLoggedIn = appMode.isLoggedIn;
   const [profileUpdated, setProfileUpdated] = useState(false);
@@ -202,7 +201,6 @@ const AuthContextProvider = (props) => {
           setProfileUpdated((prevState) => false);
         },
         searchedContributorData,
-        isLoading,
         headerIsLoading,
         isLoggedIn,
         authMessage,

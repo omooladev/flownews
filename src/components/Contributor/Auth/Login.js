@@ -9,6 +9,7 @@ import { AuthContext } from "../../../store/Auth/auth-context";
 const Login = (props) => {
   useTitle("Login");
   const {
+    passwordChanged,
     viewPassword,
     toggleViewPasswordHandler,
     authReply,
@@ -77,8 +78,8 @@ const Login = (props) => {
   );
 
   useEffect(() => {
-    onResetAuthReply();
-  }, [onResetAuthReply]);
+    if (!passwordChanged) onResetAuthReply();
+  }, [passwordChanged, onResetAuthReply]);
 
   return (
     <>

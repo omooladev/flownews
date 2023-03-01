@@ -158,8 +158,8 @@
 
 @media (min-width: 500px) {
   .auth {
-    height: 60vh;
-    margin-top: -30vh;
+    height: 65vh;
+    margin-top: -32.5vh;
   }
   .auth .icon {
     display: none;
