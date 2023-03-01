@@ -166,7 +166,7 @@ const AuthContextProvider = (props) => {
   );
   const verifyPasswordResetLink = useCallback(
     async (uri) => {
-      const response = await sendRequest(`${HOSTURI}/auth/${uri}`, {
+      const response = await sendRequest(`${HOSTURI}/auth${uri}`, {
         method: "POST",
       });
       return response;

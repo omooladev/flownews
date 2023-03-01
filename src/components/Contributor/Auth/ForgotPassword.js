@@ -7,7 +7,7 @@ import { AuthContext } from "../../../store/Auth/auth-context";
 import { useCallback } from "react";
 const ForgotPassword = (props) => {
   useTitle("Forgot Your Password");
-  const { authReply, onChangeAuthReply, onResetAuthReply, onValidateEmail } = props;
+  const { authReply, linkIsValid, onChangeAuthReply, onResetAuthReply, onValidateEmail } = props;
   const { history, onSendPasswordResetEmail } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [passwordResetLinkSent, setPasswordResetLinkSent] = useState(false);
@@ -30,7 +30,7 @@ const ForgotPassword = (props) => {
         setPasswordResetLinkSent(true);
       }
       if (error) {
-       onChangeAuthReply({ type: "error", message: error });
+        onChangeAuthReply({ type: "error", message: error });
       }
       setIsLoading(false);
     },
@@ -42,8 +42,10 @@ const ForgotPassword = (props) => {
     history.push("/login");
   }, [history]);
   useEffect(() => {
-    onResetAuthReply();
-  }, [onResetAuthReply]);
+    if (linkIsValid !== false) {
+      onResetAuthReply();
+    }
+  }, [linkIsValid, onResetAuthReply]);
 
   return (
     <>
