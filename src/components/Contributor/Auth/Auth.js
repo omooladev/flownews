@@ -139,6 +139,7 @@ const Auth = () => {
               onChangeAuthReply={changeAuthReply}
               onResetAuthReply={resetAuthReply}
               onValidatePassword={validatePasswordHandler}
+               onValidateEmail={validateEmailHandler}
             />
           )}
         </PopUp>

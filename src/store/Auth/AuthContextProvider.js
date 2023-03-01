@@ -148,6 +148,17 @@ const AuthContextProvider = (props) => {
     [sendRequest]
   );
 
+  const resetPasswordHandler = useCallback(
+    async (uri, passwordProperties) => {
+      const response = await sendRequest(`${HOSTURI}/auth${uri}`, {
+        method: "PATCH",
+        userData: { passwordProperties },
+      });
+      return response;
+    },
+    [sendRequest]
+  );
+
   const setUserDataHandler = useCallback((data) => {
     setUserData((prevData) => {
       return { ...prevData, ...data };
@@ -211,6 +222,7 @@ const AuthContextProvider = (props) => {
         showEmailLinkSentPopUp: showEmailLinkSentPopUp,
         onSetShowEmailLinkSentPopUp: (bool) => setShowEmailLinkSentPopUp(bool),
         onVerifyEmailAddress: verifyEmailHandler,
+        onResetPassword: resetPasswordHandler,
         onSendPasswordResetEmail: sendPasswordResetEmail,
         onVerifyPasswordResetLink: verifyPasswordResetLink,
 
