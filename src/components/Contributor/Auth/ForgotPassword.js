@@ -8,7 +8,12 @@ import { useCallback } from "react";
 const ForgotPassword = (props) => {
   useTitle("Forgot Your Password");
   const { authReply, linkIsValid, onChangeAuthReply, onResetAuthReply, onValidateEmail } = props;
-  const { history, onSendPasswordResetEmail } = useContext(AuthContext);
+  const {
+    history,
+    onSendPasswordResetEmail,
+    isLoggedIn,
+    userData: { email },
+  } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [passwordResetLinkSent, setPasswordResetLinkSent] = useState(false);
   const emailRef = useRef();
@@ -41,11 +46,22 @@ const ForgotPassword = (props) => {
     setPasswordResetLinkSent(false);
     history.push("/login");
   }, [history]);
+
+  const returnToSettingsPage = useCallback(() => {
+    setPasswordResetLinkSent(false);
+    history.push("/settings/security");
+  }, [history]);
   useEffect(() => {
     if (linkIsValid !== false) {
       onResetAuthReply();
     }
   }, [linkIsValid, onResetAuthReply]);
+
+  useEffect(() => {
+    if (isLoggedIn && email) {
+      emailRef.current.value = email;
+    }
+  }, [isLoggedIn,email]);
 
   return (
     <>
@@ -77,9 +93,18 @@ const ForgotPassword = (props) => {
             </button>
           )}
           {passwordResetLinkSent && (
-            <button type="button" onClick={returnToSignIn}>
-              Return to sign in
-            </button>
+            <>
+              {!isLoggedIn && (
+                <button type="button" onClick={returnToSignIn}>
+                  Return to sign in
+                </button>
+              )}
+              {isLoggedIn && (
+                <button type="button" onClick={returnToSettingsPage}>
+                  Return to setting
+                </button>
+              )}
+            </>
           )}
         </div>
       </form>

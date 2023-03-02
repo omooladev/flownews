@@ -48,6 +48,7 @@ const Auth = () => {
 
   const validateEmailHandler = useCallback(({ validationType, email }) => {
     let checkAllLogic;
+
     if (validationType === "check_full") {
       checkAllLogic = true;
     }

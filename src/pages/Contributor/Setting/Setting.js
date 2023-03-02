@@ -10,10 +10,12 @@ import Account from "./Account/Account";
 import useFetchContributorData from "../../../hooks/useFetchContributorData";
 import { useContext } from "react";
 import { AuthContext } from "../../../store/Auth/auth-context";
+import useNewLocation from "../../../hooks/useNewLocation";
 
 const Setting = () => {
   useFetchContributorData();
-  const { userData } = useContext(AuthContext);
+  const { userData, history } = useContext(AuthContext);
+  useNewLocation(history.location.pathname);
   const { path } = useParams();
   return (
     <>

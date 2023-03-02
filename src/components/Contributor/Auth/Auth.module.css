@@ -107,7 +107,8 @@
   margin: 2rem 0;
 }
 
-.form .form_actions button {
+
+.form .form_actions button,.return_to_setting {
   cursor: pointer;
   background-color: var(--nav-text-hover-color);
   width: 100%;
@@ -115,6 +116,9 @@
   padding: 0.6rem 0.5rem;
   color: var(--body-color);
   border-radius: 5px;
+}
+.return_to_setting{
+  margin:1rem 0;
 }
 .form .form_actions button:disabled {
   cursor: not-allowed;

@@ -17,7 +17,8 @@ const ResetPassword = (props) => {
     onValidateEmail,
     onValidatePassword,
   } = props;
-  const { onResetPassword, onVerifyPasswordResetLink, history } = useContext(AuthContext);
+  const { onResetPassword, onVerifyPasswordResetLink, history, isLoggedIn } =
+    useContext(AuthContext);
   const location = history.location;
   const [isLoading, setIsLoading] = useState({ type: null });
   const [linkIsValid, setLinkIsValid] = useState(null);
@@ -55,12 +56,14 @@ const ResetPassword = (props) => {
       onResetAuthReply();
       const password = passwordRef.current.value;
       const confirmPassword = confirmPasswordRef.current.value;
+
       //? validations
       const passwordIsValid = onValidatePassword({ validationType: "check_full", password });
       if (!passwordIsValid) {
         passwordRef.current.focus();
         return;
       }
+
       const confirmPasswordIsValid = onValidatePassword({
         validationType: "check_length",
         password: confirmPassword,
@@ -81,6 +84,7 @@ const ResetPassword = (props) => {
       const error = response.error || "";
       if (status === 200) {
         setPasswordChanged(true);
+
         onChangeAuthReply({ type: "success", message: "New password set successfully" });
       }
       if (error) {
@@ -95,6 +99,9 @@ const ResetPassword = (props) => {
     },
     [username, onResetPassword, onResetAuthReply, onValidatePassword, onChangeAuthReply]
   );
+  const returnToSettingsPage = useCallback(() => {
+    history.push("/settings/security");
+  }, [history]);
   useEffect(() => {
     verifyPasswordResetLink();
   }, [verifyPasswordResetLink]);
@@ -104,7 +111,7 @@ const ResetPassword = (props) => {
   return (
     <>
       {isLoading.type === "link" && <h3>Checking Link....</h3>}
-      {passwordChanged && (
+      {!isLoggedIn && passwordChanged && (
         <Login
           passwordChanged={passwordChanged}
           viewPassword={viewPassword}
@@ -115,6 +122,14 @@ const ResetPassword = (props) => {
           onValidateEmail={onValidateEmail}
           onValidatePassword={onValidatePassword}
         />
+      )}
+      {isLoggedIn && passwordChanged && (
+        <>
+          <h3>{authReply.message}</h3>
+          <button type="button" onClick={returnToSettingsPage} className={styles.return_to_setting}>
+            Return to setting
+          </button>
+        </>
       )}
       {!passwordChanged && (
         <>
@@ -131,9 +146,7 @@ const ResetPassword = (props) => {
             <>
               <h1>Change password for</h1>
               <p className={styles.username}>{`@${username}`}</p>
-              {isLoading.type === false && (
-                <Reply authReply={authReply} onResetAuthReply={onResetAuthReply} />
-              )}
+              <Reply authReply={authReply} onResetAuthReply={onResetAuthReply} />
               <form className={styles.form} onSubmit={changePasswordHandler}>
                 <div className={styles.form_control}>
                   <div className={styles.password_label}>

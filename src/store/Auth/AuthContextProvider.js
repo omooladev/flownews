@@ -87,6 +87,9 @@ const AuthContextProvider = (props) => {
     onChangeAppMode({ isLoggedIn: false, token: null, username: null, tokenExpirationTime: null });
     onCloseProfileBox();
     setProfileUpdated(false);
+    setUserData((prevData) => {
+      return { username: "" };
+    });
     history.replace("/home");
   }, [history, onCloseProfileBox, onChangeAppMode]);
 
