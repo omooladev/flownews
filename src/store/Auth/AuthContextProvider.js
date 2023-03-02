@@ -4,13 +4,15 @@ import { AuthContext } from "./auth-context";
 import { AppContext } from "../App/app-context";
 import useHttp from "../../hooks/useHttp";
 
-//const HOSTURI = "http://localhost:5000/api/v1";
-const HOSTURI = "https://flownews-api.onrender.com/api/v1";
+const HOSTURI = "http://localhost:5000/api/v1";
+//const HOSTURI = "https://flownews-api.onrender.com/api/v1";
 const AuthContextProvider = (props) => {
   const { sendRequest } = useHttp();
+
   const { appMode, onCloseProfileBox, onChangeAppMode } = useContext(AppContext);
   const [showEmailLinkSentPopUp, setShowEmailLinkSentPopUp] = useState(false);
   const [userData, setUserData] = useState({ username: "" });
+
   const token = appMode.token;
 
   const [searchedContributorData, setSearchedContributorData] = useState({
@@ -23,6 +25,8 @@ const AuthContextProvider = (props) => {
   const [contributorError, setContributorError] = useState({ ref: "", message: "" });
   const history = useHistory();
 
+  //?refactored
+  //const [contributorData, setContributorData] = useState({ username: "" });//TODO this will replace the user data
   const changeAuthMessage = useCallback((authMessage) => {
     setAuthMessage((prevMessage) => {
       return { ...prevMessage, ...authMessage };
@@ -186,6 +190,22 @@ const AuthContextProvider = (props) => {
     },
     [sendRequest]
   );
+  //?refactored functions
+  const saveContributorData = useCallback((data) => {
+    setUserData((prevData) => {
+      return { ...prevData, ...data };
+    }); //TODO will replace this soon to the one commented below
+    // setContributorData((prevData) => {
+    //   return { ...prevData, ...data };
+    // });
+  }, []);
+  const toggleEmailPrivacy = useCallback(async () => {
+    const response = await sendRequest(`${HOSTURI}/email/privacy`, {
+      method: "PATCH",
+      token,
+    });
+    return response;
+  }, [sendRequest, token]);
   useEffect(() => {
     if (showEmailLinkSentPopUp) {
       return document.body.classList.add("fixed-body");
@@ -228,6 +248,10 @@ const AuthContextProvider = (props) => {
         onVerifyPasswordResetLink: verifyPasswordResetLink,
 
         changeAppMode: onChangeAppMode,
+
+        //?Refactored already
+        onSaveContributorData: saveContributorData,
+        onToggleEmailPrivacy: toggleEmailPrivacy,
       }}
     >
       {props.children}

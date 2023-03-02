@@ -30,4 +30,8 @@ export const AuthContext = React.createContext({
   onSendPasswordResetEmail: async () => {},
   onVerifyPasswordResetLink: async () => {},
   changeAppMode: () => {},
+
+  //refactored
+  onSaveContributorData:()=>{},
+  onToggleEmailPrivacy: async () => {},
 });

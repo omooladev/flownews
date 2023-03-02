@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import SettingCmp from "../../../components/Contributor/Setting/Setting";
 import EditProfile from "./EditProfile/EditProfile";
-import Email from "./Access/Email";
+import EmailSettings from "./Access/EmailSettings";
 import styles from "./Setting.module.css";
 import ProfileUpdated from "../../../components/Contributor/Setting/EditProfile/UI/ProfileUpdated";
 import Appearance from "./Appearance/Appearance";
@@ -11,6 +11,7 @@ import useFetchContributorData from "../../../hooks/useFetchContributorData";
 import { useContext } from "react";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import useNewLocation from "../../../hooks/useNewLocation";
+
 
 const Setting = () => {
   useFetchContributorData();
@@ -28,7 +29,7 @@ const Setting = () => {
               {path === "profile" && <EditProfile />}
               {path === "appearance" && <Appearance />}
               {path === "account" && <Account />}
-              {path === "email" && <Email />}
+              {path === "email" && <EmailSettings />}
               {path === "security" && <PasswordAuthentication />}
             </div>
           </section>

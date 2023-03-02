@@ -2,10 +2,8 @@ import EmailPrivacy from "./EmailPrivacy";
 import { useContext } from "react";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
 import EmailVerify from "../../UI/EmailVerification/SendVerificationEmail_CancelEmailChangeRequest";
-import { useTitle } from "../../../../../hooks/useTitle";
 
-const Email = () => {
-  useTitle("Email Settings");
+const EmailSettings = () => {
   const {
     userData: { emailRequestChangeAddressIsVerified, emailRequestChange },
   } = useContext(AuthContext);
@@ -24,4 +22,4 @@ const Email = () => {
   );
 };
 
-export default Email;
+export default EmailSettings;
