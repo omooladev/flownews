@@ -7,17 +7,17 @@ import Education from "./Education";
 import Email from "./Email";
 import FullName from "./FullName";
 import Location from "./Location";
-import styles from "./UserForm.module.css";
 import Username from "./Username";
 import Work from "./Work";
+import styles from "./UserForm.module.css";
 const UserForm = () => {
   const { userData, onUpdateContributorProfile } = useContext(AuthContext);
-  const [userDetails, setUserDetails] = useState("");
+  const [contributorDetails, setContributorDetails] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   const getValueHandler = useCallback(({ type, value }) => {
-    setUserDetails((prevValue) => {
+    setContributorDetails((prevValue) => {
       return { ...prevValue, [type]: value };
     });
   }, []);
@@ -25,13 +25,13 @@ const UserForm = () => {
   const submitFormHandler = useCallback(
     async (event) => {
       event.preventDefault();
-      const userDetailsFullName = userDetails.fullname;
-      const userDetailsEmail = userDetails.email;
-      const userDetailsUsername = userDetails.username;
-      const userDetailsBio = userDetails.bio;
-      const userDetailsLocation = userDetails.location;
-      const userDetailsEducation = userDetails.education;
-      const userDetailsWork = userDetails.work;
+      const contributorDetailsFullName = contributorDetails.fullname;
+      const contributorDetailsEmail = contributorDetails.email;
+      const contributorDetailsUsername = contributorDetails.username;
+      const contributorDetailsBio = contributorDetails.bio;
+      const contributorDetailsLocation = contributorDetails.location;
+      const contributorDetailsEducation = contributorDetails.education;
+      const contributorDetailsWork = contributorDetails.work;
 
       //?user data
       // const userDataFullName = userData.fullname;
@@ -39,23 +39,23 @@ const UserForm = () => {
       // const userDataUsername = userData.username;
 
       let updateProperties;
-      // if (userDetailsFullName !== userDataFullName) {
-      //   updateProperties = { ...updateProperties, fullname: userDetailsFullName };
+      // if (contributorDetailsFullName !== userDataFullName) {
+      //   updateProperties = { ...updateProperties, fullname: contributorDetailsFullName };
       // }
-      // if (userDetailsEmail !== userDataEmail) {
-      //   updateProperties = { ...updateProperties, email: userDetailsEmail };
+      // if (contributorDetailsEmail !== userDataEmail) {
+      //   updateProperties = { ...updateProperties, email: contributorDetailsEmail };
       // }
       // if (!updateProperties) {
       //   return;
       // }
       updateProperties = {
-        fullname: userDetailsFullName,
-        email: userDetailsEmail,
-        username: userDetailsUsername,
-        bio: userDetailsBio,
-        location: userDetailsLocation,
-        education: userDetailsEducation,
-        work: userDetailsWork,
+        fullname: contributorDetailsFullName,
+        email: contributorDetailsEmail,
+        username: contributorDetailsUsername,
+        bio: contributorDetailsBio,
+        location: contributorDetailsLocation,
+        education: contributorDetailsEducation,
+        work: contributorDetailsWork,
       };
       setIsLoading(true);
       let error = await onUpdateContributorProfile(updateProperties);
@@ -64,9 +64,9 @@ const UserForm = () => {
         return setError(error);
       }
       return setError("");
-      // console.log(userDataFullName, userDetailsFullName, userDataEmail, userDetailsEmail);
+      // console.log(userDataFullName, contributorDetailsFullName, userDataEmail, contributorDetailsEmail);
     },
-    [userDetails, onUpdateContributorProfile]
+    [contributorDetails, onUpdateContributorProfile]
   );
 
   return (

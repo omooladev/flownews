@@ -103,35 +103,6 @@ const AuthContextProvider = (props) => {
     });
   }, []);
 
-  const updateContributorProfileHandler = useCallback(
-    async (updateProperties) => {
-      const response = await sendRequest(`${HOSTURI}/update-profile`, {
-        method: "PATCH",
-        userData: { contributorEmail: userData.email, updateProperties },
-        token,
-      });
-      const error = response.error || "";
-      const data = response.data || "";
-
-      if (data) {
-        const message = data.message || "";
-        if (!message) {
-          setUserData((prevData) => {
-            return { ...prevData, ...data };
-          });
-          setProfileUpdated(true);
-          onChangeAppMode({ username: data.username, token: data.token });
-        }
-      }
-      if (error) {
-        setProfileUpdated(false);
-        return error;
-      }
-      return;
-    },
-    [sendRequest, userData, token, onChangeAppMode]
-  );
-
   const update_ResetPasswordHandler = useCallback(
     async (title, passwordProperties) => {
       const response = await sendRequest(`${HOSTURI}/password/${title}`, {
@@ -199,6 +170,35 @@ const AuthContextProvider = (props) => {
     //   return { ...prevData, ...data };
     // });
   }, []);
+  const updateContributorProfile = useCallback(
+    async (updateProperties) => {
+      const response = await sendRequest(`${HOSTURI}/update-profile`, {
+        method: "PATCH",
+        contributorData: { updateProperties },
+        token,
+      });
+      return response;
+      // const error = response.error || "";
+      // const data = response.data || "";
+
+      // if (data) {
+      //   const message = data.message || "";
+      //   if (!message) {
+      //     setUserData((prevData) => {
+      //       return { ...prevData, ...data };
+      //     });
+      //     setProfileUpdated(true);
+      //     onChangeAppMode({ username: data.username, token: data.token });
+      //   }
+      // }
+      // if (error) {
+      //   setProfileUpdated(false);
+      //   return error;
+      // }
+      return;
+    },
+    [sendRequest, token]
+  );
   const toggleEmailPrivacy = useCallback(async () => {
     const response = await sendRequest(`${HOSTURI}/email/privacy`, {
       method: "PATCH",
@@ -228,8 +228,7 @@ const AuthContextProvider = (props) => {
         isLoggedIn,
         authMessage,
         contributorError,
-        onUpdateContributorProfile: async (updateProperties) =>
-          updateContributorProfileHandler(updateProperties),
+
         onSetUserData: setUserDataHandler,
         onGetContributorData: getContributorData,
         onChangeAuthMessage: (authMessage) => {
@@ -251,6 +250,7 @@ const AuthContextProvider = (props) => {
 
         //?Refactored already
         onSaveContributorData: saveContributorData,
+        onUpdateContributorProfile: updateContributorProfile,
         onToggleEmailPrivacy: toggleEmailPrivacy,
       }}
     >
