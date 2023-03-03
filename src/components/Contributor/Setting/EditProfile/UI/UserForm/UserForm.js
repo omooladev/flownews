@@ -47,15 +47,44 @@ const UserForm = () => {
     if (!isEmailMatch) {
       updateProperties = { ...updateProperties, email: newContributorData.email };
     }
-     const isBioMatch = compareData({
+    const isUsernameMatch = compareData({
+      firstValue: username,
+      secondValue: newContributorData.username || username,
+    });
+    if (!isUsernameMatch) {
+      updateProperties = { ...updateProperties, username: newContributorData.username };
+    }
+    const isBioMatch = compareData({
       firstValue: bio,
       secondValue: newContributorData.bio || "",
     });
     if (!isBioMatch) {
-      updateProperties = {...updateProperties, bio: newContributorData.bio };
+      updateProperties = { ...updateProperties, bio: newContributorData.bio };
     }
+    const isLocationMatch = compareData({
+      firstValue: location,
+      secondValue: newContributorData.location || "",
+    });
+    if (!isLocationMatch) {
+      updateProperties = { ...updateProperties, location: newContributorData.location };
+    }
+    const isEducationMatch = compareData({
+      firstValue: education,
+      secondValue: newContributorData.education || "",
+    });
+    if (!isEducationMatch) {
+      updateProperties = { ...updateProperties, education: newContributorData.education };
+    }
+    const isWorkMatch = compareData({
+      firstValue: work,
+      secondValue: newContributorData.work || "",
+    });
+    if (!isWorkMatch) {
+      updateProperties = { ...updateProperties, work: newContributorData.work };
+    }
+
     return updateProperties;
-  }, [fullname, email,bio, newContributorData, compareData]);
+  }, [fullname, email, username, bio, location, education, work, newContributorData, compareData]);
   const submitContributorProfileHandler = useCallback(
     async (event) => {
       event.preventDefault();

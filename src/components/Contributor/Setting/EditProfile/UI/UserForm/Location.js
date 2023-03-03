@@ -1,25 +1,16 @@
 import { useCallback, useEffect, useState } from "react";
 import styles from "./UserForm.module.css";
 const Location = (props) => {
-  let { location: defaultLocation, onGetValue } = props;
-  const [location, setLocation] = useState("");
+  let { location, onGetValue } = props;
+  const [newLocation, setNewLocation] = useState(location);
 
   const changeLocationHandler = useCallback((event) => {
-    setLocation((prevValue) => {
+    setNewLocation((prevValue) => {
       return event.target.value;
     });
+    onGetValue({ type: "location", value:event.target.value  });
   }, []);
 
-  useEffect(() => {
-    if (defaultLocation) {
-      setLocation((prevValue) => defaultLocation);
-    }
-  }, [defaultLocation]);
-  useEffect(() => {
-    if (location) {
-      onGetValue({ type: "location", value: location });
-    }
-  }, [location, onGetValue]);
   return (
     <div className={styles.form_control}>
       <label htmlFor="userFormControl__location">Location</label>
@@ -27,12 +18,12 @@ const Location = (props) => {
         type="text"
         id="userFormControl__location"
         placeholder="Please enter your location"
-        value={location}
+        value={newLocation}
         onChange={changeLocationHandler}
         maxLength="100"
         spellCheck="false"
       />
-      <span>{`${location.length} / 100`}</span>
+      <span>{`${newLocation.length} / 100`}</span>
     </div>
   );
 };
