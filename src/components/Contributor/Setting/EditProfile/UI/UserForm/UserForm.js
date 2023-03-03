@@ -12,7 +12,7 @@ import Work from "./Work";
 import styles from "./UserForm.module.css";
 const UserForm = () => {
   const {
-    userData: { fullname, email, username, bio, location, education, work },
+    userData: { fullname, email, emailIsPrivate, username, bio, location, education, work },
     onUpdateContributorProfile,
   } = useContext(AuthContext);
   const [newContributorData, setNewContributorData] = useState("");
@@ -30,19 +30,33 @@ const UserForm = () => {
     }
     return false;
   }, []);
+
+  const matchProfileFields = useCallback(async () => {
+    let updateProperties;
+    const isFullNameMatch = compareData({
+      firstValue: fullname,
+      secondValue: newContributorData.fullname || "",
+    });
+    if (!isFullNameMatch) {
+      updateProperties = { fullname: newContributorData.fullname };
+    }
+    const isEmailMatch = compareData({
+      firstValue: email,
+      secondValue: newContributorData.email || email,
+    });
+    if (!isEmailMatch) {
+      updateProperties = { ...updateProperties, email: newContributorData.email };
+    }
+    return updateProperties;
+  }, [fullname, email, newContributorData, compareData]);
   const submitContributorProfileHandler = useCallback(
     async (event) => {
       event.preventDefault();
       setError("");
       // const { fullname, email, username, bio, location, education, work }=newContributorData
-      let updateProperties;
-      const isFullNameMatch = compareData({
-        firstValue: fullname,
-        secondValue: newContributorData.fullname || "",
-      });
-      if (!isFullNameMatch) {
-        updateProperties = { fullname: newContributorData.fullname };
-      }
+
+      const updateProperties = await matchProfileFields();
+
       return console.log(updateProperties);
 
       // let updateProperties;
@@ -62,7 +76,7 @@ const UserForm = () => {
       // }
       // setIsLoading(false);
     },
-    [fullname, newContributorData, compareData, onUpdateContributorProfile]
+    [matchProfileFields]
   );
 
   return (
@@ -77,7 +91,7 @@ const UserForm = () => {
       )}
       <div className={styles.form_controls}>
         <FullName fullname={fullname} onGetValue={getValue} />
-        <Email email={email} onGetValue={getValue} />
+        <Email email={email} emailIsPrivate={emailIsPrivate} onGetValue={getValue} />
         <Username username={username} onGetValue={getValue} />
         <Bio bio={bio} onGetValue={getValue} />
         <Location location={location} onGetValue={getValue} />

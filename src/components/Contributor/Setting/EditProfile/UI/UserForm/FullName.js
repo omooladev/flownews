@@ -1,20 +1,18 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import styles from "./UserForm.module.css";
 const FullName = (props) => {
   let { fullname, onGetValue } = props;
   const [newFullName, setNewFullName] = useState(fullname);
 
-  const changeFullNameHandler = useCallback((event) => {
-    setNewFullName((prevValue) => {
-      return event.target.value;
-    });
-  }, []);
-
-  useEffect(() => {
-    if (newFullName) {
-      onGetValue({ type: "fullname", value: newFullName });
-    }
-  }, [newFullName, onGetValue]);
+  const changeFullNameHandler = useCallback(
+    (event) => {
+      setNewFullName((prevValue) => {
+        return event.target.value;
+      });
+      onGetValue({ type: "fullname", value: event.target.value });
+    },
+    [onGetValue]
+  );
 
   return (
     <div className={styles.form_control}>
