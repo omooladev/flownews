@@ -47,8 +47,15 @@ const UserForm = () => {
     if (!isEmailMatch) {
       updateProperties = { ...updateProperties, email: newContributorData.email };
     }
+     const isBioMatch = compareData({
+      firstValue: bio,
+      secondValue: newContributorData.bio || "",
+    });
+    if (!isBioMatch) {
+      updateProperties = {...updateProperties, bio: newContributorData.bio };
+    }
     return updateProperties;
-  }, [fullname, email, newContributorData, compareData]);
+  }, [fullname, email,bio, newContributorData, compareData]);
   const submitContributorProfileHandler = useCallback(
     async (event) => {
       event.preventDefault();

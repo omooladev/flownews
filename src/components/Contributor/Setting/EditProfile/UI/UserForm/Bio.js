@@ -1,15 +1,18 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import styles from "./UserForm.module.css";
 const Bio = (props) => {
   let { bio, onGetValue } = props;
   const [newBio, setNewBio] = useState(bio);
 
-  const changeBioHandler = useCallback((event) => {
-    setNewBio((prevValue) => {
-      return event.target.value;
-    });
-    onGetValue({ type: "bio", value: event.target.value });
-  }, []);
+  const changeBioHandler = useCallback(
+    (event) => {
+      setNewBio((prevValue) => {
+        return event.target.value;
+      });
+      onGetValue({ type: "bio", value: event.target.value });
+    },
+    [onGetValue]
+  );
 
   return (
     <div className={styles.form_control}>
