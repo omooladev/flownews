@@ -9,7 +9,7 @@ const FullName = (props) => {
       setNewFullName((prevValue) => {
         return event.target.value;
       });
-      onGetValue({ type: "fullname", value: event.target.value });
+      onGetValue({ type: "fullname", value: event.target.value.trim() });
     },
     [onGetValue]
   );

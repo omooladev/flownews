@@ -9,7 +9,7 @@ const Bio = (props) => {
       setNewBio((prevValue) => {
         return event.target.value;
       });
-      onGetValue({ type: "bio", value: event.target.value });
+      onGetValue({ type: "bio", value: event.target.value.trim() });
     },
     [onGetValue]
   );
@@ -25,7 +25,7 @@ const Bio = (props) => {
         maxLength="200"
         spellCheck="false"
       />
-      <span>{`${newBio.length} / 200`}</span>
+      <span>{`${newBio.trim().length} / 200`}</span>
     </div>
   );
 };

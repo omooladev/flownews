@@ -16,7 +16,7 @@ const Email = (props) => {
         return setNewEmailError("Please provide a valid email address");
       }
       setNewEmailError("");
-      onGetValue({ type: "email", value: event.target.value });
+      onGetValue({ type: "email", value: event.target.value.trim() });
     },
     [onGetValue]
   );

@@ -9,7 +9,7 @@ const Location = (props) => {
       setNewLocation((prevValue) => {
         return event.target.value;
       });
-      onGetValue({ type: "location", value: event.target.value });
+      onGetValue({ type: "location", value: event.target.value.trim() });
     },
     [onGetValue]
   );

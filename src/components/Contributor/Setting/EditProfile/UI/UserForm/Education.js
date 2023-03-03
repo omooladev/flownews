@@ -9,7 +9,7 @@ const Education = (props) => {
       setNewEducation((prevValue) => {
         return event.target.value;
       });
-      onGetValue({ type: "education", value: event.target.value });
+      onGetValue({ type: "education", value: event.target.value.trim() });
     },
     [onGetValue]
   );
@@ -27,7 +27,7 @@ const Education = (props) => {
         maxLength="100"
         spellCheck="false"
       />
-      <span>{`${newEducation.length} / 100`}</span>
+      <span>{`${newEducation.trim().length} / 100`}</span>
     </div>
   );
 };
