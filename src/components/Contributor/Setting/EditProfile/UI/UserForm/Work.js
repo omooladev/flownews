@@ -9,7 +9,7 @@ const Work = (props) => {
       setNewWork((prevValue) => {
         return event.target.value;
       });
-      onGetValue({ type: "work", value: event.target.value });
+      onGetValue({ type: "work", value: event.target.value.trim() });
     },
     [onGetValue]
   );
@@ -26,7 +26,7 @@ const Work = (props) => {
         maxLength="100"
         spellCheck="false"
       />
-      <span>{`${newWork.length} / 100`}</span>
+      <span>{`${newWork.trim().length} / 100`}</span>
     </div>
   );
 };
