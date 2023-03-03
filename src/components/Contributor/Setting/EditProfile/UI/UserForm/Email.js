@@ -9,13 +9,13 @@ const Email = (props) => {
   const changeEmailHandler = useCallback(
     (event) => {
       const emailIsValid = event.target.value.includes("@");
+      setNewEmail((prevValue) => {
+        return event.target.value;
+      });
       if (!emailIsValid) {
         return setNewEmailError("Please provide a valid email address");
       }
       setNewEmailError("");
-      setNewEmail((prevValue) => {
-        return event.target.value;
-      });
       onGetValue({ type: "email", value: event.target.value });
     },
     [onGetValue]
