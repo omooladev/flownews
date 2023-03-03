@@ -1,25 +1,20 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import styles from "./UserForm.module.css";
 const Education = (props) => {
-  let { education: defaultEducation, onGetValue } = props;
-  const [education, setEducation] = useState("");
+  let { education, onGetValue } = props;
+  const [newEducation, setNewEducation] = useState(education);
 
-  const changeEducationHandler = useCallback((event) => {
-    setEducation((prevValue) => {
-      return event.target.value;
-    });
-  }, []);
+  const changeEducationHandler = useCallback(
+    (event) => {
+      setNewEducation((prevValue) => {
+        return event.target.value;
+      });
+      onGetValue({ type: "education", value: event.target.value });
+    },
+    [onGetValue]
+  );
 
-  useEffect(() => {
-    if (defaultEducation) {
-      setEducation((prevValue) => defaultEducation);
-    }
-  }, [defaultEducation]);
-  useEffect(() => {
-    if (education) {
-      onGetValue({ type: "education", value: education });
-    }
-  }, [education, onGetValue]);
+
   return (
     <div className={styles.form_control}>
       <label htmlFor="userFormControl__education">Education</label>
@@ -27,12 +22,12 @@ const Education = (props) => {
         type="text"
         id="userFormControl__education"
         placeholder="Please enter your education"
-        value={education}
+        value={newEducation}
         onChange={changeEducationHandler}
         maxLength="100"
         spellCheck="false"
       />
-      <span>{`${education.length} / 100`}</span>
+      <span>{`${newEducation.length} / 100`}</span>
     </div>
   );
 };
