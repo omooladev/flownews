@@ -26,7 +26,7 @@ const Location = (props) => {
         maxLength="100"
         spellCheck="false"
       />
-      <span>{`${newLocation.length} / 100`}</span>
+      <span>{`${newLocation.trim().length} / 100`}</span>
     </div>
   );
 };

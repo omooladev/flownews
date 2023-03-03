@@ -93,9 +93,7 @@ const UserForm = () => {
 
       const updateProperties = await matchProfileFields();
 
-      return console.log(updateProperties);
-
-      // let updateProperties;
+     
 
       // updateProperties = {};
       // setIsLoading(true);
