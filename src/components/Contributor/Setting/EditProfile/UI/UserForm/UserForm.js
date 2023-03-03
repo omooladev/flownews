@@ -12,7 +12,6 @@ import Work from "./Work";
 import styles from "./UserForm.module.css";
 const UserForm = () => {
   const {
-    userData,
     userData: { fullname, email, username, bio, location, education, work },
     onUpdateContributorProfile,
   } = useContext(AuthContext);
@@ -20,69 +19,54 @@ const UserForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const getValueHandler = useCallback(({ type, value }) => {
+  const getValue = useCallback(({ type, value }) => {
     setNewContributorData((prevValue) => {
       return { ...prevValue, [type]: value };
     });
   }, []);
-
-  const submitFormHandler = useCallback(
+  const compareData = useCallback(({ firstValue, secondValue }) => {
+    if (firstValue.trim() === secondValue.trim()) {
+      return true;
+    }
+    return false;
+  }, []);
+  const submitContributorProfileHandler = useCallback(
     async (event) => {
       event.preventDefault();
       setError("");
-      const newContributorDataFullName = newContributorData.fullname;
-      const newContributorDataEmail = newContributorData.email;
-      const newContributorDataUsername = newContributorData.username;
-      const newContributorDataBio = newContributorData.bio;
-      const newContributorDataLocation = newContributorData.location;
-      const newContributorDataEducation = newContributorData.education;
-      const newContributorDataWork = newContributorData.work;
-
-      //?user data
-      // const userDataFullName = userData.fullname;
-      // const userDataEmail = userData.email;
-      // const userDataUsername = userData.username;
-
+      // const { fullname, email, username, bio, location, education, work }=newContributorData
       let updateProperties;
-      // if (newContributorDataFullName !== userDataFullName) {
-      //   updateProperties = { ...updateProperties, fullname: newContributorDataFullName };
-      // }
-      // if (newContributorDataEmail !== userDataEmail) {
-      //   updateProperties = { ...updateProperties, email: newContributorDataEmail };
-      // }
-      // if (!updateProperties) {
-      //   return;
-      // }
-      updateProperties = {
-        fullname: newContributorDataFullName,
-        email: newContributorDataEmail,
-        username: newContributorDataUsername,
-        bio: newContributorDataBio,
-        location: newContributorDataLocation,
-        education: newContributorDataEducation,
-        work: newContributorDataWork,
-      };
-      setIsLoading(true);
-      let response = await onUpdateContributorProfile(updateProperties);
-      const data = response.data || "";
-      const error = response.error || "";
-      if (data) {
-        console.log(data);
+      const isFullNameMatch = compareData({
+        firstValue: fullname,
+        secondValue: newContributorData.fullname || "",
+      });
+      if (!isFullNameMatch) {
+        updateProperties = { fullname: newContributorData.fullname };
       }
-      if (error) {
-        setError((prevError) => {
-          return error;
-        });
-      }
-      setIsLoading(false);
+      return console.log(updateProperties);
 
-      // console.log(userDataFullName, newContributorDataFullName, userDataEmail, newContributorDataEmail);
+      // let updateProperties;
+
+      // updateProperties = {};
+      // setIsLoading(true);
+      // let response = await onUpdateContributorProfile(updateProperties);
+      // const data = response.data || "";
+      // const error = response.error || "";
+      // if (data) {
+      //   console.log(data);
+      // }
+      // if (error) {
+      //   setError((prevError) => {
+      //     return error;
+      //   });
+      // }
+      // setIsLoading(false);
     },
-    [newContributorData, onUpdateContributorProfile]
+    [fullname, newContributorData, compareData, onUpdateContributorProfile]
   );
 
   return (
-    <form className={styles.form} onSubmit={submitFormHandler}>
+    <form className={styles.form} onSubmit={submitContributorProfileHandler}>
       {error && (
         <Card className={styles.error}>
           <h4>The following error has prohibited your profile from been saved</h4>
@@ -92,13 +76,13 @@ const UserForm = () => {
         </Card>
       )}
       <div className={styles.form_controls}>
-        <FullName fullname={fullname} onGetValue={getValueHandler} />
-        <Email email={email} onGetValue={getValueHandler} />
-        <Username username={username} onGetValue={getValueHandler} />
-        <Bio bio={bio} onGetValue={getValueHandler} />
-        <Location location={location} onGetValue={getValueHandler} />
-        <Education education={education} onGetValue={getValueHandler} />
-        <Work work={work} onGetValue={getValueHandler} />
+        <FullName fullname={fullname} onGetValue={getValue} />
+        <Email email={email} onGetValue={getValue} />
+        <Username username={username} onGetValue={getValue} />
+        <Bio bio={bio} onGetValue={getValue} />
+        <Location location={location} onGetValue={getValue} />
+        <Education education={education} onGetValue={getValue} />
+        <Work work={work} onGetValue={getValue} />
       </div>
       <div className={styles.form_actions}>
         <p>

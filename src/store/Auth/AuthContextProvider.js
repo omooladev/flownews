@@ -195,7 +195,6 @@ const AuthContextProvider = (props) => {
       //   setProfileUpdated(false);
       //   return error;
       // }
-      return;
     },
     [sendRequest, token]
   );
