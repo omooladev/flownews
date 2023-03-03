@@ -1,25 +1,19 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import styles from "./UserForm.module.css";
 const Work = (props) => {
-  let { work: defaultWork, onGetValue } = props;
-  const [work, setWork] = useState("");
+  let { work, onGetValue } = props;
+  const [newWork, setNewWork] = useState(work);
 
-  const changeWorkHandler = useCallback((event) => {
-    setWork((prevValue) => {
-      return event.target.value;
-    });
-  }, []);
+  const changeWorkHandler = useCallback(
+    (event) => {
+      setNewWork((prevValue) => {
+        return event.target.value;
+      });
+      onGetValue({ type: "work", value: event.target.value });
+    },
+    [onGetValue]
+  );
 
-  useEffect(() => {
-    if (defaultWork) {
-      setWork((prevValue) => defaultWork);
-    }
-  }, [defaultWork]);
-  useEffect(() => {
-    if (work) {
-      onGetValue({ type: "work", value: work });
-    }
-  }, [work, onGetValue]);
   return (
     <div className={styles.form_control}>
       <label htmlFor="userFormControl__work">Work</label>
@@ -27,12 +21,12 @@ const Work = (props) => {
         type="text"
         id="userFormControl__work"
         placeholder="Please enter your work"
-        value={work}
+        value={newWork}
         onChange={changeWorkHandler}
         maxLength="100"
         spellCheck="false"
       />
-      <span>{`${work.length} / 100`}</span>
+      <span>{`${newWork.length} / 100`}</span>
     </div>
   );
 };
