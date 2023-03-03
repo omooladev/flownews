@@ -11,13 +11,17 @@ import Username from "./Username";
 import Work from "./Work";
 import styles from "./UserForm.module.css";
 const UserForm = () => {
-  const { userData, onUpdateContributorProfile } = useContext(AuthContext);
-  const [contributorDetails, setContributorDetails] = useState("");
+  const {
+    userData,
+    userData: { fullname, email, username, bio, location, education, work },
+    onUpdateContributorProfile,
+  } = useContext(AuthContext);
+  const [newContributorData, setNewContributorData] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   const getValueHandler = useCallback(({ type, value }) => {
-    setContributorDetails((prevValue) => {
+    setNewContributorData((prevValue) => {
       return { ...prevValue, [type]: value };
     });
   }, []);
@@ -25,13 +29,14 @@ const UserForm = () => {
   const submitFormHandler = useCallback(
     async (event) => {
       event.preventDefault();
-      const contributorDetailsFullName = contributorDetails.fullname;
-      const contributorDetailsEmail = contributorDetails.email;
-      const contributorDetailsUsername = contributorDetails.username;
-      const contributorDetailsBio = contributorDetails.bio;
-      const contributorDetailsLocation = contributorDetails.location;
-      const contributorDetailsEducation = contributorDetails.education;
-      const contributorDetailsWork = contributorDetails.work;
+      setError("");
+      const newContributorDataFullName = newContributorData.fullname;
+      const newContributorDataEmail = newContributorData.email;
+      const newContributorDataUsername = newContributorData.username;
+      const newContributorDataBio = newContributorData.bio;
+      const newContributorDataLocation = newContributorData.location;
+      const newContributorDataEducation = newContributorData.education;
+      const newContributorDataWork = newContributorData.work;
 
       //?user data
       // const userDataFullName = userData.fullname;
@@ -39,34 +44,41 @@ const UserForm = () => {
       // const userDataUsername = userData.username;
 
       let updateProperties;
-      // if (contributorDetailsFullName !== userDataFullName) {
-      //   updateProperties = { ...updateProperties, fullname: contributorDetailsFullName };
+      // if (newContributorDataFullName !== userDataFullName) {
+      //   updateProperties = { ...updateProperties, fullname: newContributorDataFullName };
       // }
-      // if (contributorDetailsEmail !== userDataEmail) {
-      //   updateProperties = { ...updateProperties, email: contributorDetailsEmail };
+      // if (newContributorDataEmail !== userDataEmail) {
+      //   updateProperties = { ...updateProperties, email: newContributorDataEmail };
       // }
       // if (!updateProperties) {
       //   return;
       // }
       updateProperties = {
-        fullname: contributorDetailsFullName,
-        email: contributorDetailsEmail,
-        username: contributorDetailsUsername,
-        bio: contributorDetailsBio,
-        location: contributorDetailsLocation,
-        education: contributorDetailsEducation,
-        work: contributorDetailsWork,
+        fullname: newContributorDataFullName,
+        email: newContributorDataEmail,
+        username: newContributorDataUsername,
+        bio: newContributorDataBio,
+        location: newContributorDataLocation,
+        education: newContributorDataEducation,
+        work: newContributorDataWork,
       };
       setIsLoading(true);
-      let error = await onUpdateContributorProfile(updateProperties);
-      setIsLoading(false);
-      if (error) {
-        return setError(error);
+      let response = await onUpdateContributorProfile(updateProperties);
+      const data = response.data || "";
+      const error = response.error || "";
+      if (data) {
+        console.log(data);
       }
-      return setError("");
-      // console.log(userDataFullName, contributorDetailsFullName, userDataEmail, contributorDetailsEmail);
+      if (error) {
+        setError((prevError) => {
+          return error;
+        });
+      }
+      setIsLoading(false);
+
+      // console.log(userDataFullName, newContributorDataFullName, userDataEmail, newContributorDataEmail);
     },
-    [contributorDetails, onUpdateContributorProfile]
+    [newContributorData, onUpdateContributorProfile]
   );
 
   return (
@@ -80,13 +92,13 @@ const UserForm = () => {
         </Card>
       )}
       <div className={styles.form_controls}>
-        <FullName fullname={userData.fullname} onGetValue={getValueHandler} />
-        <Email email={userData.email} onGetValue={getValueHandler} />
-        <Username username={userData.username} onGetValue={getValueHandler} />
-        <Bio bio={userData.bio} onGetValue={getValueHandler} />
-        <Location location={userData.location} onGetValue={getValueHandler} />
-        <Education education={userData.education} onGetValue={getValueHandler} />
-        <Work work={userData.work} onGetValue={getValueHandler} />
+        <FullName fullname={fullname} onGetValue={getValueHandler} />
+        <Email email={email} onGetValue={getValueHandler} />
+        <Username username={username} onGetValue={getValueHandler} />
+        <Bio bio={bio} onGetValue={getValueHandler} />
+        <Location location={location} onGetValue={getValueHandler} />
+        <Education education={education} onGetValue={getValueHandler} />
+        <Work work={work} onGetValue={getValueHandler} />
       </div>
       <div className={styles.form_actions}>
         <p>
@@ -97,7 +109,7 @@ const UserForm = () => {
           information.
         </p>
         <button type="submit" className={styles.update_profile} disabled={isLoading ? true : false}>
-          Update Profile
+          {isLoading ? "Updating..." : "Update Profile"}
         </button>
       </div>
     </form>

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import styles from "./UserForm.module.css";
 const FullName = (props) => {
-  let { fullname: name, onGetValue } = props;
+  let { fullname, onGetValue } = props;
   const [fullname, setFullname] = useState("");
 
   const changeFullNameHandler = useCallback((event) => {
