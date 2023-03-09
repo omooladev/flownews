@@ -26,7 +26,7 @@ const FullName = (props) => {
         spellCheck="false"
       />
       <p>
-        Your fullname may appear around flownews where you contribute or are mentioned. You can
+        Your fullname may appear around flowNews where you contribute or are mentioned. You can
         remove it any time
       </p>
     </div>
