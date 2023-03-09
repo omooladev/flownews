@@ -32,91 +32,93 @@ const UserForm = () => {
       return { ...prevValue, [type]: value };
     });
   }, []);
-  // const compareData = useCallback(({ firstValue, secondValue }) => {
-  //   if (firstValue === secondValue) {
-  //     return true;
-  //   }
-  //   return false;
-  // }, []);
+  const compareData = useCallback(({ firstValue, secondValue }) => {
+    if (firstValue === secondValue) {
+      return true;
+    }
+    return false;
+  }, []);
 
-  // const matchProfileFields = useCallback(async () => {
-  //   let updateProperties;
-  //   const isFullNameMatch = compareData({
-  //     firstValue: fullname,
-  //     secondValue: newContributorData.fullname,
-  //   });
-  //   if (!isFullNameMatch) {
-  //     updateProperties = { fullname: newContributorData.fullname };
-  //   }
-  //   const isEmailMatch = compareData({
-  //     firstValue: email,
-  //     secondValue: newContributorData.email || email,
-  //   });
-  //   if (!isEmailMatch) {
-  //     updateProperties = { ...updateProperties, email: newContributorData.email };
-  //   }
-  //   const isUsernameMatch = compareData({
-  //     firstValue: username,
-  //     secondValue: newContributorData.username || username,
-  //   });
-  //   if (!isUsernameMatch) {
-  //     updateProperties = { ...updateProperties, username: newContributorData.username };
-  //   }
-  //   const isBioMatch = compareData({
-  //     firstValue: bio,
-  //     secondValue: newContributorData.bio || "",
-  //   });
-  //   if (!isBioMatch) {
-  //     updateProperties = { ...updateProperties, bio: newContributorData.bio };
-  //   }
-  //   const isLocationMatch = compareData({
-  //     firstValue: location,
-  //     secondValue: newContributorData.location || "",
-  //   });
-  //   if (!isLocationMatch) {
-  //     updateProperties = { ...updateProperties, location: newContributorData.location };
-  //   }
-  //   const isEducationMatch = compareData({
-  //     firstValue: education,
-  //     secondValue: newContributorData.education || "",
-  //   });
-  //   if (!isEducationMatch) {
-  //     updateProperties = { ...updateProperties, education: newContributorData.education };
-  //   }
-  //   const isWorkMatch = compareData({
-  //     firstValue: work,
-  //     secondValue: newContributorData.work || "",
-  //   });
-  //   if (!isWorkMatch) {
-  //     updateProperties = { ...updateProperties, work: newContributorData.work };
-  //   }
+  const matchProfileFields = useCallback(async () => {
+    
+    let updateProperties;
+    const isFullNameMatch = compareData({
+      firstValue: fullname,
+      secondValue: newContributorData.fullname,
+    });
+    if (!isFullNameMatch) {
+      updateProperties = { fullname: newContributorData.fullname };
+    }
+    const isEmailMatch = compareData({
+      firstValue: email,
+      secondValue: newContributorData.email || email,
+    });
+    if (!isEmailMatch) {
+      updateProperties = { ...updateProperties, email: newContributorData.email };
+    }
+    const isUsernameMatch = compareData({
+      firstValue: username,
+      secondValue: newContributorData.username || username,
+    });
+    if (!isUsernameMatch) {
+      updateProperties = { ...updateProperties, username: newContributorData.username };
+    }
+    const isBioMatch = compareData({
+      firstValue: bio,
+      secondValue: newContributorData.bio || "",
+    });
+    if (!isBioMatch) {
+      updateProperties = { ...updateProperties, bio: newContributorData.bio };
+    }
+    const isLocationMatch = compareData({
+      firstValue: location,
+      secondValue: newContributorData.location || "",
+    });
+    if (!isLocationMatch) {
+      updateProperties = { ...updateProperties, location: newContributorData.location };
+    }
+    const isEducationMatch = compareData({
+      firstValue: education,
+      secondValue: newContributorData.education || "",
+    });
+    if (!isEducationMatch) {
+      updateProperties = { ...updateProperties, education: newContributorData.education };
+    }
+    const isWorkMatch = compareData({
+      firstValue: work,
+      secondValue: newContributorData.work || "",
+    });
+    if (!isWorkMatch) {
+      updateProperties = { ...updateProperties, work: newContributorData.work };
+    }
 
-  //   return updateProperties;
-  // }, [fullname, email, username, bio, location, education, work, newContributorData, compareData]);
+    return updateProperties;
+  }, [fullname, email, username, bio, location, education, work, newContributorData, compareData]);
   const submitContributorProfileHandler = useCallback(
     async (event) => {
       event.preventDefault();
       setError("");
       // const { fullname, email, username, bio, location, education, work }=newContributorData
-      //  console.log(newContributorData);
-      // const updateProperties = await matchProfileFields();
+      console.log(newContributorData);
+      const updateProperties = await matchProfileFields();
+      console.log(updateProperties)
 
       // updateProperties = {};
-      setIsLoading(true);
-      let response = await onUpdateContributorProfile(newContributorData);
-      const data = response.data || "";
-      const error = response.error || "";
-      if (data) {
-        console.log(data);
-      }
-      if (error) {
-        setError((prevError) => {
-          return error;
-        });
-      }
-      setIsLoading(false);
+      // setIsLoading(true);
+      // let response = await onUpdateContributorProfile(newContributorData);
+      // const data = response.data || "";
+      // const error = response.error || "";
+      // if (data) {
+      //   console.log(data);
+      // }
+      // if (error) {
+      //   setError((prevError) => {
+      //     return error;
+      //   });
+      // }
+      // setIsLoading(false);
     },
-    [newContributorData, onUpdateContributorProfile]
+    [newContributorData,matchProfileFields]
   );
 
   return (
