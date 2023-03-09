@@ -178,23 +178,6 @@ const AuthContextProvider = (props) => {
         token,
       });
       return response;
-      // const error = response.error || "";
-      // const data = response.data || "";
-
-      // if (data) {
-      //   const message = data.message || "";
-      //   if (!message) {
-      //     setUserData((prevData) => {
-      //       return { ...prevData, ...data };
-      //     });
-      //     setProfileUpdated(true);
-      //     onChangeAppMode({ username: data.username, token: data.token });
-      //   }
-      // }
-      // if (error) {
-      //   setProfileUpdated(false);
-      //   return error;
-      // }
     },
     [sendRequest, token]
   );

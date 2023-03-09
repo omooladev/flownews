@@ -13,6 +13,8 @@ import styles from "./UserForm.module.css";
 const UserForm = () => {
   const {
     userData: { fullname, email, emailIsPrivate, username, bio, location, education, work },
+    changeAppMode,
+    onSaveContributorData,
     onUpdateContributorProfile,
   } = useContext(AuthContext);
   const [newContributorData, setNewContributorData] = useState({
@@ -40,7 +42,6 @@ const UserForm = () => {
   }, []);
 
   const matchProfileFields = useCallback(async () => {
-    
     let updateProperties;
     const isFullNameMatch = compareData({
       firstValue: fullname,
@@ -51,42 +52,42 @@ const UserForm = () => {
     }
     const isEmailMatch = compareData({
       firstValue: email,
-      secondValue: newContributorData.email || email,
+      secondValue: newContributorData.email,
     });
     if (!isEmailMatch) {
       updateProperties = { ...updateProperties, email: newContributorData.email };
     }
     const isUsernameMatch = compareData({
       firstValue: username,
-      secondValue: newContributorData.username || username,
+      secondValue: newContributorData.username,
     });
     if (!isUsernameMatch) {
       updateProperties = { ...updateProperties, username: newContributorData.username };
     }
     const isBioMatch = compareData({
       firstValue: bio,
-      secondValue: newContributorData.bio || "",
+      secondValue: newContributorData.bio,
     });
     if (!isBioMatch) {
       updateProperties = { ...updateProperties, bio: newContributorData.bio };
     }
     const isLocationMatch = compareData({
       firstValue: location,
-      secondValue: newContributorData.location || "",
+      secondValue: newContributorData.location,
     });
     if (!isLocationMatch) {
       updateProperties = { ...updateProperties, location: newContributorData.location };
     }
     const isEducationMatch = compareData({
       firstValue: education,
-      secondValue: newContributorData.education || "",
+      secondValue: newContributorData.education,
     });
     if (!isEducationMatch) {
       updateProperties = { ...updateProperties, education: newContributorData.education };
     }
     const isWorkMatch = compareData({
       firstValue: work,
-      secondValue: newContributorData.work || "",
+      secondValue: newContributorData.work,
     });
     if (!isWorkMatch) {
       updateProperties = { ...updateProperties, work: newContributorData.work };
@@ -98,27 +99,32 @@ const UserForm = () => {
     async (event) => {
       event.preventDefault();
       setError("");
-      // const { fullname, email, username, bio, location, education, work }=newContributorData
-      console.log(newContributorData);
-      const updateProperties = await matchProfileFields();
-      console.log(updateProperties)
 
-      // updateProperties = {};
-      // setIsLoading(true);
-      // let response = await onUpdateContributorProfile(newContributorData);
-      // const data = response.data || "";
-      // const error = response.error || "";
-      // if (data) {
-      //   console.log(data);
-      // }
-      // if (error) {
-      //   setError((prevError) => {
-      //     return error;
-      //   });
-      // }
-      // setIsLoading(false);
+      const updateProperties = await matchProfileFields();
+
+      if (!updateProperties) {
+        return;
+      }
+      setIsLoading(true);
+      let response = await onUpdateContributorProfile(updateProperties);
+      const data = response.data || "";
+      const status = response.status || "";
+      const error = response.error || "";
+      if (status === 204) {
+        return setIsLoading(false);
+      }
+      if (data) {
+        onSaveContributorData(data);
+        changeAppMode({ username: data.username });
+      }
+      if (error) {
+        setError((prevError) => {
+          return error;
+        });
+      }
+      setIsLoading(false);
     },
-    [newContributorData,matchProfileFields]
+    [matchProfileFields, changeAppMode, onSaveContributorData, onUpdateContributorProfile]
   );
 
   return (
