@@ -14,6 +14,8 @@ const UserForm = () => {
   const {
     userData: { fullname, email, emailIsPrivate, username, bio, location, education, work },
     changeAppMode,
+    profileUpdated,
+    onChangeProfileUpdated,
     onSaveContributorData,
     onUpdateContributorProfile,
   } = useContext(AuthContext);
@@ -98,7 +100,10 @@ const UserForm = () => {
   const submitContributorProfileHandler = useCallback(
     async (event) => {
       event.preventDefault();
+      onChangeProfileUpdated(false);
       setError("");
+
+      return console.log(profileUpdated)
 
       const updateProperties = await matchProfileFields();
 
@@ -116,6 +121,7 @@ const UserForm = () => {
       if (data) {
         onSaveContributorData(data);
         changeAppMode({ username: data.username });
+        onChangeProfileUpdated(true);
       }
       if (error) {
         setError((prevError) => {
@@ -124,7 +130,13 @@ const UserForm = () => {
       }
       setIsLoading(false);
     },
-    [matchProfileFields, changeAppMode, onSaveContributorData, onUpdateContributorProfile]
+    [
+      matchProfileFields,
+      changeAppMode,
+      onSaveContributorData,
+      onUpdateContributorProfile,
+      onChangeProfileUpdated,
+    ]
   );
 
   return (

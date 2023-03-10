@@ -20,13 +20,14 @@ const AuthContextProvider = (props) => {
   });
   const [headerIsLoading, setHeaderIsLoading] = useState(false);
   const isLoggedIn = appMode.isLoggedIn;
-  const [profileUpdated, setProfileUpdated] = useState(false);
+
   const [authMessage, setAuthMessage] = useState({ type: "", message: "" });
   const [contributorError, setContributorError] = useState({ ref: "", message: "" });
   const history = useHistory();
 
   //?refactored
   //const [contributorData, setContributorData] = useState({ username: "" });//TODO this will replace the user data
+  const [profileUpdated, setProfileUpdated] = useState(false);
   const changeAuthMessage = useCallback((authMessage) => {
     setAuthMessage((prevMessage) => {
       return { ...prevMessage, ...authMessage };
@@ -181,6 +182,9 @@ const AuthContextProvider = (props) => {
     },
     [sendRequest, token]
   );
+  const changeProfileUpdated = useCallback((bool) => {
+    return setProfileUpdated(bool);
+  }, []);
   const toggleEmailPrivacy = useCallback(async () => {
     const response = await sendRequest(`${HOSTURI}/email/privacy`, {
       method: "PATCH",
@@ -201,10 +205,8 @@ const AuthContextProvider = (props) => {
         token,
         history,
         userData,
-        profileUpdated,
-        onCloseProfileUpdated: () => {
-          setProfileUpdated((prevState) => false);
-        },
+
+       
         searchedContributorData,
         headerIsLoading,
         isLoggedIn,
@@ -228,9 +230,11 @@ const AuthContextProvider = (props) => {
         onSendPasswordResetEmail: sendPasswordResetEmail,
         onVerifyPasswordResetLink: verifyPasswordResetLink,
 
+        //?Refactored already
+        profileUpdated,
+        onChangeProfileUpdated: changeProfileUpdated,
         changeAppMode: onChangeAppMode,
 
-        //?Refactored already
         onSaveContributorData: saveContributorData,
         onUpdateContributorProfile: updateContributorProfile,
         onToggleEmailPrivacy: toggleEmailPrivacy,

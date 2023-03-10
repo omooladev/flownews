@@ -11,8 +11,8 @@ export const AuthContext = React.createContext({
   isLoggedIn: false,
   contributorError: { ref: "", message: "" },
   authMessage: { type: "", message: "" },
-  profileUpdated: false,
-  onCloseProfileUpdated: () => {},
+
+  
   onSetUserData: () => {},
 
   onChangeAuthMessage: () => {},
@@ -33,6 +33,8 @@ export const AuthContext = React.createContext({
 
   //refactored
   onSaveContributorData: () => {},
-  onUpdateContributorProfile: async() => {},
+  onUpdateContributorProfile: async () => {},
+  profileUpdated: false,
+  onChangeProfileUpdated: async () => {},
   onToggleEmailPrivacy: async () => {},
 });

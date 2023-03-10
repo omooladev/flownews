@@ -4,6 +4,10 @@
   padding-top: 10vh;
 }
 
+.main.profile_updated {
+  padding-top: 20vh;
+}
+
 .error {
   color: red;
 }
