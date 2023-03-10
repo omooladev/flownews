@@ -1,0 +1,40 @@
+.profile {
+  position: relative;
+  background-color: var(--nav-text-color);
+  padding-top: 1rem;
+  overflow: hidden;
+  font-family: var(--primary-font);
+  .profile_text_container {
+    background-color: var(--body-color);
+    padding: 1rem 0;
+    margin-top: 1rem;
+    position: relative;
+  }
+}
+
+@media (min-width: 700px) {
+  .profile {
+    overflow: visible;
+    padding: 5rem 0;
+    .profile_text_container {
+      position: absolute;
+      top: 3rem;
+      left: 50%;
+      width: 40rem;
+      margin-left: -20rem;
+    }
+  }
+}
+@media (min-width: 1000px) {
+  .profile {
+    overflow: visible;
+    padding: 5rem 0;
+    .profile_text_container {
+      position: absolute;
+      top: 3rem;
+      left: 50%;
+      width: 60rem;
+      margin-left: -30rem;
+    }
+  }
+}

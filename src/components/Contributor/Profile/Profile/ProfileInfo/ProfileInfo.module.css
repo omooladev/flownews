@@ -1,3 +1,6 @@
+.contributor_info {
+  color: var(--nav-text-color);
+}
 .contributor_info .username {
   display: flex;
   align-items: center;
