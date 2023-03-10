@@ -1,30 +1,25 @@
 .contributor_info {
   color: var(--nav-text-color);
 }
-
 .contributor_info .username {
   display: flex;
   align-items: center;
   justify-content: left;
   padding: 0.2rem 5%;
 }
-
 .contributor_info h2 {
   padding-right: 0.3rem;
 }
-
 .contributor_info .badge {
   font-size: 1.3rem;
   color: var(--nav-text-hover-color);
 }
-
 .contributor_info .bio {
   font-weight: normal;
   padding: 0.5rem 5%;
   text-align: left;
 }
-
-.contributor_location_email_joinedDate {
+.contributor_info .contributor_location_email_joinedDate {
   display: flex;
   align-items: flex-start;
   justify-content: left;
@@ -40,7 +35,7 @@
   .contributor_info .bio {
     text-align: center;
   }
-  .contributor_location_email_joinedDate {
+  .contributor_info .contributor_location_email_joinedDate {
     justify-content: center;
   }
 }
