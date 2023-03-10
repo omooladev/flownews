@@ -78,11 +78,13 @@
 /*? ProfileBox configuration for Setting */
 .Setting__ProfileBox {
   cursor: default;
+  color: var(--nav-text-color);
   p {
     height: 45px;
     width: 45px;
     font-size: 2.25rem;
   }
+
   .profile_box_text {
     padding: 0 0.5rem;
     .username {

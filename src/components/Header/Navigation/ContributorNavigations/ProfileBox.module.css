@@ -81,6 +81,7 @@
 /*? ProfileBox configuration for Setting */
 .Setting__ProfileBox {
   cursor: default;
+  color: var(--nav-text-color);
 }
 .Setting__ProfileBox p {
   height: 45px;

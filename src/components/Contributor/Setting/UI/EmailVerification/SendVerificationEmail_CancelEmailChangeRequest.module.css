@@ -2,8 +2,7 @@
   padding: 0.5rem;
   box-shadow: none;
   background-color: rgba(246, 160, 12, 10%);
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 .email_request_change_cancel p {
   padding: 0.5rem 0;
