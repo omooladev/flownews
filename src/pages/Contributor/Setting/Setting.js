@@ -12,7 +12,6 @@ import { useContext } from "react";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import useNewLocation from "../../../hooks/useNewLocation";
 
-
 const Setting = () => {
   useFetchContributorData();
   const { userData, history } = useContext(AuthContext);

@@ -14,7 +14,6 @@ const UserForm = () => {
   const {
     userData: { fullname, email, emailIsPrivate, username, bio, location, education, work },
     changeAppMode,
-    profileUpdated,
     onChangeProfileUpdated,
     onSaveContributorData,
     onUpdateContributorProfile,
@@ -102,8 +101,6 @@ const UserForm = () => {
       event.preventDefault();
       onChangeProfileUpdated(false);
       setError("");
-
-      return console.log(profileUpdated)
 
       const updateProperties = await matchProfileFields();
 
