@@ -29,7 +29,6 @@
   font-size: 1.6rem;
   font-family: Arial, Helvetica, sans-serif;
 }
-
 .profile_box .icon {
   color: var(--nav-text-color);
   font-size: 0.8rem;
@@ -43,10 +42,12 @@
 .profile_box .profile_box_text .username {
   color: var(--nav-text-color);
 }
+
 /*? ProfileBox configuration for Header Profile Section */
 .Header-ProfileSection__ProfileBox {
   display: none;
 }
+
 /*? ProfileBox configuration for Mobile Navigation */
 .MobileNavigation__ProfileBox {
   display: flex;
@@ -59,6 +60,7 @@
 .MobileNavigation__ProfileBox .icon {
   display: none;
 }
+
 /*? ProfileBox configuration for Profile */
 .Profile__ProfileBox {
   cursor: default;
@@ -75,6 +77,7 @@
 .Profile__ProfileBox .icon {
   display: none;
 }
+
 /*? ProfileBox configuration for Setting */
 .Setting__ProfileBox {
   cursor: default;
@@ -90,14 +93,14 @@
 .Setting__ProfileBox .profile_box_text .username {
   font-weight: bold;
   padding: 0.3rem 0;
-  font-size: 1.0rem;
-}
-.Setting__ProfileBox .icon {
-  display: none;
+  font-size: 1rem;
 }
 .Setting__ProfileBox .profile_box_text .your_personal_account {
   font-weight: normal;
   font-size: 0.9rem;
+}
+.Setting__ProfileBox .icon {
+  display: none;
 }
 
 @media (min-width: 500px) {
@@ -113,7 +116,6 @@
     display: none;
   }
 }
-
 @media (min-width: 700px) {
   /*? ProfileBox configuration for Profile */
   .Profile__ProfileBox {
@@ -127,7 +129,7 @@
     height: 100px;
     width: 100px;
     font-size: 4rem;
-    border: 8px solid black;
+    border: 8px solid var(--profile-color);
   }
   .Profile__ProfileBox .icon {
     display: none;
