@@ -1,10 +1,11 @@
-import { useRef, useEffect, useContext, useState } from "react";
+import { useRef, useEffect, useContext, useState, useCallback } from "react";
+import { Link } from "react-router-dom";
+import { useTitle } from "../../../hooks/useTitle";
+import { AuthContext } from "../../../store/Auth/auth-context";
 import AuthLoader from "../../Loaders/AuthLoader";
 import Reply from "./Reply";
 import styles from "./Auth.module.css";
-import { useTitle } from "../../../hooks/useTitle";
-import { AuthContext } from "../../../store/Auth/auth-context";
-import { useCallback } from "react";
+
 const ForgotPassword = (props) => {
   useTitle("Forgot Your Password");
   const { authReply, linkIsValid, onChangeAuthReply, onResetAuthReply, onValidateEmail } = props;
@@ -61,7 +62,7 @@ const ForgotPassword = (props) => {
     if (isLoggedIn && email) {
       emailRef.current.value = email;
     }
-  }, [isLoggedIn,email]);
+  }, [isLoggedIn, email]);
 
   return (
     <>
@@ -107,6 +108,12 @@ const ForgotPassword = (props) => {
             </>
           )}
         </div>
+        {!isLoggedIn && (
+          <div className={styles.form_footer}>
+            <p>Never mind!</p>
+            <Link to={`${isLoading ? "#" : "/login"}`}>Take me back to login</Link>
+          </div>
+        )}
       </form>
     </>
   );
