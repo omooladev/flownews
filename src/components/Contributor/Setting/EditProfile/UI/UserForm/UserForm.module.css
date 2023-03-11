@@ -66,7 +66,7 @@
   color: var(--body-color);
   padding: 0.5rem 0.6rem;
   margin: 0.5rem 0;
-  color: var(--profile-color);
+  color: white;
 }
 .form .form_actions .update_profile:disabled {
   cursor: not-allowed;
