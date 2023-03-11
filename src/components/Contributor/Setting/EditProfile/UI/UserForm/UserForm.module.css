@@ -24,11 +24,11 @@
 .form .form_controls .form_control label {
   padding: 0.5rem 0;
   font-weight: bold;
-  color: var(--profile-color);
+  color: var(--nav-text-color);
 }
 .form .form_controls .form_control input,
 .form .form_controls .form_control textarea {
-  color: var(--profile-color);
+  color: var(--nav-text-color);
   width: 100%;
   padding: 0.4rem 0.5rem;
   border: 2px solid var(--form-border-color);
