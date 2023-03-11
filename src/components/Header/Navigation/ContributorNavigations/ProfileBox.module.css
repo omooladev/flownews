@@ -23,7 +23,7 @@
   width: 32px;
   border-radius: 50%;
   background-color: var(--nav-text-hover-color);
-  color: var(--body-color);
+  color: white;
   margin: 0 0.5rem;
   text-align: center;
   font-size: 1.6rem;
@@ -130,7 +130,7 @@
     height: 100px;
     width: 100px;
     font-size: 4rem;
-    border: 8px solid var(--profile-color);
+    border: 8px solid black;
   }
   .Profile__ProfileBox .icon {
     display: none;

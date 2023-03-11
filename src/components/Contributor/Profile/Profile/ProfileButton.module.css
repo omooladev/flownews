@@ -7,6 +7,6 @@
 .edit_profile_button_container .edit_profile_button {
   cursor: pointer;
   background-color: var(--nav-text-hover-color);
-  color: var(--body-color);
+  color: white;
   padding: 0.5rem 0.6rem;
 }
