@@ -117,7 +117,7 @@ const UserForm = () => {
       }
       if (data) {
         onSaveContributorData(data);
-        changeAppMode({ username: data.username });
+        changeAppMode({ username: data.username, token: data.token });
         onChangeProfileUpdated(true);
       }
       if (error) {
