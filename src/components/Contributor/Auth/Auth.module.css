@@ -1,14 +1,27 @@
 .auth {
   background-color: var(--body-color);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-    Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  text-align: center;
+  font-family: var(--primary-font);
+}
+.auth a {
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 2s ease;
+  color: var(--nav-text-hover-color);
+}
+.auth h1 {
+  font-size: 20px;
+  font-weight: normal;
+  padding: 0.5rem 0;
+  color: var(--nav-text-hover-color);
 }
 .auth .username {
   font-size: 1.3rem;
   padding-bottom: 0.3rem;
 }
-
+.auth .cancel_icon {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
 .auth .icon {
   color: var(--nav-text-color);
   font-size: 2rem;
@@ -16,13 +29,6 @@
   top: 1.5rem;
   right: 5%;
   cursor: pointer;
-}
-
-.auth h1 {
-  font-size: 20px;
-  font-weight: normal;
-  padding: 0.5rem 0;
-  color: var(--nav-text-hover-color);
 }
 .auth .reply {
   box-shadow: none;
@@ -42,11 +48,6 @@
 .auth .reply.error {
   background-color: rgb(237, 178, 178);
 }
-
-.cancel_icon {
-  font-size: 1.2rem;
-  cursor: pointer;
-}
 .auth .form {
   width: 100%;
   background-color: var(--auth-form-color);
@@ -55,29 +56,21 @@
   margin: 1rem 0;
   border: 1px solid var(--auth-form-border-color);
 }
-
 .auth .form .form_control {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   margin: 0.5rem 0;
 }
-
-.auth .form .form_control label,
-.reset_password,
-.reset_password .auth .form .form_control .password_label {
+.auth .form .form_control label {
   padding: 0.5rem 0;
   font-size: 1rem;
-  color: var(--auth-form-label-color);
+  color: var(--profile-color);
 }
 .auth .form .form_control .password_label {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-}
-.auth .form .form_control .input_container {
-  position: relative;
   width: 100%;
 }
 .auth .form .form_control input {
@@ -92,6 +85,10 @@
 .auth .form .form_control input:focus {
   border: 1px solid var(--nav-text-hover-color);
 }
+.auth .form .form_control .input_container {
+  position: relative;
+  width: 100%;
+}
 .auth .form .form_control .input_container input {
   padding-right: 30px;
 }
@@ -99,16 +96,18 @@
   position: absolute;
   top: 8px;
   right: 10px;
-  color: var(--nav-text-color);
+  color: black;
   cursor: pointer;
 }
-
-.form .form_actions {
+.auth .form .form_actions {
   margin: 2rem 0;
 }
-
-
-.form .form_actions button,.return_to_setting {
+.auth .form .form_actions p {
+  padding-bottom: 0.5rem;
+  width: 100%;
+  text-align: left;
+}
+.auth .form .form_actions button {
   cursor: pointer;
   background-color: var(--nav-text-hover-color);
   width: 100%;
@@ -117,19 +116,10 @@
   color: var(--body-color);
   border-radius: 5px;
 }
-.return_to_setting{
-  margin:1rem 0;
-}
-.form .form_actions button:disabled {
+.auth .form .form_actions button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
 }
-.form .form_actions p {
-  padding-bottom: 0.5rem;
-  width: 100%;
-  text-align: left;
-}
-
 .auth .form_footer {
   display: flex;
   flex-direction: row;
@@ -141,23 +131,28 @@
   border-radius: 5px;
   width: 100%;
 }
-
 .auth .form_footer p {
   padding: 0 0.3rem;
   font-size: 0.9rem;
   color: var(--auth-form-label-color);
 }
-.auth a {
-  font-size: 0.9rem;
-  text-decoration: none;
-  transition: all 2s ease;
-  color: var(--nav-text-hover-color);
+
+.reset_password,
+.reset_password .auth .form .form_control .password_label {
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  color: var(--auth-form-label-color);
 }
-.auth .form_footer a {
+
+.return_to_setting {
+  cursor: pointer;
+  background-color: var(--nav-text-hover-color);
+  width: 100%;
   font-size: 0.9rem;
-  text-decoration: none;
-  transition: all 2s ease;
-  color: var(--nav-text-hover-color);
+  padding: 0.6rem 0.5rem;
+  color: var(--body-color);
+  border-radius: 5px;
+  margin: 1rem 0;
 }
 
 @media (min-width: 500px) {
@@ -171,11 +166,10 @@
   .auth .form {
     border: none;
   }
-
   .auth .form_footer a:hover {
     text-decoration: underline;
   }
-  .form .form_actions button:hover {
+  .auth .form_actions button:hover {
     opacity: 0.5;
   }
 }

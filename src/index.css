@@ -5,6 +5,7 @@
   user-select: none;
 }
 :root {
+  --reverse-black-white-color: black;
   --body-color: #ffffff;
   --header-color: #ffffff;
   --side-nav: #ccc;
@@ -48,6 +49,7 @@ body {
 }
 
 body.dark {
+   --reverse-black-white-color: black;
   --body-color: #18191a;
   --header-color: #242526;
   --side-nav: #242526;

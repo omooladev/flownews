@@ -1,0 +1,181 @@
+@import "../../../styles/_utilities";
+.auth {
+  background-color: var(--body-color);
+  font-family: var(--primary-font);
+  a {
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 2s ease;
+    color: var(--nav-text-hover-color);
+  }
+  h1 {
+    font-size: 20px;
+    font-weight: normal;
+    padding: 0.5rem 0;
+    color: var(--nav-text-hover-color);
+  }
+  .username {
+    font-size: 1.3rem;
+    padding-bottom: 0.3rem;
+  }
+  .cancel_icon {
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
+  .icon {
+    color: var(--nav-text-color);
+    font-size: 2rem;
+    position: absolute;
+    top: 1.5rem;
+    right: 5%;
+    cursor: pointer;
+  }
+
+  .reply {
+    box-shadow: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1rem;
+    opacity: 0.8;
+    border-radius: 0.4rem;
+    padding: 0.5rem;
+    width: 100%;
+    &.success {
+      color: var(--body-color);
+      background-color: var(--nav-text-hover-color);
+    }
+    &.error {
+      background-color: rgb(237, 178, 178);
+    }
+  }
+  .form {
+    width: 100%;
+    background-color: var(--auth-form-color);
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    border: 1px solid var(--auth-form-border-color);
+    .form_control {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      margin: 0.5rem 0;
+      label {
+        padding: 0.5rem 0;
+        font-size: 1rem;
+        color: var(--profile-color);
+      }
+      .password_label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+      input {
+        width: 100%;
+        padding: 0.4rem 0.5rem;
+        border-radius: 3px;
+        border: 1px solid transparent;
+        transition: all 0.3s;
+        font-size: 0.9rem;
+        outline: 2px solid transparent;
+        &:focus {
+          border: 1px solid var(--nav-text-hover-color);
+        }
+      }
+      .input_container {
+        position: relative;
+        width: 100%;
+        input {
+          padding-right: 30px;
+        }
+        .password_icon {
+          position: absolute;
+          top: 8px;
+          right: 10px;
+          color: $password-eye-icon-color;
+          cursor: pointer;
+        }
+      }
+    }
+    .form_actions {
+      margin: 2rem 0;
+      p {
+        padding-bottom: 0.5rem;
+        width: 100%;
+        text-align: left;
+      }
+      button {
+        cursor: pointer;
+        background-color: var(--nav-text-hover-color);
+        width: 100%;
+        font-size: 0.9rem;
+        padding: 0.6rem 0.5rem;
+        color: var(--body-color);
+        border-radius: 5px;
+        &:disabled {
+          cursor: not-allowed;
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+  .form_footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    padding: 0.5rem 0;
+    border: 1px solid var(--auth-form-border-color);
+    border-radius: 5px;
+    width: 100%;
+
+    p {
+      padding: 0 0.3rem;
+      font-size: 0.9rem;
+      color: var(--auth-form-label-color);
+    }
+  }
+}
+
+.reset_password,
+.reset_password .auth .form .form_control .password_label {
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  color: var(--auth-form-label-color);
+}
+
+.return_to_setting {
+  cursor: pointer;
+  background-color: var(--nav-text-hover-color);
+  width: 100%;
+  font-size: 0.9rem;
+  padding: 0.6rem 0.5rem;
+  color: var(--body-color);
+  border-radius: 5px;
+
+  margin: 1rem 0;
+}
+
+@media (min-width: 500px) {
+  .auth {
+    height: 65vh;
+    margin-top: -32.5vh;
+    .icon {
+      display: none;
+    }
+    .form {
+      border: none;
+    }
+
+    .form_footer a:hover {
+      text-decoration: underline;
+    }
+    .form_actions button:hover {
+      opacity: 0.5;
+    }
+  }
+}

@@ -24,10 +24,11 @@
       label {
         padding: 0.5rem 0;
         font-weight: bold;
+        color: var(--profile-color);
       }
       input,
       textarea {
-        color: var(--nav-text-color);
+        color: var(--profile-color);
         width: 100%;
         padding: 0.4rem 0.5rem;
         border: 2px solid var(--form-border-color);
@@ -57,7 +58,7 @@
       a {
         font-size: 0.9rem;
         padding: 0.2rem 0;
-        color: blue;
+        color: var(--link-color);
       }
     }
 
@@ -67,6 +68,7 @@
       color: var(--body-color);
       padding: 0.5rem 0.6rem;
       margin: 0.5rem 0;
+      color: var(--profile-color);
       &:disabled {
         cursor: not-allowed;
       }
