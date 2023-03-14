@@ -11,6 +11,7 @@ import SuspenseLoader from "../Loaders/SuspenseLoader";
 const Header = () => {
   const { toggleMenu } = useContext(AppContext);
   const { isLoggedIn, contributorError, headerIsLoading, userData } = useContext(AuthContext);
+
   return (
     <>
       {(userData.username || !isLoggedIn) && !contributorError.ref && (
