@@ -27,7 +27,7 @@ const AuthContextProvider = (props) => {
 
   //?refactored
   //const [contributorData, setContributorData] = useState({ username: "" });//TODO this will replace the user data
-  const [profileUpdated, setProfileUpdated] = useState(true);
+  const [profileUpdated, setProfileUpdated] = useState(false);
   const changeAuthMessage = useCallback((authMessage) => {
     setAuthMessage((prevMessage) => {
       return { ...prevMessage, ...authMessage };

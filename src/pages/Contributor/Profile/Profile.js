@@ -3,8 +3,8 @@ import useCloseProfileUpdated from "../../../hooks/useCloseProfileUpdated";
 import useFetchContributorData from "../../../hooks/useFetchContributorData";
 
 const Profile = () => {
-  useFetchContributorData();
   useCloseProfileUpdated();
+  useFetchContributorData();
 
   return <ProfileCmp />;
 };
