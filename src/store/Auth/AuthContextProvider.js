@@ -206,7 +206,6 @@ const AuthContextProvider = (props) => {
         history,
         userData,
 
-       
         searchedContributorData,
         headerIsLoading,
         isLoggedIn,
