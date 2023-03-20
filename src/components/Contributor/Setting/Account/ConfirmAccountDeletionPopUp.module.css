@@ -1,0 +1,42 @@
+.popup {
+  background-color: var(--body-color);
+  color: var(--nav-text-color);
+}
+.popup .icon {
+  color: var(--nav-text-color);
+  font-size: 2rem;
+  position: absolute;
+  top: 1.5rem;
+  right: 5%;
+  cursor: pointer;
+}
+.popup .are_you_sure {
+  display: none;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+.popup .are_you_sure .icon {
+  display: block;
+  font-size: 1.5rem;
+  position: static;
+}
+.popup .important {
+  width: 100%;
+  background-color: rgba(255, 0, 0, 0.2);
+}
+
+@media (min-width: 500px) {
+  .popup {
+    height: 50vh;
+    margin-top: -25vh;
+  }
+  .popup .icon {
+    display: none;
+  }
+  .popup .are_you_sure {
+    display: flex;
+  }
+}

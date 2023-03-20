@@ -1,9 +1,22 @@
 import OauthAssociation from "./OauthAssociation";
 import styles from "./DeleteAccount.module.css";
 import OauthPermission from "./OauthPermission";
+import { useCallback, useState } from "react";
+import ConfirmAccountDeletionPopUp from "./ConfirmAccountDeletionPopUp";
 const DeleteAccount = () => {
+  const [showPopUp, setShowPopUp] = useState(true);
+  const deleteAccountHandler = useCallback(() => {
+    setShowPopUp(true);
+  }, []);
   return (
     <section className={styles.delete_account}>
+      {showPopUp && (
+        <ConfirmAccountDeletionPopUp
+          onSetShowPopUp={() => {
+            setShowPopUp(false);
+          }}
+        />
+      )}
       <h2>Delete Account</h2>
       <hr />
       <OauthAssociation />
@@ -21,7 +34,7 @@ const DeleteAccount = () => {
           Allow your username to become available to anyone.
         </li>
       </ul>
-      <button type="button" className={styles.delete_account_button}>
+      <button type="button" className={styles.delete_account_button} onClick={deleteAccountHandler}>
         Delete your account
       </button>
     </section>
