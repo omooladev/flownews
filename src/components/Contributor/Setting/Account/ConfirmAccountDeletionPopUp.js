@@ -20,28 +20,26 @@ const ConfirmAccountDeletionPopUp = (props) => {
         <BiX className={`${styles.icon} ${styles.cancel}`} onClick={closePopUpHandler} />
       </div>
       <div className={styles.important}>
-        <BiError />
+        <BiError className={`${styles.icon}`} />
         <p>This is extremely important</p>
       </div>
-      <p>
-        We will immediately delete all of your contents, along with your comments,replies and
-        everything associated with your account
+      <p className={styles.notes}>
+        <span>We will immediately delete all of your contents</span>, along with your comments,
+        replies and everything associated with your account
       </p>
-      <p>
+      <p className={styles.notes}>
         Your username will be available to anyone on FlowNews immediately after account deletion
       </p>
       <form className={styles.form}>
-        <div className={styles.form_controls}>
-          <div className={styles.form_control}>
-            <label>Your username or email</label>
-            <input type="text" />
-          </div>
-          <div className={styles.form_control}>
-            <label>
-              To verify, type <span>delete my account</span>below:
-            </label>
-            <input type="text" />
-          </div>
+        <div className={styles.form_control}>
+          <label>Your username or email</label>
+          <input type="text" />
+        </div>
+        <div className={styles.form_control}>
+          <label>
+            To verify, type <span>delete my account</span> below:
+          </label>
+          <input type="text" />
         </div>
       </form>
     </PopUp>

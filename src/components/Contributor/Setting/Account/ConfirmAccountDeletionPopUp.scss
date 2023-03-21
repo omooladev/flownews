@@ -1,6 +1,8 @@
+@use "../../../../sass/_DisplayFlex" as DisplayFlex;
 .popup {
   background-color: var(--body-color);
   color: var(--nav-text-color);
+  padding: 0;
   .icon {
     color: var(--nav-text-color);
     font-size: 2rem;
@@ -16,6 +18,7 @@
     justify-content: space-between;
     font-size: 1.3rem;
     font-weight: bold;
+    padding: 0 5%;
     .icon {
       display: block;
       font-size: 1.5rem;
@@ -23,14 +26,71 @@
     }
   }
   .important {
-    width:100%;
-    background-color: rgba(255, 0, 0, 0.2);
+    @extend %DisplayFlex;
+    width: 100%;
+    background-color: #ff000033;
+    justify-content: left;
+    padding: 1rem 5%;
+    margin: 1rem 0;
+    .icon {
+      position: static;
+      display: block;
+      color: red;
+      font-size: 1.3rem;
+    }
+    p {
+      margin-left: 0.5rem;
+      font-size: 1.1rem;
+    }
+  }
+  .notes {
+    padding: 0 5%;
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+    span {
+      font-weight: bold;
+    }
+  }
+  form {
+    padding: 0 5%;
+    width: 100%;
+    .form_control {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      margin: 0.5rem 0;
+      width: 100%;
+      label {
+        padding: 0.5rem 0;
+        color: var(--nav-text-color);
+        font-size: 1.1rem;
+        font-weight: bold;
+      }
+      input {
+        width: 100%;
+        padding: 0.4rem 0.5rem;
+        font-size: 0.9rem;
+        outline: 2px solid transparent;
+        background-color: var(--form-background-color);
+        border: 2px solid var(--form-border-color);
+        border-radius: 5px;
+        &:focus {
+          border: 2px solid var(--nav-text-hover-color);
+          caret-color: var(--nav-text-hover-color);
+          background-color: var(--body-color);
+        }
+      }
+      span {
+        font-weight: normal;
+        font-style: italic;
+      }
+    }
   }
 }
 @media (min-width: 500px) {
   .popup {
-    height: 50vh;
-    margin-top: -25vh;
+    height: 60vh;
+    margin-top: -30vh;
     .icon {
       display: none;
     }
