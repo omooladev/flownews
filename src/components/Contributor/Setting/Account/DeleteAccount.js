@@ -1,8 +1,8 @@
-import OauthAssociation from "./OauthAssociation";
-import styles from "./DeleteAccount.module.css";
-import OauthPermission from "./OauthPermission";
 import { useCallback, useState } from "react";
+import OauthAssociation from "./OauthAssociation";
+import OauthPermission from "./OauthPermission";
 import ConfirmAccountDeletionPopUp from "./ConfirmAccountDeletionPopUp";
+import styles from "./DeleteAccount.module.css";
 const DeleteAccount = () => {
   const [showPopUp, setShowPopUp] = useState(false);
   const deleteAccountHandler = useCallback(() => {
