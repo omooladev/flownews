@@ -54,7 +54,7 @@ const ConfirmAccountDeletionPopUp = (props) => {
         </div>
         <div className={styles.form_control}>
           <label>Confirm your password</label>
-          <input type="text" />
+          <input type="password" />
         </div>
         <p>Reply will appear here</p>
         <button>Delete this account</button>
