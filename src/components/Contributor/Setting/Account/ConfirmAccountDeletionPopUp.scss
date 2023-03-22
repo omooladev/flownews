@@ -92,11 +92,13 @@
       background-color: var(--nav-text-hover-color);
       color: var(--body-color);
       padding: 0.5rem 0.6rem;
-      color: white;
+      color: red;
       width: 100%;
       margin: 1rem 0;
       &:disabled {
         cursor: not-allowed;
+        border: 2px solid var(--form-border-color);
+        background-color: transparent;
       }
     }
   }

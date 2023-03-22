@@ -10,7 +10,8 @@ const ConfirmAccountDeletionPopUp = (props) => {
     userData: { username },
     onMakeBodyFixed,
   } = useContext(AuthContext);
-  const [confirmDetails, setConfirmDetails] = useState({ username });
+  const [details, setDetails] = useState({ username });
+  const [detailsIsValid, setDetailsIsValid] = useState(true);
   const closePopUpHandler = useCallback(
     (event) => {
       event.stopPropagation();
@@ -19,6 +20,16 @@ const ConfirmAccountDeletionPopUp = (props) => {
     },
     [onSetShowPopUp, onMakeBodyFixed]
   );
+
+  const changeValueHandler = useCallback(({ type, value }) => {
+    setDetails((prevDetails) => {
+      return { ...prevDetails, [type]: value };
+    });
+  }, []);
+  const deleteAccountHandler = useCallback((event) => {
+    setDetailsIsValid(false)
+    event.preventDefault();
+  }, []);
 
   useEffect(() => {
     onMakeBodyFixed(true);
@@ -41,23 +52,41 @@ const ConfirmAccountDeletionPopUp = (props) => {
       <p className={styles.notes}>
         Your username will be available to anyone on FlowNews immediately after account deletion
       </p>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={deleteAccountHandler}>
         <div className={styles.form_control}>
           <label>Your username or email</label>
-          <input type="text" value={confirmDetails.username} />
+          <input
+            type="text"
+            value={details.username}
+            onChange={(event) => {
+              changeValueHandler({ type: "username", value: event.target.value });
+            }}
+          />
         </div>
         <div className={styles.form_control}>
           <label>
             To verify, type <span>delete my account</span> below:
           </label>
-          <input type="text" />
+          <input
+            type="text"
+            onChange={(event) => {
+              changeValueHandler({ type: "verify_text", value: event.target.value });
+            }}
+          />
         </div>
         <div className={styles.form_control}>
           <label>Confirm your password</label>
-          <input type="password" />
+          <input
+            type="password"
+            onChange={(event) => {
+              changeValueHandler({ type: "password", value: event.target.value });
+            }}
+          />
         </div>
         <p>Reply will appear here</p>
-        <button>Delete this account</button>
+        <button type="submit" disabled={!detailsIsValid}>
+          Delete this account
+        </button>
       </form>
     </PopUp>
   );
