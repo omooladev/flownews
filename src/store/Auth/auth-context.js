@@ -12,7 +12,6 @@ export const AuthContext = React.createContext({
   contributorError: { ref: "", message: "" },
   authMessage: { type: "", message: "" },
 
-  
   onSetUserData: () => {},
 
   onChangeAuthMessage: () => {},
@@ -23,8 +22,7 @@ export const AuthContext = React.createContext({
   onSignOut: () => {},
 
   onUpdate_ResetPassword: async () => {},
-  showEmailLinkSentPopUp: false,
-  onSetShowEmailLinkSentPopUp: (bool) => {},
+
   onVerifyEmailAddress: async () => {},
   onResetPassword: async () => {},
   onSendPasswordResetEmail: async () => {},
@@ -32,6 +30,8 @@ export const AuthContext = React.createContext({
   changeAppMode: () => {},
 
   //refactored
+  makeBodyFixed: false,
+  onMakeBodyFixed: (bool) => {},
   onSaveContributorData: () => {},
   onUpdateContributorProfile: async () => {},
   profileUpdated: false,

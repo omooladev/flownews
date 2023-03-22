@@ -1,17 +1,28 @@
-import { useCallback } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { BiX, BiError } from "react-icons/bi";
+import { AuthContext } from "../../../../store/Auth/auth-context";
 import PopUp from "../../../../UI/PopUp";
 import styles from "./ConfirmAccountDeletionPopUp.module.css";
 
 const ConfirmAccountDeletionPopUp = (props) => {
   const { onSetShowPopUp } = props;
+  const {
+    userData: { username },
+    onMakeBodyFixed,
+  } = useContext(AuthContext);
+  const [confirmDetails, setConfirmDetails] = useState({ username });
   const closePopUpHandler = useCallback(
     (event) => {
       event.stopPropagation();
       onSetShowPopUp(false);
+      onMakeBodyFixed(false);
     },
-    [onSetShowPopUp]
+    [onSetShowPopUp, onMakeBodyFixed]
   );
+
+  useEffect(() => {
+    onMakeBodyFixed(true);
+  }, [onMakeBodyFixed]);
   return (
     <PopUp className={`auth_popup ${styles.popup}`} onClick={closePopUpHandler}>
       <BiX className={`${styles.icon} ${styles.cancel}`} onClick={closePopUpHandler} />
@@ -33,7 +44,7 @@ const ConfirmAccountDeletionPopUp = (props) => {
       <form className={styles.form}>
         <div className={styles.form_control}>
           <label>Your username or email</label>
-          <input type="text" />
+          <input type="text" value={confirmDetails.username} />
         </div>
         <div className={styles.form_control}>
           <label>
@@ -41,6 +52,12 @@ const ConfirmAccountDeletionPopUp = (props) => {
           </label>
           <input type="text" />
         </div>
+        <div className={styles.form_control}>
+          <label>Confirm your password</label>
+          <input type="text" />
+        </div>
+        <p>Reply will appear here</p>
+        <button>Delete this account</button>
       </form>
     </PopUp>
   );

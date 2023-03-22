@@ -3,26 +3,27 @@
   background-color: var(--body-color);
   color: var(--nav-text-color);
   padding: 0;
+
   .icon {
+    cursor: pointer;
     color: var(--nav-text-color);
     font-size: 2rem;
     position: absolute;
     top: 1.5rem;
     right: 5%;
-    cursor: pointer;
   }
   .are_you_sure {
     display: none;
-    width: 100%;
     align-items: center;
     justify-content: space-between;
     font-size: 1.3rem;
     font-weight: bold;
     padding: 0 5%;
+    width: 100%;
     .icon {
+      position: static;
       display: block;
       font-size: 1.5rem;
-      position: static;
     }
   }
   .important {
@@ -85,12 +86,26 @@
         font-style: italic;
       }
     }
+
+    button {
+      cursor: pointer;
+      background-color: var(--nav-text-hover-color);
+      color: var(--body-color);
+      padding: 0.5rem 0.6rem;
+      color: white;
+      width: 100%;
+      margin: 1rem 0;
+      &:disabled {
+        cursor: not-allowed;
+      }
+    }
   }
 }
 @media (min-width: 500px) {
   .popup {
-    height: 60vh;
-    margin-top: -30vh;
+    height: 70vh;
+    margin-top: -40vh;
+
     .icon {
       display: none;
     }

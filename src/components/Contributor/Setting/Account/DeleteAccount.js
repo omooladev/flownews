@@ -4,7 +4,7 @@ import OauthPermission from "./OauthPermission";
 import { useCallback, useState } from "react";
 import ConfirmAccountDeletionPopUp from "./ConfirmAccountDeletionPopUp";
 const DeleteAccount = () => {
-  const [showPopUp, setShowPopUp] = useState(true);
+  const [showPopUp, setShowPopUp] = useState(false);
   const deleteAccountHandler = useCallback(() => {
     setShowPopUp(true);
   }, []);

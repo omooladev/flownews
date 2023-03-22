@@ -9,7 +9,7 @@ const AuthContextProvider = (props) => {
   const { sendRequest } = useHttp();
 
   const { appMode, onCloseProfileBox, onChangeAppMode } = useContext(AppContext);
-  const [showEmailLinkSentPopUp, setShowEmailLinkSentPopUp] = useState(false);
+  const [makeBodyFixed, setMakeBodyFixed] = useState(false);
   const [userData, setUserData] = useState({ username: "" });
 
   const token = appMode.token;
@@ -192,11 +192,11 @@ const AuthContextProvider = (props) => {
     return response;
   }, [sendRequest, token]);
   useEffect(() => {
-    if (showEmailLinkSentPopUp) {
+    if (makeBodyFixed) {
       return document.body.classList.add("fixed-body");
     }
     return document.body.classList.remove("fixed-body");
-  }, [showEmailLinkSentPopUp]);
+  }, [makeBodyFixed]);
   return (
     <AuthContext.Provider
       value={{
@@ -221,8 +221,7 @@ const AuthContextProvider = (props) => {
         onSignOut: signOutHandler,
 
         onUpdate_ResetPassword: update_ResetPasswordHandler,
-        showEmailLinkSentPopUp: showEmailLinkSentPopUp,
-        onSetShowEmailLinkSentPopUp: (bool) => setShowEmailLinkSentPopUp(bool),
+
         onVerifyEmailAddress: verifyEmailHandler,
         onResetPassword: resetPasswordHandler,
         onSendPasswordResetEmail: sendPasswordResetEmail,
@@ -232,6 +231,8 @@ const AuthContextProvider = (props) => {
         profileUpdated,
         onChangeProfileUpdated: changeProfileUpdated,
         changeAppMode: onChangeAppMode,
+        makeBodyFixed: makeBodyFixed,
+        onMakeBodyFixed: (bool) => setMakeBodyFixed(bool),
 
         onSaveContributorData: saveContributorData,
         onUpdateContributorProfile: updateContributorProfile,
