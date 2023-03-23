@@ -10,8 +10,8 @@
   --secondary-font: "Lato", Helvetica, sans-serif;
   --tertiary-font: "Frank Ruhl Libre", Helvetica, serif;
   /*? fonts sizes */
-  --primary-font-size: 14px;
-  --primary-font-text-height:;
+  --primary-font-size: 0.875rem;
+  --primary-font-line-height: 1.3125rem;
   --reverse-black-white-color: black;
   --body-color: #ffffff;
   --header-color: #ffffff;

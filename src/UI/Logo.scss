@@ -1,0 +1,24 @@
+@use "../sass/_DisplayFlex";
+.logo {
+  font-family: var(--primary-font);
+  cursor: pointer;
+  font-size: var(--primary-font-size);
+  color: var(--nav-text-color);
+  @extend %DisplayFlex;
+  justify-content: space-around;
+  #FN_text {
+    font-size: 3.4rem;
+    color: var(--nav-text-hover-color);
+    padding-right: 0.5rem;
+  }
+
+  #flownews_text {
+    text-transform: uppercase;
+    padding: 0.2rem 0;
+    font-weight: normal;
+  }
+  #publication_text {
+    padding: 0.2rem 0;
+    font-weight: normal;
+  }
+}
