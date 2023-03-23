@@ -13,9 +13,16 @@
   --primary-font-size: 0.875rem;
   --primary-font-line-height: 1.3125rem;
   --reverse-black-white-color: black;
+  /*? colors */
+  --black-color: black;
+  --white-color: white;
   --body-color: #ffffff;
+  --primary-color: rgb(48, 155, 101);
+  --secondary-color: black;
   --header-color: #ffffff;
+  --side-nav-color: #ccc;
   --side-nav: #ccc;
+
   --nav-text-color: black;
   --nav-text-hover-color: rgb(48, 155, 101);
   --subscribe-button: var(--nav-text-hover-color);
@@ -36,10 +43,6 @@
   --nav-link-padding: 0.5rem;
   --nav-link-margin: 0 5px;
 
-  /* --primary-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-    Cantarell, "Open Sans", "Helvetica Neue", sans-serif; */
-
-  /* Profile color */
   --profile-color: black;
   /* Public Profile colors */
   --form-border-color: rgba(48, 155, 101, 0.2);
@@ -47,18 +50,22 @@
   --link-color: blue;
 }
 body {
-  font-family: "Roboto";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   background-color: var(--body-color);
   height: auto;
 }
 
 body.dark {
-  --reverse-black-white-color: black;
+  /*? colors */
+  --black-color: black;
+  --white-color: white;
+  --primary-color: rgb(255, 165, 0);
+  --secondary-color: rgba(255, 255, 255, 0.87);
   --body-color: #18191a;
   --header-color: #242526;
   --side-nav: #242526;
+
+  --reverse-black-white-color: black;
+
   --nav-text-color: #ccc;
   --nav-text-hover-color: rgb(255, 165, 0);
   --subscribe-button: var(--nav-text-hover-color);

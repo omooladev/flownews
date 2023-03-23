@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./Logo.module.css";
 const Logo = (props) => {
-  console.log("logo");
   let className = props.className || "";
   return (
     <div className={`${className} ${styles.logo}`}>

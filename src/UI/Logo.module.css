@@ -9,18 +9,18 @@
   font-family: var(--primary-font);
   cursor: pointer;
   font-size: var(--primary-font-size);
-  color: var(--nav-text-color);
+  color: var(--secondary-color);
   justify-content: space-around;
 }
 .logo #FN_text {
   font-size: 3.4rem;
-  color: var(--nav-text-hover-color);
   padding-right: 0.5rem;
+  color: var(--primary-color);
 }
 .logo #flownews_text {
+  font-weight: normal;
   text-transform: uppercase;
   padding: 0.2rem 0;
-  font-weight: normal;
 }
 .logo #publication_text {
   padding: 0.2rem 0;
