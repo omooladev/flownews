@@ -5,9 +5,9 @@ import AccountSubscribe from "./Navigation/NavigationSections/AccountSubscribe";
 import Logo from "../../UI/Logo";
 import Menu from "./Menu/Menu";
 import Navigation from "./Navigation/Navigation";
-// import SuspenseLoader from "../Loaders/SuspenseLoader";
-import styles from "./Header.module.css";
 import SuspenseLoader from "../Loaders/SuspenseLoader";
+import styles from "./Header.module.css";
+
 const Header = () => {
   const { toggleMenu } = useContext(AppContext);
   const { isLoggedIn, contributorError, headerIsLoading, userData } = useContext(AuthContext);

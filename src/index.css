@@ -13,6 +13,8 @@
   --primary-font-size: 0.875rem;
   --primary-font-line-height: 1.3125rem;
   --reverse-black-white-color: black;
+  /*? padding */
+  --primary-padding: 0.5rem;
   /*? colors */
   --black-color: black;
   --white-color: white;
@@ -37,12 +39,6 @@
 
   --nav-profile-box-color: white;
 
-  --nav-link-font-family: var(--tertiary-font);
-  --nav-link-font-size: 1rem;
-  --nav-link-font-weight: 500;
-  --nav-link-padding: 0.5rem;
-  --nav-link-margin: 0 5px;
-
   --profile-color: black;
   /* Public Profile colors */
   --form-border-color: rgba(48, 155, 101, 0.2);
@@ -50,6 +46,7 @@
   --link-color: blue;
 }
 body {
+  font-family: var(--secondary-font);
   background-color: var(--body-color);
   height: auto;
 }
