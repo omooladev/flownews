@@ -1,7 +1,12 @@
 .for_mobile_only {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+}
+
+.for_mobile_only {
+  flex-direction: column;
   width: 100%;
 }
 .for_mobile_only button {
@@ -22,11 +27,11 @@
 .for_mobile_only button.contributor:hover {
   color: var(--nav-text-hover-color);
 }
-.for_mobile_only button.login {
+.for_mobile_only.login {
   color: var(--subscribe-button-color);
   background-color: var(--subscribe-button);
 }
-.for_mobile_only button.login:hover {
+.for_mobile_only.login:hover {
   background-color: var(--subscribe-button-hover);
   opacity: 0.8;
 }
@@ -35,6 +40,7 @@
   display: block;
   margin: 0.5rem;
 }
+
 .for_mobile_only .sign_out {
   display: block;
   margin: 0.5rem;
@@ -44,9 +50,11 @@
   font-weight: 300;
   color: var(--nav-text-color);
 }
+
 .for_mobile_only .sign_out a {
   color: var(--nav-text-color);
 }
+
 @media (min-width: 350px) {
   .for_mobile_only .notification {
     display: none;
@@ -57,7 +65,6 @@
     display: none;
   }
 }
-
 @media (min-width: 700px) {
   .for_mobile_only {
     display: none;

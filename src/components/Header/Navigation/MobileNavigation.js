@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useCallback, useContext } from "react";
+import { Link } from "react-router-dom";
 import { AppContext } from "../../../store/App/app-context";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import Notification from "./ContributorNavigations/Notification";
@@ -7,29 +7,23 @@ import ProfileBox from "./ContributorNavigations/ProfileBox";
 import styles from "./MobileNavigation.module.css";
 const MobileNavigation = () => {
   const { onCloseMenu } = useContext(AppContext);
-  const { isLoggedIn, userData, onSignOut } = useContext(AuthContext);
-  const history = useHistory();
+  const { isLoggedIn, userData, onSignOut, history } = useContext(AuthContext);
+  const becomeContributorHandler = useCallback(() => {
+    onCloseMenu();
+    history.replace("/become-contributor");
+  }, [history, onCloseMenu]);
+  const loginHandler = useCallback(() => {
+    onCloseMenu();
+    history.replace("/login");
+  }, [history, onCloseMenu]);
   return (
     <div className={styles.for_mobile_only}>
       {!isLoggedIn && (
         <>
-          <button
-            className={styles.contributor}
-            onClick={() => {
-              onCloseMenu();
-              history.replace("/become-contributor");
-            }}
-          >
+          <button className={styles.contributor} onClick={becomeContributorHandler}>
             Become a contributor
           </button>
-
-          <button
-            className={styles.login}
-            onClick={() => {
-              onCloseMenu();
-              history.replace("/login");
-            }}
-          >
+          <button className={styles.login} onClick={loginHandler}>
             Login
           </button>
         </>

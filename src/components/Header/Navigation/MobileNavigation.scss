@@ -1,0 +1,65 @@
+@use "../../../sass/_DisplayFlex";
+.for_mobile_only {
+  @extend %DisplayFlex;
+  flex-direction: column;
+  width: 100%;
+  button {
+    cursor: pointer;
+    margin: 0.5rem 0;
+    text-transform: capitalize;
+    text-align: center;
+    padding: var(--nav-link-padding);
+    font-size: var(--nav-link-font-size);
+    &.contributor {
+      background-color: transparent;
+      color: var(--nav-text-color);
+      font-size: var(--nav-link-font-size);
+      font-weight: var(--nav-link-font-weight);
+      transition: all 0.4s ease;
+      &:hover {
+        color: var(--nav-text-hover-color);
+      }
+    }
+  }
+  &.login {
+    color: var(--subscribe-button-color);
+    background-color: var(--subscribe-button);
+    &:hover {
+      background-color: var(--subscribe-button-hover);
+      opacity: 0.8;
+    }
+  }
+}
+
+.for_mobile_only .notification {
+  display: block;
+  margin: 0.5rem;
+}
+.for_mobile_only .sign_out {
+  display: block;
+  margin: 0.5rem;
+  text-transform: none;
+  cursor: pointer;
+  padding: 0 1rem;
+  font-weight: 300;
+  color: var(--nav-text-color);
+}
+.for_mobile_only .sign_out a {
+  color: var(--nav-text-color);
+}
+@media (min-width: 350px) {
+  .for_mobile_only .notification {
+    display: none;
+  }
+}
+@media (min-width: 500px) {
+  .for_mobile_only .sign_out {
+    display: none;
+  }
+}
+
+@media (min-width: 700px) {
+  .for_mobile_only {
+    display: none;
+  }
+}
