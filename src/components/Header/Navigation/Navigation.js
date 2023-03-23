@@ -12,13 +12,6 @@ const Navigation = (props) => {
   const { menuIsActive, onToggleMenu } = useContext(AppContext);
   const { isLoggedIn, userData } = useContext(AuthContext);
 
-  // const toggleAppDisplayMode = useCallback(() => {
-  //   if (appMode.display === "light") {
-  //     return onChangeAppDisplayMode("dark");
-  //   }
-  //   return onChangeAppDisplayMode("light");
-  // }, [appMode, onChangeAppDisplayMode]);
-
   return (
     <nav className={`${className} ${styles.navigation} ${menuIsActive ? styles.active : ""}`}>
       <section className={styles["navigation-section"]}>

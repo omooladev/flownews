@@ -37,6 +37,7 @@
 @media (min-width: 500px) {
   .navigation-link {
     a:hover {
+      transition: all 0.4s ease;
       color: var(--primary-color);
       &::before {
         opacity: 1;

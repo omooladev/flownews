@@ -12,9 +12,6 @@
   transition: all 0.4s ease;
   z-index: 998;
 }
-.navigation.active .navigation-section {
-  left: 0%;
-}
 .navigation .navigation-section .toggleLogo {
   height: 10vh;
   width: 100%;
@@ -26,24 +23,23 @@
 .navigation .navigation-section .toggleLogo .logo {
   display: none;
 }
-
-.navigation.active .navigation-section .toggleLogo .logo {
-  display: flex;
-  transition: all 0.4s ease;
-}
-
-.navigation .navigation-section .navigation-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  width: 100%;
-}
-
 .navigation .navigation-section .toggleLogo .icon {
   cursor: pointer;
   font-size: 1.5rem;
   color: var(--nav-text-color);
+}
+.navigation .navigation-section .navigation-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.navigation.active .navigation-section {
+  left: 0%;
+}
+.navigation.active .navigation-section .toggleLogo .logo {
+  display: flex;
+  transition: all 0.4s ease;
 }
 
 @media (min-width: 350px) {
