@@ -1,12 +1,18 @@
+.navigation .navigation-section, .navigation .navigation-section .toggleLogo, .navigation .navigation-section .navigation-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 .navigation .navigation-section {
   position: fixed;
   top: 0;
   left: -100%;
   width: 100vw;
   height: 100vh;
-  display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: flex-start;
   background-color: var(--side-nav);
   padding: 0 2.5%;
   transition: all 0.4s ease;
@@ -15,8 +21,6 @@
 .navigation .navigation-section .toggleLogo {
   height: 10vh;
   width: 100%;
-  display: flex;
-  align-items: center;
   justify-content: space-around;
   padding: 2rem 0;
 }
@@ -25,13 +29,11 @@
 }
 .navigation .navigation-section .toggleLogo .icon {
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: var(--nav-text-color);
 }
 .navigation .navigation-section .navigation-list {
-  display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
 }
 .navigation.active .navigation-section {
