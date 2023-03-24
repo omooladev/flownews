@@ -1,23 +1,18 @@
 .searchBox {
   position: relative;
 }
-
 .searchBox .searchField {
   position: absolute;
   bottom: -80px;
   right: -5px;
-  /* left: 5%; */
-
   height: 2.5rem;
   width: 80vw;
-
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   padding: 0 3px;
   background-color: var(--search-field-color);
-
   box-shadow: 0 5px 5px var(--header-color);
   border-radius: 0.3rem;
   border: 2px solid var(--search-field-border-color);
@@ -49,20 +44,20 @@
   cursor: pointer;
   right: 15px;
 }
-.searchBox .searchToggle {
+.searchBox .searchField .searchToggle {
   cursor: pointer;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
 }
-.searchBox .icon {
+.searchBox .searchField .icon {
   color: var(--nav-text-hover-color);
 }
-.searchBox .searchToggle .icon {
+.searchBox .searchField .searchToggle .icon {
   font-size: 1.3rem;
 }
-.searchBox .searchField .icon {
+.searchBox .searchField .searchField .icon {
   font-size: 1.3rem;
 }
 
@@ -76,7 +71,6 @@
     margin: var(--nav-link-padding);
   }
 }
-
 @media (min-width: 1200px) {
   .searchBox .searchField {
     right: 5px;

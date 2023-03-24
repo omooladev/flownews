@@ -1,7 +1,7 @@
 import { useCallback, useContext } from "react";
 import { BiX, BiSearch } from "react-icons/bi";
 import { AppContext } from "../../../../store/App/app-context";
-import SearchField from "../../../../UI/SearchField";
+import SearchField from "./SearchField";
 import styles from "./SearchBox.module.css";
 const SearchBox = () => {
   const { onToggleSearch, isSearching, onCloseMenu, menuIsActive } = useContext(AppContext);

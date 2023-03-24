@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import styles from "./SearchField.module.css";
+import styles from "./SearchField.module.css"
 const SearchField = (props) => {
   let { search, className, onFocus } = props;
   const searchRef = useRef();

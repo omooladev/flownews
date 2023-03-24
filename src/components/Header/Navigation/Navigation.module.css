@@ -30,7 +30,7 @@
 .navigation .navigation-section .toggleLogo .icon {
   cursor: pointer;
   font-size: 1.8rem;
-  color: var(--nav-text-color);
+  color: var(--secondary-color);
 }
 .navigation .navigation-section .navigation-list {
   flex-direction: column;
