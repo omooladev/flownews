@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import { useTitle } from "../../hooks/useTitle";
 import { AppContext } from "./app-context";
 const getAppMode = () => {
   const appMode = localStorage.getItem("flownews-mode");
@@ -10,13 +9,17 @@ const getAppMode = () => {
 };
 
 const AppContextProvider = (props) => {
-  useTitle("Flownews");
+  //* check the default browser theme
   const browserDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const browserLightTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
+  //* states
   const [appMode, setAppMode] = useState(getAppMode);
-  const [isSearching, setIsSearching] = useState(false);
-  const [menuIsActive, setMenuIsActive] = useState(false);
-  const [profileBoxIsActive, setProfileBoxIsActive] = useState(false);
+  const [componentsIsActive, setComponentsIsActive] = useState({
+    menuIsActive: false,
+    profileBoxIsActive: false,
+    searchFieldIsActive: false,
+  });
+
   const [lastLocation, setLastLocation] = useState("");
 
   const changeAppMode = useCallback((properties) => {
@@ -24,38 +27,9 @@ const AppContextProvider = (props) => {
       return { ...prevMode, ...properties };
     });
   }, []);
-  const toggleSearchHandler = useCallback(() => {
-    setIsSearching((prevState) => {
-      return !prevState;
-    });
-  }, []);
 
-  const toggleProfileBoxHandler = useCallback(() => {
-    setIsSearching((prevState) => {
-      if (prevState) return !prevState;
-    });
-    setMenuIsActive((prevState) => {
-      if (prevState) return !prevState;
-    });
-    setProfileBoxIsActive((prevState) => {
-      return !prevState;
-    });
-  }, []);
-
-  const toggleMenuHandler = useCallback(() => {
-    setMenuIsActive((prevState) => {
-      return !prevState;
-    });
-  }, []);
-
-  const closeMenuHandler = useCallback((event) => {
-    setMenuIsActive((prevState) => {
-      return false;
-    });
-  }, []);
-
-  const closeComponents = useCallback(() => {
-    console.log(isSearching);
+  const toggleComponentsIsActive = useCallback(({ type, event }) => {
+    console.log(type, event);
   }, []);
 
   useEffect(() => {
@@ -78,33 +52,13 @@ const AppContextProvider = (props) => {
     <AppContext.Provider
       value={{
         appMode,
-        onChangeAppMode: (properties) => {
-          changeAppMode(properties);
-        },
-        isSearching,
-        menuIsActive,
+        onChangeAppMode: changeAppMode,
         lastLocation,
-        profileBoxIsActive,
-        onToggleProfileBox: toggleProfileBoxHandler,
-        onCloseProfileBox: () => {
-          setProfileBoxIsActive((prevState) => {
-            return false;
-          });
-        },
-
         onSetLastLocation: (location) => {
           setLastLocation(location);
         },
-
-        onToggleSearch: toggleSearchHandler,
-        onCloseSearch: () => {
-          setIsSearching((prevState) => {
-            return false;
-          });
-        },
-        onToggleMenu: toggleMenuHandler,
-        onCloseMenu: closeMenuHandler,
-        onCloseComponents: closeComponents,
+        componentsIsActive,
+        onToggleComponentsIsActive: toggleComponentsIsActive,
       }}
     >
       {props.children}

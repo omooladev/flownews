@@ -4,22 +4,15 @@ import { AppContext } from "../../../../store/App/app-context";
 import SearchField from "./SearchField";
 import styles from "./SearchBox.module.css";
 const SearchBox = () => {
-  const { onToggleSearch, isSearching, onCloseMenu, menuIsActive } = useContext(AppContext);
+  const { onToggleSearch, isSearching } = useContext(AppContext);
   const toggleSearchHandler = useCallback(
     (event) => {
       event.stopPropagation();
-      if (menuIsActive) {
-        onCloseMenu();
-      }
       onToggleSearch();
     },
-    [menuIsActive, onToggleSearch, onCloseMenu]
+    [onToggleSearch]
   );
-  const closeMenuHandler = useCallback(() => {
-    if (menuIsActive) {
-      onCloseMenu();
-    }
-  }, [menuIsActive, onCloseMenu]);
+
   return (
     <div className={styles["searchBox"]}>
       <div className={styles.searchToggle} onClick={toggleSearchHandler}>
@@ -28,7 +21,7 @@ const SearchBox = () => {
       </div>
       {isSearching && (
         <div className={styles.searchField}>
-          <SearchField className={styles.input} onFocus={closeMenuHandler} search={isSearching} />
+          <SearchField className={styles.input} search={isSearching} />
           <BiSearch className={`${styles.icon} ${styles.search}`} />
         </div>
       )}

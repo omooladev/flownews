@@ -16,14 +16,15 @@
   /*? padding */
   --primary-padding: 0.5rem;
   /*? colors */
-  --black-color: black;
-  --white-color: white;
   --body-color: #ffffff;
   --primary-color: rgb(48, 155, 101);
   --secondary-color: black;
   --header-color: #ffffff;
   --side-nav-color: #ccc;
   --side-nav: #ccc;
+  /*? normal global colors  */
+  --black-color: black;
+  --white-color: white;
 
   --nav-text-color: black;
   --nav-text-hover-color: rgb(48, 155, 101);
@@ -53,8 +54,6 @@ body {
 
 body.dark {
   /*? colors */
-  --black-color: black;
-  --white-color: white;
   --primary-color: rgb(255, 165, 0);
   --secondary-color: rgba(255, 255, 255, 0.87);
   --body-color: #18191a;
