@@ -54,6 +54,10 @@ const AppContextProvider = (props) => {
     });
   }, []);
 
+  const closeComponents = useCallback(() => {
+    console.log(isSearching);
+  }, []);
+
   useEffect(() => {
     if (browserLightTheme || appMode.theme === "light-default") {
       document.body.classList.remove("dark");
@@ -70,7 +74,6 @@ const AppContextProvider = (props) => {
       return localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode }));
     }
   }, [appMode]);
-
   return (
     <AppContext.Provider
       value={{
@@ -101,6 +104,7 @@ const AppContextProvider = (props) => {
         },
         onToggleMenu: toggleMenuHandler,
         onCloseMenu: closeMenuHandler,
+        onCloseComponents: closeComponents,
       }}
     >
       {props.children}
