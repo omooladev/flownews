@@ -29,7 +29,12 @@ const AppContextProvider = (props) => {
   }, []);
 
   const toggleComponentsIsActive = useCallback(({ type, event }) => {
-    console.log(type, event);
+    if (event === "close") {
+      const component = `${type}IsActive`;
+      return setComponentsIsActive((prevState) => {
+        return { ...prevState, [component]: true };
+      });
+    }
   }, []);
 
   useEffect(() => {

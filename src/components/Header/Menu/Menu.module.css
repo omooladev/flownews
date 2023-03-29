@@ -1,17 +1,17 @@
 .menu_icon {
-  cursor: pointer;
   position: absolute;
+  cursor: pointer;
   top: 50%;
   left: 5%;
   height: 2rem;
   width: 2rem;
-  margin-top: -1rem;
   font-size: 2rem;
-  color: var(--nav-text-hover-color);
+  margin-top: -1rem;
+  color: var(--primary-color);
   opacity: 1;
   transition: all 0.4s ease;
 }
-.menu_icon.active {
+.menu_icon .active {
   opacity: 0;
 }
 

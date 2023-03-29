@@ -3,13 +3,16 @@ import { BiMenu } from "react-icons/bi";
 import { AppContext } from "../../../store/App/app-context";
 import styles from "./Menu.module.css";
 const Menu = () => {
-  const { onToggleMenu, menuIsActive } = useContext(AppContext);
+  const {
+    componentsIsActive: { menuIsActive },
+    onToggleComponentsIsActive,
+  } = useContext(AppContext);
   const toggleMenuHandler = useCallback(
     (event) => {
       event.stopPropagation();
-      onToggleMenu();
+      onToggleComponentsIsActive({ type: "menu", event: "close" });
     },
-    [onToggleMenu]
+    [onToggleComponentsIsActive]
   );
   return (
     <BiMenu

@@ -4,24 +4,27 @@ import { AppContext } from "../../../../store/App/app-context";
 import SearchField from "./SearchField";
 import styles from "./SearchBox.module.css";
 const SearchBox = () => {
-  const { onToggleSearch, isSearching } = useContext(AppContext);
+  const {
+    componentsIsActive: { searchFieldIsActive },
+    onToggleComponentsIsActive,
+  } = useContext(AppContext);
   const toggleSearchHandler = useCallback(
     (event) => {
       event.stopPropagation();
-      onToggleSearch();
+      onToggleComponentsIsActive({ type: "searchField", event: "close" });
     },
-    [onToggleSearch]
+    [onToggleComponentsIsActive]
   );
 
   return (
     <div className={styles["searchBox"]}>
       <div className={styles.searchToggle} onClick={toggleSearchHandler}>
-        {isSearching && <BiX className={`${styles.icon} ${styles.cancel}`} />}
-        {!isSearching && <BiSearch className={`${styles.icon} ${styles.search}`} />}
+        {searchFieldIsActive && <BiX className={`${styles.icon} ${styles.cancel}`} />}
+        {!searchFieldIsActive && <BiSearch className={`${styles.icon} ${styles.search}`} />}
       </div>
-      {isSearching && (
+      {searchFieldIsActive && (
         <div className={styles.searchField}>
-          <SearchField className={styles.input} search={isSearching} />
+          <SearchField className={styles.input} search={searchFieldIsActive} />
           <BiSearch className={`${styles.icon} ${styles.search}`} />
         </div>
       )}

@@ -13,4 +13,5 @@ export const AppContext = React.createContext({
     profileBoxIsActive: false,
     searchFieldIsActive: false,
   },
+  onToggleComponentsIsActive: () => {},
 });
