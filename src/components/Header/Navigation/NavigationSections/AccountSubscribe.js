@@ -1,30 +1,47 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback,useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
 import styles from "./AccountSubscribe.module.css";
+import { AppContext } from "../../../../store/App/app-context";
 const Account = (props) => {
   let className = props.className || "";
+  const {
+    componentsIsActive: { accountSubscribeContainerIsActive },
+    onToggleComponentsIsActive,
+  } = useContext(AppContext);
   const history = useHistory();
-  const [openAccount, setOpenAccount] = useState(false);
 
   const showOpenAccountContainer = useCallback(() => {
-    setOpenAccount((prevState) => {
-      return true;
-    });
-  }, []);
+    onToggleComponentsIsActive({ type: "accountSubscribeContainer", event: "toggle" });
+  }, [onToggleComponentsIsActive]);
   const hideOpenAccountContainer = useCallback(() => {
-    setOpenAccount((prevState) => {
-      return false;
-    });
-  }, []);
-  const toggleAccountContainer = useCallback((event) => {
-    setOpenAccount((prevState) => {
-      return !prevState;
-    });
-  }, []);
+    onToggleComponentsIsActive({ type: "accountSubscribeContainer", event: "close" });
+  }, [onToggleComponentsIsActive]);
+  const toggleAccountContainer = useCallback(
+    (event) => {
+      onToggleComponentsIsActive({ type: "accountSubscribeContainer", event: "toggle" });
+    },
+    [onToggleComponentsIsActive]
+  );
+  const loginHandler = useCallback(
+    (event) => {
+      history.replace("/login");
+    },
+    [history]
+  );
+  const becomeContributorHandler = useCallback(
+    (event) => {
+      history.replace("/become-contributor");
+    },
+    [history]
+  );
 
   return (
-    <div className={`${className} ${styles.account_subscribe} ${openAccount ? styles.active : ""}`}>
+    <div
+      className={`${className} ${styles.account_subscribe} ${
+        accountSubscribeContainerIsActive ? styles.active : ""
+      }`}
+    >
       <div className={styles.my_account} onClick={toggleAccountContainer}>
         <div onMouseEnter={showOpenAccountContainer}>
           <FaRegUser className={styles.icon} />
@@ -34,13 +51,10 @@ const Account = (props) => {
           <span>Get into your account</span>
           <hr />
           <div className={styles["my_account_container_button"]}>
-            <button className={styles.login} onClick={() => history.replace("/login")}>
+            <button className={styles.login} onClick={loginHandler}>
               Login
             </button>
-            <button
-              className={styles.contributor}
-              onClick={() => history.replace("/become-contributor")}
-            >
+            <button className={styles.contributor} onClick={becomeContributorHandler}>
               Become a contributor
             </button>
           </div>

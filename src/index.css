@@ -14,7 +14,7 @@
   --primary-font-line-height: 1.3125rem;
   --reverse-black-white-color: black;
   /*? padding */
-  --primary-padding: 0.5rem;
+  --primary-padding: 0.5rem 0.6rem;
   /*? colors */
   --primary-color: rgb(48, 155, 101);
   --primary-hover-color: rgba(48, 155, 101, 0.8);

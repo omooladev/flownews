@@ -1,40 +1,31 @@
+.account_subscribe .my_account {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 .account_subscribe {
   position: relative;
-}
-.account_subscribe .subscribe_button {
-  cursor: pointer;
   font-size: var(--primary-font-size);
-  text-transform: uppercase;
-  color: var(--white-color);
-  background-color: var(--primary-color);
-  padding: 0.5rem 0.6rem;
-  margin: var(--nav-link-margin);
+  font-size: 1rem;
 }
-.account_subscribe .subscribe_button:hover {
-  background-color: var(--primary-hover-color);
-}
-
-.account_subscribe .my_account,
-.account_subscribe.active .my_account {
+.account_subscribe .my_account {
   cursor: pointer;
-  color: var(--nav-text-color);
+  color: var(--secondary-color);
   text-transform: capitalize;
-  padding: var(--nav-link-padding);
-  margin: var(--nav-link-margin);
-  font-size: var(--nav-link-font-size);
-  font-weight: var(--nav-link-font-weight);
-  display: flex;
-  align-items: center;
   justify-content: space-around;
+  margin: 0 0.5rem;
 }
-
-.account_subscribe .my_account_container {
+.account_subscribe .my_account .icon {
+  margin: 0 0.5rem;
+}
+.account_subscribe .my_account .my_account_container {
   display: none;
-  opacity: 0;
   cursor: default;
   position: absolute;
   bottom: -6.5rem;
-  left: 0;
+  left: -4rem;
   width: 260px;
   z-index: 999;
   background-color: var(--search-field-color);
@@ -45,48 +36,44 @@
   margin: var(--nav-link-margin);
   padding: 0.5rem 0;
 }
-
-.account_subscribe.active .my_account_container {
-  display: block;
-  opacity: 1;
-}
-
-.account_subscribe .my_account_container span {
-  font-size: var(--nav-link-font-size);
-  font-weight: var(--nav-link-font-weight);
-  color: var(--nav-text-color);
+.account_subscribe .my_account .my_account_container span {
+  color: var(--secondary-color);
   margin: 0.5rem;
+  font-weight: bold;
 }
-
-.account_subscribe .my_account_container hr {
+.account_subscribe .my_account .my_account_container hr {
   display: block;
   margin-top: 0.5rem;
 }
-
-.account_subscribe .my_account_container .my_account_container_button button {
+.account_subscribe .my_account .my_account_container .my_account_container_button button {
   cursor: pointer;
   margin: 0.5rem;
-  padding: var(--nav-link-padding);
+  padding: var(--primary-padding);
   font-size: var(--nav-link-font-size);
   font-size: 0.9rem;
 }
-
-.account_subscribe .my_account_container .my_account_container_button button.login {
-  color: var(--subscribe-button-color);
-  background-color: var(--subscribe-button);
+.account_subscribe .my_account .my_account_container .my_account_container_button button.login {
+  color: var(--white-color);
+  background-color: var(--primary-color);
 }
-
-.account_subscribe .my_account_container .my_account_container_button button.contributor {
+.account_subscribe .my_account .my_account_container .my_account_container_button button.contributor {
   color: var(--nav-text-color);
   background-color: transparent;
 }
-
-.account_subscribe .my_account_container .my_account_container_button button.contributor:hover {
+.account_subscribe .my_account .my_account_container .my_account_container_button button.contributor:hover {
   color: var(--nav-text-hover-color);
 }
-
-.account_subscribe .my_account .icon {
-  font-size: 1.1rem;
-  color: var(--nav-text-color);
-  margin: var(--nav-link-margin);
+.account_subscribe .subscribe_button {
+  cursor: pointer;
+  text-transform: uppercase;
+  color: var(--white-color);
+  background-color: var(--primary-color);
+  padding: var(--primary-padding);
+  margin: 0 0.5rem;
+}
+.account_subscribe .subscribe_button:hover {
+  background-color: var(--primary-hover-color);
+}
+.account_subscribe.active .my_account_container {
+  display: block;
 }

@@ -18,6 +18,7 @@ const AppContextProvider = (props) => {
     menuIsActive: false,
     profileBoxIsActive: false,
     searchFieldIsActive: false,
+    accountSubscribeContainerIsActive:false,
   });
 
   const [lastLocation, setLastLocation] = useState("");
