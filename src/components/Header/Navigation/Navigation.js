@@ -9,7 +9,10 @@ import SearchBox from "./NavigationSections/SearchBox";
 import styles from "./Navigation.module.css";
 const Navigation = (props) => {
   let className = props.className || "";
-  const { menuIsActive, onToggleMenu } = useContext(AppContext);
+  const {
+    componentsIsActive: { menuIsActive },
+    onToggleComponentsIsActive,
+  } = useContext(AppContext);
   const { isLoggedIn, userData } = useContext(AuthContext);
 
   return (
@@ -17,7 +20,12 @@ const Navigation = (props) => {
       <section className={styles["navigation-section"]}>
         <div className={styles.toggleLogo}>
           <Logo className={styles.logo} />
-          <BiX className={`${styles.icon} ${styles.cancel}`} onClick={onToggleMenu} />
+          <BiX
+            className={`${styles.icon} ${styles.cancel}`}
+            onClick={() => {
+              onToggleComponentsIsActive({ type: "menu", event: "close" });
+            }}
+          />
         </div>
         <ul className={styles["navigation-list"]}>
           <UserNavigation isLoggedIn={isLoggedIn} />
