@@ -8,17 +8,13 @@ const HOSTURI = "https://flownews-api.onrender.com/api/v1";
 const AuthContextProvider = (props) => {
   const { sendRequest } = useHttp();
 
-  const { appMode, onCloseProfileBox, onChangeAppMode } = useContext(AppContext);
+  const { appMode, onChangeAppMode,onToggleComponentsIsActive } = useContext(AppContext);
+  const token = appMode.token;
+  const isLoggedIn = appMode.isLoggedIn;
   const [makeBodyFixed, setMakeBodyFixed] = useState(false);
   const [userData, setUserData] = useState({ username: "" });
-
-  const token = appMode.token;
-
-  const [searchedContributorData, setSearchedContributorData] = useState({
-    user: { username: "" },
-  });
+  const [searchedContributorData, setSearchedContributorData] = useState({ username: "" });
   const [headerIsLoading, setHeaderIsLoading] = useState(false);
-  const isLoggedIn = appMode.isLoggedIn;
 
   const [authMessage, setAuthMessage] = useState({ type: "", message: "" });
   const [contributorError, setContributorError] = useState({ ref: "", message: "" });
@@ -89,13 +85,13 @@ const AuthContextProvider = (props) => {
 
   const signOutHandler = useCallback(() => {
     onChangeAppMode({ isLoggedIn: false, token: null, username: null, tokenExpirationTime: null });
-    onCloseProfileBox();
+    onToggleComponentsIsActive({ event: "*" });
     setProfileUpdated(false);
     setUserData((prevData) => {
       return { username: "" };
     });
     history.replace("/home");
-  }, [history, onCloseProfileBox, onChangeAppMode]);
+  }, [history, onToggleComponentsIsActive, onChangeAppMode]);
 
   const resetAuthMessage = useCallback(() => {
     setAuthMessage((prevMessage) => {

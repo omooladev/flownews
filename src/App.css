@@ -1,7 +1,7 @@
 .main {
-  /* height: 90vh; */
   background-color: var(--body-color);
-  padding-top: 9vh;
+  padding-top: 10vh;
+  /* background-color: red; */
 }
 
 .main.profile_updated {
