@@ -16,8 +16,8 @@ const AppContextProvider = (props) => {
   const [appMode, setAppMode] = useState(getAppMode);
   const [componentsIsActive, setComponentsIsActive] = useState({
     menuIsActive: false,
-    profileBoxIsActive: false,
-    searchFieldIsActive: false,
+    profileBoxIsActive: true,
+    searchFieldIsActive: true,
   });
 
   const [lastLocation, setLastLocation] = useState("");
@@ -38,11 +38,18 @@ const AppContextProvider = (props) => {
     if (event === "toggle") {
       const component = `${type}IsActive`;
       return setComponentsIsActive((prevState) => {
-        const {} = prevState;
-        prevState.map((state) => {
-          console.log(state);
+        const prevStateKeys = Object.keys(prevState);
+        prevStateKeys.forEach((key) => {
+          if (key === component) {
+            prevState[key] = !prevState[key];
+          }
+          if (prevState[key] === true && key !== component) {
+            prevState[key] = false;
+          }
+          return;
         });
-        return { ...prevState };
+        const newState = prevState;
+        return { ...newState };
       });
     }
   }, []);
