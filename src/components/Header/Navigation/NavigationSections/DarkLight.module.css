@@ -1,9 +1,0 @@
-.darkLight {
-  display: flex;
-  cursor: pointer;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  padding: var(--nav-link-padding);
-  margin: var(--nav-link-padding);
-}
