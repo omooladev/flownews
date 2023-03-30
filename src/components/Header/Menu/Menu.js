@@ -10,7 +10,7 @@ const Menu = () => {
   const toggleMenuHandler = useCallback(
     (event) => {
       event.stopPropagation();
-      onToggleComponentsIsActive({ type: "menu", event: "close" });
+      onToggleComponentsIsActive({ type: "menu", event: "toggle" });
     },
     [onToggleComponentsIsActive]
   );

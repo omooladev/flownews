@@ -32,7 +32,17 @@ const AppContextProvider = (props) => {
     if (event === "close") {
       const component = `${type}IsActive`;
       return setComponentsIsActive((prevState) => {
-        return { ...prevState, [component]: true };
+        return { ...prevState, [component]: false };
+      });
+    }
+    if (event === "toggle") {
+      const component = `${type}IsActive`;
+      return setComponentsIsActive((prevState) => {
+        const {} = prevState;
+        prevState.map((state) => {
+          console.log(state);
+        });
+        return { ...prevState };
       });
     }
   }, []);

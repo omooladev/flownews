@@ -11,7 +11,7 @@ const SearchBox = () => {
   const toggleSearchHandler = useCallback(
     (event) => {
       event.stopPropagation();
-      onToggleComponentsIsActive({ type: "searchField", event: "close" });
+      onToggleComponentsIsActive({ type: "searchField", event: "toggle" });
     },
     [onToggleComponentsIsActive]
   );
