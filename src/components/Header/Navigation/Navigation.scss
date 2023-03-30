@@ -1,5 +1,6 @@
 @use "../../../sass/_DisplayFlex";
 .navigation {
+  @extend %DisplayFlex;
   .navigation-section {
     position: fixed;
     top: 0;
@@ -12,7 +13,7 @@
     background-color: var(--side-nav);
     padding: 0 2.5%;
     transition: all 0.4s ease;
-    z-index: 998;
+    z-index: 1000; //?TODO ZINDEX
     .toggleLogo {
       height: 10vh;
       width: 100%;
@@ -20,7 +21,7 @@
       justify-content: space-around;
       padding: 2rem 0;
       .logo {
-        display: none;
+        display: flex;
       }
       .icon {
         cursor: pointer;
@@ -36,11 +37,6 @@
   }
   &.active .navigation-section {
     left: 0%;
-  }
-
-  &.active .navigation-section .toggleLogo .logo {
-    display: flex;
-    transition: all 0.4s ease;
   }
 }
 

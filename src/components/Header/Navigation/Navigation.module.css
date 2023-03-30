@@ -1,4 +1,4 @@
-.navigation .navigation-section, .navigation .navigation-section .toggleLogo, .navigation .navigation-section .navigation-list {
+.navigation, .navigation .navigation-section, .navigation .navigation-section .toggleLogo, .navigation .navigation-section .navigation-list {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -16,7 +16,7 @@
   background-color: var(--side-nav);
   padding: 0 2.5%;
   transition: all 0.4s ease;
-  z-index: 998;
+  z-index: 1000;
 }
 .navigation .navigation-section .toggleLogo {
   height: 10vh;
@@ -25,7 +25,7 @@
   padding: 2rem 0;
 }
 .navigation .navigation-section .toggleLogo .logo {
-  display: none;
+  display: flex;
 }
 .navigation .navigation-section .toggleLogo .icon {
   cursor: pointer;
@@ -38,10 +38,6 @@
 }
 .navigation.active .navigation-section {
   left: 0%;
-}
-.navigation.active .navigation-section .toggleLogo .logo {
-  display: flex;
-  transition: all 0.4s ease;
 }
 
 @media (min-width: 350px) {
