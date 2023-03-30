@@ -1,12 +1,11 @@
-import { useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
-
 import styles from "./AccountSubscribe.module.css";
 const Account = (props) => {
+  let className = props.className || "";
   const history = useHistory();
   const [openAccount, setOpenAccount] = useState(false);
-  let className = props.className || "";
 
   const showOpenAccountContainer = useCallback(() => {
     setOpenAccount((prevState) => {
@@ -47,10 +46,10 @@ const Account = (props) => {
           </div>
         </div>
       </div>
-      <button type="button" className={styles.subscribe}>
+      <button type="button" className={styles.subscribe_button}>
         subscribe
       </button>
     </div>
   );
 };
-export default Account;
+export default React.memo(Account);

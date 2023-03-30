@@ -17,6 +17,7 @@
   --primary-padding: 0.5rem;
   /*? colors */
   --primary-color: rgb(48, 155, 101);
+  --primary-hover-color: rgba(48, 155, 101, 0.8);
   --secondary-color: black;
   /*? specific colors */
   --body-color: #ffffff;
@@ -29,9 +30,7 @@
 
   --nav-text-color: black;
   --nav-text-hover-color: rgb(48, 155, 101);
-  --subscribe-button: var(--nav-text-hover-color);
-  --subscribe-button-color: var(--body-color);
-  --subscribe-button-hover: var(--nav-text-hover-color);
+
   --search-field-color: var(--header-color);
   --search-field-border-color: var(--nav-text-hover-color);
 
@@ -68,9 +67,7 @@ body.dark {
 
   --nav-text-color: #ccc;
   --nav-text-hover-color: rgb(255, 165, 0);
-  --subscribe-button: var(--nav-text-hover-color);
-  --subscribe-button-color: var(--header-color);
-  --subscribe-button-hover: var(--nav-text-hover-color);
+
   --search-field-color: var(--header-color);
   --search-field-border-color: var(--nav-text-hover-color);
 

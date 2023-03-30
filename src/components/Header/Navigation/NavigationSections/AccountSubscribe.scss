@@ -1,19 +1,19 @@
 .account_subscribe {
   position: relative;
-}
-.account_subscribe .subscribe_button {
-  cursor: pointer;
-  font-size: var(--primary-font-size);
-  text-transform: uppercase;
-  color: var(--white-color);
-  background-color: var(--primary-color);
-  padding: 0.5rem 0.6rem;
-  margin: var(--nav-link-margin);
-}
-.account_subscribe .subscribe_button:hover {
-  background-color: var(--primary-hover-color);
-}
 
+  .subscribe_button {
+    cursor: pointer;
+    font-size: var(--primary-font-size);
+    text-transform: uppercase;
+    color: var(--white-color);
+    background-color: var(--primary-color);
+    padding: 0.5rem 0.6rem;
+    margin: var(--nav-link-margin);
+    &:hover {
+      background-color: var(--primary-hover-color);
+    }
+  }
+}
 .account_subscribe .my_account,
 .account_subscribe.active .my_account {
   cursor: pointer;
@@ -23,11 +23,11 @@
   margin: var(--nav-link-margin);
   font-size: var(--nav-link-font-size);
   font-weight: var(--nav-link-font-weight);
+
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
-
 .account_subscribe .my_account_container {
   display: none;
   opacity: 0;
@@ -38,6 +38,7 @@
   width: 260px;
   z-index: 999;
   background-color: var(--search-field-color);
+
   box-shadow: 0 5px 5px var(--header-color);
   border-radius: 0.3rem;
   border: 2px solid var(--search-field-border-color);
@@ -45,19 +46,16 @@
   margin: var(--nav-link-margin);
   padding: 0.5rem 0;
 }
-
 .account_subscribe.active .my_account_container {
   display: block;
   opacity: 1;
 }
-
 .account_subscribe .my_account_container span {
   font-size: var(--nav-link-font-size);
   font-weight: var(--nav-link-font-weight);
   color: var(--nav-text-color);
   margin: 0.5rem;
 }
-
 .account_subscribe .my_account_container hr {
   display: block;
   margin-top: 0.5rem;
@@ -70,17 +68,14 @@
   font-size: var(--nav-link-font-size);
   font-size: 0.9rem;
 }
-
 .account_subscribe .my_account_container .my_account_container_button button.login {
   color: var(--subscribe-button-color);
   background-color: var(--subscribe-button);
 }
-
 .account_subscribe .my_account_container .my_account_container_button button.contributor {
   color: var(--nav-text-color);
   background-color: transparent;
 }
-
 .account_subscribe .my_account_container .my_account_container_button button.contributor:hover {
   color: var(--nav-text-hover-color);
 }
