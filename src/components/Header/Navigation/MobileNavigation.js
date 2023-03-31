@@ -1,21 +1,20 @@
 import { useCallback, useContext } from "react";
 import { Link } from "react-router-dom";
-import { AppContext } from "../../../store/App/app-context";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import Notification from "./ContributorNavigations/Notification";
 import ProfileBox from "./ContributorNavigations/ProfileBox";
 import styles from "./MobileNavigation.module.css";
-const MobileNavigation = () => {
-  const { onCloseMenu } = useContext(AppContext);
+const MobileNavigation = (props) => {
+  const { onToggleComponentsIsActive } = props;
   const { isLoggedIn, userData, onSignOut, history } = useContext(AuthContext);
   const becomeContributorHandler = useCallback(() => {
-    onCloseMenu();
+    onToggleComponentsIsActive({ type: "menu", event: "close" });
     history.replace("/become-contributor");
-  }, [history, onCloseMenu]);
+  }, [history, onToggleComponentsIsActive]);
   const loginHandler = useCallback(() => {
-    onCloseMenu();
+    onToggleComponentsIsActive({ type: "menu", event: "close" });
     history.replace("/login");
-  }, [history, onCloseMenu]);
+  }, [history, onToggleComponentsIsActive]);
   return (
     <div className={styles.for_mobile_only}>
       {!isLoggedIn && (
@@ -33,7 +32,7 @@ const MobileNavigation = () => {
           <ProfileBox
             className="MobileNavigation__ProfileBox"
             onClick={() => {
-              onCloseMenu();
+              onToggleComponentsIsActive({ type: "menu", event: "close" });
               history.replace(`/@${userData.username}`);
             }}
           />
@@ -42,7 +41,7 @@ const MobileNavigation = () => {
             <Link
               to="#"
               onClick={() => {
-                onCloseMenu();
+               onToggleComponentsIsActive({ type: "menu", event: "close" });
                 onSignOut();
               }}
             >

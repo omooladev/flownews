@@ -28,7 +28,7 @@ const Navigation = (props) => {
           />
         </div>
         <ul className={styles["navigation-list"]}>
-          <UserNavigation isLoggedIn={isLoggedIn} />
+          <UserNavigation />
         </ul>
       </section>
       <SearchBox />

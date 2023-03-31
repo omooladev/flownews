@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import styles from "./SearchField.module.css"
+import styles from "./SearchField.module.css";
 const SearchField = (props) => {
-  let { search, className, onFocus } = props;
+  let { search, className } = props;
   const searchRef = useRef();
 
   useEffect(() => {
@@ -10,7 +10,7 @@ const SearchField = (props) => {
     }
   }, [search]);
   className = className || "";
-  return <input onFocus={onFocus} className={`${className} ${styles.input}`} ref={searchRef} />;
+  return <input className={`${className} ${styles.input}`} ref={searchRef} />;
 };
 
 export default SearchField;

@@ -5,13 +5,12 @@ import { AppContext } from "../../../store/App/app-context";
 import MobileNavigation from "./MobileNavigation";
 import styles from "./UserNavigation.module.css";
 const UserNavigation = () => {
-  console.log("user navigation");
-  const { onCloseMenu } = useContext(AppContext);
+  const { onToggleComponentsIsActive } = useContext(AppContext);
   const userLinks = ["home", "news", "blog", "celebrity", "food", "make-up"];
 
   const closeMenuHandler = useCallback(() => {
-    onCloseMenu();
-  }, [onCloseMenu]);
+    onToggleComponentsIsActive({ type: "menu", event: "close" });
+  }, [onToggleComponentsIsActive]);
   return (
     <>
       {userLinks.map((link) => {
@@ -27,7 +26,7 @@ const UserNavigation = () => {
           </li>
         );
       })}
-      <MobileNavigation />
+      <MobileNavigation onToggleComponentsIsActive={onToggleComponentsIsActive} />
     </>
   );
 };
