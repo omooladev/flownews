@@ -2,6 +2,7 @@ import { useCallback, useContext } from "react";
 import Routes from "../routes/Routes";
 import { AppContext } from "../store/App/app-context";
 import { AuthContext } from "../store/Auth/auth-context";
+import Dummy_news from "../components/DummyNews/dummy_news";
 
 const Main = () => {
   const { onToggleComponentsIsActive } = useContext(AppContext);
@@ -17,7 +18,7 @@ const Main = () => {
       className={`main ${profileUpdated ? "profile_updated" : ""}`}
       onClick={closeComponentsHandler}
     >
-      eeeev3 3 3 3 3
+      <Dummy_news />
       <Routes />
     </main>
   );

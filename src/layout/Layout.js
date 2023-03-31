@@ -1,6 +1,6 @@
 import Header from "../components/Header/Header";
 import Main from "./Main";
-const Layout = (props) => {
+const Layout = () => {
   return (
     <>
       <Header />
