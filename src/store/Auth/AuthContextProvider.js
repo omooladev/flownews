@@ -8,7 +8,7 @@ const HOSTURI = "https://flownews-api.onrender.com/api/v1";
 const AuthContextProvider = (props) => {
   const { sendRequest } = useHttp();
 
-  const { appMode, onChangeAppMode,onToggleComponentsIsActive } = useContext(AppContext);
+  const { appMode, onChangeAppMode, onToggleComponentsIsActive,lastLocation } = useContext(AppContext);
   const token = appMode.token;
   const isLoggedIn = appMode.isLoggedIn;
   const [makeBodyFixed, setMakeBodyFixed] = useState(false);
@@ -224,6 +224,7 @@ const AuthContextProvider = (props) => {
         onVerifyPasswordResetLink: verifyPasswordResetLink,
 
         //?Refactored already
+        lastLocation,
         profileUpdated,
         onChangeProfileUpdated: changeProfileUpdated,
         changeAppMode: onChangeAppMode,

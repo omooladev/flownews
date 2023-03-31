@@ -1,19 +1,16 @@
 import { useCallback, useContext, useState } from "react";
-import { AppContext } from "../../../store/App/app-context";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import { BiX } from "react-icons/bi";
 import PopUp from "../../../UI/PopUp";
-import styles from "./Auth.module.css";
 import Login from "./Login";
 import BecomeContributor from "./BecomeContributor";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
-
+import styles from "./Auth.module.css";
 const Auth = () => {
   const [viewPassword, setViewPassword] = useState(false);
-  const { lastLocation } = useContext(AppContext);
   const [authReply, setAuthReply] = useState({ type: null, message: "" });
-  const { history } = useContext(AuthContext);
+  const { history, lastLocation } = useContext(AuthContext);
   const location = history.location.pathname;
   const loginLocation = location.includes("/login");
   const becomeContributorLocation = location.includes("/become-contributor");

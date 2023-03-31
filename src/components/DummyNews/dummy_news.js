@@ -1,5 +1,5 @@
-import styles from "./dummy_news.module.css";
-const Dummy_news = () => {
+import styles from "./DummyNews.module.css";
+const DummyNews = () => {
   return (
     <div className={styles.news_container}>
       <h2>Dummy News</h2>
@@ -394,4 +394,4 @@ const Dummy_news = () => {
   );
 };
 
-export default Dummy_news;
+export default DummyNews;
