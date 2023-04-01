@@ -28,12 +28,11 @@
   left: 0rem;
   width: 260px;
   z-index: 999;
-  background-color: var(--search-field-color);
+  background-color: var(--header-color);
   box-shadow: 0 5px 5px var(--header-color);
   border-radius: 0.3rem;
-  border: 2px solid var(--search-field-border-color);
+  border: 2px solid var(--primary-color);
   transition: all 0.3s ease;
-  margin: var(--nav-link-margin);
   padding: 0.5rem 0;
 }
 .account_subscribe .my_account .my_account_container span {
@@ -49,19 +48,22 @@
   cursor: pointer;
   margin: 0.5rem;
   padding: var(--primary-padding);
-  font-size: var(--nav-link-font-size);
+  font-size: var(--primary-font-size);
   font-size: 0.9rem;
 }
 .account_subscribe .my_account .my_account_container .my_account_container_button button.login {
   color: var(--white-color);
   background-color: var(--primary-color);
 }
+.account_subscribe .my_account .my_account_container .my_account_container_button button.login:hover {
+  background-color: var(--primary-hover-color);
+}
 .account_subscribe .my_account .my_account_container .my_account_container_button button.contributor {
-  color: var(--nav-text-color);
+  color: var(--secondary-color);
   background-color: transparent;
 }
 .account_subscribe .my_account .my_account_container .my_account_container_button button.contributor:hover {
-  color: var(--nav-text-hover-color);
+  color: var(--primary-color);
 }
 .account_subscribe .subscribe_button {
   cursor: pointer;

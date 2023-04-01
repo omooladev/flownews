@@ -4,6 +4,7 @@ import { useTitle } from "../../hooks/useTitle";
 import { AuthContext } from "../../store/Auth/auth-context";
 import styles from "./NotFound.module.css";
 const NotFound = () => {
+  useTitle("Page Not Found");
   const { isLoggedIn } = useContext(AuthContext);
 
   return (

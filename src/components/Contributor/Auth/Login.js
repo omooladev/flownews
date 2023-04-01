@@ -1,11 +1,11 @@
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
-import AuthLoader from "../../Loaders/AuthLoader";
-import styles from "./Auth.module.css";
-import Reply from "./Reply";
 import { useTitle } from "../../../hooks/useTitle";
 import { AuthContext } from "../../../store/Auth/auth-context";
+import AuthLoader from "../../Loaders/AuthLoader";
+import Reply from "./Reply";
+import styles from "./Auth.module.css";
 const Login = (props) => {
   useTitle("Login");
   const {
@@ -21,6 +21,7 @@ const Login = (props) => {
   const { changeAppMode, onLoginOrBecomeContributor, onSetUserData, history } =
     useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
+  //* refs
   const emailRef = useRef();
   const passwordRef = useRef();
   const loginHandler = useCallback(
@@ -78,13 +79,13 @@ const Login = (props) => {
   );
 
   useEffect(() => {
-    if (!passwordChanged) onResetAuthReply();
+    if (passwordChanged === false) onResetAuthReply();
   }, [passwordChanged, onResetAuthReply]);
 
   return (
     <>
       <h1>Log in to FlowNews</h1>
-      <Reply isLoading={isLoading} authReply={authReply} onResetAuthReply={onResetAuthReply} />
+      <Reply authReply={authReply} onResetAuthReply={onResetAuthReply} />
       <form className={styles.form} onSubmit={loginHandler}>
         <div className={styles.form_control}>
           <label>Email Address</label>
@@ -95,7 +96,6 @@ const Login = (props) => {
             <label>Password</label>
             <Link to={`${isLoading ? "#" : "/forgot-password"}`}>Forgot password?</Link>
           </div>
-
           <div className={styles.input_container}>
             <input type={viewPassword ? "text" : "password"} ref={passwordRef} />
             {!viewPassword && (

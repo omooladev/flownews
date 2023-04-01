@@ -9,7 +9,7 @@ import ResetPassword from "./ResetPassword";
 import styles from "./Auth.module.css";
 const Auth = () => {
   const [viewPassword, setViewPassword] = useState(false);
-  const [authReply, setAuthReply] = useState({ type: null, message: "" });
+  const [authReply, setAuthReply] = useState({ type: "error", message: "An error has occurredeeeeeeeeeeeeeeeeeeeeeeeve e e eve evev eveeeeeeeeeeee" });
   const { history, lastLocation } = useContext(AuthContext);
   const location = history.location.pathname;
   const loginLocation = location.includes("/login");
@@ -97,9 +97,8 @@ const Auth = () => {
 
   return (
     <>
-      <PopUp onClick={closePopUpHandler} className={`auth_popup ${styles.auth}`}>
+      <PopUp onClick={closePopUpHandler} className={`popup ${styles.auth}`}>
         <BiX className={`${styles.icon} ${styles.cancel}`} onClick={closePopUpHandler} />
-
         {loginLocation && (
           <Login
             viewPassword={viewPassword}

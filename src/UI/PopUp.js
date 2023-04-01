@@ -9,6 +9,7 @@ const PopUpBox = (props) => {
   return <Card className={props.className}>{props.children}</Card>;
 };
 const PopUp = (props) => {
+  console.log("popup");
   const portalElement = document.getElementById("overlays");
   return (
     <>

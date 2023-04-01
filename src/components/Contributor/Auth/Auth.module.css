@@ -1,52 +1,66 @@
+.auth .reply {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 .auth {
   background-color: var(--body-color);
-  font-family: var(--primary-font);
+  width: 100vw;
+  height: 100vh;
+  font-size: var(--primary-font-size);
 }
 .auth a {
-  font-size: 0.9rem;
   text-decoration: none;
   transition: all 2s ease;
-  color: var(--nav-text-hover-color);
+  color: var(--primary-color);
 }
 .auth h1 {
-  font-size: 20px;
+  font-size: var(--heading-font-size);
   font-weight: normal;
   padding: 0.5rem 0;
-  color: var(--nav-text-hover-color);
+  color: var(--primary-color);
 }
 .auth .username {
-  font-size: 1.3rem;
+  font-size: var(--primary-font-size);
   padding-bottom: 0.3rem;
-}
-.auth .cancel_icon {
-  font-size: 1.2rem;
-  cursor: pointer;
+  background-color: red;
 }
 .auth .icon {
-  color: var(--nav-text-color);
+  cursor: pointer;
+  color: var(--primary-color);
   font-size: 2rem;
   position: absolute;
   top: 1.5rem;
   right: 5%;
-  cursor: pointer;
 }
 .auth .reply {
   box-shadow: none;
-  display: flex;
   justify-content: space-around;
-  align-items: center;
-  font-size: 1rem;
-  opacity: 0.8;
   border-radius: 0.4rem;
   padding: 0.5rem;
   width: 100%;
+  opacity: 0.8;
+  overflow: hidden;
 }
 .auth .reply.success {
   color: var(--body-color);
-  background-color: var(--nav-text-hover-color);
+  background-color: var(--primary-color);
 }
 .auth .reply.error {
-  background-color: rgb(237, 178, 178);
+  background-color: var(--error-color);
+}
+.auth .reply p {
+  font-size: 1.1rem;
+  width: 80%;
+  overflow: hidden;
+}
+.auth .reply .reply_icon {
+  cursor: pointer;
+  display: block;
+  font-size: 1.4rem;
+  width: 3rem;
 }
 .auth .form {
   width: 100%;
@@ -83,7 +97,7 @@
   outline: 2px solid transparent;
 }
 .auth .form .form_control input:focus {
-  border: 1px solid var(--nav-text-hover-color);
+  border: 1px solid var(--primary-color);
 }
 .auth .form .form_control .input_container {
   position: relative;
@@ -109,7 +123,7 @@
 }
 .auth .form .form_actions button {
   cursor: pointer;
-  background-color: var(--nav-text-hover-color);
+  background-color: var(--primary-color);
   width: 100%;
   font-size: 0.9rem;
   padding: 0.6rem 0.5rem;
@@ -134,7 +148,7 @@
 .auth .form_footer p {
   padding: 0 0.3rem;
   font-size: 0.9rem;
-  color: var(--auth-form-label-color);
+  color: var(--secondary-color);
 }
 
 .reset_password,
@@ -146,7 +160,7 @@
 
 .return_to_setting {
   cursor: pointer;
-  background-color: var(--nav-text-hover-color);
+  background-color: var(--primary-color);
   width: 100%;
   font-size: 0.9rem;
   padding: 0.6rem 0.5rem;
