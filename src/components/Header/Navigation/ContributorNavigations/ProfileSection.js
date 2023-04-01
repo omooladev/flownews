@@ -10,10 +10,10 @@ import Write from "./Write";
 const ProfileSection = () => {
   const history = useHistory();
   const { profileBoxIsActive, onToggleProfileBox, onCloseProfileBox } = useContext(AppContext);
-  const { onSignOut, userData } = useContext(AuthContext);
+  const { onSignOut, contributorData } = useContext(AuthContext);
 
-  const contributorFullUsername = userData.username;
-  const contributorEmailAddress = userData.email;
+  const contributorFullUsername = contributorData.username;
+  const contributorEmailAddress = contributorData.email;
 
   const goToPage = useCallback(
     (location) => {
@@ -39,7 +39,7 @@ const ProfileSection = () => {
           </ul>
           <hr className={styles.write_line} />
           <ul className={`${styles["nav-user-list"]}`}>
-            <li onClick={() => goToPage(`/@${userData.username}`)}>Profile</li>
+            <li onClick={() => goToPage(`/@${contributorData.username}`)}>Profile</li>
             <li>Lists</li>
             <li>Stories</li>
             <li>Stats</li>

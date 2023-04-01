@@ -9,7 +9,7 @@ import ResetPassword from "./ResetPassword";
 import styles from "./Auth.module.css";
 const Auth = () => {
   const [viewPassword, setViewPassword] = useState(false);
-  const [authReply, setAuthReply] = useState({ type: "success", message: "An error has occurredeeeeeeeeeeeeeeeeeeeeeeeve e e eve evev eveeeeeeeeeeee" });
+  const [authReply, setAuthReply] = useState({ type:null, message: "" });
   const { history, lastLocation } = useContext(AuthContext);
   const location = history.location.pathname;
   const loginLocation = location.includes("/login");

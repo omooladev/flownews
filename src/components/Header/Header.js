@@ -12,11 +12,12 @@ const Header = () => {
   const {
     componentsIsActive: { menuIsActive },
   } = useContext(AppContext);
-  const { isLoggedIn, contributorError, headerIsLoading, userData } = useContext(AuthContext);
+  const { isLoggedIn, contributorError, headerIsLoading, contributorData } =
+    useContext(AuthContext);
 
   return (
     <>
-      {(userData.username || !isLoggedIn) && !contributorError.ref && (
+      {(contributorData.username || !isLoggedIn) && !contributorError.ref && (
         <header className={`${styles.header} ${menuIsActive ? styles.menu_active : ""}`}>
           <Menu />
           <Logo className={styles.logo} />

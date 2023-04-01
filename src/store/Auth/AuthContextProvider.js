@@ -8,26 +8,29 @@ const HOSTURI = "https://flownews-api.onrender.com/api/v1";
 const AuthContextProvider = (props) => {
   const { sendRequest } = useHttp();
 
-  const { appMode, onChangeAppMode, onToggleComponentsIsActive,lastLocation } = useContext(AppContext);
-  const token = appMode.token;
-  const isLoggedIn = appMode.isLoggedIn;
+  const {
+    appMode: { isLoggedIn, token },
+    onChangeAppMode,
+    onToggleComponentsIsActive,
+    lastLocation,
+  } = useContext(AppContext);
+
   const [makeBodyFixed, setMakeBodyFixed] = useState(false);
-  const [userData, setUserData] = useState({ username: "" });
   const [searchedContributorData, setSearchedContributorData] = useState({ username: "" });
   const [headerIsLoading, setHeaderIsLoading] = useState(false);
 
-  const [authMessage, setAuthMessage] = useState({ type: "", message: "" });
+  // const [authMessage, setAuthMessage] = useState({ type: "", message: "" });
   const [contributorError, setContributorError] = useState({ ref: "", message: "" });
   const history = useHistory();
 
   //?refactored
-  //const [contributorData, setContributorData] = useState({ username: "" });//TODO this will replace the user data
+  const [contributorData, setContributorData] = useState({ username: "" });
   const [profileUpdated, setProfileUpdated] = useState(false);
-  const changeAuthMessage = useCallback((authMessage) => {
-    setAuthMessage((prevMessage) => {
-      return { ...prevMessage, ...authMessage };
-    });
-  }, []);
+  // const changeAuthMessage = useCallback((authMessage) => {
+  //   setAuthMessage((prevMessage) => {
+  //     return { ...prevMessage, ...authMessage };
+  //   });
+  // }, []);
   const loginOrBecomeContributor = useCallback(
     async ({ location, contributorAuthData }) => {
       const response = await sendRequest(`${HOSTURI}/auth/${location}`, {
@@ -41,7 +44,7 @@ const AuthContextProvider = (props) => {
 
   const getContributorData = useCallback(
     async (username) => {
-      if (userData.username) {
+      if (contributorData.username) {
         return;
       }
       setHeaderIsLoading((prevState) => {
@@ -57,7 +60,7 @@ const AuthContextProvider = (props) => {
       if (data) {
         const isSearch = data.isSearch || "";
         if (!isSearch) {
-          setUserData((prevData) => {
+          setContributorData((prevData) => {
             return { ...prevData, ...data };
           });
         }
@@ -80,24 +83,24 @@ const AuthContextProvider = (props) => {
         return !prevState;
       });
     },
-    [sendRequest, token, userData.username, onChangeAppMode]
+    [sendRequest, token, contributorData.username, onChangeAppMode]
   );
 
   const signOutHandler = useCallback(() => {
     onChangeAppMode({ isLoggedIn: false, token: null, username: null, tokenExpirationTime: null });
     onToggleComponentsIsActive({ event: "*" });
     setProfileUpdated(false);
-    setUserData((prevData) => {
+    setContributorData((prevData) => {
       return { username: "" };
     });
     history.replace("/home");
   }, [history, onToggleComponentsIsActive, onChangeAppMode]);
 
-  const resetAuthMessage = useCallback(() => {
-    setAuthMessage((prevMessage) => {
-      return { ...prevMessage, type: "", message: "" };
-    });
-  }, []);
+  // const resetAuthMessage = useCallback(() => {
+  //   setAuthMessage((prevMessage) => {
+  //     return { ...prevMessage, type: "", message: "" };
+  //   });
+  // }, []);
 
   const update_ResetPasswordHandler = useCallback(
     async (title, passwordProperties) => {
@@ -132,12 +135,6 @@ const AuthContextProvider = (props) => {
     [sendRequest]
   );
 
-  const setUserDataHandler = useCallback((data) => {
-    setUserData((prevData) => {
-      return { ...prevData, ...data };
-    });
-  }, []);
-
   const sendPasswordResetEmail = useCallback(
     async (email, title) => {
       const response = await sendRequest(`${HOSTURI}/auth/password/${title}`, {
@@ -159,12 +156,9 @@ const AuthContextProvider = (props) => {
   );
   //?refactored functions
   const saveContributorData = useCallback((data) => {
-    setUserData((prevData) => {
+    setContributorData((prevData) => {
       return { ...prevData, ...data };
-    }); //TODO will replace this soon to the one commented below
-    // setContributorData((prevData) => {
-    //   return { ...prevData, ...data };
-    // });
+    });
   }, []);
   const updateContributorProfile = useCallback(
     async (updateProperties) => {
@@ -199,20 +193,18 @@ const AuthContextProvider = (props) => {
         HOSTURI,
         token,
         history,
-        userData,
 
         searchedContributorData,
         headerIsLoading,
         isLoggedIn,
-        authMessage,
+        // authMessage,
         contributorError,
 
-        onSetUserData: setUserDataHandler,
         onGetContributorData: getContributorData,
-        onChangeAuthMessage: (authMessage) => {
-          changeAuthMessage(authMessage);
-        },
-        onResetAuthMessage: resetAuthMessage,
+        // onChangeAuthMessage: (authMessage) => {
+        //   changeAuthMessage(authMessage);
+        // },
+        // onResetAuthMessage: resetAuthMessage,
         onLoginOrBecomeContributor: loginOrBecomeContributor,
         onSignOut: signOutHandler,
 
@@ -225,13 +217,14 @@ const AuthContextProvider = (props) => {
 
         //?Refactored already
         lastLocation,
+        contributorData,
+        onSaveContributorData: saveContributorData,
         profileUpdated,
         onChangeProfileUpdated: changeProfileUpdated,
         changeAppMode: onChangeAppMode,
         makeBodyFixed: makeBodyFixed,
         onMakeBodyFixed: (bool) => setMakeBodyFixed(bool),
 
-        onSaveContributorData: saveContributorData,
         onUpdateContributorProfile: updateContributorProfile,
         onToggleEmailPrivacy: toggleEmailPrivacy,
       }}

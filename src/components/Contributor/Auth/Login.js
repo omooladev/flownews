@@ -18,7 +18,7 @@ const Login = (props) => {
     onValidateEmail,
     onValidatePassword,
   } = props;
-  const { changeAppMode, onLoginOrBecomeContributor, onSetUserData, history } =
+  const { changeAppMode, onLoginOrBecomeContributor, history, onSaveContributorData } =
     useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   //* refs
@@ -51,12 +51,9 @@ const Login = (props) => {
       });
       const data = response.data || "";
       const error = response.error || "";
+      console.log(data)
       if (data) {
-        onSetUserData((prevData) => {
-          return {
-            ...data,
-          };
-        });
+        onSaveContributorData(data);
         changeAppMode({
           username: data.username,
           token: data.token,
@@ -77,7 +74,7 @@ const Login = (props) => {
       onValidatePassword,
       onChangeAuthReply,
       onResetAuthReply,
-      onSetUserData,
+      onSaveContributorData,
       onLoginOrBecomeContributor,
     ]
   );
@@ -89,7 +86,7 @@ const Login = (props) => {
   return (
     <>
       <h1>Log in to FlowNews</h1>
-      <Reply authReply={authReply} onResetAuthReply={onResetAuthReply} />
+      {!isLoading && <Reply authReply={authReply} onResetAuthReply={onResetAuthReply} />}
       <form className={styles.form} onSubmit={loginHandler}>
         <div className={styles.form_control}>
           <label>Email Address</label>
