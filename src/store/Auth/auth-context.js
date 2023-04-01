@@ -9,10 +9,7 @@ export const AuthContext = React.createContext({
   headerIsLoading: false,
   isLoggedIn: false,
   contributorError: { ref: "", message: "" },
-  // authMessage: { type: "", message: "" },
 
-  // onChangeAuthMessage: () => {},
-  // onResetAuthMessage: () => {},
   //? auth functions
   onLoginOrBecomeContributor: async () => {},
   onGetContributorData: () => {},

@@ -69,7 +69,7 @@ const ForgotPassword = (props) => {
       <h1>Reset your Password</h1>
       {!passwordResetLinkSent && (
         <p className={styles.reset_password}>
-          Enter your user account's email address and we will send you a password reset link."
+          Enter your user account's email address and we will send you a password reset link.
         </p>
       )}
       {!isLoading && <Reply authReply={authReply} onResetAuthReply={onResetAuthReply} />}

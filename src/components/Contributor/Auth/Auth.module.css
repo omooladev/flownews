@@ -67,7 +67,7 @@
   background-color: var(--auth-form-color);
   border: 1px solid var(--auth-form-border-color);
   border-radius: 10px;
-  padding: 0.5rem 1rem;
+  padding: var(--auth-form-padding);
   margin: 1rem 0;
 }
 .auth .form .form_control {
@@ -160,7 +160,7 @@
 .reset_password .auth .form .form_control .password_label {
   padding: 0.5rem 0;
   font-size: 1rem;
-  color: var(--auth-form-label-color);
+  color: var(--tertiary-color);
 }
 
 .return_to_setting {

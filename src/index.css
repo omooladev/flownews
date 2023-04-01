@@ -17,6 +17,7 @@
   /*? padding */
   --primary-padding: 0.5rem 0.6rem;
   --secondary-padding: 0.4rem 0.5rem;
+  --auth-form-padding: 0.5rem 1rem;
   /*? colors */
   --primary-color: rgb(48, 155, 101);
   --primary-hover-color: rgba(48, 155, 101, 0.8);
@@ -60,7 +61,7 @@ body.dark {
   --side-nav: #242526;
   --auth-form-color: transparent;
   --auth-form-border-color: rgb(98, 96, 96);
-
+  --auth-form-padding: 0.5rem 0rem;
   --reverse-black-white-color: black;
 
   --nav-profile-box-color: #ccc;

@@ -19,18 +19,12 @@ const AuthContextProvider = (props) => {
   const [searchedContributorData, setSearchedContributorData] = useState({ username: "" });
   const [headerIsLoading, setHeaderIsLoading] = useState(false);
 
-  // const [authMessage, setAuthMessage] = useState({ type: "", message: "" });
   const [contributorError, setContributorError] = useState({ ref: "", message: "" });
   const history = useHistory();
 
   //?refactored
   const [contributorData, setContributorData] = useState({ username: "" });
   const [profileUpdated, setProfileUpdated] = useState(false);
-  // const changeAuthMessage = useCallback((authMessage) => {
-  //   setAuthMessage((prevMessage) => {
-  //     return { ...prevMessage, ...authMessage };
-  //   });
-  // }, []);
   const loginOrBecomeContributor = useCallback(
     async ({ location, contributorAuthData }) => {
       const response = await sendRequest(`${HOSTURI}/auth/${location}`, {
@@ -95,12 +89,6 @@ const AuthContextProvider = (props) => {
     });
     history.replace("/home");
   }, [history, onToggleComponentsIsActive, onChangeAppMode]);
-
-  // const resetAuthMessage = useCallback(() => {
-  //   setAuthMessage((prevMessage) => {
-  //     return { ...prevMessage, type: "", message: "" };
-  //   });
-  // }, []);
 
   const update_ResetPasswordHandler = useCallback(
     async (title, passwordProperties) => {
@@ -197,14 +185,11 @@ const AuthContextProvider = (props) => {
         searchedContributorData,
         headerIsLoading,
         isLoggedIn,
-        // authMessage,
+
         contributorError,
 
         onGetContributorData: getContributorData,
-        // onChangeAuthMessage: (authMessage) => {
-        //   changeAuthMessage(authMessage);
-        // },
-        // onResetAuthMessage: resetAuthMessage,
+
         onLoginOrBecomeContributor: loginOrBecomeContributor,
         onSignOut: signOutHandler,
 
@@ -212,7 +197,7 @@ const AuthContextProvider = (props) => {
 
         onVerifyEmailAddress: verifyEmailHandler,
         onResetPassword: resetPasswordHandler,
-        onSendPasswordResetEmail: sendPasswordResetEmail,
+
         onVerifyPasswordResetLink: verifyPasswordResetLink,
 
         //?Refactored already
@@ -224,9 +209,9 @@ const AuthContextProvider = (props) => {
         changeAppMode: onChangeAppMode,
         makeBodyFixed: makeBodyFixed,
         onMakeBodyFixed: (bool) => setMakeBodyFixed(bool),
-
         onUpdateContributorProfile: updateContributorProfile,
         onToggleEmailPrivacy: toggleEmailPrivacy,
+        onSendPasswordResetEmail: sendPasswordResetEmail,
       }}
     >
       {props.children}
