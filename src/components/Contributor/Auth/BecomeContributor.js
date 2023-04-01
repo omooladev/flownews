@@ -70,7 +70,7 @@ const BecomeContributor = (props) => {
   return (
     <>
       <h1>Create a FlowNews account</h1>
-      <Reply isLoading={isLoading} authReply={authReply} onResetAuthReply={onResetAuthReply} />
+      <Reply  authReply={authReply} onResetAuthReply={onResetAuthReply} />
       <form className={styles.form} onSubmit={becomeContributorHandler}>
         <div className={styles.form_control}>
           <label>Email Address</label>

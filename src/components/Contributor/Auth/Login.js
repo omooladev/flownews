@@ -27,16 +27,20 @@ const Login = (props) => {
   const loginHandler = useCallback(
     async (event) => {
       event.preventDefault();
+      //*reset reply
       onResetAuthReply();
+      //*get input values
       const email = emailRef.current.value;
       const password = passwordRef.current.value;
-      //? validations
+      //* validations
       const emailIsValid = onValidateEmail({ validationType: "check_full", email });
       if (!emailIsValid) {
+        emailRef.current.focus();
         return;
       }
       const passwordIsValid = onValidatePassword({ validationType: "check_length", password });
       if (!passwordIsValid) {
+        passwordRef.current.focus();
         return;
       }
 

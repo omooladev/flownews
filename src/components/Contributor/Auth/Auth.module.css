@@ -86,7 +86,7 @@
 }
 .auth .form .form_control input {
   width: 100%;
-  padding: var(--primary-padding);
+  padding: var(--secondary-padding);
   border-radius: 3px;
   border: 1px solid transparent;
   transition: all 0.3s;
@@ -99,7 +99,7 @@
 .auth .form .form_control .input_container {
   position: relative;
   width: 100%;
-  background-color: blue;
+  overflow: hidden;
 }
 .auth .form .form_control .input_container input {
   padding-right: 30px;
@@ -107,11 +107,12 @@
 .auth .form .form_control .input_container .password_icon {
   cursor: pointer;
   position: absolute;
-  top: 8px;
+  top: 50%;
   right: 10px;
   color: black;
-  height: 100%;
-  background-color: red;
+  height: 1rem;
+  margin-top: -0.5rem;
+  font-size: 1rem;
 }
 .auth .form .form_actions {
   margin: 2rem 0;
@@ -133,6 +134,10 @@
 .auth .form .form_actions button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
+}
+.auth .form .form_actions button:disabled:hover {
+  opacity: 0.5;
+  background-color: var(--primary-color);
 }
 .auth .form_footer {
   display: flex;
@@ -182,10 +187,10 @@
   .auth .form {
     border: none;
   }
-  .auth .form_footer a:hover {
-    text-decoration: underline;
+  .auth .form .form_actions button:hover {
+    background-color: var(--primary-hover-color);
   }
-  .auth .form_actions button:hover {
-    opacity: 0.5;
+  .auth .form .form_footer a:hover {
+    text-decoration: underline;
   }
 }
