@@ -80,7 +80,7 @@ const Auth = () => {
         });
         return false;
       }
-      if (passwordLength < 8 || checkAllLogic) {
+      if (passwordLength < 8 && checkAllLogic) {
         setAuthReply((prevReply) => {
           return {
             ...prevReply,

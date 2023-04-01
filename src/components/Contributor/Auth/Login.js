@@ -51,7 +51,7 @@ const Login = (props) => {
       });
       const data = response.data || "";
       const error = response.error || "";
-      console.log(data)
+      console.log(data);
       if (data) {
         onSaveContributorData(data);
         changeAppMode({
@@ -80,7 +80,7 @@ const Login = (props) => {
   );
 
   useEffect(() => {
-    if (passwordChanged === false) onResetAuthReply();
+    if (!passwordChanged) onResetAuthReply();
   }, [passwordChanged, onResetAuthReply]);
 
   return (
