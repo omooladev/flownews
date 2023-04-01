@@ -26,6 +26,7 @@ const ForgotPassword = (props) => {
       //? validations
       const emailIsValid = onValidateEmail({ validationType: "check_full", email });
       if (!emailIsValid) {
+        emailRef.current.focus()
         return;
       }
       setIsLoading(true);

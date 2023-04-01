@@ -55,6 +55,7 @@
   font-size: 1rem;
   width: 80%;
   overflow: hidden;
+  line-height: 1.5rem;
 }
 .auth .reply .reply_icon {
   cursor: pointer;
@@ -65,7 +66,6 @@
 .auth .form {
   width: 100%;
   background-color: var(--auth-form-color);
-  border: 1px solid var(--auth-form-border-color);
   border-radius: 10px;
   padding: var(--auth-form-padding);
   margin: 1rem 0;
@@ -161,6 +161,7 @@
   padding: 0.5rem 0;
   font-size: 1rem;
   color: var(--tertiary-color);
+  line-height: 1.5rem;
 }
 
 .return_to_setting {
@@ -183,9 +184,6 @@
   }
   .auth .icon {
     display: none;
-  }
-  .auth .form {
-    border: none;
   }
   .auth .form .form_actions button:hover {
     background-color: var(--primary-hover-color);
