@@ -12,7 +12,7 @@
 }
 .success {
   color: var(--body-color);
-  background-color: var(--nav-text-hover-color);
+  background-color: var(--primary-color);
 }
 .popup {
   position: fixed;

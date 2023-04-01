@@ -46,7 +46,7 @@
       background-color: var(--error-color);
     }
     p {
-      font-size: 1.1rem;
+      font-size: 1rem;
       width: 80%;
       overflow: hidden;
     }
@@ -60,33 +60,33 @@
   .form {
     width: 100%;
     background-color: var(--auth-form-color);
+    border: 1px solid var(--auth-form-border-color);
     border-radius: 10px;
     padding: 0.5rem 1rem;
     margin: 1rem 0;
-    border: 1px solid var(--auth-form-border-color);
+
     .form_control {
-      display: flex;
+      @extend %DisplayFlex;
       align-items: flex-start;
       flex-direction: column;
       margin: 0.5rem 0;
       label {
         padding: 0.5rem 0;
         font-size: 1rem;
-        color: var(--profile-color);
+        color: var(--tertiary-color);
       }
       .password_label {
-        display: flex;
-        align-items: center;
+        @extend %DisplayFlex;
         justify-content: space-between;
         width: 100%;
       }
       input {
         width: 100%;
-        padding: 0.4rem 0.5rem;
+        padding: var(--primary-padding);
         border-radius: 3px;
         border: 1px solid transparent;
         transition: all 0.3s;
-        font-size: 0.9rem;
+        font-size: 1rem;
         outline: 2px solid transparent;
         &:focus {
           border: 1px solid var(--primary-color);
@@ -95,15 +95,18 @@
       .input_container {
         position: relative;
         width: 100%;
+        background-color: blue;
         input {
           padding-right: 30px;
         }
         .password_icon {
+          cursor: pointer;
           position: absolute;
           top: 8px;
           right: 10px;
           color: black;
-          cursor: pointer;
+          height: 100%;
+          background-color: red;
         }
       }
     }
@@ -171,6 +174,8 @@
   .auth {
     height: 65vh;
     margin-top: -32.5vh;
+    width: 25rem;
+    margin-left: -12.5rem;
     .icon {
       display: none;
     }

@@ -1,4 +1,4 @@
-.auth .reply {
+.auth .reply, .auth .form .form_control, .auth .form .form_control .password_label {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -52,7 +52,7 @@
   background-color: var(--error-color);
 }
 .auth .reply p {
-  font-size: 1.1rem;
+  font-size: 1rem;
   width: 80%;
   overflow: hidden;
 }
@@ -65,13 +65,12 @@
 .auth .form {
   width: 100%;
   background-color: var(--auth-form-color);
+  border: 1px solid var(--auth-form-border-color);
   border-radius: 10px;
   padding: 0.5rem 1rem;
   margin: 1rem 0;
-  border: 1px solid var(--auth-form-border-color);
 }
 .auth .form .form_control {
-  display: flex;
   align-items: flex-start;
   flex-direction: column;
   margin: 0.5rem 0;
@@ -79,21 +78,19 @@
 .auth .form .form_control label {
   padding: 0.5rem 0;
   font-size: 1rem;
-  color: var(--profile-color);
+  color: var(--tertiary-color);
 }
 .auth .form .form_control .password_label {
-  display: flex;
-  align-items: center;
   justify-content: space-between;
   width: 100%;
 }
 .auth .form .form_control input {
   width: 100%;
-  padding: 0.4rem 0.5rem;
+  padding: var(--primary-padding);
   border-radius: 3px;
   border: 1px solid transparent;
   transition: all 0.3s;
-  font-size: 0.9rem;
+  font-size: 1rem;
   outline: 2px solid transparent;
 }
 .auth .form .form_control input:focus {
@@ -102,16 +99,19 @@
 .auth .form .form_control .input_container {
   position: relative;
   width: 100%;
+  background-color: blue;
 }
 .auth .form .form_control .input_container input {
   padding-right: 30px;
 }
 .auth .form .form_control .input_container .password_icon {
+  cursor: pointer;
   position: absolute;
   top: 8px;
   right: 10px;
   color: black;
-  cursor: pointer;
+  height: 100%;
+  background-color: red;
 }
 .auth .form .form_actions {
   margin: 2rem 0;
@@ -173,6 +173,8 @@
   .auth {
     height: 65vh;
     margin-top: -32.5vh;
+    width: 25rem;
+    margin-left: -12.5rem;
   }
   .auth .icon {
     display: none;
