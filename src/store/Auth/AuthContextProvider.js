@@ -181,13 +181,10 @@ const AuthContextProvider = (props) => {
         HOSTURI,
         token,
         history,
-
         searchedContributorData,
         headerIsLoading,
         isLoggedIn,
-
         contributorError,
-
         onGetContributorData: getContributorData,
 
         onLoginOrBecomeContributor: loginOrBecomeContributor,

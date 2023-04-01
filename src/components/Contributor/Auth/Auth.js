@@ -1,3 +1,4 @@
+import styles from "./Auth.module.css";
 import { useCallback, useContext, useState } from "react";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import { BiX } from "react-icons/bi";
@@ -6,7 +7,7 @@ import Login from "./Login";
 import BecomeContributor from "./BecomeContributor";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
-import styles from "./Auth.module.css";
+
 const Auth = () => {
   const [viewPassword, setViewPassword] = useState(false);
   const [authReply, setAuthReply] = useState({ type:null, message: "" });

@@ -22,10 +22,22 @@
   padding: 0.5rem 0;
   color: var(--primary-color);
 }
+.auth h3,
 .auth .username {
-  font-size: var(--primary-font-size);
+  color: var(--tertiary-color);
+}
+.auth p {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: var(--tertiary-color);
+}
+.auth a {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+.auth .username {
+  font-size: 1.3rem;
   padding-bottom: 0.3rem;
-  background-color: red;
 }
 .auth .icon {
   cursor: pointer;
@@ -52,10 +64,9 @@
   background-color: var(--error-color);
 }
 .auth .reply p {
-  font-size: 1rem;
   width: 80%;
   overflow: hidden;
-  line-height: 1.5rem;
+  color: var(--black-color);
 }
 .auth .reply .reply_icon {
   cursor: pointer;
@@ -120,7 +131,7 @@
 .auth .form .form_actions p {
   padding-bottom: 0.5rem;
   width: 100%;
-  text-align: left;
+  text-align: center;
 }
 .auth .form .form_actions button {
   cursor: pointer;
@@ -151,17 +162,13 @@
   width: 100%;
 }
 .auth .form_footer p {
-  padding: 0 0.3rem;
-  font-size: 0.9rem;
-  color: var(--secondary-color);
+  padding: 0 0.5rem;
 }
 
 .reset_password,
 .reset_password .auth .form .form_control .password_label {
   padding: 0.5rem 0;
-  font-size: 1rem;
-  color: var(--tertiary-color);
-  line-height: 1.5rem;
+  text-align: center;
 }
 
 .return_to_setting {
