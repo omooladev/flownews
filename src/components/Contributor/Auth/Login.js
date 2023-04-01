@@ -109,7 +109,7 @@ const Login = (props) => {
         </div>
         <div className={styles.form_actions}>
           <button type="submit" disabled={isLoading ? true : false}>
-            {isLoading ? <AuthLoader /> : "Log in"}
+            {isLoading ? <AuthLoader text="Logging in" /> : "Log in"}
           </button>
         </div>
       </form>

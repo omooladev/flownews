@@ -95,7 +95,7 @@ const BecomeContributor = (props) => {
         </div>
         <div className={styles.form_actions}>
           <button type="submit" disabled={isLoading ? true : false}>
-            {isLoading ? <AuthLoader /> : "Sign up"}
+            {isLoading ? <AuthLoader text="Creating account" /> : "Sign up"}
           </button>
         </div>
       </form>
