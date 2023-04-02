@@ -1,3 +1,4 @@
+import styles from "./Auth.module.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
@@ -5,7 +6,7 @@ import { useTitle } from "../../../hooks/useTitle";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import AuthLoader from "../../Loaders/AuthLoader";
 import Reply from "./Reply";
-import styles from "./Auth.module.css";
+
 const Login = (props) => {
   useTitle("Login");
   const {

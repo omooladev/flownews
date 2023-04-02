@@ -185,10 +185,12 @@
 
 @media (min-width: 500px) {
   .auth {
-    height: 65vh;
-    margin-top: -32.5vh;
+    // height: 65vh;
+    height: 60vh;
+    height:35rem;
+    height: auto;
     width: 25rem;
-    margin-left: -12.5rem;
+    margin-top: -17.5rem;
     .icon {
       display: none;
     }
