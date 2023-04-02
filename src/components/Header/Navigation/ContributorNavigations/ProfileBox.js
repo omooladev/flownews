@@ -5,10 +5,10 @@ import styles from "./ProfileBox.module.css";
 
 const ProfileBox = (props) => {
   const { location } = props;
-  const { userData } = useContext(AuthContext);
-  const contributorUsernameCut = userData.username[0];
-  const contributorFullUsername = userData.username;
-  const contributorProfilePicture = userData.profilePicture || "";
+  const { contributorData } = useContext(AuthContext);
+  const contributorUsernameCut = contributorData.username[0];
+  const contributorFullUsername = contributorData.username;
+  const contributorProfilePicture = contributorData.profilePicture || "";
 
   const className = `${styles[props.className]}` || "";
 

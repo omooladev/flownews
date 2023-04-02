@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import { useTitle } from "../../hooks/useTitle";
 import { AppContext } from "./app-context";
 const getAppMode = () => {
   const appMode = localStorage.getItem("flownews-mode");
@@ -10,13 +9,18 @@ const getAppMode = () => {
 };
 
 const AppContextProvider = (props) => {
-  useTitle("Flownews");
+  //* check the default browser theme
   const browserDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const browserLightTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
+  //* states
   const [appMode, setAppMode] = useState(getAppMode);
-  const [isSearching, setIsSearching] = useState(false);
-  const [menuIsActive, setMenuIsActive] = useState(false);
-  const [profileBoxIsActive, setProfileBoxIsActive] = useState(false);
+  const [componentsIsActive, setComponentsIsActive] = useState({
+    menuIsActive: false,
+    profileBoxIsActive: false,
+    searchFieldIsActive: false,
+    accountSubscribeContainerIsActive:false,
+  });
+
   const [lastLocation, setLastLocation] = useState("");
 
   const changeAppMode = useCallback((properties) => {
@@ -24,34 +28,45 @@ const AppContextProvider = (props) => {
       return { ...prevMode, ...properties };
     });
   }, []);
-  const toggleSearchHandler = useCallback(() => {
-    setIsSearching((prevState) => {
-      return !prevState;
-    });
-  }, []);
 
-  const toggleProfileBoxHandler = useCallback(() => {
-    setIsSearching((prevState) => {
-      if (prevState) return !prevState;
-    });
-    setMenuIsActive((prevState) => {
-      if (prevState) return !prevState;
-    });
-    setProfileBoxIsActive((prevState) => {
-      return !prevState;
-    });
-  }, []);
+  const toggleComponentsIsActive = useCallback(({ type, event }) => {
+    if (event === "*") {
+      return setComponentsIsActive((prevState) => {
+        const prevStateKeys = Object.keys(prevState);
+        prevStateKeys.forEach((key) => {
+          if (prevState[key] === true) {
+            prevState[key] = false;
+          }
+          return;
+        });
+        const newState = prevState;
+        return { ...newState };
+      });
+    }
+    if (event === "close") {
+      const component = `${type}IsActive`;
+      return setComponentsIsActive((prevState) => {
+        return { ...prevState, [component]: false };
+      });
+    }
 
-  const toggleMenuHandler = useCallback(() => {
-    setMenuIsActive((prevState) => {
-      return !prevState;
-    });
-  }, []);
-
-  const closeMenuHandler = useCallback((event) => {
-    setMenuIsActive((prevState) => {
-      return false;
-    });
+    if (event === "toggle") {
+      const component = `${type}IsActive`;
+      return setComponentsIsActive((prevState) => {
+        const prevStateKeys = Object.keys(prevState);
+        prevStateKeys.forEach((key) => {
+          if (key === component) {
+            prevState[key] = !prevState[key];
+          }
+          if (prevState[key] === true && key !== component) {
+            prevState[key] = false;
+          }
+          return;
+        });
+        const newState = prevState;
+        return { ...newState };
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -70,37 +85,17 @@ const AppContextProvider = (props) => {
       return localStorage.setItem("flownews-mode", JSON.stringify({ ...appMode }));
     }
   }, [appMode]);
-
   return (
     <AppContext.Provider
       value={{
         appMode,
-        onChangeAppMode: (properties) => {
-          changeAppMode(properties);
-        },
-        isSearching,
-        menuIsActive,
+        onChangeAppMode: changeAppMode,
         lastLocation,
-        profileBoxIsActive,
-        onToggleProfileBox: toggleProfileBoxHandler,
-        onCloseProfileBox: () => {
-          setProfileBoxIsActive((prevState) => {
-            return false;
-          });
-        },
-
         onSetLastLocation: (location) => {
           setLastLocation(location);
         },
-
-        onToggleSearch: toggleSearchHandler,
-        onCloseSearch: () => {
-          setIsSearching((prevState) => {
-            return false;
-          });
-        },
-        onToggleMenu: toggleMenuHandler,
-        onCloseMenu: closeMenuHandler,
+        componentsIsActive,
+        onToggleComponentsIsActive: toggleComponentsIsActive,
       }}
     >
       {props.children}

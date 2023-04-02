@@ -1,8 +1,7 @@
 .profile_section {
   display: none;
   position: relative;
-  font-family: var(--nav-link-font-family);
-  font-size: var(--nav-link-font-size);
+  font-size: var(--primary-font-size);
 }
 
 .nav-user {
@@ -37,9 +36,11 @@
   color: var(--nav-text-color);
   color: black;
 }
+
 .nav-user-list .signed_in_as {
   padding: 0 1rem;
 }
+
 .nav-user-list .username {
   padding: 0 1rem;
   font-weight: bold;
@@ -71,29 +72,34 @@
   padding: 0.5rem 1rem;
   color: black;
 }
+
 .profileNavigation li a:hover,
 li.write a:hover {
   background-color: var(--nav-text-hover-color);
   color: white;
 }
+
 .profileNavigation li a p {
   padding: 0 0.5rem;
 }
+
 .write {
   display: flex;
 }
+
 .write a {
   color: black;
   align-items: center;
 }
+
 .write a p {
   padding: 0 0.5rem;
 }
+
 @media (min-width: 500px) {
   .profile_section {
     display: block;
   }
-
   .nav-user {
     width: 300px;
   }

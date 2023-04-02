@@ -1,26 +1,22 @@
 import { useParams } from "react-router-dom";
-import { useContext, useEffect } from "react";
-import { AppContext } from "../../../store/App/app-context";
-import { AuthContext } from "../../../store/Auth/auth-context";
 import SettingCmp from "../../../components/Contributor/Setting/Setting";
 import EditProfile from "./EditProfile/EditProfile";
-import Email from "./Access/Email";
+import EmailSettings from "./Access/EmailSettings";
 import styles from "./Setting.module.css";
 import ProfileUpdated from "../../../components/Contributor/Setting/EditProfile/UI/ProfileUpdated";
 import Appearance from "./Appearance/Appearance";
 import PasswordAuthentication from "./Access/PasswordAuthentication";
+import Account from "./Account/Account";
+import useFetchContributorData from "../../../hooks/useFetchContributorData";
+import { useContext } from "react";
+import { AuthContext } from "../../../store/Auth/auth-context";
+import useNewLocation from "../../../hooks/useNewLocation";
 
 const Setting = () => {
+  useFetchContributorData();
+  const { userData, history } = useContext(AuthContext);
+  useNewLocation(history.location.pathname);
   const { path } = useParams();
-  const {
-    appMode: { isLoggedIn, username },
-  } = useContext(AppContext);
-  const { onGetContributorData, userData } = useContext(AuthContext);
-  useEffect(() => {
-    if (isLoggedIn) {
-      onGetContributorData(username);
-    }
-  }, [username, isLoggedIn, onGetContributorData]);
   return (
     <>
       {userData.username && (
@@ -31,7 +27,8 @@ const Setting = () => {
             <div className={styles.links}>
               {path === "profile" && <EditProfile />}
               {path === "appearance" && <Appearance />}
-              {path === "email" && <Email />}
+              {path === "account" && <Account />}
+              {path === "email" && <EmailSettings />}
               {path === "security" && <PasswordAuthentication />}
             </div>
           </section>

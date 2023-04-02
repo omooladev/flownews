@@ -1,0 +1,39 @@
+.education_work {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 5%;
+}
+.education_work .education,
+.education_work .work {
+  margin: 0.5rem 0;
+  padding-right: 1rem;
+}
+.education_work .education label,
+.education_work .work label {
+  font-size: 1rem;
+}
+.education_work .education p,
+.education_work .work p {
+  padding: 0.5rem 0;
+  color: grey;
+}
+
+@media (min-width: 650px) {
+  .education_work {
+    flex-direction: row;
+    padding-left: 5%;
+    padding-right: 5%;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+@media (min-width: 800px) {
+  .education_work {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .education_work .education,
+  .education_work .work {
+    text-align: center;
+  }
+}

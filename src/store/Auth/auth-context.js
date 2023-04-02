@@ -3,22 +3,33 @@ import React from "react";
 export const AuthContext = React.createContext({
   HOSTURI: "",
   token: "",
-  userData: {},
+  history: "",
   searchedContributorData: {},
   isLoading: false,
   headerIsLoading: false,
   isLoggedIn: false,
   contributorError: { ref: "", message: "" },
-  authMessage: { type: "", message: "" },
-  profileUpdated: false,
-  onCloseProfileUpdated: () => {},
-  onSetUserData: () => {},
-  onUpdateContributorProfile: () => {},
-  onChangeAuthMessage: () => {},
-  onResetAuthMessage: () => {},
-  on_Login_BecomeContributor: () => {},
+
+  //? auth functions
+  onLoginOrBecomeContributor: async () => {},
   onGetContributorData: () => {},
   onSignOut: () => {},
 
   onUpdate_ResetPassword: async () => {},
+
+  onVerifyEmailAddress: async () => {},
+  onResetPassword: async () => {},
+  onSendPasswordResetEmail: async () => {},
+  onVerifyPasswordResetLink: async () => {},
+  changeAppMode: () => {},
+
+  //refactored
+  lastLocation: "",
+  makeBodyFixed: false,
+  onMakeBodyFixed: (bool) => {},
+  onSaveContributorData: (data) => {},
+  onUpdateContributorProfile: async () => {},
+  profileUpdated: false,
+  onChangeProfileUpdated: async () => {},
+  onToggleEmailPrivacy: async () => {},
 });

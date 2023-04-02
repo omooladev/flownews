@@ -1,4 +1,11 @@
 .not_found {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.not_found {
   background-color: var(--body-color);
   position: fixed;
   height: 100vh;
@@ -6,15 +13,11 @@
   top: 0;
   left: 0;
   z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
-  color: var(--nav-text-color);
+  color: var(--secondary-color);
   padding: 0 5%;
   text-align: center;
 }
-
 .not_found h1 {
   font-weight: bold;
   padding: 0.5rem 0;
@@ -25,10 +28,9 @@
   font-size: 1.1rem;
   margin-bottom: 2rem;
 }
-
 .not_found a {
   cursor: pointer;
-  background-color: var(--nav-text-hover-color);
+  background-color: var(--primary-color);
   width: 100%;
   font-size: 1.1rem;
   padding: 0.6rem 0.5rem;

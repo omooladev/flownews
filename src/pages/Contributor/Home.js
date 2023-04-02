@@ -1,18 +1,13 @@
-import { useContext, useEffect } from "react";
-import { AppContext } from "../../store/App/app-context";
-import { AuthContext } from "../../store/Auth/auth-context";
+import useFetchContributorData from "../../hooks/useFetchContributorData";
+import useNewLocation from "../../hooks/useNewLocation";
+import { useLocation } from "react-router-dom";
+import DummyNews from "../../components/DummyNews/dummy_news"
 const Home = () => {
-  const {
-    appMode: { isLoggedIn, username },
-   
-  } = useContext(AppContext);
-  const { onGetContributorData } = useContext(AuthContext);
-  useEffect(() => {
-    if (isLoggedIn) {
-      onGetContributorData(username);
-    }
-  }, [username, isLoggedIn, onGetContributorData]);
-  return;
+  useFetchContributorData();
+  const location = useLocation();
+  useNewLocation(location.pathname);
+
+  return <DummyNews/>
 };
 
 export default Home;

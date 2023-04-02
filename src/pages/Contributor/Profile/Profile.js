@@ -1,19 +1,10 @@
-import { useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import ProfileCmp from "../../../components/Contributor/Profile/Profile";
-import { AppContext } from "../../../store/App/app-context";
-import { AuthContext } from "../../../store/Auth/auth-context";
+import useCloseProfileUpdated from "../../../hooks/useCloseProfileUpdated";
+import useFetchContributorData from "../../../hooks/useFetchContributorData";
+
 const Profile = () => {
-  const { username } = useParams();
-  const {
-    appMode: { isLoggedIn },
-  } = useContext(AppContext);
-  const { onGetContributorData } = useContext(AuthContext);
-  useEffect(() => {
-    if (isLoggedIn) {
-      onGetContributorData(username);
-    }
-  }, [username, isLoggedIn, onGetContributorData]);
+  useCloseProfileUpdated();
+  useFetchContributorData();
 
   return <ProfileCmp />;
 };
