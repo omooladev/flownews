@@ -47,6 +47,7 @@ body {
   font-family: var(--secondary-font);
   background-color: var(--body-color);
   height: auto;
+  overflow: scroll;
 }
 
 body.dark {

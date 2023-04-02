@@ -186,10 +186,8 @@
   .auth {
     height: 60vh;
     height: 35rem;
-    height: 60vh;
     width: 25rem;
-    margin-top: -30vh;
-    overflow: scroll;
+    margin-top: -17.5rem;
   }
   .auth .icon {
     display: none;
