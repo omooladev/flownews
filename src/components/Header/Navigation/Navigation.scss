@@ -14,6 +14,8 @@
     padding: 0 2.5%;
     transition: all 0.4s ease;
     z-index: 1000; //?TODO ZINDEX
+    overflow: scroll;
+    padding-bottom: 1rem;
     .toggleLogo {
       height: 10vh;
       width: 100%;
@@ -37,7 +39,7 @@
   }
   &.active .navigation-section {
     left: 0%;
-    overflow: scroll;
+    
   }
 }
 
