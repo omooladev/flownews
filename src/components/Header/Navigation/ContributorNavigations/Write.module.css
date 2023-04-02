@@ -1,0 +1,30 @@
+.write {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.write {
+  display: none;
+  padding: var(--primary-padding);
+  justify-content: space-between;
+}
+.write a {
+  display: flex;
+  justify-content: center;
+  color: var(--secondary-color);
+}
+.write p {
+  padding: 0 0.5rem;
+  font-size: var(--primary-font);
+}
+.write .icon {
+  font-size: 1.1rem;
+}
+
+@media (min-width: 650px) {
+  .write {
+    display: flex;
+  }
+}

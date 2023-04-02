@@ -1,0 +1,73 @@
+@use "../../../../sass/_DisplayFlex";
+.searchBox {
+  position: relative;
+  padding: var(--primary-padding);
+  .searchToggle {
+    @extend %DisplayFlex;
+
+    .icon {
+      cursor: pointer;
+      color: var(--secondary-color);
+      font-size: 1.3rem;
+    }
+  }
+  .searchField {
+    position: absolute;
+    bottom: -80px;
+    right: -5px;
+    height: 2.5rem;
+    width: 80vw;
+
+    @extend %DisplayFlex;
+    padding: 0 3px;
+    background-color: var(--header-color);
+    box-shadow: 0 5px 5px var(--header-color);
+    border-radius: 0.3rem;
+    border: 2px solid var(--primary-color);
+    transition: all 0.3s ease;
+    &::before {
+      content: "";
+      position: absolute;
+      height: 12px;
+      width: 12px;
+      right: 14px;
+      top: -4px;
+      transform: rotate(-45deg);
+      background-color: var(--primary-color);
+      z-index: -1;
+    }
+    .input {
+      height: 100%;
+      width: 100%;
+      padding: 0 45px 0 15px;
+      font-size: 1rem;
+      color: var(--secondary-color);
+      background-color: transparent;
+      font-weight: 400px;
+      border-radius: 4px;
+    }
+    .search {
+      position: absolute;
+      cursor: pointer;
+      right: 15px;
+    }
+
+    .icon {
+      color: var(--primary-color);
+      font-size: 1.2rem;
+    }
+  }
+}
+@media (min-width: 500px) {
+  .searchBox .searchField {
+    width: 300px;
+    right: -5px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .searchBox .searchField {
+    right: 0px;
+    height: 2.5rem;
+  }
+}

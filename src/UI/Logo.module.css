@@ -1,0 +1,28 @@
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  font-family: var(--secondary-font);
+  cursor: pointer;
+  font-size: var(--primary-font-size);
+  color: var(--secondary-color);
+  justify-content: space-around;
+}
+.logo #FN_text {
+  font-size: 3.4rem;
+  padding-right: 0.5rem;
+  color: var(--primary-color);
+}
+.logo #flownews_text {
+  font-weight: normal;
+  text-transform: uppercase;
+  padding: 0.2rem 0;
+}
+.logo #publication_text {
+  padding: 0.2rem 0;
+  font-weight: normal;
+}

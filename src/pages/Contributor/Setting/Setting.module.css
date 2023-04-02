@@ -1,0 +1,29 @@
+.setting_page {
+  padding: 1rem 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.setting_page .links {
+  font-family: var(--primary-font);
+  color: var(--nav-text-color);
+}
+
+.setting_page .links h2 {
+  padding: 0.5rem 0;
+  color: var(--profile-color);
+}
+.setting_page .links p {
+  font-size: 1rem;
+  padding: 0.2rem 0;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 750px) {
+  .setting_page {
+    flex-direction: row;
+  }
+  .setting_page .links {
+    width: 80%;
+  }
+}

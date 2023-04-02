@@ -1,0 +1,22 @@
+.menu_icon {
+  position: absolute;
+  cursor: pointer;
+  top: 50%;
+  left: 5%;
+  height: 2rem;
+  width: 2rem;
+  font-size: 2rem;
+  margin-top: -1rem;
+  color: var(--primary-color);
+  opacity: 1;
+  transition: all 0.4s ease;
+}
+.menu_icon .active {
+  opacity: 0;
+}
+
+@media (min-width: 1200px) {
+  .menu_icon {
+    display: none;
+  }
+}
