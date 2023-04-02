@@ -23,7 +23,7 @@ const ResetPassword = (props) => {
   const location = history.location;
   const [isLoading, setIsLoading] = useState({ type: null });
   const [linkIsValid, setLinkIsValid] = useState(false);
-  const [username, setUsername] = useState("omoola");
+  const [username, setUsername] = useState("");
   const [passwordChanged, setPasswordChanged] = useState(false);
   //**refs
   const passwordRef = useRef();
@@ -103,9 +103,9 @@ const ResetPassword = (props) => {
   const returnToSettingsPage = useCallback(() => {
     history.push("/settings/security");
   }, [history]);
-  // useEffect(() => {
-  //   verifyPasswordResetLink();
-  // }, [verifyPasswordResetLink]);
+  useEffect(() => {
+    verifyPasswordResetLink();
+  }, [verifyPasswordResetLink]);
   useEffect(() => {
     onResetAuthReply();
   }, [onResetAuthReply]);

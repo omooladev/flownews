@@ -51,7 +51,6 @@ const Login = (props) => {
       });
       const data = response.data || "";
       const error = response.error || "";
-      console.log(data);
       if (data) {
         onSaveContributorData(data);
         changeAppMode({

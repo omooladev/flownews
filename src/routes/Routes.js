@@ -4,11 +4,11 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import SuspenseLoader from "../components/Loaders/SuspenseLoader";
 import AuthPage from "../pages/Auth/Auth";
 import NotFoundPage from "../pages/NotFound";
-// import ContributorHomePage from "../pages/Contributor/Home";
+import UserHomePage from "../pages/User/Home";
+import ContributorHomePage from "../pages/Contributor/Home";
 import EmailVerification from "../pages/EmailVerification/EmailVerification";
-import DummyNews from "../components/DummyNews/dummy_news";
 //import SettingPage from "../pages/Contributor/Setting/Setting";
-// const UserHomePage = React.lazy(() => import("../pages/User/Home"));
+
 // const ContributorHomePage = React.lazy(() => import("../pages/Contributor/Home"));
 // const AccountPage = React.lazy(() => import("../pages/Contributor/DashBoard/Account"));
 const ProfilePage = React.lazy(() => import("../pages/Contributor/Profile/Profile"));
@@ -29,8 +29,7 @@ const Routes = () => {
               <Redirect to="/home" />
             </Route>
             <Route path="/home" exact>
-              <DummyNews />
-              {/* <UserHomePage /> */}
+              <UserHomePage />
             </Route>
             <Route path="/login" exact>
               <AuthPage />
@@ -55,8 +54,7 @@ const Routes = () => {
               <Redirect to="/home" />
             </Route>
             <Route path="/home" exact>
-              <DummyNews />
-              {/* <ContributorHomePage /> */}
+              <ContributorHomePage />
             </Route>
             <Route path="/@:username" exact>
               <ProfilePage />

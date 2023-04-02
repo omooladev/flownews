@@ -39,6 +39,7 @@ const AuthContextProvider = (props) => {
   const getContributorData = useCallback(
     async (username) => {
       if (contributorData.username) {
+        //* This means that if contributor data exits already, then there is no need to fetch data again
         return;
       }
       setHeaderIsLoading((prevState) => {
