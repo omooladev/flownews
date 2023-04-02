@@ -6,7 +6,7 @@
 }
 :root {
   /*? fonts family */
-  /* --primary-font: "Merriweather", serif; */
+  --primary-font: "Merriweather", serif;
   --secondary-font: "Lato", Helvetica, sans-serif;
   --tertiary-font: "Frank Ruhl Libre", Helvetica, serif;
   /*? fonts sizes */
