@@ -1,7 +1,6 @@
 .main {
-  /* height: 90vh; */
   background-color: var(--body-color);
-  padding-top: 9vh;
+  padding-top: 10vh;
 }
 
 .main.profile_updated {
@@ -13,16 +12,13 @@
 }
 .success {
   color: var(--body-color);
-  background-color: var(--nav-text-hover-color);
+  background-color: var(--primary-color);
 }
-.auth_popup {
+.popup {
   position: fixed;
   top: 0%;
-  width: 100vw;
-  height: 100vh;
   padding: 1rem 5%;
   z-index: 999;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,8 +26,7 @@
 }
 
 @media (min-width: 500px) {
-  .auth_popup {
-    position: fixed;
+  .popup {
     top: 50%;
     left: 50%;
     width: 25rem;

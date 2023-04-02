@@ -1,32 +1,39 @@
 import { useCallback, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { AppContext } from "../../../../store/App/app-context";
 import { AuthContext } from "../../../../store/Auth/auth-context";
-
-import styles from "./ProfileSection.module.css";
 import ProfileBox from "./ProfileBox";
-import { useHistory } from "react-router-dom";
 import Write from "./Write";
+import styles from "./ProfileSection.module.css";
 
 const ProfileSection = () => {
   const history = useHistory();
-  const { profileBoxIsActive, onToggleProfileBox, onCloseProfileBox } = useContext(AppContext);
-  const { onSignOut, userData } = useContext(AuthContext);
-
-  const contributorFullUsername = userData.username;
-  const contributorEmailAddress = userData.email;
+  const {
+    componentsIsActive: { profileBoxIsActive },
+    onToggleComponentsIsActive,
+  } = useContext(AppContext);
+  const {
+    onSignOut,
+    contributorData: {
+      username,
+      username: contributorFullUsername,
+      email: contributorEmailAddress,
+    },
+  } = useContext(AuthContext);
 
   const goToPage = useCallback(
     (location) => {
-      if (profileBoxIsActive) {
-        onCloseProfileBox();
-      }
+      onToggleComponentsIsActive({ type: "profileBox", event: "close" });
       history.push(location);
     },
-    [history, onCloseProfileBox, profileBoxIsActive]
+    [history, onToggleComponentsIsActive, profileBoxIsActive]
   );
+  const toggleProfileBoxHandler = useCallback(() => {
+    onToggleComponentsIsActive({ type: "profileBox", event: "toggle" });
+  }, [onToggleComponentsIsActive]);
   return (
     <section className={styles.profile_section}>
-      <ProfileBox className="Header-ProfileSection__ProfileBox" onClick={onToggleProfileBox} />
+      <ProfileBox className="Header-ProfileSection__ProfileBox" onClick={toggleProfileBoxHandler} />
       {profileBoxIsActive && (
         <nav className={`${styles["nav-user"]}`}>
           <ul className={`${styles["nav-user-list"]}`}>
@@ -39,7 +46,7 @@ const ProfileSection = () => {
           </ul>
           <hr className={styles.write_line} />
           <ul className={`${styles["nav-user-list"]}`}>
-            <li onClick={() => goToPage(`/@${userData.username}`)}>Profile</li>
+            <li onClick={() => goToPage(`/@${username}`)}>Profile</li>
             <li>Lists</li>
             <li>Stories</li>
             <li>Stats</li>

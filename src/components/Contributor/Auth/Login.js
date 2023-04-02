@@ -1,11 +1,11 @@
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
-import AuthLoader from "../../Loaders/AuthLoader";
-import styles from "./Auth.module.css";
-import Reply from "./Reply";
 import { useTitle } from "../../../hooks/useTitle";
 import { AuthContext } from "../../../store/Auth/auth-context";
+import AuthLoader from "../../Loaders/AuthLoader";
+import Reply from "./Reply";
+import styles from "./Auth.module.css";
 const Login = (props) => {
   useTitle("Login");
   const {
@@ -18,24 +18,29 @@ const Login = (props) => {
     onValidateEmail,
     onValidatePassword,
   } = props;
-  const { changeAppMode, onLoginOrBecomeContributor, onSetUserData, history } =
+  const { changeAppMode, onLoginOrBecomeContributor, history, onSaveContributorData } =
     useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
+  //* refs
   const emailRef = useRef();
   const passwordRef = useRef();
   const loginHandler = useCallback(
     async (event) => {
       event.preventDefault();
+      //*reset reply
       onResetAuthReply();
+      //*get input values
       const email = emailRef.current.value;
       const password = passwordRef.current.value;
-      //? validations
+      //* validations
       const emailIsValid = onValidateEmail({ validationType: "check_full", email });
       if (!emailIsValid) {
+        emailRef.current.focus();
         return;
       }
       const passwordIsValid = onValidatePassword({ validationType: "check_length", password });
       if (!passwordIsValid) {
+        passwordRef.current.focus();
         return;
       }
 
@@ -47,11 +52,7 @@ const Login = (props) => {
       const data = response.data || "";
       const error = response.error || "";
       if (data) {
-        onSetUserData((prevData) => {
-          return {
-            ...data,
-          };
-        });
+        onSaveContributorData(data);
         changeAppMode({
           username: data.username,
           token: data.token,
@@ -72,7 +73,7 @@ const Login = (props) => {
       onValidatePassword,
       onChangeAuthReply,
       onResetAuthReply,
-      onSetUserData,
+      onSaveContributorData,
       onLoginOrBecomeContributor,
     ]
   );
@@ -84,7 +85,7 @@ const Login = (props) => {
   return (
     <>
       <h1>Log in to FlowNews</h1>
-      <Reply isLoading={isLoading} authReply={authReply} onResetAuthReply={onResetAuthReply} />
+      {!isLoading && <Reply authReply={authReply} onResetAuthReply={onResetAuthReply} />}
       <form className={styles.form} onSubmit={loginHandler}>
         <div className={styles.form_control}>
           <label>Email Address</label>
@@ -95,7 +96,6 @@ const Login = (props) => {
             <label>Password</label>
             <Link to={`${isLoading ? "#" : "/forgot-password"}`}>Forgot password?</Link>
           </div>
-
           <div className={styles.input_container}>
             <input type={viewPassword ? "text" : "password"} ref={passwordRef} />
             {!viewPassword && (
@@ -108,7 +108,7 @@ const Login = (props) => {
         </div>
         <div className={styles.form_actions}>
           <button type="submit" disabled={isLoading ? true : false}>
-            {isLoading ? <AuthLoader /> : "Log in"}
+            {isLoading ? <AuthLoader text="Logging in" /> : "Log in"}
           </button>
         </div>
       </form>

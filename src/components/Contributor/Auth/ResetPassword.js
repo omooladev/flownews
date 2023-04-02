@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState, useCallback, useRef } from "react";
 import { AuthContext } from "../../../store/Auth/auth-context";
+import { useTitle } from "../../../hooks/useTitle";
 import ForgotPassword from "./ForgotPassword";
 import AuthLoader from "../../Loaders/AuthLoader";
-import styles from "./Auth.module.css";
 import Reply from "./Reply";
-import { useTitle } from "../../../hooks/useTitle";
 import Login from "./Login";
+import styles from "./Auth.module.css";
+
 const ResetPassword = (props) => {
   useTitle("Reset Password");
   const {
@@ -21,9 +22,10 @@ const ResetPassword = (props) => {
     useContext(AuthContext);
   const location = history.location;
   const [isLoading, setIsLoading] = useState({ type: null });
-  const [linkIsValid, setLinkIsValid] = useState(null);
+  const [linkIsValid, setLinkIsValid] = useState(false);
   const [username, setUsername] = useState("");
   const [passwordChanged, setPasswordChanged] = useState(false);
+  //**refs
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
   const verifyPasswordResetLink = useCallback(async () => {
@@ -84,7 +86,6 @@ const ResetPassword = (props) => {
       const error = response.error || "";
       if (status === 200) {
         setPasswordChanged(true);
-
         onChangeAuthReply({ type: "success", message: "New password set successfully" });
       }
       if (error) {

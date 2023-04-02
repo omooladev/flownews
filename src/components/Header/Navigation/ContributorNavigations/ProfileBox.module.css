@@ -6,7 +6,6 @@
   align-items: center;
   overflow: hidden;
   height: auto;
-  font-family: Arial, Helvetica, sans-serif;
 }
 .profile_box .profile_picture {
   height: 32px;
@@ -15,22 +14,21 @@
   margin: 0 0.5rem;
   object-fit: cover;
   object-position: center;
-  background-color: var(--nav-text-hover-color);
+  background-color: var(--primary-color);
   color: var(--body-color);
 }
 .profile_box p {
   height: 32px;
   width: 32px;
   border-radius: 50%;
-  background-color: var(--nav-text-hover-color);
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--white-color);
   margin: 0 0.5rem;
   text-align: center;
   font-size: 1.6rem;
-  font-family: Arial, Helvetica, sans-serif;
 }
 .profile_box .icon {
-  color: var(--nav-text-color);
+  color: var(--secondary-color);
   font-size: 0.8rem;
 }
 .profile_box .profile_box_text {
@@ -40,7 +38,7 @@
   justify-content: center;
 }
 .profile_box .profile_box_text .username {
-  color: var(--nav-text-color);
+  color: var(--secondary-color);
 }
 
 /*? ProfileBox configuration for Header Profile Section */

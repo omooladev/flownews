@@ -5,14 +5,14 @@ const Reply = (props) => {
   const { authReply, onResetAuthReply } = props;
   return (
     <>
-      {authReply && authReply.type && (
+      {authReply.type && (
         <Card
           className={`${styles.reply} ${
             authReply.type === "success" ? styles["success"] : styles["error"]
           }`}
         >
           <p>{authReply.message}</p>
-          <BiX className={styles.cancel_icon} onClick={onResetAuthReply} />
+          <BiX className={styles.reply_icon} onClick={onResetAuthReply} />
         </Card>
       )}
     </>

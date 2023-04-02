@@ -1,14 +1,13 @@
-import { useContext } from "react";
 import useFetchContributorData from "../../hooks/useFetchContributorData";
 import useNewLocation from "../../hooks/useNewLocation";
-import { AuthContext } from "../../store/Auth/auth-context";
-
+import { useLocation } from "react-router-dom";
+import DummyNews from "../../components/DummyNews/dummy_news"
 const Home = () => {
   useFetchContributorData();
-  const { history } = useContext(AuthContext);
-  useNewLocation(history.location.pathname);
+  const location = useLocation();
+  useNewLocation(location.pathname);
 
-  return;
+  return <DummyNews/>
 };
 
 export default Home;

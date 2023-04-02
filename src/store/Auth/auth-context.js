@@ -4,18 +4,12 @@ export const AuthContext = React.createContext({
   HOSTURI: "",
   token: "",
   history: "",
-  userData: {},
   searchedContributorData: {},
   isLoading: false,
   headerIsLoading: false,
   isLoggedIn: false,
   contributorError: { ref: "", message: "" },
-  authMessage: { type: "", message: "" },
 
-  onSetUserData: () => {},
-
-  onChangeAuthMessage: () => {},
-  onResetAuthMessage: () => {},
   //? auth functions
   onLoginOrBecomeContributor: async () => {},
   onGetContributorData: () => {},
@@ -30,9 +24,10 @@ export const AuthContext = React.createContext({
   changeAppMode: () => {},
 
   //refactored
+  lastLocation: "",
   makeBodyFixed: false,
   onMakeBodyFixed: (bool) => {},
-  onSaveContributorData: () => {},
+  onSaveContributorData: (data) => {},
   onUpdateContributorProfile: async () => {},
   profileUpdated: false,
   onChangeProfileUpdated: async () => {},

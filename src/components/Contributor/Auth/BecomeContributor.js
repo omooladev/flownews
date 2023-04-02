@@ -30,10 +30,12 @@ const BecomeContributor = (props) => {
       const password = passwordRef.current.value;
       const emailIsValid = onValidateEmail({ validationType: "check_full", email });
       if (!emailIsValid) {
+        emailRef.current.focus();
         return;
       }
       const passwordIsValid = onValidatePassword({ validationType: "check_full", password });
       if (!passwordIsValid) {
+        passwordRef.current.focus();
         return;
       }
       setIsLoading(true);
@@ -47,7 +49,7 @@ const BecomeContributor = (props) => {
         onChangeAuthReply({ type: "success", message: "Account created successfully" });
         setTimeout(() => {
           history.replace("/login");
-        }, 800);
+        }, 1000);
       }
       if (error) {
         onChangeAuthReply({ type: "error", message: error });
@@ -70,7 +72,7 @@ const BecomeContributor = (props) => {
   return (
     <>
       <h1>Create a FlowNews account</h1>
-      <Reply isLoading={isLoading} authReply={authReply} onResetAuthReply={onResetAuthReply} />
+      <Reply authReply={authReply} onResetAuthReply={onResetAuthReply} />
       <form className={styles.form} onSubmit={becomeContributorHandler}>
         <div className={styles.form_control}>
           <label>Email Address</label>
@@ -93,7 +95,7 @@ const BecomeContributor = (props) => {
         </div>
         <div className={styles.form_actions}>
           <button type="submit" disabled={isLoading ? true : false}>
-            {isLoading ? <AuthLoader /> : "Sign up"}
+            {isLoading ? <AuthLoader text="Creating account" /> : "Sign up"}
           </button>
         </div>
       </form>

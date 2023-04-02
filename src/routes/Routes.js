@@ -4,14 +4,16 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import SuspenseLoader from "../components/Loaders/SuspenseLoader";
 import AuthPage from "../pages/Auth/Auth";
 import NotFoundPage from "../pages/NotFound";
+import UserHomePage from "../pages/User/Home";
 import ContributorHomePage from "../pages/Contributor/Home";
 import EmailVerification from "../pages/EmailVerification/EmailVerification";
 //import SettingPage from "../pages/Contributor/Setting/Setting";
-const UserHomePage = React.lazy(() => import("../pages/User/Home"));
+
 // const ContributorHomePage = React.lazy(() => import("../pages/Contributor/Home"));
 // const AccountPage = React.lazy(() => import("../pages/Contributor/DashBoard/Account"));
 const ProfilePage = React.lazy(() => import("../pages/Contributor/Profile/Profile"));
 const SettingPage = React.lazy(() => import("../pages/Contributor/Setting/Setting"));
+
 const Routes = () => {
   const { isLoggedIn } = useContext(AuthContext);
 
@@ -41,9 +43,9 @@ const Routes = () => {
             <Route path="/:_id/verify/:token" exact>
               <EmailVerification />
             </Route>
-            {/* <Route path="*">
+            <Route path="*">
               <NotFoundPage />
-            </Route> */}
+            </Route>
           </Switch>
         )}
         {isLoggedIn && (
@@ -66,10 +68,9 @@ const Routes = () => {
             <Route path="/:_id/verify/:token" exact>
               <EmailVerification />
             </Route>
-
-            {/* <Route path="*">
+            <Route path="*">
               <NotFoundPage />
-            </Route> */}
+            </Route>
           </Switch>
         )}
 

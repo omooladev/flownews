@@ -4,25 +4,15 @@ import { AppContext } from "../../../store/App/app-context";
 import styles from "./Menu.module.css";
 const Menu = () => {
   const {
-    onToggleMenu,
-    menuIsActive,
-    isSearching,
-    onCloseSearch,
-    profileBoxIsActive,
-    onCloseProfileBox,
+    componentsIsActive: { menuIsActive },
+    onToggleComponentsIsActive,
   } = useContext(AppContext);
   const toggleMenuHandler = useCallback(
     (event) => {
       event.stopPropagation();
-      if (isSearching) {
-        onCloseSearch();
-      }
-      if (profileBoxIsActive) {
-        onCloseProfileBox();
-      }
-      onToggleMenu();
+      onToggleComponentsIsActive({ type: "menu", event: "toggle" });
     },
-    [isSearching, onCloseSearch, onToggleMenu, profileBoxIsActive, onCloseProfileBox]
+    [onToggleComponentsIsActive]
   );
   return (
     <BiMenu

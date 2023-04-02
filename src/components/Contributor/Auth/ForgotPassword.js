@@ -13,7 +13,7 @@ const ForgotPassword = (props) => {
     history,
     onSendPasswordResetEmail,
     isLoggedIn,
-    userData: { email },
+    contributorData: { email },
   } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [passwordResetLinkSent, setPasswordResetLinkSent] = useState(false);
@@ -26,6 +26,7 @@ const ForgotPassword = (props) => {
       //? validations
       const emailIsValid = onValidateEmail({ validationType: "check_full", email });
       if (!emailIsValid) {
+        emailRef.current.focus()
         return;
       }
       setIsLoading(true);
@@ -67,11 +68,12 @@ const ForgotPassword = (props) => {
   return (
     <>
       <h1>Reset your Password</h1>
-      <p className={styles.reset_password}>
-        {!passwordResetLinkSent &&
-          "Enter your user account's email address and we will send you a password reset link."}
-      </p>
-      <Reply isLoading={isLoading} authReply={authReply} onResetAuthReply={onResetAuthReply} />
+      {!passwordResetLinkSent && (
+        <p className={styles.reset_password}>
+          Enter your user account's email address and we will send you a password reset link.
+        </p>
+      )}
+      {!isLoading && <Reply authReply={authReply} onResetAuthReply={onResetAuthReply} />}
       <form className={styles.form} onSubmit={sendPasswordResetLink}>
         {passwordResetLinkSent && (
           <p className={styles.reset_password}>
@@ -79,18 +81,20 @@ const ForgotPassword = (props) => {
             minutes, check your spam folder
           </p>
         )}
-
         {!passwordResetLinkSent && (
           <div className={styles.form_control}>
             <label>Email Address</label>
             <input type="email" ref={emailRef} autoComplete="on" />
           </div>
         )}
-
         <div className={styles.form_actions}>
           {!passwordResetLinkSent && (
             <button type="submit" disabled={isLoading ? true : false}>
-              {isLoading ? <AuthLoader /> : "Send me password reset email"}
+              {isLoading ? (
+                <AuthLoader text="Sending Reset Link" />
+              ) : (
+                "Send me password reset email"
+              )}
             </button>
           )}
           {passwordResetLinkSent && (

@@ -1,0 +1,46 @@
+/* MOBILE SCREEN OF LESS THAN 700PX */
+@use "../../sass/_DisplayFlex";
+.header {
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 100vw;
+  height: 10vh;
+  padding: 2rem 5%;
+  background-color: var(--header-color);
+  @extend %DisplayFlex;
+  justify-content: space-around;
+  border-bottom: 1px solid var(--primary-color);
+  z-index: 997; //TODO ZINDEX
+  .logo {
+    opacity: 1;
+  }
+  &.menu_active .logo {
+    opacity: 0;
+  }
+  
+  .account_subscribe {
+    display: none;
+  }
+}
+
+.error {
+  height: 100vh;
+  @extend %DisplayFlex;
+  text-align: center;
+  padding: 0 5%;
+}
+
+@media (min-width: 700px) {
+  .header {
+    .account_subscribe {
+      display: flex;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .header {
+    justify-content: space-between;
+  }
+}

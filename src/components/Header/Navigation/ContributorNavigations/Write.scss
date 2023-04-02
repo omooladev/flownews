@@ -1,0 +1,24 @@
+@use "../../../../sass/DisplayFlex";
+.write {
+  @extend %DisplayFlex;
+  display: none;
+  padding: var(--primary-padding);
+  justify-content: space-between;
+  a {
+    display: flex;
+    justify-content: center;
+    color: var(--secondary-color);
+  }
+  p {
+    padding: 0 0.5rem;
+    font-size: var(--primary-font);
+  }
+  .icon {
+    font-size: 1.1rem;
+  }
+}
+@media (min-width: 650px) {
+  .write {
+    display: flex;
+  }
+}

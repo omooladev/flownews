@@ -1,7 +1,12 @@
 .for_mobile_only {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+}
+
+.for_mobile_only {
+  flex-direction: column;
   width: 100%;
 }
 .for_mobile_only button {
@@ -9,25 +14,23 @@
   margin: 0.5rem 0;
   text-transform: capitalize;
   text-align: center;
-  padding: var(--nav-link-padding);
-  font-size: var(--nav-link-font-size);
+  padding: var(--primary-padding);
+  font-size: var(--primary-font-size);
 }
 .for_mobile_only button.contributor {
   background-color: transparent;
-  color: var(--nav-text-color);
-  font-size: var(--nav-link-font-size);
-  font-weight: var(--nav-link-font-weight);
+  color: var(--secondary-color);
   transition: all 0.4s ease;
 }
 .for_mobile_only button.contributor:hover {
-  color: var(--nav-text-hover-color);
+  color: var(--primary-color);
 }
 .for_mobile_only button.login {
-  color: var(--subscribe-button-color);
-  background-color: var(--subscribe-button);
+  color: var(--white-color);
+  background-color: var(--primary-color);
 }
 .for_mobile_only button.login:hover {
-  background-color: var(--subscribe-button-hover);
+  background-color: var(--primary-color);
   opacity: 0.8;
 }
 
@@ -35,6 +38,7 @@
   display: block;
   margin: 0.5rem;
 }
+
 .for_mobile_only .sign_out {
   display: block;
   margin: 0.5rem;
@@ -44,9 +48,11 @@
   font-weight: 300;
   color: var(--nav-text-color);
 }
+
 .for_mobile_only .sign_out a {
   color: var(--nav-text-color);
 }
+
 @media (min-width: 350px) {
   .for_mobile_only .notification {
     display: none;
@@ -57,7 +63,6 @@
     display: none;
   }
 }
-
 @media (min-width: 700px) {
   .for_mobile_only {
     display: none;
