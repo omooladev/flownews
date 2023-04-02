@@ -17,7 +17,7 @@
   padding: 0 2.5%;
   transition: all 0.4s ease;
   z-index: 1000;
-  overflow: scroll;
+  overflow-y: scroll;
   padding-bottom: 1rem;
 }
 .navigation .navigation-section .toggleLogo {

@@ -15,9 +15,11 @@
     font-weight: normal;
     padding: 0.5rem 0;
     color: var(--primary-color);
+    text-align: center;
   }
   h3,
   .username {
+    text-align: center;
     color: var(--tertiary-color);
   }
   p {
@@ -182,16 +184,26 @@
   border-radius: 5px;
   margin: 1rem 0;
 }
+@media (max-height: 500px) {
+  .auth {
+    height: 50vh;
+    margin-top: -25vh;
+    overflow-y: scroll;
+  }
+}
+@media (min-height: 500px) {
+  .auth {
+    height: 27rem;
+    margin-top: -13.5rem;
+    overflow: hidden;
+  }
+}
 
 @media (min-width: 500px) {
   .auth {
-    // height: 65vh;
-    height: 60vh;
-    height:35rem;
-    // height: 60vh;
     width: 25rem;
-    margin-top: -17.5rem;
-    // overflow: scroll;
+    margin-left: -12.5rem;
+
     .icon {
       display: none;
     }
