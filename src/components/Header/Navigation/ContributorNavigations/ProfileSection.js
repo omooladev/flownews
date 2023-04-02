@@ -26,7 +26,7 @@ const ProfileSection = () => {
       onToggleComponentsIsActive({ type: "profileBox", event: "close" });
       history.push(location);
     },
-    [history, onToggleComponentsIsActive, profileBoxIsActive]
+    [history, onToggleComponentsIsActive]
   );
   const toggleProfileBoxHandler = useCallback(() => {
     onToggleComponentsIsActive({ type: "profileBox", event: "toggle" });
