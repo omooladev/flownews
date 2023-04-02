@@ -1,14 +1,13 @@
 .notification {
   display: none;
   padding: var(--primary-padding);
+  a {
+    color: var(--secondary-color);
+    .icon {
+      font-size: 1.1rem;
+    }
+  }
 }
-.notification a {
-  color: var(--secondary-color);
-}
-.notification a .icon {
-  font-size: 1.1rem;
-}
-
 @media (min-width: 350px) {
   .notification {
     display: block;

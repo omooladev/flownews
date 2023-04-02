@@ -1,8 +1,10 @@
 @use "../../../../sass/_DisplayFlex";
 .searchBox {
   position: relative;
+  padding: var(--primary-padding);
   .searchToggle {
     @extend %DisplayFlex;
+
     .icon {
       cursor: pointer;
       color: var(--secondary-color);
