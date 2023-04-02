@@ -1,9 +1,0 @@
-.news_container {
-  padding: 2rem 5%;
-  color: var(--secondary-color);
-}
-
-.news_container p {
-  font-size: var(--primary-font-size);
-  line-height: var(--primary-font-line-height);
-}
