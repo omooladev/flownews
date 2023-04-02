@@ -8,7 +8,6 @@
 .auth {
   background-color: var(--body-color);
   width: 100vw;
-  height: 100vh;
   font-size: var(--primary-font-size);
 }
 .auth a {
@@ -184,14 +183,14 @@
   margin: 1rem 0;
 }
 
-@media (max-height: 500px) {
+@media (max-height: 500px) and (min-width: 500px) {
   .auth {
     height: 50vh;
     margin-top: -25vh;
     overflow-y: scroll;
   }
 }
-@media (min-height: 500px) {
+@media (min-height: 500px) and (min-width: 500px) {
   .auth {
     height: 27rem;
     margin-top: -13.5rem;
@@ -211,5 +210,20 @@
   }
   .auth .form .form_footer a:hover {
     text-decoration: underline;
+  }
+}
+@media (min-height: 500px) and (max-width: 500px) {
+  .auth {
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media (max-height: 500px) and (max-width: 500px) {
+  .auth {
+    height: 100vh;
+    align-items: left;
+    justify-content: left;
+    overflow-y: scroll;
   }
 }
