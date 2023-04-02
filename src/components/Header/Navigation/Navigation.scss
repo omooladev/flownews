@@ -37,6 +37,7 @@
   }
   &.active .navigation-section {
     left: 0%;
+    overflow: scroll;
   }
 }
 

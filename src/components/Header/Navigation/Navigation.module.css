@@ -38,6 +38,7 @@
 }
 .navigation.active .navigation-section {
   left: 0%;
+  overflow: scroll;
 }
 
 @media (min-width: 350px) {
