@@ -1,7 +1,10 @@
 .main {
-  /* height: 90vh; */
   background-color: var(--body-color);
   padding-top: 10vh;
+}
+
+.main.profile_updated {
+  padding-top: 20vh;
 }
 
 .error {
@@ -9,17 +12,13 @@
 }
 .success {
   color: var(--body-color);
-  background-color: var(--nav-text-hover-color);
+  background-color: var(--primary-color);
 }
-.auth_popup {
-  position: absolute;
+.popup {
+  position: fixed;
   top: 0%;
-  width: 100vw;
-  height: 100vh;
-
   padding: 1rem 5%;
   z-index: 999;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,15 +26,11 @@
 }
 
 @media (min-width: 500px) {
-  .auth_popup {
+  .popup {
     top: 50%;
     left: 50%;
-    width: 90%;
-    margin-left: -45%;
     width: 25rem;
     margin-left: -12.5rem;
-    height: auto;
-    margin-top: -35vh;
     padding: 1rem;
   }
 }

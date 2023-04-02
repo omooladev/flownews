@@ -1,39 +1,33 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import styles from "./UserForm.module.css";
 const FullName = (props) => {
-  let { fullname: name, onGetValue } = props;
-  const [fullname, setFullname] = useState("");
+  let { fullname, onGetValue } = props;
+  const [newFullName, setNewFullName] = useState(fullname);
 
-  const changeFullNameHandler = useCallback((event) => {
-    setFullname((prevValue) => {
-      return event.target.value;
-    });
-  }, []);
+  const changeFullNameHandler = useCallback(
+    (event) => {
+      setNewFullName((prevValue) => {
+        return event.target.value;
+      });
+      onGetValue({ type: "fullname", value: event.target.value.trim() });
+    },
+    [onGetValue]
+  );
 
-  useEffect(() => {
-    if (name) {
-      setFullname((prevValue) => name);
-    }
-  }, [name]);
-  useEffect(() => {
-    if (fullname) {
-      onGetValue({ type: "fullname", value: fullname });
-    }
-  }, [fullname, onGetValue]);
   return (
     <div className={styles.form_control}>
-      <label htmlFor="userFormControl__name">Name</label>
+      <label htmlFor="userFormControl__fullname">Name</label>
       <input
         type="text"
-        id="userFormControl__name"
+        id="userFormControl__fullname"
         placeholder="Please enter your fullname"
-        value={fullname}
+        value={newFullName}
         onChange={changeFullNameHandler}
         spellCheck="false"
       />
       <p>
-        Your name may appear around flownews where you contribute or are mentioned. You can remove
-        it any time
+        Your fullname may appear around flowNews where you contribute or are mentioned. You can
+        remove it any time
       </p>
     </div>
   );

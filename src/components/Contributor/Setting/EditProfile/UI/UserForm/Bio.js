@@ -1,37 +1,31 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import styles from "./UserForm.module.css";
 const Bio = (props) => {
-  let { bio: biography, onGetValue } = props;
-  const [bio, setBio] = useState("");
+  let { bio, onGetValue } = props;
+  const [newBio, setNewBio] = useState(bio);
 
-  const changeBioHandler = useCallback((event) => {
-    setBio((prevValue) => {
-      return event.target.value;
-    });
-  }, []);
+  const changeBioHandler = useCallback(
+    (event) => {
+      setNewBio((prevValue) => {
+        return event.target.value;
+      });
+      onGetValue({ type: "bio", value: event.target.value.trim() });
+    },
+    [onGetValue]
+  );
 
-  useEffect(() => {
-    if (biography) {
-      setBio((prevValue) => biography);
-    }
-  }, [biography]);
-  useEffect(() => {
-    if (bio) {
-      onGetValue({ type: "bio", value: bio });
-    }
-  }, [bio, onGetValue]);
   return (
     <div className={styles.form_control}>
       <label htmlFor="userFormControl__bio">Bio</label>
       <textarea
         id="userFormControl__bio"
         placeholder="Please enter your bio"
-        value={bio}
+        value={newBio}
         onChange={changeBioHandler}
         maxLength="200"
         spellCheck="false"
       />
-      <span>{`${bio.length} / 200`}</span>
+      <span>{`${newBio.trim().length} / 200`}</span>
     </div>
   );
 };

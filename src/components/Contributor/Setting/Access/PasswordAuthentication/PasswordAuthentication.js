@@ -1,15 +1,19 @@
-import { useCallback, useContext, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { useCallback, useContext, useState, useRef} from "react";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
-import EmailVerify from "../../UI/EmailVerification/VerifyEmail_CancelEmailRequest";
+import EmailVerify from "../../UI/EmailVerification/SendVerificationEmail_CancelEmailChangeRequest";
 import styles from "../../EditProfile/UI/UserForm/UserForm.module.css";
 import styles2 from "./PasswordAuthentication.module.css";
 import { useTitle } from "../../../../../hooks/useTitle";
+import useNewLocation from "../../../../../hooks/useNewLocation";
 
 const PasswordAuthentication = () => {
   useTitle("Account Security");
+  const location = useLocation();
+  useNewLocation(location.pathname);
+
   const {
-    userData: { emailIsVerified, emailRequestChange },
+    userData: { emailRequestChangeAddressIsVerified, emailRequestChange },
     onUpdate_ResetPassword,
   } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
@@ -73,7 +77,7 @@ const PasswordAuthentication = () => {
   }, []);
   return (
     <section className={styles2.password}>
-      {(!emailIsVerified || emailRequestChange) && <EmailVerify />}
+      {(!emailRequestChangeAddressIsVerified || emailRequestChange) && <EmailVerify />}
       <h2>Change Password</h2>
       <hr />
       {message.type && <p className={`${message.type} ${styles2[message.type]}`}>{message.text}</p>}

@@ -7,70 +7,137 @@ import Education from "./Education";
 import Email from "./Email";
 import FullName from "./FullName";
 import Location from "./Location";
-import styles from "./UserForm.module.css";
 import Username from "./Username";
 import Work from "./Work";
+import styles from "./UserForm.module.css";
 const UserForm = () => {
-  const { userData, onUpdateContributorProfile } = useContext(AuthContext);
-  const [userDetails, setUserDetails] = useState("");
+  const {
+    userData: { fullname, email, emailIsPrivate, username, bio, location, education, work },
+    changeAppMode,
+    onChangeProfileUpdated,
+    onSaveContributorData,
+    onUpdateContributorProfile,
+  } = useContext(AuthContext);
+  const [newContributorData, setNewContributorData] = useState({
+    fullname,
+    email,
+    username,
+    bio,
+    location,
+    education,
+    work,
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const getValueHandler = useCallback(({ type, value }) => {
-    setUserDetails((prevValue) => {
+  const getValue = useCallback(({ type, value }) => {
+    setNewContributorData((prevValue) => {
       return { ...prevValue, [type]: value };
     });
   }, []);
+  const compareData = useCallback(({ firstValue, secondValue }) => {
+    if (firstValue === secondValue) {
+      return true;
+    }
+    return false;
+  }, []);
 
-  const submitFormHandler = useCallback(
+  const matchProfileFields = useCallback(async () => {
+    let updateProperties;
+    const isFullNameMatch = compareData({
+      firstValue: fullname,
+      secondValue: newContributorData.fullname,
+    });
+    if (!isFullNameMatch) {
+      updateProperties = { fullname: newContributorData.fullname };
+    }
+    const isEmailMatch = compareData({
+      firstValue: email,
+      secondValue: newContributorData.email,
+    });
+    if (!isEmailMatch) {
+      updateProperties = { ...updateProperties, email: newContributorData.email };
+    }
+    const isUsernameMatch = compareData({
+      firstValue: username,
+      secondValue: newContributorData.username,
+    });
+    if (!isUsernameMatch) {
+      updateProperties = { ...updateProperties, username: newContributorData.username };
+    }
+    const isBioMatch = compareData({
+      firstValue: bio,
+      secondValue: newContributorData.bio,
+    });
+    if (!isBioMatch) {
+      updateProperties = { ...updateProperties, bio: newContributorData.bio };
+    }
+    const isLocationMatch = compareData({
+      firstValue: location,
+      secondValue: newContributorData.location,
+    });
+    if (!isLocationMatch) {
+      updateProperties = { ...updateProperties, location: newContributorData.location };
+    }
+    const isEducationMatch = compareData({
+      firstValue: education,
+      secondValue: newContributorData.education,
+    });
+    if (!isEducationMatch) {
+      updateProperties = { ...updateProperties, education: newContributorData.education };
+    }
+    const isWorkMatch = compareData({
+      firstValue: work,
+      secondValue: newContributorData.work,
+    });
+    if (!isWorkMatch) {
+      updateProperties = { ...updateProperties, work: newContributorData.work };
+    }
+
+    return updateProperties;
+  }, [fullname, email, username, bio, location, education, work, newContributorData, compareData]);
+  const submitContributorProfileHandler = useCallback(
     async (event) => {
       event.preventDefault();
-      const userDetailsFullName = userDetails.fullname;
-      const userDetailsEmail = userDetails.email;
-      const userDetailsUsername = userDetails.username;
-      const userDetailsBio = userDetails.bio;
-      const userDetailsLocation = userDetails.location;
-      const userDetailsEducation = userDetails.education;
-      const userDetailsWork = userDetails.work;
+      onChangeProfileUpdated(false);
+      setError("");
 
-      //?user data
-      // const userDataFullName = userData.fullname;
-      // const userDataEmail = userData.email;
-      // const userDataUsername = userData.username;
+      const updateProperties = await matchProfileFields();
 
-      let updateProperties;
-      // if (userDetailsFullName !== userDataFullName) {
-      //   updateProperties = { ...updateProperties, fullname: userDetailsFullName };
-      // }
-      // if (userDetailsEmail !== userDataEmail) {
-      //   updateProperties = { ...updateProperties, email: userDetailsEmail };
-      // }
-      // if (!updateProperties) {
-      //   return;
-      // }
-      updateProperties = {
-        fullname: userDetailsFullName,
-        email: userDetailsEmail,
-        username: userDetailsUsername,
-        bio: userDetailsBio,
-        location: userDetailsLocation,
-        education: userDetailsEducation,
-        work: userDetailsWork,
-      };
-      setIsLoading(true);
-      let error = await onUpdateContributorProfile(updateProperties);
-      setIsLoading(false);
-      if (error) {
-        return setError(error);
+      if (!updateProperties) {
+        return;
       }
-      return setError("");
-      // console.log(userDataFullName, userDetailsFullName, userDataEmail, userDetailsEmail);
+      setIsLoading(true);
+      let response = await onUpdateContributorProfile(updateProperties);
+      const data = response.data || "";
+      const status = response.status || "";
+      const error = response.error || "";
+      if (status === 204) {
+        return setIsLoading(false);
+      }
+      if (data) {
+        onSaveContributorData(data);
+        changeAppMode({ username: data.username, token: data.token });
+        onChangeProfileUpdated(true);
+      }
+      if (error) {
+        setError((prevError) => {
+          return error;
+        });
+      }
+      setIsLoading(false);
     },
-    [userDetails, onUpdateContributorProfile]
+    [
+      matchProfileFields,
+      changeAppMode,
+      onSaveContributorData,
+      onUpdateContributorProfile,
+      onChangeProfileUpdated,
+    ]
   );
 
   return (
-    <form className={styles.form} onSubmit={submitFormHandler}>
+    <form className={styles.form} onSubmit={submitContributorProfileHandler}>
       {error && (
         <Card className={styles.error}>
           <h4>The following error has prohibited your profile from been saved</h4>
@@ -80,13 +147,13 @@ const UserForm = () => {
         </Card>
       )}
       <div className={styles.form_controls}>
-        <FullName fullname={userData.fullname} onGetValue={getValueHandler} />
-        <Email email={userData.email} onGetValue={getValueHandler} />
-        <Username username={userData.username} onGetValue={getValueHandler} />
-        <Bio bio={userData.bio} onGetValue={getValueHandler} />
-        <Location location={userData.location} onGetValue={getValueHandler} />
-        <Education education={userData.education} onGetValue={getValueHandler} />
-        <Work work={userData.work} onGetValue={getValueHandler} />
+        <FullName fullname={fullname} onGetValue={getValue} />
+        <Email email={email} emailIsPrivate={emailIsPrivate} onGetValue={getValue} />
+        <Username username={username} onGetValue={getValue} />
+        <Bio bio={bio} onGetValue={getValue} />
+        <Location location={location} onGetValue={getValue} />
+        <Education education={education} onGetValue={getValue} />
+        <Work work={work} onGetValue={getValue} />
       </div>
       <div className={styles.form_actions}>
         <p>
@@ -97,7 +164,7 @@ const UserForm = () => {
           information.
         </p>
         <button type="submit" className={styles.update_profile} disabled={isLoading ? true : false}>
-          Update Profile
+          {isLoading ? "Updating..." : "Update Profile"}
         </button>
       </div>
     </form>

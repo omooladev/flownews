@@ -1,33 +1,39 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import styles from "./UserForm.module.css";
 const Username = (props) => {
-  let { username: user_name, onGetValue } = props;
-  const [username, setUsername] = useState("");
+  let { username, onGetValue } = props;
+  const [newUsername, setNewUsername] = useState(username);
+  const [newUsernameError, setNewUsernameError] = useState("");
+  const changeUsernameHandler = useCallback(
+    (event) => {
+      const usernameLength = event.target.value.trim().length;
+      setNewUsername((prevValue) => {
+        return event.target.value;
+      });
+      onGetValue({ type: "username", value: event.target.value.trim() });
+      if (usernameLength === 0) {
+        return setNewUsernameError("Please provide a valid username");
+      }
+      if (usernameLength < 9) {
+        return setNewUsernameError("username cannot be less than 9 characters");
+      }
+      if (usernameLength > 11) {
+        return setNewUsernameError("username cannot be greater than 11 characters");
+      }
+      setNewUsernameError("");
+    },
+    [onGetValue]
+  );
 
-  const changeUsernameHandler = useCallback((event) => {
-    setUsername((prevValue) => {
-      return event.target.value;
-    });
-  }, []);
-
-  useEffect(() => {
-    if (user_name) {
-      setUsername((prevValue) => user_name);
-    }
-  }, [user_name]);
-  useEffect(() => {
-    if (username) {
-      onGetValue({ type: "username", value: username });
-    }
-  }, [username, onGetValue]);
   return (
     <div className={styles.form_control}>
       <label htmlFor="userFormControl__username">Username</label>
+      {newUsernameError && <p className="error">{newUsernameError}</p>}
       <input
         type="text"
         id="userFormControl__username"
         placeholder="Please enter your username"
-        value={username}
+        value={newUsername}
         onChange={changeUsernameHandler}
         spellCheck="false"
       />
