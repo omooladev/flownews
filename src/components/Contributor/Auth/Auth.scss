@@ -184,7 +184,6 @@
   margin: 1rem 0;
 }
 
-
 @media (min-width: 500px) {
   .auth {
     width: 25rem;
@@ -207,15 +206,18 @@
 
 @media (max-height: 500px) and (min-width: 500px) {
   .auth {
-    height: 50vh;
-    margin-top: -25vh;
+    height: 80vh;
+    margin-top: -40vh;
     overflow-y: scroll;
+    .reply {
+      padding: 1rem 0.5rem;
+    }
   }
 }
 @media (min-height: 500px) and (min-width: 500px) {
   .auth {
-    height: 27rem;
-    margin-top: -13.5rem;
+    height: 30rem;
+    margin-top: -15rem;
     overflow: hidden;
   }
 }
@@ -232,5 +234,17 @@
     align-items: left;
     justify-content: left;
     overflow-y: scroll;
+    .icon {
+      position: static;
+      top: 0;
+      left: 0;
+      font-size: 2rem;
+      display: block;
+      height: 5vh;
+      background-color: red;
+    }
+    .reply {
+      padding: 1rem 0.5rem;
+    }
   }
 }

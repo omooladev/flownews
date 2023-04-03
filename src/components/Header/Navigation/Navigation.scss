@@ -78,6 +78,7 @@
   }
 }
 
+//? if the height of device is less than 500px-attach a scroll bar to the navigation
 @media (max-height: 500px) {
   .navigation-section {
     overflow-y: scroll;
