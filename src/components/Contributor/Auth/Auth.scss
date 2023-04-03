@@ -183,20 +183,7 @@
   border-radius: 5px;
   margin: 1rem 0;
 }
-@media (max-height: 500px) and (min-width: 500px) {
-  .auth {
-    height: 50vh;
-    margin-top: -25vh;
-    overflow-y: scroll;
-  }
-}
-@media (min-height: 500px) and (min-width: 500px) {
-  .auth {
-    height: 27rem;
-    margin-top: -13.5rem;
-    overflow: hidden;
-  }
-}
+
 
 @media (min-width: 500px) {
   .auth {
@@ -218,6 +205,20 @@
   }
 }
 
+@media (max-height: 500px) and (min-width: 500px) {
+  .auth {
+    height: 50vh;
+    margin-top: -25vh;
+    overflow-y: scroll;
+  }
+}
+@media (min-height: 500px) and (min-width: 500px) {
+  .auth {
+    height: 27rem;
+    margin-top: -13.5rem;
+    overflow: hidden;
+  }
+}
 @media (min-height: 500px) and (max-width: 500px) {
   .auth {
     height: 100vh;

@@ -183,20 +183,6 @@
   margin: 1rem 0;
 }
 
-@media (max-height: 500px) and (min-width: 500px) {
-  .auth {
-    height: 50vh;
-    margin-top: -25vh;
-    overflow-y: scroll;
-  }
-}
-@media (min-height: 500px) and (min-width: 500px) {
-  .auth {
-    height: 27rem;
-    margin-top: -13.5rem;
-    overflow: hidden;
-  }
-}
 @media (min-width: 500px) {
   .auth {
     width: 25rem;
@@ -210,6 +196,20 @@
   }
   .auth .form .form_footer a:hover {
     text-decoration: underline;
+  }
+}
+@media (max-height: 500px) and (min-width: 500px) {
+  .auth {
+    height: 50vh;
+    margin-top: -25vh;
+    overflow-y: scroll;
+  }
+}
+@media (min-height: 500px) and (min-width: 500px) {
+  .auth {
+    height: 27rem;
+    margin-top: -13.5rem;
+    overflow: hidden;
   }
 }
 @media (min-height: 500px) and (max-width: 500px) {

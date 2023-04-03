@@ -20,6 +20,7 @@
 }
 .header .logo {
   opacity: 1;
+  margin-left: 1.5rem;
 }
 .header.menu_active .logo {
   opacity: 0;
@@ -42,5 +43,8 @@
 @media (min-width: 1200px) {
   .header {
     justify-content: space-between;
+  }
+  .header .logo {
+    margin-left: 0;
   }
 }
