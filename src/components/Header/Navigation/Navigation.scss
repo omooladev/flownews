@@ -38,7 +38,6 @@
   }
   &.active .navigation-section {
     left: 0%;
-    
   }
 }
 
@@ -76,5 +75,11 @@
         justify-content: space-around;
       }
     }
+  }
+}
+
+@media (max-height: 500px) {
+  .navigation-section {
+    overflow-y: scroll;
   }
 }
