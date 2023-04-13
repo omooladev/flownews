@@ -10,8 +10,9 @@
   @extend %DisplayFlex;
   flex-direction: column;
   color: var(--secondary-color);
-  padding: 0 5%;
+  padding: 2rem 5%;
   text-align: center;
+  overflow: hidden;
   h1 {
     font-weight: bold;
     padding: 0.5rem 0;
@@ -24,14 +25,16 @@
   }
 
   a {
+    display: block;
     cursor: pointer;
     background-color: var(--primary-color);
     width: 100%;
     font-size: 1.1rem;
     padding: 0.6rem 0.5rem;
-    color: var(--body-color);
+    color: var(--white-color);
     border-radius: 5px;
     text-align: center;
+    margin: 0 auto;
     &:hover {
       opacity: 0.9;
     }
@@ -41,5 +44,12 @@
 @media (min-width: 500px) {
   .not_found a {
     width: 5rem;
+  }
+}
+
+@media (max-height: 250px) {
+  .not_found {
+    overflow-y: scroll;
+    display: block;
   }
 }

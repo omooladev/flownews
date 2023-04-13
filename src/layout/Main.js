@@ -1,7 +1,8 @@
 import { useCallback, useContext } from "react";
-import Routes from "../routes/Routes";
 import { AppContext } from "../store/App/app-context";
 import { AuthContext } from "../store/Auth/auth-context";
+import Routes from "../routes/Routes";
+
 
 
 const Main = () => {
