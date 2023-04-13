@@ -3,7 +3,7 @@ import { AuthContext } from "../store/Auth/auth-context";
 import { Switch, Route, Redirect } from "react-router-dom";
 import SuspenseLoader from "../components/Loaders/SuspenseLoader";
 import AuthPage from "../pages/Auth/Auth";
-import NotFoundPage from "../pages/NotFound";
+import NotFoundPage from "../pages/NotFound/NotFound";
 import UserHomePage from "../pages/User/Home";
 import ContributorHomePage from "../pages/Contributor/Home";
 import EmailVerification from "../pages/EmailVerification/EmailVerification";
