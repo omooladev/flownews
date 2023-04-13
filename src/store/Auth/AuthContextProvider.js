@@ -205,7 +205,7 @@ const AuthContextProvider = (props) => {
         profileUpdated,
         onChangeProfileUpdated: changeProfileUpdated,
         changeAppMode: onChangeAppMode,
-        makeBodyFixed: makeBodyFixed,
+        makeBodyFixed,
         onMakeBodyFixed: (bool) => setMakeBodyFixed(bool),
         onUpdateContributorProfile: updateContributorProfile,
         onToggleEmailPrivacy: toggleEmailPrivacy,
