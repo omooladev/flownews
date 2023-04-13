@@ -7,7 +7,6 @@
 
 .auth {
   background-color: var(--body-color);
-  width: 100vw;
   font-size: var(--primary-font-size);
 }
 .auth a {
@@ -182,10 +181,6 @@
 }
 
 @media (min-width: 500px) {
-  .auth {
-    width: 25rem;
-    margin-left: -12.5rem;
-  }
   .auth .icon {
     display: none;
   }
@@ -194,5 +189,42 @@
   }
   .auth .form .form_footer a:hover {
     text-decoration: underline;
+  }
+}
+@media (min-height: 500px) {
+  .auth {
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+}
+@media (min-height: 500px) and (min-width: 500px) {
+  .auth {
+    height: 30rem;
+    width: 25rem;
+    margin-left: -12.5rem;
+    margin-top: -15rem;
+  }
+}
+@media (min-height: 500px) and (max-width: 500px) {
+  .auth {
+    height: 100vh;
+    width: 100vw;
+  }
+}
+@media (max-height: 500px) and (min-width: 500px) {
+  .auth {
+    height: 80vh;
+    margin-top: -40vh;
+    width: 25rem;
+    margin-left: -12.5rem;
+    overflow-y: scroll;
+  }
+}
+@media (max-height: 500px) and (max-width: 500px) {
+  .auth {
+    height: 100vh;
+    width: 100vw;
+    overflow-y: scroll;
   }
 }
