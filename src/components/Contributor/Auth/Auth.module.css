@@ -1,4 +1,4 @@
-.auth .reply, .auth .form .form_control, .auth .form .form_control .password_label {
+.auth .reply, .auth .form .form_control, .auth .form .form_control .password_label, .auth .form_footer {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -152,18 +152,16 @@
   background-color: var(--primary-color);
 }
 .auth .form_footer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  flex-wrap: wrap;
   background-color: transparent;
-  padding: 0.5rem 0;
+  padding: 0.5rem;
   border: 1px solid var(--auth-form-border-color);
   border-radius: 5px;
   width: 100%;
 }
 .auth .form_footer p {
   padding: 0 0.5rem;
+  text-align: center;
 }
 
 .reset_password,

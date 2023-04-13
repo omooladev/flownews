@@ -152,17 +152,16 @@
     }
   }
   .form_footer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    @extend %DisplayFlex;
+    flex-wrap: wrap;
     background-color: transparent;
-    padding: 0.5rem 0;
+    padding: 0.5rem;
     border: 1px solid var(--auth-form-border-color);
     border-radius: 5px;
     width: 100%;
     p {
       padding: 0 0.5rem;
+      text-align: center;
     }
   }
 }
