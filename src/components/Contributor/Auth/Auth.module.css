@@ -20,6 +20,7 @@
   padding: 0.5rem 0;
   color: var(--primary-color);
   text-align: center;
+  margin: 0.5rem 0;
 }
 .auth h3,
 .auth .username {
@@ -49,13 +50,12 @@
   font-size: 2rem;
 }
 .auth .reply {
-  box-shadow: none;
   justify-content: space-around;
   border-radius: 0.4rem;
   padding: 0.5rem;
   width: 100%;
   opacity: 0.8;
-  overflow: hidden;
+  height: auto;
 }
 .auth .reply.success {
   color: var(--body-color);
@@ -181,7 +181,7 @@
   margin: 1rem 0;
 }
 
-@media (max-width: 500px) and (max-height: 500px) {
+@media (max-width: 500px) {
   .auth {
     position: absolute;
     top: 0;
@@ -191,6 +191,10 @@
     margin-top: 0;
     padding: 1rem 5%;
     overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
   }
 }
 @media (min-width: 500px) {
