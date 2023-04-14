@@ -1,5 +1,5 @@
 import styles from "./Auth.module.css";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import { BiX } from "react-icons/bi";
 import PopUp from "../../../UI/PopUp";
@@ -11,7 +11,7 @@ import ResetPassword from "./ResetPassword";
 const Auth = () => {
   const [viewPassword, setViewPassword] = useState(false);
   const [authReply, setAuthReply] = useState({ type: null, message: "" });
-  const { history, lastLocation, onMakeBodyFixed } = useContext(AuthContext);
+  const { history, lastLocation } = useContext(AuthContext);
   const location = history.location.pathname;
   const loginLocation = location.includes("/login");
   const becomeContributorLocation = location.includes("/become-contributor");
@@ -95,13 +95,13 @@ const Auth = () => {
     return true;
   }, []);
 
-  useEffect(() => {
-    onMakeBodyFixed(true);
-  }, [onMakeBodyFixed]);
   return (
     <>
       <PopUp onClick={closePopUpHandler} className={`popup ${styles.auth}`}>
-        <BiX className={`${styles.icon} ${styles.cancel}`} onClick={closePopUpHandler} />
+        <div className={styles.mobile_cancel_icon}>
+          <BiX className={`${styles.icon} ${styles.cancel}`} onClick={closePopUpHandler} />
+        </div>
+
         {loginLocation && (
           <Login
             viewPassword={viewPassword}

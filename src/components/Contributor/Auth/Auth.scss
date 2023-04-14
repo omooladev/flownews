@@ -33,13 +33,14 @@
     font-size: 1.3rem;
     padding-bottom: 0.3rem;
   }
-  .icon {
-    cursor: pointer;
-    color: var(--primary-color);
-    font-size: 2rem;
-    position: absolute;
-    top: 1.5rem;
-    right: 5%;
+  .mobile_cancel_icon {
+    width: 100%;
+    text-align: right;
+    .icon {
+      cursor: pointer;
+      color: var(--primary-color);
+      font-size: 2rem;
+    }
   }
 
   .reply {
@@ -184,8 +185,36 @@
 
 //? media queries for responsiveness
 //* when the width is greater than 500px
+@media (max-width: 500px) and (max-height: 500px) {
+  .auth {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    margin-top: 0;
+    padding: 1rem 5%;
+    overflow-y: scroll;
+    // position: absolute;
+    // top: 0;
+    // height: 30rem;
+  }
+}
+// @media (min-height: 500px) {
+//   .auth {
+//     position: absolute;
+//     top: 50%;
+//     height: 30rem;
+//     margin-top: -15rem;
+//   }
+// }
+
 @media (min-width: 500px) {
   .auth {
+    position: absolute;
+    left: 50%;
+    width: 25rem;
+    margin-left: -12.5rem;
     .icon {
       display: none;
     }
@@ -197,47 +226,5 @@
         text-decoration: underline;
       }
     }
-  }
-}
-//* when the height is greater than 500px
-@media (min-height: 500px) {
-  .auth {
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-}
-//* when the height of the screen is greater than 500px and the width is greater than 500px
-@media (min-height: 500px) and (min-width: 500px) {
-  .auth {
-    height: 30rem;
-    width: 25rem;
-    margin-left: -12.5rem;
-    margin-top: -15rem;
-  }
-}
-//* when the height of the screen is greater than 500px and the width is less than 500px
-@media (min-height: 500px) and (max-width: 500px) {
-  .auth {
-    height: 100vh;
-    width: 100vw;
-  }
-}
-//* when the height of the screen is less than 500px and the width is greater than 500px
-@media (max-height: 500px) and (min-width: 500px) {
-  .auth {
-    height: 80vh;
-    margin-top: -40vh;
-    width: 25rem;
-    margin-left: -12.5rem;
-    overflow-y: scroll;
-  }
-}
-
-@media (max-height: 500px) and (max-width: 500px) {
-  .auth {
-    height: 100vh;
-    width: 100vw;
-    overflow-y: scroll;
   }
 }
