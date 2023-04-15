@@ -4,20 +4,21 @@
   font-size: 1.1rem;
 
   .nav-user {
-    overflow: hidden;
     position: absolute;
     width: 300px;
     top: 3rem;
     right: 0;
     background-color: var(--nav-profile-box-color);
-    box-shadow: 2px 3px #ccc, -2px -1px #ccc;
+    // box-shadow: 2px 3px #ccc, -2px -1px #ccc;
+    overflow-x: hidden;
+    border-radius: 5px;
     &::before {
       content: "";
       position: absolute;
-      height: 12px;
+      height: 30px;
       width: 12px;
       right: 28px;
-      top: -4px;
+      top: -5px;
       transform: rotate(-45deg);
       background-color: var(--primary-color);
       z-index: -1;
@@ -44,6 +45,7 @@
       cursor: pointer;
       padding: 0.5rem 1rem;
       color: var(--black-color);
+
       &:hover {
         color: var(--white-color);
         background-color: var(--primary-color);

@@ -36,6 +36,12 @@
 }
 
 @media (min-width: 700px) {
+  .header {
+    justify-content: space-between;
+  }
+  .header .logo {
+    margin-left: 5rem;
+  }
   .header .account_subscribe {
     display: flex;
   }

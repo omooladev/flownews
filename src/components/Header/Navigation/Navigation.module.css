@@ -63,6 +63,7 @@
     width: auto;
     padding: 0;
     background-color: var(--header-color);
+    overflow: hidden;
   }
   .navigation .navigation-section .toggleLogo {
     display: none;
