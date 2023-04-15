@@ -1,13 +1,10 @@
 @use "../../../../sass/DisplayFlex";
 .write {
-  @extend %DisplayFlex;
-  display: none;
   padding: var(--primary-padding);
-  justify-content: space-between;
   a {
-    display: flex;
-    justify-content: center;
-    color: var(--secondary-color);
+    @extend %DisplayFlex;
+    justify-content: left;
+    color: var(--black-color);
   }
   p {
     padding: 0 0.5rem;
@@ -19,6 +16,8 @@
 }
 @media (min-width: 650px) {
   .write {
-    display: flex;
+    a {
+      color: var(--secondary-color);
+    }
   }
 }
