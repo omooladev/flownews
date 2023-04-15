@@ -49,7 +49,7 @@
 
 .nav-user-list > li:hover {
   color: white;
-  background-color: var(--nav-text-hover-color);
+  background-color: var(--primary-color);
 }
 
 .nav-user-list > li:not(.nav-user-list > li:last-of-type) {
@@ -67,15 +67,14 @@
   display: flex;
   align-items: center;
   justify-content: left;
-  color: var(--nav-text-color);
+  color: var(--secondary-color);
   width: 100%;
   padding: 0.5rem 1rem;
-  color: black;
 }
 
 .profileNavigation li a:hover,
 li.write a:hover {
-  background-color: var(--nav-text-hover-color);
+  background-color: var(--primary-color);
   color: white;
 }
 

@@ -13,12 +13,19 @@ const ProfileBox = (props) => {
   const className = `${styles[props.className]}` || "";
 
   return (
-    <div onClick={props.onClick} className={`${styles.profile_box} ${className}`}>
-      {contributorProfilePicture ? (
-        <img src={contributorProfilePicture} alt="contributor" className={styles.profile_picture} />
-      ) : (
-        <p>{contributorUsernameCut}</p>
-      )}
+    <section onClick={props.onClick} className={`${styles.profile_box} ${className}`}>
+      <div className={styles.profilePicture_Username}>
+        {contributorProfilePicture ? (
+          <img
+            src={contributorProfilePicture}
+            alt="contributor"
+            className={styles.profile_picture}
+          />
+        ) : 
+          `${contributorUsernameCut}`
+        }
+      </div>
+
       <FaChevronDown className={styles.icon} />
       <div className={styles.profile_box_text}>
         <label className={styles.username}>{contributorFullUsername}</label>
@@ -26,7 +33,7 @@ const ProfileBox = (props) => {
           <h5 className={styles.your_personal_account}>Your personal account</h5>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 
