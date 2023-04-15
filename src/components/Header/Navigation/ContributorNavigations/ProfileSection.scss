@@ -99,3 +99,12 @@
     display: none;
   }
 }
+
+@media (max-height: 550px) {
+  .profile_section {
+    .nav-user {
+      height: 85vh;
+      overflow-y: scroll;
+    }
+  }
+}
