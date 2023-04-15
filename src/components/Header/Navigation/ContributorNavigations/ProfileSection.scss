@@ -63,24 +63,6 @@
       margin: 0;
     }
   }
-
-  .profileNavigation li a {
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    color: var(--secondary-color);
-    width: 100%;
-    padding: 0.5rem 1rem;
-    // color: black;
-  }
-  .profileNavigation li a:hover,
-  li.write a:hover {
-    background-color: var(--primary-color);
-    color: white;
-  }
-  .profileNavigation li a p {
-    padding: 0 0.5rem;
-  }
 }
 @media (min-width: 500px) {
   .profile_section {

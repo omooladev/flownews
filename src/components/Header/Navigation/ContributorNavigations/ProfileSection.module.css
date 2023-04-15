@@ -57,22 +57,6 @@
   font-size: 1.1rem;
   margin: 0;
 }
-.profile_section .profileNavigation li a {
-  display: flex;
-  align-items: center;
-  justify-content: left;
-  color: var(--secondary-color);
-  width: 100%;
-  padding: 0.5rem 1rem;
-}
-.profile_section .profileNavigation li a:hover,
-.profile_section li.write a:hover {
-  background-color: var(--primary-color);
-  color: white;
-}
-.profile_section .profileNavigation li a p {
-  padding: 0 0.5rem;
-}
 
 @media (min-width: 500px) {
   .profile_section {

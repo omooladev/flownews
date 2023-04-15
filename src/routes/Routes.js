@@ -8,7 +8,6 @@ import UserHomePage from "../pages/User/Home";
 import ContributorHomePage from "../pages/Contributor/Home";
 import EmailVerification from "../pages/EmailVerification/EmailVerification";
 //import SettingPage from "../pages/Contributor/Setting/Setting";
-
 // const ContributorHomePage = React.lazy(() => import("../pages/Contributor/Home"));
 // const AccountPage = React.lazy(() => import("../pages/Contributor/DashBoard/Account"));
 const ProfilePage = React.lazy(() => import("../pages/Contributor/Profile/Profile"));

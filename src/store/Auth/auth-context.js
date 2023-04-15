@@ -24,6 +24,7 @@ export const AuthContext = React.createContext({
   changeAppMode: () => {},
 
   //refactored
+  contributorData: { username: "" },
   lastLocation: "",
   makeBodyFixed: false,
   onMakeBodyFixed: (bool) => {},
