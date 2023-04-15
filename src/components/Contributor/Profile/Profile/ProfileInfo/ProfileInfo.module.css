@@ -1,5 +1,5 @@
 .contributor_info {
-  color: var(--nav-text-color);
+  color: var(--tertiary-color);
 }
 .contributor_info .username {
   display: flex;
@@ -12,12 +12,14 @@
 }
 .contributor_info .badge {
   font-size: 1.3rem;
-  color: var(--nav-text-hover-color);
+  color: var(--primary-color);
 }
 .contributor_info .bio {
   font-weight: normal;
   padding: 0.5rem 5%;
   text-align: left;
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 .contributor_info .contributor_location_email_joinedDate {
   display: flex;

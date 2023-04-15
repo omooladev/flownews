@@ -1,9 +1,8 @@
 .profile {
   position: relative;
-  background-color: black;
+  background-color: var(--black-color);
   padding-top: 1rem;
   overflow: hidden;
-  font-family: var(--primary-font);
   .profile_text_container {
     background-color: var(--body-color);
     padding: 1rem 0;

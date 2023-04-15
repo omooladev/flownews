@@ -11,7 +11,7 @@ import ProfileMoreInfo from "./ProfileMoreInfo";
 import ProfileFollow from "./ProfileFollow";
 const ProfileInfo = () => {
   const {
-    userData: {
+    contributorData: {
       location,
       bio,
       username,

@@ -28,14 +28,6 @@
       background-color: var(--primary-color);
       color: var(--body-color);
     }
-    // p {
-    //   width: 100%;
-    //   height: 100%;
-    //   text-align: center;
-    //   color: var(--white-color);
-    //   font-size: 2.2rem;
-    //   margin-top: -8px;
-    // }
   }
 
   .icon {
@@ -74,11 +66,13 @@
   position: absolute;
   top: -1rem;
   left: 5%;
-  p {
+  .profilePicture_Username {
     height: 45px;
     width: 45px;
     font-size: 2.25rem;
+    line-height: 40px;
   }
+
   .username,
   .icon {
     display: none;
@@ -133,11 +127,12 @@
     top: -2.5rem;
     left: 50%;
     margin-left: -50px;
-    p {
+    .profilePicture_Username {
       height: 100px;
       width: 100px;
       font-size: 4rem;
-      border: 8px solid black;
+      border: 8px solid var(--black-color);
+      line-height: 75px;
     }
     .icon {
       display: none;
