@@ -11,11 +11,12 @@
 .education_work .education label,
 .education_work .work label {
   font-size: 1rem;
+  color: var(--secondary-color);
 }
 .education_work .education p,
 .education_work .work p {
   padding: 0.5rem 0;
-  color: grey;
+  color: var(--tertiary-color);
 }
 
 @media (min-width: 650px) {

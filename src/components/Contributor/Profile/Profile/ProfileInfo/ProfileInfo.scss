@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: left;
     padding: 0.2rem 5%;
+    font-size: 20px;
   }
   h2 {
     padding-right: 0.3rem;
@@ -19,6 +20,7 @@
     text-align: left;
     font-size: 1rem;
     line-height: 1.5rem;
+    font-size: 18px;
   }
 
   .contributor_location_email_joinedDate {
@@ -28,17 +30,16 @@
     flex-wrap: wrap;
     padding: 0 5%;
     padding-bottom: 1.5rem;
+    color: var(--secondary-color);
   }
 }
 @media (min-width: 700px) {
   .contributor_info {
     .username {
-      font-size:30px;
       justify-content: center;
     }
     .bio {
       text-align: center;
-      font-size:18px;
     }
     .contributor_location_email_joinedDate {
       justify-content: center;

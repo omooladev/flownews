@@ -8,10 +8,11 @@
     padding-right: 1rem;
     label {
       font-size: 1rem;
+      color: var(--secondary-color);
     }
     p {
       padding: 0.5rem 0;
-      color: grey;
+      color: var(--tertiary-color);
     }
   }
 }
