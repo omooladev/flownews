@@ -6,7 +6,7 @@ import ProfileBox from "./ContributorNavigations/ProfileBox";
 import styles from "./MobileNavigation.module.css";
 const MobileNavigation = (props) => {
   const { onToggleComponentsIsActive } = props;
-  const { isLoggedIn, userData, onSignOut, history } = useContext(AuthContext);
+  const { isLoggedIn, contributorData, onSignOut, history } = useContext(AuthContext);
   const becomeContributorHandler = useCallback(() => {
     onToggleComponentsIsActive({ type: "menu", event: "close" });
     history.replace("/become-contributor");
@@ -33,7 +33,7 @@ const MobileNavigation = (props) => {
             className="MobileNavigation__ProfileBox"
             onClick={() => {
               onToggleComponentsIsActive({ type: "menu", event: "close" });
-              history.replace(`/@${userData.username}`);
+              history.replace(`/@${contributorData.username}`);
             }}
           />
           <Notification className={styles.notification} />
@@ -41,7 +41,7 @@ const MobileNavigation = (props) => {
             <Link
               to="#"
               onClick={() => {
-               onToggleComponentsIsActive({ type: "menu", event: "close" });
+                onToggleComponentsIsActive({ type: "menu", event: "close" });
                 onSignOut();
               }}
             >

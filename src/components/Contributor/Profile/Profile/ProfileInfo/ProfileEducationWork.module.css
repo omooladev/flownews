@@ -10,11 +10,14 @@
 }
 .education_work .education label,
 .education_work .work label {
-  font-size: 1rem;
+  font-size: 15px;
+  line-height: 20.4px;
   color: var(--secondary-color);
 }
 .education_work .education p,
 .education_work .work p {
+  line-height: 24px;
+  font-size: 16px;
   padding: 0.5rem 0;
   color: var(--tertiary-color);
 }
