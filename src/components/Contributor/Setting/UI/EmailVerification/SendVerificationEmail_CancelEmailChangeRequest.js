@@ -13,7 +13,7 @@ const EmailVerify = () => {
     token,
     onSetUserData,
     onSetShowEmailLinkSentPopUp,
-    userData: {
+    contributorData: {
       emailRequestChange,
       emailRequestChangeAddress,
       emailRequestChangeAddressIsVerified,

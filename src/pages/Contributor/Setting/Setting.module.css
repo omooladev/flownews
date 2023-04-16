@@ -6,7 +6,7 @@
 
 .setting_page .links {
   font-family: var(--primary-font);
-  color: var(--nav-text-color);
+  color: var(--secondary-color);
 }
 
 .setting_page .links h2 {

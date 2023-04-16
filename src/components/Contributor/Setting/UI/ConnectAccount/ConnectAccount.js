@@ -5,7 +5,7 @@ import Card from "../../../../../UI/Card";
 import styles from "./ConnectAccount.module.css";
 const ConnectAccount = () => {
   const {
-    userData: {
+    contributorData: {
       socialMediaHandles: { facebook, twitter },
     },
   } = useContext(AuthContext);

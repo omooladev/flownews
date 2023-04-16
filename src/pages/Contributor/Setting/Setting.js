@@ -14,12 +14,12 @@ import useNewLocation from "../../../hooks/useNewLocation";
 
 const Setting = () => {
   useFetchContributorData();
-  const { userData, history } = useContext(AuthContext);
+  const { contributorData, history } = useContext(AuthContext);
   useNewLocation(history.location.pathname);
   const { path } = useParams();
   return (
     <>
-      {userData.username && (
+      {contributorData.username && (
         <>
           <ProfileUpdated />
           <section className={styles.setting_page}>
