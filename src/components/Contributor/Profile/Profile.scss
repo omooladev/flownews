@@ -1,26 +1,33 @@
 .profile {
   position: relative;
   background-color: var(--black-color);
-  padding-top: 1rem;
-  overflow: hidden;
+  overflow: visible;
+  min-height: 10rem;
   .profile_text_container {
+    position: absolute;
+    top: 45%;
     background-color: var(--body-color);
-    padding: 1rem 0;
-    margin-top: 1rem;
-    position: relative;
+    border-radius: 15px;
+    padding-bottom: 10px;
   }
 }
-
+@media (min-height: 500px) {
+  .profile {
+    .profile_text_container {
+      top: 30%;
+    }
+  }
+}
 @media (min-width: 700px) {
   .profile {
-    height: 8rem;
+    position: relative;
+    min-height: 10rem;
     overflow: visible;
     .profile_text_container {
-      position: absolute;
-      top: 50%;
+      top: 60%;
       left: 50%;
-      width: 40rem;
-      margin-left: -20rem;
+      width: 90%;
+      margin-left: -45%;
     }
   }
 }

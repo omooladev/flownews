@@ -32,10 +32,12 @@
 
 @media (min-width: 700px) {
   .contributor_info .username {
+    font-size: 30px;
     justify-content: center;
   }
   .contributor_info .bio {
     text-align: center;
+    font-size: 18px;
   }
   .contributor_info .contributor_location_email_joinedDate {
     justify-content: center;

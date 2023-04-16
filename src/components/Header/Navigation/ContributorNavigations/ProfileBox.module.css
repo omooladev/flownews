@@ -65,14 +65,15 @@
 .Profile__ProfileBox {
   cursor: default;
   position: absolute;
-  top: -1rem;
+  top: -1.6rem;
   left: 5%;
 }
 .Profile__ProfileBox .profilePicture_Username {
-  height: 45px;
-  width: 45px;
+  height: 60px;
+  width: 60px;
   font-size: 2.25rem;
   line-height: 40px;
+  border: 6px solid var(--black-color);
 }
 .Profile__ProfileBox .username,
 .Profile__ProfileBox .icon {
