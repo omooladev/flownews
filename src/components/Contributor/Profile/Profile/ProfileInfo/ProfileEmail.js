@@ -7,7 +7,7 @@ const ProfileEmail = (props) => {
     <div className={styles.email}>
       <BiEnvelope />
       <p>{email}</p>
-      {!emailIsVerified && <BiXCircle className={styles.not_verified} />}
+      {!emailIsVerified && <BiXCircle className={styles.not_verified} title="email not verified" />}
     </div>
   );
 };
