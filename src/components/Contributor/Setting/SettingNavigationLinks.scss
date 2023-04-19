@@ -13,7 +13,6 @@
         padding: 0.5rem 0.5rem;
         border-radius: 0.3rem;
         width: 100%;
-        // transition: all 0.4s ease;
 
         span {
           padding: 0 0.5rem;
@@ -31,7 +30,7 @@
     .link_header {
       padding: 0rem 0.5rem;
       font-weight: normal;
-      color: var(--profile-color);
+      color: var(--tertiary-color);
     }
   }
 }

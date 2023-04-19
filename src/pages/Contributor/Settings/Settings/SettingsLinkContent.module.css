@@ -3,7 +3,7 @@
 }
 .setting_link_content h2 {
   padding: 0.5rem 0;
-  color: var(--profile-color);
+  color: var(--tertiary-color);
 }
 .setting_link_content p {
   font-size: 1rem;

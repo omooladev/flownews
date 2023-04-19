@@ -109,6 +109,11 @@
   display: none;
 }
 
+.UserForm__ProfileBox .username,
+.UserForm__ProfileBox .icon {
+  display: none;
+}
+
 @media (min-width: 500px) {
   /*? ProfileBox configuration for Header Profile Section */
   .Header-ProfileSection__ProfileBox {

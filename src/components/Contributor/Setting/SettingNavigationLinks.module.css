@@ -31,7 +31,7 @@
 .setting_navigation-links ul .link_header {
   padding: 0rem 0.5rem;
   font-weight: normal;
-  color: var(--profile-color);
+  color: var(--tertiary-color);
 }
 
 @media (min-width: 500px) {
