@@ -112,9 +112,19 @@
 }
 
 .UserForm__ProfileBox {
+  cursor: default;
   .username,
   .icon {
     display: none;
+  }
+  .profilePicture_Username {
+    cursor: default;
+    height: 180px;
+    width: 180px;
+    font-size: 10rem;
+    line-height: 130px;
+    margin: 0;
+    text-align: center;
   }
 }
 @media (min-width: 500px) {

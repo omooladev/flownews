@@ -109,9 +109,21 @@
   display: none;
 }
 
+.UserForm__ProfileBox {
+  cursor: default;
+}
 .UserForm__ProfileBox .username,
 .UserForm__ProfileBox .icon {
   display: none;
+}
+.UserForm__ProfileBox .profilePicture_Username {
+  cursor: default;
+  height: 180px;
+  width: 180px;
+  font-size: 10rem;
+  line-height: 130px;
+  margin: 0;
+  text-align: center;
 }
 
 @media (min-width: 500px) {

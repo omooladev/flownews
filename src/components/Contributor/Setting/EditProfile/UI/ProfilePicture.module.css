@@ -1,18 +1,17 @@
 .profile_picture {
   position: absolute;
-  top: 0;
-  right: 0;
-  background-color: blue;
+  top: 0%;
+  right: 10%;
 }
-.profile_picture .profile_box {
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
-  font-size: 2.2rem;
-  line-height: 25px;
-  overflow: hidden;
-  background-color: var(--primary-color);
-  margin: 0 0.5rem;
-  text-align: center;
-  color: var(--white-color);
+.profile_picture p {
+  color: var(--tertiary-color);
+  font-weight: bold;
+}
+.profile_picture button {
+  padding: 0.4rem 1rem;
+  position: absolute;
+  bottom: 0;
+  left: 0.5rem;
+  background-color: red;
+  border-radius: 5px;
 }
