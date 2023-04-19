@@ -1,6 +1,6 @@
 @media (min-width: 750px) {
   .setting_links {
-    width: 35rem;
+    min-width: 20rem;
     padding-right: 2rem;
   }
 }
