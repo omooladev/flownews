@@ -3,16 +3,12 @@ import { AuthContext } from "../store/Auth/auth-context";
 import { Switch, Route, Redirect } from "react-router-dom";
 import SuspenseLoader from "../components/Loaders/SuspenseLoader";
 import AuthPage from "../pages/Auth/Auth";
-import NotFoundPage from "../pages/NotFound";
+import NotFoundPage from "../pages/NotFound/NotFound";
 import UserHomePage from "../pages/User/Home";
 import ContributorHomePage from "../pages/Contributor/Home";
+import ProfilePage from "../pages/Contributor/Profile/Profile";
 import EmailVerification from "../pages/EmailVerification/EmailVerification";
-//import SettingPage from "../pages/Contributor/Setting/Setting";
-
-// const ContributorHomePage = React.lazy(() => import("../pages/Contributor/Home"));
-// const AccountPage = React.lazy(() => import("../pages/Contributor/DashBoard/Account"));
-const ProfilePage = React.lazy(() => import("../pages/Contributor/Profile/Profile"));
-const SettingPage = React.lazy(() => import("../pages/Contributor/Setting/Setting"));
+import SettingPage from "../pages/Contributor/Settings/Settings/Settings";
 
 const Routes = () => {
   const { isLoggedIn } = useContext(AuthContext);
@@ -59,7 +55,7 @@ const Routes = () => {
             <Route path="/@:username" exact>
               <ProfilePage />
             </Route>
-            <Route path="/settings/:path" exact>
+            <Route path="/settings">
               <SettingPage />
             </Route>
             <Route path="/forgot-password" exact>

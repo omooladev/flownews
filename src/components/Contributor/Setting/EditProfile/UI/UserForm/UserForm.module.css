@@ -62,11 +62,10 @@
 }
 .form .form_actions .update_profile {
   cursor: pointer;
-  background-color: var(--nav-text-hover-color);
-  color: var(--body-color);
+  background-color: var(--primary-color);
   padding: 0.5rem 0.6rem;
   margin: 0.5rem 0;
-  color: white;
+  color: var(--white-color);
 }
 .form .form_actions .update_profile:disabled {
   cursor: not-allowed;

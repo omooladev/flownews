@@ -1,0 +1,18 @@
+.setting_link_content {
+  color: var(--secondary-color);
+  h2 {
+    padding: 0.5rem 0;
+    color: var(--profile-color);
+  }
+  p {
+    font-size: 1rem;
+    padding: 0.2rem 0;
+    margin-bottom: 1rem;
+  }
+}
+
+// @media (min-width: 750px) {
+//   .setting_link_content {
+//     width: 70rem;
+//   }
+// }

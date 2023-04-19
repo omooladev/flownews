@@ -6,25 +6,28 @@
   align-items: center;
   overflow: hidden;
   height: auto;
-  .profile_picture {
+  .profilePicture_Username {
     height: 32px;
     width: 32px;
     border-radius: 50%;
-    margin: 0 0.5rem;
-    object-fit: cover;
-    object-position: center;
+    font-size: 2.2rem;
+    line-height: 25px;
+    overflow: hidden;
     background-color: var(--primary-color);
-    color: var(--body-color);
-  }
-  p {
-    height: 32px;
-    width: 32px;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-    color: var(--white-color);
     margin: 0 0.5rem;
     text-align: center;
-    font-size: 1.6rem;
+
+    color: var(--white-color);
+    .profile_picture {
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      margin: 0 0.5rem;
+      object-fit: cover;
+      object-position: center;
+      background-color: var(--primary-color);
+      color: var(--body-color);
+    }
   }
 
   .icon {
@@ -58,16 +61,20 @@
   }
 }
 /*? ProfileBox configuration for Profile */
+
 .Profile__ProfileBox {
   cursor: default;
   position: absolute;
-  top: -1rem;
+  top: -1.6rem;
   left: 5%;
-  p {
-    height: 45px;
-    width: 45px;
+  .profilePicture_Username {
+    height: 60px;
+    width: 60px;
     font-size: 2.25rem;
+    line-height: 40px;
+    border: 6px solid var(--black-color);
   }
+
   .username,
   .icon {
     display: none;
@@ -122,11 +129,12 @@
     top: -2.5rem;
     left: 50%;
     margin-left: -50px;
-    p {
+    .profilePicture_Username {
       height: 100px;
       width: 100px;
       font-size: 4rem;
-      border: 8px solid black;
+      border: 8px solid var(--black-color);
+      line-height: 75px;
     }
     .icon {
       display: none;

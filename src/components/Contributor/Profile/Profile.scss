@@ -1,38 +1,39 @@
 .profile {
   position: relative;
-  background-color: black;
-  padding-top: 1rem;
-  overflow: hidden;
-  font-family: var(--primary-font);
+  background-color: var(--black-color);
+  overflow: visible;
+  min-height: 10rem;
   .profile_text_container {
+    position: absolute;
+    top: 45%;
     background-color: var(--body-color);
-    padding: 1rem 0;
-    margin-top: 1rem;
-    position: relative;
+    border-radius: 15px;
+    padding-bottom: 10px;
   }
 }
-
+@media (min-height: 500px) {
+  .profile {
+    .profile_text_container {
+      top: 30%;
+    }
+  }
+}
 @media (min-width: 700px) {
   .profile {
+    position: relative;
+    min-height: 10rem;
     overflow: visible;
-    padding: 5rem 0;
     .profile_text_container {
-      position: absolute;
-      top: 3rem;
+      top: 60%;
       left: 50%;
-      width: 40rem;
-      margin-left: -20rem;
+      width: 90%;
+      margin-left: -45%;
     }
   }
 }
 @media (min-width: 1000px) {
   .profile {
-    overflow: visible;
-    padding: 5rem 0;
     .profile_text_container {
-      position: absolute;
-      top: 3rem;
-      left: 50%;
       width: 60rem;
       margin-left: -30rem;
     }

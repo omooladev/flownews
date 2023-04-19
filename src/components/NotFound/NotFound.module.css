@@ -14,9 +14,10 @@
   left: 0;
   z-index: 1000;
   flex-direction: column;
-  color: var(--secondary-color);
-  padding: 0 5%;
+  color: var(--tertiary-color);
+  padding: 2rem 5%;
   text-align: center;
+  overflow: hidden;
 }
 .not_found h1 {
   font-weight: bold;
@@ -29,14 +30,16 @@
   margin-bottom: 2rem;
 }
 .not_found a {
+  display: block;
   cursor: pointer;
   background-color: var(--primary-color);
   width: 100%;
   font-size: 1.1rem;
   padding: 0.6rem 0.5rem;
-  color: var(--body-color);
+  color: var(--white-color);
   border-radius: 5px;
   text-align: center;
+  margin: 0 auto;
 }
 .not_found a:hover {
   opacity: 0.9;
@@ -45,5 +48,11 @@
 @media (min-width: 500px) {
   .not_found a {
     width: 5rem;
+  }
+}
+@media (max-height: 250px) {
+  .not_found {
+    overflow-y: scroll;
+    display: block;
   }
 }

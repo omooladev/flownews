@@ -12,7 +12,7 @@ import Work from "./Work";
 import styles from "./UserForm.module.css";
 const UserForm = () => {
   const {
-    userData: { fullname, email, emailIsPrivate, username, bio, location, education, work },
+    contributorData: { fullname, email, emailIsPrivate, username, bio, location, education, work },
     changeAppMode,
     onChangeProfileUpdated,
     onSaveContributorData,

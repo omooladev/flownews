@@ -1,0 +1,12 @@
+.setting_link_content {
+  color: var(--secondary-color);
+}
+.setting_link_content h2 {
+  padding: 0.5rem 0;
+  color: var(--profile-color);
+}
+.setting_link_content p {
+  font-size: 1rem;
+  padding: 0.2rem 0;
+  margin-bottom: 1rem;
+}

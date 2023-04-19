@@ -17,7 +17,7 @@ const AuthContextProvider = (props) => {
 
   const [makeBodyFixed, setMakeBodyFixed] = useState(false);
   const [searchedContributorData, setSearchedContributorData] = useState({ username: "" });
-  const [headerIsLoading, setHeaderIsLoading] = useState(false);
+  const [contributorDataIsLoading, setContributorDataIsLoading] = useState(false);
 
   const [contributorError, setContributorError] = useState({ ref: "", message: "" });
   const history = useHistory();
@@ -42,8 +42,8 @@ const AuthContextProvider = (props) => {
         //* This means that if contributor data exits already, then there is no need to fetch data again
         return;
       }
-      setHeaderIsLoading((prevState) => {
-        return !prevState;
+      setContributorDataIsLoading((prevState) => {
+        return true;
       });
 
       const response = await sendRequest(`${HOSTURI}/@${username}`, {
@@ -74,8 +74,8 @@ const AuthContextProvider = (props) => {
         });
       }
 
-      return setHeaderIsLoading((prevState) => {
-        return !prevState;
+      return setContributorDataIsLoading((prevState) => {
+        return false;
       });
     },
     [sendRequest, token, contributorData.username, onChangeAppMode]
@@ -183,7 +183,7 @@ const AuthContextProvider = (props) => {
         token,
         history,
         searchedContributorData,
-        headerIsLoading,
+        contributorDataIsLoading,
         isLoggedIn,
         contributorError,
         onGetContributorData: getContributorData,
@@ -205,7 +205,7 @@ const AuthContextProvider = (props) => {
         profileUpdated,
         onChangeProfileUpdated: changeProfileUpdated,
         changeAppMode: onChangeAppMode,
-        makeBodyFixed: makeBodyFixed,
+        makeBodyFixed,
         onMakeBodyFixed: (bool) => setMakeBodyFixed(bool),
         onUpdateContributorProfile: updateContributorProfile,
         onToggleEmailPrivacy: toggleEmailPrivacy,

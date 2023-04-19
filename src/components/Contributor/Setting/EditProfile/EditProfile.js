@@ -6,7 +6,7 @@ import User from "./UI/User";
 const EditProfile = () => {
 
   const {
-    userData: { emailRequestChangeAddressIsVerified, emailRequestChange },
+    contributorData: { emailRequestChangeAddressIsVerified, emailRequestChange },
   } = useContext(AuthContext);
   return (
     <section>

@@ -1,4 +1,4 @@
-import NotFoundCmp from "../components/NotFound/NotFound";
+import NotFoundCmp from "../../components/NotFound/NotFound";
 const NotFound = () => {
   return <NotFoundCmp />;
 };

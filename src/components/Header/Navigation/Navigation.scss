@@ -14,6 +14,7 @@
     padding: 0 2.5%;
     transition: all 0.4s ease;
     z-index: 1000; //?TODO ZINDEX
+    padding-bottom: 1rem;
     .toggleLogo {
       height: 10vh;
       width: 100%;
@@ -65,6 +66,7 @@
       width: auto;
       padding: 0;
       background-color: var(--header-color);
+      overflow: hidden;
       .toggleLogo {
         display: none;
       }
@@ -74,5 +76,12 @@
         justify-content: space-around;
       }
     }
+  }
+}
+
+//? if the height of device is less than 500px-attach a scroll bar to the navigation
+@media (max-height: 500px) {
+  .navigation-section {
+    overflow-y: scroll;
   }
 }

@@ -17,6 +17,7 @@
   padding: 0 2.5%;
   transition: all 0.4s ease;
   z-index: 1000;
+  padding-bottom: 1rem;
 }
 .navigation .navigation-section .toggleLogo {
   height: 10vh;
@@ -62,6 +63,7 @@
     width: auto;
     padding: 0;
     background-color: var(--header-color);
+    overflow: hidden;
   }
   .navigation .navigation-section .toggleLogo {
     display: none;
@@ -70,5 +72,10 @@
     position: static;
     flex-direction: row;
     justify-content: space-around;
+  }
+}
+@media (max-height: 500px) {
+  .navigation-section {
+    overflow-y: scroll;
   }
 }

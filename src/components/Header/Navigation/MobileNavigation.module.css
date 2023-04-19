@@ -46,11 +46,11 @@
   cursor: pointer;
   padding: 0 1rem;
   font-weight: 300;
-  color: var(--nav-text-color);
+  color: var(--secondary-color);
 }
 
 .for_mobile_only .sign_out a {
-  color: var(--nav-text-color);
+  color: var(--secondary-colorr);
 }
 
 @media (min-width: 350px) {

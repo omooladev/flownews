@@ -1,6 +1,5 @@
 .setting_navigation-links {
   margin: 2rem 0;
-  font-family: var(--primary-font);
 }
 .setting_navigation-links ul {
   display: flex;
@@ -11,7 +10,7 @@
 }
 .setting_navigation-links ul li a {
   cursor: pointer;
-  color: var(--nav-text-color);
+  color: var(--secondary-color);
   display: flex;
   align-items: center;
   padding: 0.5rem 0.5rem;
@@ -24,7 +23,7 @@
 .setting_navigation-links ul li a.active {
   color: var(--body-color);
   font-weight: bold;
-  background-color: var(--nav-text-hover-color);
+  background-color: var(--primary-color);
 }
 .setting_navigation-links ul .link_section {
   margin: 1rem 0;
@@ -39,7 +38,7 @@
   .setting_navigation-links ul li a:hover {
     color: var(--body-color);
     transition: all 0.4s ease;
-    background-color: var(--nav-text-hover-color);
+    background-color: var(--primary-color);
     opacity: 0.6;
   }
 }

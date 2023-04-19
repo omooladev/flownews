@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import styles from "./ProfileButton.module.css";
 const ProfileButton = () => {
   const history = useHistory();
-
   const clickEditProfileHandler = useCallback(() => {
     history.push("/settings/profile");
   }, [history]);

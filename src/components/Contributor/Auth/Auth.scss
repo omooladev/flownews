@@ -2,8 +2,6 @@
 // http://localhost:3000/:_id/reset_password/:token//TODO remove this
 .auth {
   background-color: var(--body-color);
-  width: 100vw;
-  height: 100vh;
   font-size: var(--primary-font-size);
   a {
     text-decoration: none;
@@ -15,9 +13,12 @@
     font-weight: normal;
     padding: 0.5rem 0;
     color: var(--primary-color);
+    text-align: center;
+    margin: 0.5rem 0;
   }
   h3,
   .username {
+    text-align: center;
     color: var(--tertiary-color);
   }
   p {
@@ -33,24 +34,24 @@
     font-size: 1.3rem;
     padding-bottom: 0.3rem;
   }
-  .icon {
-    cursor: pointer;
-    color: var(--primary-color);
-    font-size: 2rem;
-    position: absolute;
-    top: 1.5rem;
-    right: 5%;
+  .mobile_cancel_icon {
+    width: 100%;
+    text-align: right;
+    .icon {
+      cursor: pointer;
+      color: var(--primary-color);
+      font-size: 2rem;
+    }
   }
 
   .reply {
-    box-shadow: none;
     @extend %DisplayFlex;
     justify-content: space-around;
     border-radius: 0.4rem;
     padding: 0.5rem;
     width: 100%;
     opacity: 0.8;
-    overflow: hidden;
+    height: auto;
     &.success {
       color: var(--body-color);
       background-color: var(--primary-color);
@@ -137,7 +138,7 @@
         width: 100%;
         font-size: 0.9rem;
         padding: 0.6rem 0.5rem;
-        color: var(--body-color);
+        color: var(--white-color);
         border-radius: 5px;
         &:disabled {
           cursor: not-allowed;
@@ -151,17 +152,16 @@
     }
   }
   .form_footer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    @extend %DisplayFlex;
+    flex-wrap: wrap;
     background-color: transparent;
-    padding: 0.5rem 0;
+    padding: 0.5rem;
     border: 1px solid var(--auth-form-border-color);
     border-radius: 5px;
     width: 100%;
     p {
       padding: 0 0.5rem;
+      text-align: center;
     }
   }
 }
@@ -183,16 +183,35 @@
   margin: 1rem 0;
 }
 
+//? media queries for responsiveness
+//* when the width is less than 500px
+@media (max-width: 500px) {
+  .auth {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    padding: 1rem 5%;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+  }
+}
+
 @media (min-width: 500px) {
   .auth {
-    height: 65vh;
-    margin-top: -32.5vh;
+    position: absolute;
+    left: 50%;
     width: 25rem;
     margin-left: -12.5rem;
+    overflow: hidden;
+    padding: 1rem;
     .icon {
       display: none;
     }
-
     .form {
       .form_actions button:hover {
         background-color: var(--primary-hover-color);
@@ -201,5 +220,14 @@
         text-decoration: underline;
       }
     }
+  }
+}
+
+@media (min-height: 500px) and (min-width: 500px) {
+  .auth {
+    position: absolute;
+    top: 50%;
+    height: auto;
+    transform: translateY(-50%);
   }
 }

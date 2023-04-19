@@ -7,11 +7,15 @@
     margin: 0.5rem 0;
     padding-right: 1rem;
     label {
-      font-size: 1rem;
+      font-size: 15px;
+      line-height: 20.4px;
+      color: var(--secondary-color);
     }
     p {
+      line-height: 24px;
+      font-size: 16px;
       padding: 0.5rem 0;
-      color: grey;
+      color: var(--tertiary-color);
     }
   }
 }

@@ -42,7 +42,7 @@ const ProfileSection = () => {
           </ul>
           <hr />
           <ul className={`${styles["nav-user-list"]}`}>
-            <Write className={styles.write} />
+            <Write className={styles.write}/>
           </ul>
           <hr className={styles.write_line} />
           <ul className={`${styles["nav-user-list"]}`}>

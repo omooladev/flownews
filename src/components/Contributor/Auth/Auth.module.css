@@ -1,4 +1,4 @@
-.auth .reply, .auth .form .form_control, .auth .form .form_control .password_label {
+.auth .reply, .auth .form .form_control, .auth .form .form_control .password_label, .auth .form_footer {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -7,8 +7,6 @@
 
 .auth {
   background-color: var(--body-color);
-  width: 100vw;
-  height: 100vh;
   font-size: var(--primary-font-size);
 }
 .auth a {
@@ -21,9 +19,12 @@
   font-weight: normal;
   padding: 0.5rem 0;
   color: var(--primary-color);
+  text-align: center;
+  margin: 0.5rem 0;
 }
 .auth h3,
 .auth .username {
+  text-align: center;
   color: var(--tertiary-color);
 }
 .auth p {
@@ -39,22 +40,22 @@
   font-size: 1.3rem;
   padding-bottom: 0.3rem;
 }
-.auth .icon {
+.auth .mobile_cancel_icon {
+  width: 100%;
+  text-align: right;
+}
+.auth .mobile_cancel_icon .icon {
   cursor: pointer;
   color: var(--primary-color);
   font-size: 2rem;
-  position: absolute;
-  top: 1.5rem;
-  right: 5%;
 }
 .auth .reply {
-  box-shadow: none;
   justify-content: space-around;
   border-radius: 0.4rem;
   padding: 0.5rem;
   width: 100%;
   opacity: 0.8;
-  overflow: hidden;
+  height: auto;
 }
 .auth .reply.success {
   color: var(--body-color);
@@ -139,7 +140,7 @@
   width: 100%;
   font-size: 0.9rem;
   padding: 0.6rem 0.5rem;
-  color: var(--body-color);
+  color: var(--white-color);
   border-radius: 5px;
 }
 .auth .form .form_actions button:disabled {
@@ -151,18 +152,16 @@
   background-color: var(--primary-color);
 }
 .auth .form_footer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  flex-wrap: wrap;
   background-color: transparent;
-  padding: 0.5rem 0;
+  padding: 0.5rem;
   border: 1px solid var(--auth-form-border-color);
   border-radius: 5px;
   width: 100%;
 }
 .auth .form_footer p {
   padding: 0 0.5rem;
+  text-align: center;
 }
 
 .reset_password,
@@ -182,12 +181,29 @@
   margin: 1rem 0;
 }
 
+@media (max-width: 500px) {
+  .auth {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    padding: 1rem 5%;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+  }
+}
 @media (min-width: 500px) {
   .auth {
-    height: 65vh;
-    margin-top: -32.5vh;
+    position: absolute;
+    left: 50%;
     width: 25rem;
     margin-left: -12.5rem;
+    overflow: hidden;
+    padding: 1rem;
   }
   .auth .icon {
     display: none;
@@ -197,5 +213,13 @@
   }
   .auth .form .form_footer a:hover {
     text-decoration: underline;
+  }
+}
+@media (min-height: 500px) and (min-width: 500px) {
+  .auth {
+    position: absolute;
+    top: 50%;
+    height: auto;
+    transform: translateY(-50%);
   }
 }
