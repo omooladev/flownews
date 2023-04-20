@@ -8,10 +8,34 @@
   font-weight: bold;
 }
 .profile_picture button {
-  padding: 0.4rem 1rem;
+  cursor: pointer;
   position: absolute;
-  bottom: 0;
-  left: 0.5rem;
-  background-color: red;
+  bottom: 0.5rem;
+  left: 0rem;
   border-radius: 5px;
+  background-color: #eee;
+  padding: 0.4rem 0.6rem;
+}
+.profile_picture button span {
+  padding-left: 0.5rem;
+}
+.profile_picture button.active {
+  cursor: default;
+}
+.profile_picture .upload_container {
+  position: absolute;
+  left: 0rem;
+  top: 100%;
+  background-color: #eee;
+  color: black;
+  border-radius: 5px;
+  margin-top: 0.5rem;
+  padding: 0.2rem 0;
+}
+.profile_picture .upload_container li {
+  cursor: pointer;
+  padding: 0.5rem 0.6rem;
+}
+.profile_picture .upload_container li:hover {
+  background-color: var(--primary-color);
 }

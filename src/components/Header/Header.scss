@@ -50,5 +50,8 @@
     .logo {
       margin-left: 0;
     }
+    &.menu_active .logo {
+      opacity: 1;
+    }
   }
 }
