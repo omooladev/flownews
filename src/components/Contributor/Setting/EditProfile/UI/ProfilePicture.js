@@ -5,6 +5,7 @@ import { useCallback, useContext, useState } from "react";
 import { AppContext } from "../../../../../store/App/app-context";
 
 const ProfilePicture = () => {
+  //min-width:1400px
   const [profilePicture, setProfilePicture] = useState("");
   const [error, setError] = useState("");
   const {
@@ -14,13 +15,13 @@ const ProfilePicture = () => {
   const toggleUploadContainer = useCallback(
     (event) => {
       event.stopPropagation();
+      setError("");
       onToggleComponentsIsActive({ type: "uploadContainer", event: "toggle" });
     },
     [onToggleComponentsIsActive]
   );
   const stopPropagationHandler = useCallback((event) => {
     event.stopPropagation();
-    setError("");
   }, []);
 
   const saveProfilePictureHandler = useCallback(
@@ -41,7 +42,7 @@ const ProfilePicture = () => {
   return (
     <section className={styles.profile_picture}>
       <p>Profile picture</p>
-      {error && <p>Please upload a picture smaller than 1MB</p>}
+      <span className={`${styles.error} ${error ? styles.show : ""}`}>{error||"Error will appear here"}</span>
       <ProfileBox className="UserForm__ProfileBox" />
       <button
         onClick={toggleUploadContainer}

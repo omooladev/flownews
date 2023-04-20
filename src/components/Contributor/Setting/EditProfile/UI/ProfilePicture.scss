@@ -1,7 +1,18 @@
 .profile_picture {
   position: absolute;
   top: 0%;
-  right: 10%;
+  right: 0%;
+  width: 23rem;
+  .error {
+    opacity: 0;
+    color: red;
+    display: inline-block;
+    padding: 0.5rem 0;
+    &.show {
+      opacity: 1;
+    }
+  }
+
   p {
     color: var(--tertiary-color);
     font-weight: bold;
