@@ -25,24 +25,29 @@ const ProfilePicture = () => {
   }, []);
 
   const saveProfilePictureHandler = useCallback(
-    (event) => {
+    async (event) => {
       event.stopPropagation();
       onToggleComponentsIsActive({ type: "uploadContainer", event: "close" });
 
-      const file = event.target.files[0];
+      let file = event.target.files[0];
       const maxSize = 1024 * 1024; //? This is 1MB
       const imageSize = file.size;
       if (imageSize > maxSize) {
         return setError("Please upload a picture smaller than 1MB");
       }
+      await transformFile(file);s
     },
     [onToggleComponentsIsActive]
   );
 
+  const transformFile = useCallback(async(file) => {}, []);
+
   return (
     <section className={styles.profile_picture}>
       <p>Profile picture</p>
-      <span className={`${styles.error} ${error ? styles.show : ""}`}>{error||"Error will appear here"}</span>
+      <span className={`${styles.error} ${error ? styles.show : ""}`}>
+        {error || "Error will appear here"}
+      </span>
       <ProfileBox className="UserForm__ProfileBox" />
       <button
         onClick={toggleUploadContainer}
