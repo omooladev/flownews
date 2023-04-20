@@ -16,6 +16,12 @@ const ProfilePicture = () => {
     },
     [onToggleComponentsIsActive]
   );
+  const stopPropagationHandler = useCallback(
+    (event) => {
+      event.stopPropagation();
+    },
+    []
+  );
 
   return (
     <section className={styles.profile_picture}>
@@ -30,11 +36,15 @@ const ProfilePicture = () => {
       </button>
       {uploadContainerIsActive && (
         <ul className={styles.upload_container} id="userForm_upload_container">
-          <li>Upload a photo...</li>
-          <li>Revert Avatar</li>
+          <li onClick={stopPropagationHandler}>
+            <label htmlFor="userForm_image_input">Upload a photo...</label>
+            <input type="file" accept="image/" id="userForm_image_input" />
+          </li>
+          <li>
+            <label>Revert Avatar</label>
+          </li>
         </ul>
       )}
-      {/* <input type="radio" /> */}
     </section>
   );
 };

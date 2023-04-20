@@ -14,9 +14,10 @@
     border-radius: 5px;
     background-color: #eee;
     padding: 0.4rem 0.6rem;
-    label{
-      padding-left:0.5rem;
+    label {
+      padding-left: 0.5rem;
     }
+
     &.active {
       cursor: default;
     }
@@ -30,9 +31,16 @@
     border-radius: 5px;
     margin-top: 0.5rem;
     padding: 0.2rem 0;
+    input {
+      display: none;
+    }
     li {
-      cursor: pointer;
-      padding: 0.5rem 0.6rem;
+      label {
+        cursor: pointer;
+        padding: 0.5rem 0.6rem;
+        display: block;
+        width: 100%;
+      }
       &:hover {
         background-color: var(--primary-color);
       }

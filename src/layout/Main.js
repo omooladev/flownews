@@ -11,6 +11,7 @@ const Main = () => {
   const closeComponentsHandler = useCallback(
     (event) => {
       event.stopPropagation();
+
       onToggleComponentsIsActive({ event: "*" });
     },
     [onToggleComponentsIsActive]

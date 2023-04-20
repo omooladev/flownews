@@ -32,9 +32,14 @@
   margin-top: 0.5rem;
   padding: 0.2rem 0;
 }
-.profile_picture .upload_container li {
+.profile_picture .upload_container input {
+  display: none;
+}
+.profile_picture .upload_container li label {
   cursor: pointer;
   padding: 0.5rem 0.6rem;
+  display: block;
+  width: 100%;
 }
 .profile_picture .upload_container li:hover {
   background-color: var(--primary-color);
