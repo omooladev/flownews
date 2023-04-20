@@ -1,7 +1,7 @@
 import { FaEdit } from "react-icons/fa";
 import ProfileBox from "../../../../Header/Navigation/ContributorNavigations/ProfileBox";
 import styles from "./ProfilePicture.module.css";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext } from "react";
 import { AppContext } from "../../../../../store/App/app-context";
 
 const ProfilePicture = () => {
