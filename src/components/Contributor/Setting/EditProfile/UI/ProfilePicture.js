@@ -35,7 +35,7 @@ const ProfilePicture = () => {
       if (imageSize > maxSize) {
         return setError("Please upload a picture smaller than 1MB");
       }
-      await transformFile(file);s
+      await transformFile(file);
     },
     [onToggleComponentsIsActive]
   );
