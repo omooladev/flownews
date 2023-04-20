@@ -26,10 +26,10 @@ const ProfilePicture = () => {
         className={uploadContainerIsActive ? styles.active : ""}
       >
         <FaEdit />
-        <span>Edit</span>
+        <label htmlFor="userForm_upload_container">Edit</label>
       </button>
       {uploadContainerIsActive && (
-        <ul className={styles.upload_container}>
+        <ul className={styles.upload_container} id="userForm_upload_container">
           <li>Upload a photo...</li>
           <li>Revert Avatar</li>
         </ul>
