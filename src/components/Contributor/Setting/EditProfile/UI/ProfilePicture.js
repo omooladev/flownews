@@ -6,6 +6,7 @@ import { AppContext } from "../../../../../store/App/app-context";
 
 const ProfilePicture = () => {
   const [profilePicture, setProfilePicture] = useState("");
+  const [error, setError] = useState("");
   const {
     onToggleComponentsIsActive,
     componentsIsActive: { uploadContainerIsActive },
@@ -19,27 +20,35 @@ const ProfilePicture = () => {
   );
   const stopPropagationHandler = useCallback((event) => {
     event.stopPropagation();
+    setError("");
   }, []);
 
-  const saveProfilePictureHandler = useCallback((event) => {
-    event.stopPropagation();
-    onToggleComponentsIsActive({ type: "uploadContainer", event: "close" });
-    const file = event.target.files[0];
+  const saveProfilePictureHandler = useCallback(
+    (event) => {
+      event.stopPropagation();
+      onToggleComponentsIsActive({ type: "uploadContainer", event: "close" });
 
-    console.log(file.size);
-  }, []);
+      const file = event.target.files[0];
+      const maxSize = 1024 * 1024; //? This is 1MB
+      const imageSize = file.size;
+      if (imageSize > maxSize) {
+        return setError("Please upload a picture smaller than 1MB");
+      }
+    },
+    [onToggleComponentsIsActive]
+  );
 
   return (
     <section className={styles.profile_picture}>
       <p>Profile picture</p>
-      {/* <p>Please upload a picture smaller than 1MB</p> */}
+      {error && <p>Please upload a picture smaller than 1MB</p>}
       <ProfileBox className="UserForm__ProfileBox" />
       <button
         onClick={toggleUploadContainer}
         className={uploadContainerIsActive ? styles.active : ""}
       >
         <FaRegEdit />
-        <label htmlFor="userForm_upload_container">Edit</label>
+        <span>Edit</span>
       </button>
       {uploadContainerIsActive && (
         <ul className={styles.upload_container} id="userForm_upload_container">
