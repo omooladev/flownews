@@ -13,7 +13,10 @@ const ProfilePicture = () => {
     onToggleComponentsIsActive,
     componentsIsActive: { uploadContainerIsActive },
   } = useContext(AppContext);
-  const { onSaveContributorData } = useContext(AuthContext);
+  const {
+    onSaveContributorData,
+    contributorData: { profilePicture: displayPicture },
+  } = useContext(AuthContext);
   const toggleUploadContainer = useCallback(
     (event) => {
       event.stopPropagation();
@@ -39,8 +42,13 @@ const ProfilePicture = () => {
       onToggleComponentsIsActive({ type: "uploadContainer", event: "close" });
 
       let file = event.target.files[0];
+      const imageType = file.type;
       const maxSize = 1024 * 1024; //? This is 1MB
       const imageSize = file.size;
+      if (!imageType.includes("image/")) {
+        return setError("Please upload an image");
+      }
+
       if (imageSize > maxSize) {
         return setError("Please upload a picture smaller than 1MB");
       }
@@ -73,6 +81,11 @@ const ProfilePicture = () => {
           <li onClick={stopPropagationHandler}>
             <label htmlFor="userForm_image_input">Upload a photo...</label>
           </li>
+          {displayPicture && (
+            <li onClick={stopPropagationHandler}>
+              <label>Remove Profile photo</label>
+            </li>
+          )}
           <input
             type="file"
             accept="image/"
