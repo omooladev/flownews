@@ -20,14 +20,12 @@
   color: var(--white-color);
 }
 .profile_box .profilePicture_Username .profile_picture {
-  height: 32px;
-  width: 32px;
+  height: 100%;
+  width: 100%;
   border-radius: 50%;
-  margin: 0 0.5rem;
   object-fit: cover;
   object-position: center;
   background-color: var(--primary-color);
-  color: var(--body-color);
 }
 .profile_box .icon {
   color: var(--secondary-color);

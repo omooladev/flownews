@@ -3,6 +3,7 @@ import ProfileBox from "../../../../Header/Navigation/ContributorNavigations/Pro
 import styles from "./ProfilePicture.module.css";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { AppContext } from "../../../../../store/App/app-context";
+import { AuthContext } from "../../../../../store/Auth/auth-context";
 
 const ProfilePicture = () => {
   //min-width:1400px
@@ -12,6 +13,7 @@ const ProfilePicture = () => {
     onToggleComponentsIsActive,
     componentsIsActive: { uploadContainerIsActive },
   } = useContext(AppContext);
+  const { onSaveContributorData } = useContext(AuthContext);
   const toggleUploadContainer = useCallback(
     (event) => {
       event.stopPropagation();
@@ -49,8 +51,9 @@ const ProfilePicture = () => {
 
   useEffect(() => {
     if (profilePicture) {
+      onSaveContributorData({ profilePicture });
     }
-  }, [profilePicture]);
+  }, [profilePicture, onSaveContributorData]);
   return (
     <section className={styles.profile_picture}>
       <p>Profile picture</p>
