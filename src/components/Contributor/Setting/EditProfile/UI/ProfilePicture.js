@@ -1,7 +1,7 @@
 import { FaRegEdit } from "react-icons/fa";
 import ProfileBox from "../../../../Header/Navigation/ContributorNavigations/ProfileBox";
 import styles from "./ProfilePicture.module.css";
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { AppContext } from "../../../../../store/App/app-context";
 
 const ProfilePicture = () => {
@@ -23,6 +23,13 @@ const ProfilePicture = () => {
   const stopPropagationHandler = useCallback((event) => {
     event.stopPropagation();
   }, []);
+  const transformFile = useCallback(async (file) => {
+    const reader = new FileReader();
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onloadend = () => setProfilePicture(reader.result);
+    }
+  }, []);
 
   const saveProfilePictureHandler = useCallback(
     async (event) => {
@@ -37,11 +44,13 @@ const ProfilePicture = () => {
       }
       await transformFile(file);
     },
-    [onToggleComponentsIsActive]
+    [onToggleComponentsIsActive, transformFile]
   );
 
-  const transformFile = useCallback(async(file) => {}, []);
-
+  useEffect(() => {
+    if (profilePicture) {
+    }
+  }, [profilePicture]);
   return (
     <section className={styles.profile_picture}>
       <p>Profile picture</p>
