@@ -1,13 +1,14 @@
 import { FaRegEdit } from "react-icons/fa";
 import ProfileBox from "../../../../Header/Navigation/ContributorNavigations/ProfileBox";
-import styles from "./ProfilePicture.module.css";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { AppContext } from "../../../../../store/App/app-context";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
-
+import styles from "./ProfilePicture.module.css";
 const ProfilePicture = () => {
   //min-width:1400px
   const [profilePicture, setProfilePicture] = useState("");
+  const [removeProfilePhotoContainerIsActive, setRemoveProfilePhotoContainerIsActive] =
+    useState(false);
   const [error, setError] = useState("");
   const {
     onToggleComponentsIsActive,
@@ -17,6 +18,11 @@ const ProfilePicture = () => {
     onSaveContributorData,
     contributorData: { profilePicture: displayPicture },
   } = useContext(AuthContext);
+
+  const removeProfilePhotoHandler = useCallback((event) => {
+    event.stopPropagation();
+    setRemoveProfilePhotoContainerIsActive(true);
+  }, []);
   const toggleUploadContainer = useCallback(
     (event) => {
       event.stopPropagation();
@@ -59,6 +65,7 @@ const ProfilePicture = () => {
 
   useEffect(() => {
     if (profilePicture) {
+      //TODO send a request to save the profile picture on the database
       onSaveContributorData({ profilePicture });
     }
   }, [profilePicture, onSaveContributorData]);
@@ -71,7 +78,9 @@ const ProfilePicture = () => {
       <ProfileBox className="UserForm__ProfileBox" />
       <button
         onClick={toggleUploadContainer}
-        className={uploadContainerIsActive ? styles.active : ""}
+        className={`${styles.upload_container_button} ${
+          uploadContainerIsActive ? styles.active : ""
+        }`}
       >
         <FaRegEdit />
         <span>Edit</span>
@@ -82,8 +91,19 @@ const ProfilePicture = () => {
             <label htmlFor="userForm_image_input">Upload a photo...</label>
           </li>
           {displayPicture && (
-            <li onClick={stopPropagationHandler}>
+            <li onClick={removeProfilePhotoHandler}>
               <label>Remove Profile photo</label>
+              {removeProfilePhotoContainerIsActive && uploadContainerIsActive && (
+                <section className={styles.remove_profile_photo_container}>
+                  <p className={styles.header}>
+                    Are you sure you want to remove your profile photo?
+                  </p>
+                  <div className={styles.buttons}>
+                    <button>Yes</button>
+                    <button>Cancel</button>
+                  </div>
+                </section>
+              )}
             </li>
           )}
           <input

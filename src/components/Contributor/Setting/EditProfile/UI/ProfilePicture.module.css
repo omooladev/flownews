@@ -17,7 +17,7 @@
   color: var(--tertiary-color);
   font-weight: bold;
 }
-.profile_picture button {
+.profile_picture .upload_container_button {
   cursor: pointer;
   position: absolute;
   bottom: 0.5rem;
@@ -28,11 +28,11 @@
   padding: 0.4rem 0.6rem;
   box-shadow: var(--secondary-color) 0px 0px 0px 1px;
 }
-.profile_picture button span {
+.profile_picture .upload_container_button span {
   display: inline-block;
   padding-left: 0.5rem;
 }
-.profile_picture button.active {
+.profile_picture .upload_container_button.active {
   cursor: default;
 }
 .profile_picture .upload_container {
@@ -50,11 +50,46 @@
 .profile_picture .upload_container input {
   display: none;
 }
+.profile_picture .upload_container li {
+  position: relative;
+}
 .profile_picture .upload_container li label {
   cursor: pointer;
   padding: 0.5rem 0.6rem;
   display: block;
   width: 100%;
+}
+.profile_picture .upload_container li .remove_profile_photo_container {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background-color: var(--body-color);
+  color: var(--tertiary-color);
+  box-shadow: var(--secondary-color) 0px 0px 0px 1px;
+  width: 12rem;
+  padding: 0.5rem 0.6rem;
+  margin-left: 0.5rem;
+}
+.profile_picture .upload_container li .remove_profile_photo_container .header {
+  font-weight: normal;
+  text-align: center;
+}
+.profile_picture .upload_container li .remove_profile_photo_container .buttons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.profile_picture .upload_container li .remove_profile_photo_container .buttons button {
+  padding: 0.4rem 0.5rem;
+  border-radius: 5px;
+  color: var(--white-color);
+}
+.profile_picture .upload_container li .remove_profile_photo_container .buttons button:first-child {
+  background-color: var(--primary-color);
+}
+.profile_picture .upload_container li .remove_profile_photo_container .buttons button:last-child {
+  background-color: red;
 }
 .profile_picture .upload_container li:hover {
   color: var(--white-color);
