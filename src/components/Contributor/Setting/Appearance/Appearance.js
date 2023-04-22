@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useTitle } from "../../../../hooks/useTitle";
 import { AuthContext } from "../../../../store/Auth/auth-context";
-import EmailVerify from "../UI/EmailVerification/SendVerificationEmail_CancelEmailChangeRequest";
+import EmailVerification from "../UI/EmailVerification/EmailVerification";
 
 import ThemeMode from "./ThemeMode";
 const Appearance = () => {
@@ -11,7 +11,7 @@ const Appearance = () => {
   } = useContext(AuthContext);
   return (
     <section>
-      {(!emailRequestChangeAddressIsVerified || emailRequestChange) && <EmailVerify />}
+      {(!emailRequestChangeAddressIsVerified || emailRequestChange) && <EmailVerification />}
       <h2>Theme preferences</h2>
       <hr />
       <p>

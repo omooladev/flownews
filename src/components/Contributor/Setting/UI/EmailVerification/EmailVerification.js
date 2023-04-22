@@ -2,8 +2,8 @@ import { useCallback, useContext, useState } from "react";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
 import useHttp from "../../../../../hooks/useHttp";
 import EmailLinkSentPopUp from "../../../../PopUps/Email/EmailLinkSentPopUp";
-import styles from "./SendVerificationEmail_CancelEmailChangeRequest.module.css";
-const EmailVerify = () => {
+import styles from "./EmailVerification.module.css";
+const EmailVerification = () => {
   const { sendRequest } = useHttp();
   const [isLoading, setIsLoading] = useState({ type: "" });
   const [error, setError] = useState("");
@@ -145,5 +145,4 @@ const EmailVerify = () => {
   );
 };
 
-export default EmailVerify;
-SendEmailVeri_CancelEmailChangeRequest.js;
+export default EmailVerification;

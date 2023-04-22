@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../../store/Auth/auth-context";
-import EmailVerify from "../UI/EmailVerification/SendVerificationEmail_CancelEmailChangeRequest";
+import EmailVerification from "../UI/EmailVerification/EmailVerification";
 import ConnectAccount from "../UI/ConnectAccount/ConnectAccount";
 import User from "./UI/User";
 const EditProfile = () => {
@@ -11,7 +11,7 @@ const EditProfile = () => {
     <section>
       <h2>Public Profile</h2>
       <hr />
-      {(!emailRequestChangeAddressIsVerified || emailRequestChange) && <EmailVerify />}
+      {(!emailRequestChangeAddressIsVerified || emailRequestChange) && <EmailVerification />}
       <ConnectAccount />
       <User />
     </section>

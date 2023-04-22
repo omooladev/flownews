@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useTitle } from "../../../../hooks/useTitle";
 import { AuthContext } from "../../../../store/Auth/auth-context";
 import ConnectAccount from "../UI/ConnectAccount/ConnectAccount";
-import EmailVerify from "../UI/EmailVerification/SendVerificationEmail_CancelEmailChangeRequest";
+import EmailVerification from "../UI/EmailVerification/EmailVerification";
 import DeleteAccount from "./DeleteAccount";
 
 const Account = () => {
@@ -12,7 +12,7 @@ const Account = () => {
   } = useContext(AuthContext);
   return (
     <section>
-      {(!emailRequestChangeAddressIsVerified || emailRequestChange) && <EmailVerify />}
+      {(!emailRequestChangeAddressIsVerified || emailRequestChange) && <EmailVerification />}
       <ConnectAccount />
       <DeleteAccount />
     </section>
