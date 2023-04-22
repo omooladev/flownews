@@ -1,8 +1,6 @@
 .profile_picture {
-  position: absolute;
-  top: 0;
-  right: 0%;
-  width: 15rem;
+  position: relative;
+  width: 20rem;
   background-color: purple;
 }
 .profile_picture .profile_picture_header {
@@ -44,9 +42,20 @@
   cursor: default;
 }
 
+@media (min-width: 1000px) {
+  .profile_picture {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 15rem;
+  }
+  .profile_picture .upload_container_button {
+    bottom: 0.5rem;
+    left: 0rem;
+  }
+}
 @media (min-width: 1400px) {
   .profile_picture {
-    right: 0%;
-    width: 23rem;
+    width: 22rem;
   }
 }
