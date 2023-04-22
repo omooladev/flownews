@@ -10,7 +10,7 @@
   --secondary-font: "Lato", Helvetica, sans-serif;
   --tertiary-font: "Frank Ruhl Libre", Helvetica, serif;
   /*? fonts sizes */
-  --primary-font-size: 0.875rem;
+  --primary-font-size: 14px;
   --heading-font-size: 1.5rem;
   --primary-font-line-height: 1.3125rem;
   --reverse-black-white-color: black;
@@ -31,6 +31,7 @@
   --header-color: #ffffff;
   --side-nav-color: #ccc;
   --side-nav: #ccc;
+  --link-color: blue;
   --error-color: rgb(237, 178, 178);
   /*? normal global colors  */
   --black-color: black;
@@ -42,7 +43,6 @@
   /* Public Profile colors */
   --form-border-color: rgba(48, 155, 101, 0.2);
   --form-background-color: rgba(48, 155, 101, 0.1);
-  --link-color: blue;
 }
 body {
   font-family: var(--secondary-font);
@@ -64,8 +64,8 @@ body.dark {
   --auth-form-color: transparent;
   --auth-form-border-color: rgb(98, 96, 96);
   --auth-form-padding: 0.5rem 0rem;
+  --link-color: rgb(255, 165, 0);
   --reverse-black-white-color: black;
-
   --nav-profile-box-color: #ccc;
 
   /* Profile color */
@@ -73,7 +73,6 @@ body.dark {
   /* Public Profile colors */
   --form-border-color: rgba(255, 165, 0, 0.2);
   --form-background-color: transparent;
-  --link-color: rgb(255, 165, 0);
 }
 
 body.fixed-body {

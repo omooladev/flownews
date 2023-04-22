@@ -4,7 +4,6 @@ import EmailVerify from "../UI/EmailVerification/SendVerificationEmail_CancelEma
 import ConnectAccount from "../UI/ConnectAccount/ConnectAccount";
 import User from "./UI/User";
 const EditProfile = () => {
-
   const {
     contributorData: { emailRequestChangeAddressIsVerified, emailRequestChange },
   } = useContext(AuthContext);

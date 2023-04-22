@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { BiEnvelope, BiX } from "react-icons/bi";
-import PopUp from "../../../../../UI/PopUp";
+import PopUp from "../../../UI/PopUp";
 import styles from "./EmailLinkSentPopUp.module.css";
 
 const EmailLinkSentPopUp = (props) => {
