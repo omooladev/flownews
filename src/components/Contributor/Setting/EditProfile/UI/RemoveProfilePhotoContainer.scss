@@ -1,0 +1,32 @@
+.remove_profile_photo_container {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background-color: var(--body-color);
+  color: var(--tertiary-color);
+  box-shadow: var(--secondary-color) 0px 0px 0px 1px;
+  width: 12rem;
+  padding: 0.5rem 0.6rem;
+  margin-left: 0.5rem;
+  .header {
+    font-weight: normal;
+    text-align: center;
+  }
+  .buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    button {
+      padding: 0.4rem 0.5rem;
+      border-radius: 5px;
+      color: var(--white-color);
+      &:first-child {
+        background-color: var(--primary-color);
+      }
+      &:last-child {
+        background-color: red;
+      }
+    }
+  }
+}

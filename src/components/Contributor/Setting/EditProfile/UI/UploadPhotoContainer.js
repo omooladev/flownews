@@ -8,14 +8,14 @@ const UploadPhotoContainer = ({
   uploadContainerIsActive,
 }) => {
   //min-width:1400px
-  const [profilePicture, setProfilePicture] = useState("");
-  const [removeProfilePhotoContainerIsActive, setRemoveProfilePhotoContainerIsActive] =
-    useState(false);
-
   const {
     onSaveContributorData,
     contributorData: { profilePicture: displayPicture },
   } = useContext(AuthContext);
+  const [profilePicture, setProfilePicture] = useState("");
+  const [removeProfilePhotoContainerIsActive, setRemoveProfilePhotoContainerIsActive] =
+    useState(false);
+
   const transformFile = useCallback(async (file) => {
     const reader = new FileReader();
     if (file) {
@@ -44,9 +44,9 @@ const UploadPhotoContainer = ({
     [onToggleComponentsIsActive, transformFile, onSetError]
   );
 
-  const removeProfilePhotoHandler = useCallback((event) => {
+  const removeProfilePhotoHandler = useCallback((event, bool) => {
     event.stopPropagation();
-    setRemoveProfilePhotoContainerIsActive(true);
+    setRemoveProfilePhotoContainerIsActive(bool);
   }, []);
   const stopPropagationHandler = useCallback((event) => {
     event.stopPropagation();
@@ -65,10 +65,12 @@ const UploadPhotoContainer = ({
             <label htmlFor="userForm_image_input">Upload a photo...</label>
           </li>
           {displayPicture && (
-            <li onClick={removeProfilePhotoHandler}>
+            <li onClick={(event) => removeProfilePhotoHandler(event, true)}>
               <label>Remove Profile photo</label>
               {removeProfilePhotoContainerIsActive && uploadContainerIsActive && (
-                <RemoveProfilePhotoContainer />
+                <RemoveProfilePhotoContainer
+                  onRemoveProfilePhotoContainer={(event) => removeProfilePhotoHandler(event, false)}
+                />
               )}
             </li>
           )}
