@@ -61,6 +61,16 @@ const UploadPhotoContainer = ({
       onSaveContributorData({ profilePicture });
     }
   }, [profilePicture, onSaveContributorData]);
+
+  useEffect(() => {
+    if (!uploadContainerIsActive && removeProfilePhotoContainerIsActive) {
+      hideRemoveProfilePhotoContainer();
+    }
+  }, [
+    uploadContainerIsActive,
+    removeProfilePhotoContainerIsActive,
+    hideRemoveProfilePhotoContainer,
+  ]);
   return (
     <>
       {uploadContainerIsActive && (
