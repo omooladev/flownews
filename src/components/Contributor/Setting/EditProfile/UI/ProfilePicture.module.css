@@ -1,7 +1,6 @@
 .profile_picture {
   position: relative;
-  width: 20rem;
-  background-color: purple;
+  width: 100%;
 }
 .profile_picture .profile_picture_header {
   font-size: 1.1rem;
@@ -11,7 +10,6 @@
   color: red;
   display: inline-block;
   padding: 0.5rem 0;
-  background-color: blue;
   width: 100%;
   font-size: 1rem;
   line-height: 1.5rem;
@@ -48,10 +46,6 @@
     top: 0;
     right: 0;
     width: 15rem;
-  }
-  .profile_picture .upload_container_button {
-    bottom: 0.5rem;
-    left: 0rem;
   }
 }
 @media (min-width: 1400px) {

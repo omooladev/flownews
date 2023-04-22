@@ -6,12 +6,12 @@ import UploadPhotoContainer from "./UploadPhotoContainer";
 import styles from "./ProfilePicture.module.css";
 
 const ProfilePicture = () => {
-  const [error, setError] = useState("Please upload a picture smaller than 1MB 2222222222222222222 2222");
+  const [error, setError] = useState("");
   const {
     onToggleComponentsIsActive,
-    //componentsIsActive: { uploadContainerIsActive },
+    componentsIsActive: { uploadContainerIsActive },
   } = useContext(AppContext);
-  let uploadContainerIsActive = true; //TODO delete this
+ 
   const toggleUploadContainer = useCallback(
     (event) => {
       event.stopPropagation();

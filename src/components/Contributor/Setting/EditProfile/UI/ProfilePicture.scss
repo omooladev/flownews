@@ -1,7 +1,6 @@
 .profile_picture {
   position: relative;
-  width: 20rem;
-  background-color: purple;
+  width: 100%;
   .profile_picture_header {
     font-size: 1.1rem;
   }
@@ -10,7 +9,6 @@
     color: red;
     display: inline-block;
     padding: 0.5rem 0;
-    background-color: blue;
     width: 100%;
     font-size: 1rem;
     line-height: 1.5rem;
@@ -26,8 +24,8 @@
   .upload_container_button {
     cursor: pointer;
     position: absolute;
-    bottom: 0.5rem;
-    left: 0rem;
+   bottom: 0.5rem;
+      left: 0rem;
     border-radius: 5px;
     background-color: var(--body-color);
     color: var(--tertiary-color);
@@ -50,10 +48,6 @@
     top: 0;
     right: 0;
     width: 15rem;
-    .upload_container_button {
-      bottom: 0.5rem;
-      left: 0rem;
-    }
   }
 }
 
