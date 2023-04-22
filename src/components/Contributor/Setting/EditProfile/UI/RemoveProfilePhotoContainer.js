@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import styles from "./RemoveProfilePhotoContainer.module.css";
 const RemoveProfilePhotoContainer = ({
+  onToggleComponentsIsActive,
   onSaveContributorData,
   onHideRemoveProfilePhotoContainer,
   onClick,
@@ -11,7 +12,8 @@ const RemoveProfilePhotoContainer = ({
   const removeProfilePhotoHandler = useCallback(() => {
     //TODO send a request to delete the profile picture
     onSaveContributorData({ profilePicture: null });
-  }, [onSaveContributorData]);
+    onToggleComponentsIsActive({ type: "uploadContainer", event: "close" });
+  }, [onSaveContributorData, onToggleComponentsIsActive]);
   return (
     <section className={styles.remove_profile_photo_container} onClick={onClick}>
       <p className={styles.header}>Are you sure you want to remove your profile photo?</p>

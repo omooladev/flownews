@@ -88,6 +88,7 @@ const UploadPhotoContainer = ({
                   onSaveContributorData={onSaveContributorData}
                   onClick={stopPropagationHandler}
                   onHideRemoveProfilePhotoContainer={hideRemoveProfilePhotoContainer}
+                  onToggleComponentsIsActive={onToggleComponentsIsActive}
                 />
               )}
             </>
