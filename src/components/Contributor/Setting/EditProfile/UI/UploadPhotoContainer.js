@@ -44,13 +44,17 @@ const UploadPhotoContainer = ({
     [onToggleComponentsIsActive, transformFile, onSetError]
   );
 
-  const removeProfilePhotoHandler = useCallback((event, bool) => {
+  const showRemoveProfilePhotoContainer = useCallback((event) => {
     event.stopPropagation();
-    setRemoveProfilePhotoContainerIsActive(bool);
+    setRemoveProfilePhotoContainerIsActive((prevState) => true);
+  }, []);
+  const hideRemoveProfilePhotoContainer = useCallback(() => {
+    setRemoveProfilePhotoContainerIsActive((prevState) => false);
   }, []);
   const stopPropagationHandler = useCallback((event) => {
     event.stopPropagation();
   }, []);
+
   useEffect(() => {
     if (profilePicture) {
       //TODO send a request to save the profile picture on the database
@@ -65,14 +69,17 @@ const UploadPhotoContainer = ({
             <label htmlFor="userForm_image_input">Upload a photo...</label>
           </li>
           {displayPicture && (
-            <li onClick={(event) => removeProfilePhotoHandler(event, true)}>
-              <label>Remove Profile photo</label>
+            <>
+              <li onClick={showRemoveProfilePhotoContainer}>
+                <label>Remove Profile photo</label>
+              </li>
               {removeProfilePhotoContainerIsActive && uploadContainerIsActive && (
                 <RemoveProfilePhotoContainer
-                  onRemoveProfilePhotoContainer={(event) => removeProfilePhotoHandler(event, false)}
+                  onClick={stopPropagationHandler}
+                  onHideRemoveProfilePhotoContainer={hideRemoveProfilePhotoContainer}
                 />
               )}
-            </li>
+            </>
           )}
           <input
             type="file"
