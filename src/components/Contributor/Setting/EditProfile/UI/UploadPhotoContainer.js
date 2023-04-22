@@ -85,6 +85,7 @@ const UploadPhotoContainer = ({
               </li>
               {removeProfilePhotoContainerIsActive && uploadContainerIsActive && (
                 <RemoveProfilePhotoContainer
+                  onSaveContributorData={onSaveContributorData}
                   onClick={stopPropagationHandler}
                   onHideRemoveProfilePhotoContainer={hideRemoveProfilePhotoContainer}
                 />
