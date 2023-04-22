@@ -2,12 +2,20 @@
   position: absolute;
   top: 0;
   right: 0%;
-  width: 23rem;
+  width: 15rem;
+  background-color: purple;
+  .profile_picture_header {
+    font-size: 1.1rem;
+  }
   .error {
     opacity: 0;
     color: red;
     display: inline-block;
     padding: 0.5rem 0;
+    background-color: blue;
+    width: 100%;
+    font-size: 1rem;
+    line-height: 1.5rem;
     &.show {
       opacity: 1;
     }
@@ -37,5 +45,10 @@
       cursor: default;
     }
   }
- 
+}
+@media (min-width: 1400px) {
+  .profile_picture {
+    right: 0%;
+    width: 23rem;
+  }
 }

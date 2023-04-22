@@ -1,7 +1,5 @@
 .remove_profile_photo_container {
   position: absolute;
-  top: 0;
-  left: 100%;
   background-color: var(--body-color);
   color: var(--tertiary-color);
   box-shadow: var(--secondary-color) 0px 0px 0px 1px;
@@ -28,5 +26,12 @@
         background-color: red;
       }
     }
+  }
+}
+
+@media (min-width: 1400px) {
+  .remove_profile_photo_container {
+    top: 2rem;
+    left: 100%;
   }
 }

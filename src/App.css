@@ -1,6 +1,8 @@
 .main {
   background-color: var(--body-color);
   padding-top: 10vh;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .main.profile_updated {
@@ -16,4 +18,10 @@
 }
 .popup {
   z-index: 999;
+}
+
+@media (min-width: 1600px) {
+  .main {
+    width: 1400px;
+  }
 }

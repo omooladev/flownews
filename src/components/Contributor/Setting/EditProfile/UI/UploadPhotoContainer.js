@@ -12,9 +12,9 @@ const UploadPhotoContainer = ({
     onSaveContributorData,
     contributorData: { profilePicture: displayPicture },
   } = useContext(AuthContext);
-  const [profilePicture, setProfilePicture] = useState("");
+  const [profilePicture, setProfilePicture] = useState("s");//TODO remove this
   const [removeProfilePhotoContainerIsActive, setRemoveProfilePhotoContainerIsActive] =
-    useState(false);
+    useState(true);//TODO change to false
 
   const transformFile = useCallback(async (file) => {
     const reader = new FileReader();
