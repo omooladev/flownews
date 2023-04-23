@@ -3,10 +3,16 @@
 }
 .setting_link_content h2 {
   font-size: 24px;
+  line-height: 36px;
   padding: 0.5rem 0;
 }
+.setting_link_content h3 {
+  font-size: 20px;
+  line-height: 30px;
+}
 .setting_link_content p {
-  font-size: 14px;
+  font-size: 16px;
+  line-height: 24px;
   padding: 0.2rem 0;
   margin-bottom: 1rem;
 }

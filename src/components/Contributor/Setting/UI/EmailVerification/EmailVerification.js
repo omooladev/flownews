@@ -5,14 +5,10 @@ import EmailLinkSentPopUp from "../../../../PopUps/Email/EmailLinkSentPopUp";
 import styles from "./EmailVerification.module.css";
 const EmailVerification = () => {
   const { sendRequest } = useHttp();
-  const [isLoading, setIsLoading] = useState({ type: "" });
-  const [error, setError] = useState("");
-  const [emailSent, setEmailSent] = useState(false);
-  const [resentSuccess, setResentSuccess] = useState(false);
   const {
     HOSTURI,
     token,
-    onSetUserData,
+    onSaveContributorData,
     onSetShowEmailLinkSentPopUp,
     contributorData: {
       emailRequestChange,
@@ -20,6 +16,10 @@ const EmailVerification = () => {
       emailRequestChangeAddressIsVerified,
     },
   } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState({ type: "" });
+  const [error, setError] = useState("an error www");
+  const [emailSent, setEmailSent] = useState(false);
+  const [resentSuccess, setResentSuccess] = useState(false);
 
   const cancelEmailRequestChangeHandler = useCallback(
     async (event) => {
@@ -35,7 +35,7 @@ const EmailVerification = () => {
       const error = response.error || "";
       const data = response.data || "";
       if (data) {
-        onSetUserData(data);
+        onSaveContributorData(data);
       }
       if (error) {
         setError(error);
@@ -44,7 +44,7 @@ const EmailVerification = () => {
         return { ...prevState, type: "" };
       });
     },
-    [sendRequest, HOSTURI, token, onSetUserData]
+    [sendRequest, HOSTURI, token, onSaveContributorData]
   );
   const verifyEmailHandler = useCallback(
     async (event, Type) => {
@@ -85,7 +85,7 @@ const EmailVerification = () => {
     [HOSTURI, sendRequest, token, onSetShowEmailLinkSentPopUp]
   );
   return (
-    <div className={styles.email_request_change_cancel}>
+    <div className={styles.email_verification}>
       {emailSent && (
         <EmailLinkSentPopUp
           isLoading={isLoading}
@@ -110,7 +110,7 @@ const EmailVerification = () => {
           </p>
           {error && <p className="error">{error}</p>}
           <button
-            className={styles.verify_email}
+            className={styles.verifyEmailButton}
             disabled={isLoading.type === "verify" ? true : false}
             onClick={(event) => {
               verifyEmailHandler(event, { type: "verify" });
@@ -131,7 +131,7 @@ const EmailVerification = () => {
         <>
           <p>Please verify your email address to have access to all features of flownews</p>
           <button
-            className={styles.verify_email}
+            className={styles.verifyEmailButton}
             disabled={isLoading.type === "verify" ? true : false}
             onClick={(event) => {
               verifyEmailHandler(event, { type: "verify" });
