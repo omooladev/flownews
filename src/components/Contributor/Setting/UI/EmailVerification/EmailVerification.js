@@ -1,8 +1,10 @@
-import { useCallback, useContext, useState } from "react";
+import { Fragment, useCallback, useContext, useState } from "react";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
 import useHttp from "../../../../../hooks/useHttp";
 import EmailLinkSentPopUp from "../../../../PopUps/Email/EmailLinkSentPopUp";
 import styles from "./EmailVerification.module.css";
+import EmailRequestChange from "./EmailRequestChange";
+import EmailRequestNotChange from "./EmailRequestNotChange";
 const EmailVerification = () => {
   const { sendRequest } = useHttp();
   const {
@@ -85,63 +87,40 @@ const EmailVerification = () => {
     [HOSTURI, sendRequest, token, onSetShowEmailLinkSentPopUp]
   );
   return (
-    <div className={styles.email_verification}>
-      {emailSent && (
-        <EmailLinkSentPopUp
-          isLoading={isLoading}
-          resentSuccess={resentSuccess}
-          emailRequestChangeAddress={emailRequestChangeAddress}
-          onResendEmailLink={verifyEmailHandler}
-          onSetEmailSent={(bool) => {
-            setEmailSent(bool);
-          }}
-          onSetShowEmailLinkSentPopUp={(bool) => {
-            onSetShowEmailLinkSentPopUp(bool);
-          }}
-        />
+    <Fragment>
+      {(!emailRequestChangeAddressIsVerified || emailRequestChange) && (
+        <div className={styles.email_verification}>
+          {emailSent && (
+            <EmailLinkSentPopUp
+              isLoading={isLoading}
+              resentSuccess={resentSuccess}
+              emailRequestChangeAddress={emailRequestChangeAddress}
+              onResendEmailLink={verifyEmailHandler}
+              onSetEmailSent={(bool) => {
+                setEmailSent(bool);
+              }}
+              onSetShowEmailLinkSentPopUp={(bool) => {
+                onSetShowEmailLinkSentPopUp(bool);
+              }}
+            />
+          )}
+          <h3>Email Verification</h3>
+
+          {emailRequestChange && !emailRequestChangeAddressIsVerified && (
+            <EmailRequestChange
+              isLoading={isLoading}
+              error={error}
+              emailRequestChangeAddress={emailRequestChangeAddress}
+              verifyEmailHandler={verifyEmailHandler}
+              onCancelEmailRequestChangeHandler={cancelEmailRequestChangeHandler}
+            />
+          )}
+          {!emailRequestChange && !emailRequestChangeAddressIsVerified && (
+            <EmailRequestNotChange isLoading={isLoading} verifyEmailHandler={verifyEmailHandler} />
+          )}
+        </div>
       )}
-      <h3>Email Verification</h3>
-      {emailRequestChange && !emailRequestChangeAddressIsVerified && (
-        <>
-          <p>
-            You have requested to change your email to{" "}
-            <a href={`mailto:${emailRequestChangeAddress}`}>{emailRequestChangeAddress}</a>. Verify
-            now to finalize the change or cancel the request
-          </p>
-          {error && <p className="error">{error}</p>}
-          <button
-            className={styles.verifyEmailButton}
-            disabled={isLoading.type === "verify" ? true : false}
-            onClick={(event) => {
-              verifyEmailHandler(event, { type: "verify" });
-            }}
-          >
-            {isLoading.type === "verify" ? "Sending verification link" : "Verify"}
-          </button>
-          <button
-            className={styles.cancel}
-            onClick={cancelEmailRequestChangeHandler}
-            disabled={isLoading.type === "cancel" ? true : false}
-          >
-            {isLoading.type === "cancel" ? "Cancelling email change request" : "Cancel"}
-          </button>
-        </>
-      )}
-      {!emailRequestChange && !emailRequestChangeAddressIsVerified && (
-        <>
-          <p>Please verify your email address to have access to all features of flownews</p>
-          <button
-            className={styles.verifyEmailButton}
-            disabled={isLoading.type === "verify" ? true : false}
-            onClick={(event) => {
-              verifyEmailHandler(event, { type: "verify" });
-            }}
-          >
-            {isLoading.type === "verify" ? "Sending verification link" : "Verify"}
-          </button>
-        </>
-      )}
-    </div>
+    </Fragment>
   );
 };
 
