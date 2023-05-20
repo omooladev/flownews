@@ -51,6 +51,7 @@ const EmailVerification = () => {
   const verifyEmailHandler = useCallback(
     async (event, Type) => {
       event.stopPropagation();
+      return setEmailSent(true);
       setError("");
       setIsLoading((prevState) => {
         return { ...prevState, type: "verify" };
