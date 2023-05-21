@@ -8,8 +8,8 @@
   background-color: red;
   overflow: hidden;
 }
-
-.main.profilePage {
+/*note---->extra settings for the main class */
+.main.profile_page {
   width: 100%;
 }
 
