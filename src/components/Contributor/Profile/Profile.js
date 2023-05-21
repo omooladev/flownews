@@ -6,10 +6,12 @@ import ProfileInfo from "./Profile/ProfileInfo/ProfileInfo";
 import { useContext } from "react";
 import { AppContext } from "../../../store/App/app-context";
 const Profile = () => {
-  const {appMode:{theme}}=useContext(AppContext)
-  console.log(theme)
+  const {
+    appMode: { theme },
+  } = useContext(AppContext);
+  console.log(theme.includes("dark"));
   return (
-    <section className={styles.profile}>
+    <section className={`${styles.profile} ${theme.includes("light") ? styles.light : ""}`}>
       <Card className={styles.profile_text_container}>
         <ProfileBox className="Profile__ProfileBox" />
         <ProfileButton />

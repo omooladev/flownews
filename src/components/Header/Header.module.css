@@ -11,7 +11,7 @@
   top: 0%;
   left: 0%;
   width: 100vw;
-  height: 10vh;
+  max-height: 10vh;
   padding: 2rem 5%;
   background-color: var(--header-color);
   justify-content: space-around;

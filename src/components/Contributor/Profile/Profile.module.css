@@ -1,39 +1,29 @@
 .profile {
   position: relative;
   overflow: visible;
-  min-height: 10rem;
-  /* background-color: var(--black-color); */
+  min-height: 100vh;
+  background-color: var(--black-color);
 }
-.profile .profile_text_container {
+/*note---->extra settings for the profile class */
+.profile.light {
+  width: 100%;
+  min-height: 10rem;
+}
+.profile.light .profile_text_container {
   position: absolute;
-  top: 45%;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  margin: 0 auto;
+  max-width: 60rem;
   background-color: var(--body-color);
   border-radius: 15px;
   padding-bottom: 10px;
-  /* background-color: blue; */
 }
 
-@media (min-height: 500px) {
-  .profile .profile_text_container {
-    top: 30%;
-  }
-}
 @media (min-width: 700px) {
-  .profile {
-    position: relative;
-    min-height: 10rem;
-    overflow: visible;
-  }
-  .profile .profile_text_container {
-    top: 60%;
-    left: 50%;
-    width: 90%;
-    margin-left: -45%;
-  }
-}
-@media (min-width: 1000px) {
-  .profile .profile_text_container {
-    width: 60rem;
-    margin-left: -30rem;
+  .profile.light .profile_text_container {
+    top: 45%;
   }
 }

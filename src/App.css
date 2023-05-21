@@ -3,14 +3,15 @@
   padding-top: 10vh;
   width: 90%;
   max-width: 1400px;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   margin: 0 auto;
   background-color: red;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 /*note---->extra settings for the main class */
 .main.profile_page {
   width: 100%;
+  max-width:100%;
 }
 
 .main.profile_updated {
