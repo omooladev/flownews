@@ -2,7 +2,15 @@
   background-color: var(--body-color);
   padding-top: 10vh;
   width: 90%;
+  max-width: 1400px;
+  min-height: 100vh;
   margin: 0 auto;
+  background-color: red;
+  overflow: hidden;
+}
+
+.main.profilePage {
+  width: 100%;
 }
 
 .main.profile_updated {
@@ -18,10 +26,4 @@
 }
 .popup {
   z-index: 999;
-}
-
-@media (min-width: 1600px) {
-  .main {
-    width: 1400px;
-  }
 }

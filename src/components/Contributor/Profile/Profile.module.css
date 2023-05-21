@@ -1,8 +1,8 @@
 .profile {
   position: relative;
-  background-color: var(--black-color);
   overflow: visible;
   min-height: 10rem;
+  /* background-color: var(--black-color); */
 }
 .profile .profile_text_container {
   position: absolute;
@@ -10,6 +10,7 @@
   background-color: var(--body-color);
   border-radius: 15px;
   padding-bottom: 10px;
+  /* background-color: blue; */
 }
 
 @media (min-height: 500px) {
