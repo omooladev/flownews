@@ -14,7 +14,7 @@
   top: 40%;
   left: 50%;
   transform: translateX(-50%);
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   max-width: 60rem;
   background-color: var(--body-color);
@@ -25,5 +25,6 @@
 @media (min-width: 700px) {
   .profile.light .profile_text_container {
     top: 45%;
+    width:90%;
   }
 }

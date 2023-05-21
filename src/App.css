@@ -3,10 +3,9 @@
   padding-top: 10vh;
   width: 90%;
   max-width: 1400px;
-  /* min-height: 100vh; */
+
   margin: 0 auto;
-  background-color: red;
-  /* overflow: hidden; */
+  
 }
 /*note---->extra settings for the main class */
 .main.profile_page {
