@@ -52,11 +52,12 @@ const EmailVerification = () => {
     async (event, Type) => {
       event.stopPropagation();
       return setEmailSent(true);
+      // eslint-disable-next-line
       setError("");
       setIsLoading((prevState) => {
         return { ...prevState, type: "verify" };
       });
-
+      // eslint-disable-next-line
       const response = await sendRequest(`${HOSTURI}/email/sendVerificationLink`, {
         method: "PATCH",
         token,
@@ -76,6 +77,7 @@ const EmailVerification = () => {
           }, 2000);
         }
       }
+      // eslint-disable-next-line
       if (error) {
         setError(error);
         setEmailSent(false);
