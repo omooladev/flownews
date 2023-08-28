@@ -3,7 +3,7 @@
   top: 0%;
   left: 0%;
   height: 100vh;
-  background-color: transparent;
+  background-color: var(--body-color);
   width: 100vw;
   display: flex;
   align-items: center;
@@ -29,4 +29,3 @@
     transform: rotate(1turn);
   }
 }
-

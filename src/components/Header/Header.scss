@@ -5,13 +5,13 @@
   top: 0%;
   left: 0%;
   width: 100vw;
-  max-height: 10vh;
+  height: 10vh;
   padding: 2rem 5%;
   background-color: var(--header-color);
   @extend %DisplayFlex;
   justify-content: space-around;
   border-bottom: 1px solid var(--primary-color);
-  z-index: 997; //TODO ZINDEX
+  z-index: 997; //TODO Z-INDEX
   .logo {
     opacity: 1;
     margin-left: 1.5rem;

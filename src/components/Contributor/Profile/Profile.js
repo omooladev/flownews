@@ -11,7 +11,9 @@ const Profile = () => {
   } = useContext(AppContext);
   console.log(theme.includes("dark"));
   return (
-    <section className={`${styles.profile} ${theme.includes("light") ? styles.light : ""}`}>
+    <section
+      className={`${styles.profile} ${theme.includes("light") ? styles.light : styles.dark}`}
+    >
       <Card className={styles.profile_text_container}>
         <ProfileBox className="Profile__ProfileBox" />
         <ProfileButton />
