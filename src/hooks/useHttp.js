@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import axios from "axios";
 const useHttp = () => {
+  let source = axios.CancelToken.source();
   const sendRequest = useCallback(async (uri, config) => {
     const { method, contributorData, token } = config;
     try {
@@ -15,8 +16,12 @@ const useHttp = () => {
         return { data, status };
       }
       if (method === "POST") {
-        const { data,status } = await axios.post(uri, contributorData);
-        return { data,status };
+        console.log(source)
+        const { data, status } = await axios.post(uri, contributorData, {
+          cancelToken: source.token,
+        });
+        
+        return { data, status };
       }
       if (method === "GET") {
         const { data } = await axios.get(uri, {
@@ -29,6 +34,10 @@ const useHttp = () => {
       }
     } catch (err) {
       let response = err.response || err.message;
+      if (axios.isCancel(err)) {
+        console.log("Request was canceled:", err.message);
+      }
+
       if (err.response) {
         response = response.data.message;
       }
@@ -36,7 +45,7 @@ const useHttp = () => {
     }
   }, []);
 
-  return { sendRequest };
+  return { sendRequest, source };
 };
 
 export default useHttp;

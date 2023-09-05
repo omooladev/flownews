@@ -6,7 +6,7 @@ import useHttp from "../../hooks/useHttp";
 //const HOSTURI = "http://localhost:5000/api/v1";
 const HOSTURI = "https://flownews-api.onrender.com/api/v1";
 const AuthContextProvider = (props) => {
-  const { sendRequest } = useHttp();
+  const { sendRequest, source } = useHttp();
 
   const {
     appMode: { isLoggedIn, token },
@@ -210,6 +210,8 @@ const AuthContextProvider = (props) => {
         onUpdateContributorProfile: updateContributorProfile,
         onToggleEmailPrivacy: toggleEmailPrivacy,
         onSendPasswordResetEmail: sendPasswordResetEmail,
+
+        source,
       }}
     >
       {props.children}

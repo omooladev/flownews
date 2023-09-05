@@ -11,7 +11,7 @@ import ResetPassword from "./ResetPassword";
 const Auth = () => {
   const [viewPassword, setViewPassword] = useState(false);
   const [authReply, setAuthReply] = useState({ type: null, message: "" });
-  const { history, lastLocation } = useContext(AuthContext);
+  const { history, lastLocation, source } = useContext(AuthContext);
   const location = history.location.pathname;
   const loginLocation = location.includes("/login");
   const becomeContributorLocation = location.includes("/become-contributor");
@@ -32,6 +32,7 @@ const Auth = () => {
   const closePopUpHandler = useCallback(
     (event) => {
       event.stopPropagation();
+      // source.cancel("http request cancelled")
       history.replace(lastLocation);
       if (authReply.type) {
         return resetAuthReply();
