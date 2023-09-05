@@ -32,6 +32,7 @@ const Auth = () => {
   const closePopUpHandler = useCallback(
     (event) => {
       event.stopPropagation();
+      //----------> cancel the http request
       cancelRequest();
       history.replace(lastLocation);
       if (authReply.type) {

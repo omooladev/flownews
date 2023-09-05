@@ -12,8 +12,7 @@ const Header = () => {
   const {
     componentsIsActive: { menuIsActive },
   } = useContext(AppContext);
-  const { isLoggedIn, contributorError, contributorDataIsLoading, contributorData } =
-    useContext(AuthContext);
+  const { isLoggedIn, contributorError, pageIsLoading, contributorData } = useContext(AuthContext);
 
   return (
     <>
@@ -25,10 +24,10 @@ const Header = () => {
           {!isLoggedIn && <AccountSubscribe className={styles.account_subscribe} />}
         </header>
       )}
-      {!contributorDataIsLoading && contributorError.ref && (
+      {!pageIsLoading && contributorError.ref && (
         <p className={`error ${styles.error}`}>{contributorError.message}</p>
       )}
-      {contributorDataIsLoading && <SuspenseLoader />}
+      {pageIsLoading && <SuspenseLoader />}
     </>
   );
 };

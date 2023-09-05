@@ -48,7 +48,6 @@ const useHttp = () => {
         return { data };
       }
     } catch (err) {
-      console.log(err.name);
       let response = err.response || err.message;
 
       if (err.response) {

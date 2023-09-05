@@ -5,6 +5,7 @@ import DummyNews from "../../components/DummyNews/dummy_news";
 import { useContext } from "react";
 import { AuthContext } from "../../store/Auth/auth-context";
 const Home = () => {
+  
   useFetchContributorData();
   const location = useLocation();
   useNewLocation(location.pathname);

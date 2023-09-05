@@ -3,11 +3,19 @@ import { AppContext } from "../store/App/app-context";
 import { AuthContext } from "../store/Auth/auth-context";
 
 const useFetchContributorData = () => {
+  //----------> check if the contributor is loggedIn and get their username
+  //            from the appMode saved on the local storage
   const {
     appMode: { isLoggedIn, username },
   } = useContext(AppContext);
+
+  //----------> access the function from the auth context that retrieves
+  //            the contributor data from the database
   const { onGetContributorData } = useContext(AuthContext);
+
   useEffect(() => {
+    //----------> so if the contributor is logged in already,
+    //            we can fetch from the database their details
     if (isLoggedIn) {
       onGetContributorData(username);
     }
@@ -15,3 +23,8 @@ const useFetchContributorData = () => {
 };
 
 export default useFetchContributorData;
+
+//---------->notes about this file
+// This file makes sure that the details of logged-in contributors
+// are fetched and displayed on their Flownews pages even when they
+// refresh the pages.

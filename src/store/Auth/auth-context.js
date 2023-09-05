@@ -35,4 +35,5 @@ export const AuthContext = React.createContext({
   onToggleEmailPrivacy: async () => {},
 
   cancelRequest: () => {},
+  pageIsLoading: false,
 });
