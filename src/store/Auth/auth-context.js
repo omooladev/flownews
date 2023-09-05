@@ -33,4 +33,6 @@ export const AuthContext = React.createContext({
   profileUpdated: false,
   onChangeProfileUpdated: async () => {},
   onToggleEmailPrivacy: async () => {},
+
+  cancelRequest: () => {},
 });

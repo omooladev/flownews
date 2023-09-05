@@ -6,7 +6,7 @@ import Routes from "../routes/Routes";
 const Main = () => {
   const { onToggleComponentsIsActive } = useContext(AppContext);
 
-  const { profileUpdated, lastLocation, contributorData, isLoggedIn } = useContext(AuthContext);
+  const { profileUpdated, lastLocation } = useContext(AuthContext);
 
   const closeComponentsHandler = useCallback(
     (event) => {

@@ -1,8 +1,22 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import axios from "axios";
 const useHttp = () => {
-  let source = axios.CancelToken.source();
+  //----------> created a http controller for controlling and aborting http requests
+  const [httpController, setHttpController] = useState(new AbortController());
+
   const sendRequest = useCallback(async (uri, config) => {
+    //----------> created a new instance of the controller for aborting http requests
+    const newHttpController = new AbortController();
+
+    //----------> set the http controller
+    setHttpController((prevController) => {
+      return newHttpController;
+    });
+
+    //----------> link the signal to the http abort controller
+    const signal = newHttpController.signal;
+
+    //----------> custom https configuration settings
     const { method, contributorData, token } = config;
     try {
       if (method === "PATCH") {
@@ -15,12 +29,13 @@ const useHttp = () => {
 
         return { data, status };
       }
+
+      //----------> POST REQUEST
       if (method === "POST") {
-        console.log(source)
         const { data, status } = await axios.post(uri, contributorData, {
-          cancelToken: source.token,
+          signal, //----------> the signal that links to the abort controller
         });
-        
+
         return { data, status };
       }
       if (method === "GET") {
@@ -33,10 +48,8 @@ const useHttp = () => {
         return { data };
       }
     } catch (err) {
+      console.log(err.name);
       let response = err.response || err.message;
-      if (axios.isCancel(err)) {
-        console.log("Request was canceled:", err.message);
-      }
 
       if (err.response) {
         response = response.data.message;
@@ -45,7 +58,18 @@ const useHttp = () => {
     }
   }, []);
 
-  return { sendRequest, source };
+  const cancelRequest = useCallback(() => {
+    //----------> if the http abort controller exist then abort the request
+    if (httpController) {
+      httpController.abort();
+    }
+
+    //----------> I aborted the request whenever the user
+    //            tries to login or signup but then clicks
+    //            outside of the auth form i.e the AuthPopUP
+  }, [httpController]);
+
+  return { sendRequest, cancelRequest };
 };
 
 export default useHttp;
