@@ -7,6 +7,7 @@ import Logo from "../../UI/Logo";
 import Menu from "./Menu/Menu";
 import Navigation from "./Navigation/Navigation";
 import SuspenseLoader from "../Loaders/SuspenseLoader";
+import NotFound from "../NotFound/NotFound";
 
 const Header = () => {
   const {
@@ -16,7 +17,7 @@ const Header = () => {
 
   return (
     <>
-      {(contributorData.username || !isLoggedIn) && !contributorError.ref && (
+      {(contributorData.username || !isLoggedIn) && !contributorError.hasError && (
         <header className={`${styles.header} ${menuIsActive ? styles.menu_active : ""}`}>
           <Menu />
           <Logo className={styles.logo} />
@@ -24,9 +25,7 @@ const Header = () => {
           {!isLoggedIn && <AccountSubscribe className={styles.account_subscribe} />}
         </header>
       )}
-      {!pageIsLoading && contributorError.ref && (
-        <p className={`error ${styles.error}`}>{contributorError.message}</p>
-      )}
+      {!pageIsLoading && contributorError.hasError && <NotFound />}
       {pageIsLoading && <SuspenseLoader />}
     </>
   );

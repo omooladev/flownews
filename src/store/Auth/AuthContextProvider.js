@@ -3,9 +3,8 @@ import { useHistory } from "react-router-dom";
 import { AuthContext } from "./auth-context";
 import { AppContext } from "../App/app-context";
 import useHttp from "../../hooks/useHttp";
-import NotFound from "../../pages/NotFound/NotFound";
-//const HOSTURI = "http://localhost:5000/api/v1";
-const HOSTURI = "https://flownews-api.onrender.com/api/v1";
+const HOSTURI = "http://localhost:5000/api/v1";
+//const HOSTURI = "https://flownews-api.onrender.com/api/v1";
 const AuthContextProvider = (props) => {
   //----------> get the http request functions from the useHttp hook
   const { sendRequest, cancelRequest } = useHttp();
@@ -21,7 +20,7 @@ const AuthContextProvider = (props) => {
   const [searchedContributorData, setSearchedContributorData] = useState({ username: "" });
   const [pageIsLoading, setPageIsLoading] = useState(false);
 
-  const [contributorError, setContributorError] = useState({ ref: "", message: "" });
+  const [contributorError, setContributorError] = useState({ hasError: false, message: "" });
   const history = useHistory();
 
   //?refactored
@@ -40,20 +39,23 @@ const AuthContextProvider = (props) => {
 
   const getContributorData = useCallback(
     async (username) => {
-      if (contributorData.username) {
+      if (contributorData.username && contributorData.username === username) {
         //* This means that if contributor data exits already, then there is no need to fetch data again
         return;
       }
+      //---------->now check if username is passed in the uri
+
       setPageIsLoading((prevState) => {
         return true;
       });
 
-      const response = await sendRequest(`${HOSTURI}/@${username}`, {
-        method: "GET",
-        token,
-      });
-      //todo----------> i will change this later that there is no need to send the username as part of the request
-      //todo                We only send the token.
+      const response = await sendRequest(
+        `${HOSTURI}/contributors${username ? "/" + username : ""}`,
+        {
+          method: "GET",
+          token,
+        }
+      );
       const data = response.data;
       const error = response.error;
 
@@ -75,18 +77,15 @@ const AuthContextProvider = (props) => {
         }
       }
       if (error) {
-        console.log(error);
-        if (error === "Cannot find your account") {
-          //----------> if your account cannot be found or token has expired we redirect you to the login page
-          //return onChangeAppMode({ token: null, isLoggedIn: false, username: null });
-        }
         if (error === "Cannot find contributor") {
           //----------> if the contributor you're searching for does not exist,
           //            we display the 404 page
+          setContributorError((prevError) => {
+            return { ...prevError, hasError: true, message: error };
+          });
+        } else {
+          onChangeAppMode({ token: null, isLoggedIn: false });
         }
-        setContributorError((prevError) => {
-          return { ...prevError, ref: "home", message: error };
-        });
       }
 
       return setPageIsLoading((prevState) => {
@@ -95,6 +94,12 @@ const AuthContextProvider = (props) => {
     },
     [sendRequest, token, contributorData.username, onChangeAppMode]
   );
+
+  const resetContributorError = useCallback(() => {
+    setContributorError((prevError) => {
+      return { ...prevError, hasError: false, message: "" };
+    });
+  }, []);
 
   const signOutHandler = useCallback(() => {
     onChangeAppMode({ isLoggedIn: false, token: null, username: null, tokenExpirationTime: null });
@@ -201,6 +206,7 @@ const AuthContextProvider = (props) => {
         pageIsLoading,
         isLoggedIn,
         contributorError,
+        onResetContributorError: resetContributorError,
         onGetContributorData: getContributorData,
 
         onLoginOrBecomeContributor: loginOrBecomeContributor,

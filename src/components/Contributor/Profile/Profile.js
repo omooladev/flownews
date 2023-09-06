@@ -9,7 +9,7 @@ const Profile = () => {
   const {
     appMode: { theme },
   } = useContext(AppContext);
-  console.log(theme.includes("dark"));
+
   return (
     <section
       className={`${styles.profile} ${theme.includes("light") ? styles.light : styles.dark}`}

@@ -55,7 +55,6 @@ const Login = (props) => {
       if (data) {
         onSaveContributorData(data);
         changeAppMode({
-          username: data.username,
           token: data.token,
           isLoggedIn: true,
           tokenExpirationTime: data.tokenExpirationTime,

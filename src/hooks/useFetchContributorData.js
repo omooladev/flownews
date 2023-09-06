@@ -2,11 +2,10 @@ import { useContext, useEffect } from "react";
 import { AppContext } from "../store/App/app-context";
 import { AuthContext } from "../store/Auth/auth-context";
 
-const useFetchContributorData = () => {
-  //----------> check if the contributor is loggedIn and get their username
-  //            from the appMode saved on the local storage
+const useFetchContributorData = (username) => {
+  //----------> check if the contributor is loggedIn
   const {
-    appMode: { isLoggedIn, username },
+    appMode: { isLoggedIn },
   } = useContext(AppContext);
 
   //----------> access the function from the auth context that retrieves

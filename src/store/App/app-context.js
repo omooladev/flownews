@@ -5,7 +5,7 @@ export const AppContext = React.createContext({
   onPopUp: () => {},
   lastLocation: "",
   onSetLastLocation: () => {},
-  appMode: { display: "light", isLoggedIn: false, username: "" },
+  appMode: { display: "light", isLoggedIn: false },
   onChangeAppMode: () => {},
   componentsIsActive: {
     menuIsActive: false,

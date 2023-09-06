@@ -5,10 +5,15 @@ import useFetchContributorData from "../../../hooks/useFetchContributorData";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import { useTitle } from "../../../hooks/useTitle";
 import useNewLocation from "../../../hooks/useNewLocation";
+import { useLocation } from "react-router-dom";
 const Profile = () => {
+  const location = useLocation();
+  //----------> get the username in the uri
+  const username = location.pathname.split("@")[1];
+
   // useCloseProfileUpdated()
   //note-------->fetches contributor data
-  useFetchContributorData();
+  useFetchContributorData(username);
 
   //note-------->saves route location
   useNewLocation("profile");

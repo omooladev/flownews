@@ -8,7 +8,8 @@ export const AuthContext = React.createContext({
   isLoading: false,
   headerIsLoading: false,
   isLoggedIn: false,
-  contributorError: { ref: "", message: "" },
+  contributorError: { hasError: "", message: "" },
+  onResetContributorError: () => {},
 
   //? auth functions
   onLoginOrBecomeContributor: async () => {},
