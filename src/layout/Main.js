@@ -6,7 +6,7 @@ import Routes from "../routes/Routes";
 const Main = () => {
   const { onToggleComponentsIsActive } = useContext(AppContext);
 
-  const { profileUpdated, lastLocation} = useContext(AuthContext);
+  const { profileUpdated, lastLocation } = useContext(AuthContext);
 
   const closeComponentsHandler = useCallback(
     (event) => {
@@ -22,14 +22,18 @@ const Main = () => {
   //note----->and if this page is the profile page then we add a class name of profile_page.
   //note----->This is because we want to add configure some extra settings
   return (
-    <main
-      className={`main ${profileUpdated ? "profile_updated" : ""} ${
-        lastLocation === "profile" ? "profile_page" : ""
-      }`}
-      onClick={closeComponentsHandler}
-    >
-      <Routes />
-    </main>
+    <>
+      
+        <main
+          className={`main ${profileUpdated ? "profile_updated" : ""} ${
+            lastLocation === "profile" ? "profile_page" : ""
+          }`}
+          onClick={closeComponentsHandler}
+        >
+          <Routes />
+        </main>
+     
+    </>
   );
 };
 

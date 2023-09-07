@@ -3,8 +3,8 @@ import { useHistory } from "react-router-dom";
 import { AuthContext } from "./auth-context";
 import { AppContext } from "../App/app-context";
 import useHttp from "../../hooks/useHttp";
-//const HOSTURI = "http://localhost:5000/api/v1";
-const HOSTURI = "https://flownews-api.onrender.com/api/v1";
+const HOSTURI = "http://localhost:5000/api/v1";
+//const HOSTURI = "https://flownews-api.onrender.com/api/v1";
 const AuthContextProvider = (props) => {
   //----------> get the http request functions from the useHttp hook
   const { sendRequest, cancelRequest } = useHttp();
@@ -18,9 +18,13 @@ const AuthContextProvider = (props) => {
 
   const [makeBodyFixed, setMakeBodyFixed] = useState(false);
   const [searchedContributorData, setSearchedContributorData] = useState({ username: "" });
-  const [pageIsLoading, setPageIsLoading] = useState(false);
+  const [pageIsLoading, setPageIsLoading] = useState(null);
 
-  const [contributorError, setContributorError] = useState({ hasError: false, message: "" });
+  const [contributorError, setContributorError] = useState({
+    hasError: false,
+    message: "",
+    ref: null,
+  });
   const history = useHistory();
 
   //?refactored
@@ -39,11 +43,13 @@ const AuthContextProvider = (props) => {
 
   const getContributorData = useCallback(
     async (username) => {
-      if (contributorData.username && contributorData.username === username) {
+      console.log("ola");
+      if (contributorData.username && (!username || contributorData.username === username)) {
+        console.log("no searching");
         //* This means that if contributor data exits already, then there is no need to fetch data again
         return;
       }
-      //---------->now check if username is passed in the uri
+      console.log("searching");
 
       setPageIsLoading((prevState) => {
         return true;
@@ -83,8 +89,12 @@ const AuthContextProvider = (props) => {
           setContributorError((prevError) => {
             return { ...prevError, hasError: true, message: error };
           });
-        } else {
+        } else if (error === "Authentication Failed" || error === "Cannot find your account") {
           onChangeAppMode({ token: null, isLoggedIn: false });
+        } else {
+          setContributorError((prevError) => {
+            return { ...prevError, hasError: true, message: error, ref: "network_error" };
+          });
         }
       }
 

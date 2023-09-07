@@ -6,15 +6,13 @@ import AccountSubscribe from "./Navigation/NavigationSections/AccountSubscribe";
 import Logo from "../../UI/Logo";
 import Menu from "./Menu/Menu";
 import Navigation from "./Navigation/Navigation";
-import SuspenseLoader from "../Loaders/SuspenseLoader";
-import NotFound from "../NotFound/NotFound";
+
 
 const Header = () => {
   const {
     componentsIsActive: { menuIsActive },
   } = useContext(AppContext);
-  const { isLoggedIn, contributorError, pageIsLoading, contributorData } = useContext(AuthContext);
-
+  const { isLoggedIn, contributorError,  contributorData } = useContext(AuthContext);
   return (
     <>
       {(contributorData.username || !isLoggedIn) && !contributorError.hasError && (
@@ -25,8 +23,8 @@ const Header = () => {
           {!isLoggedIn && <AccountSubscribe className={styles.account_subscribe} />}
         </header>
       )}
-      {!pageIsLoading && contributorError.hasError && <NotFound />}
-      {pageIsLoading && <SuspenseLoader />}
+
+     
     </>
   );
 };

@@ -5,12 +5,11 @@ import DummyNews from "../../components/DummyNews/dummy_news";
 import { useContext } from "react";
 import { AuthContext } from "../../store/Auth/auth-context";
 const Home = () => {
-  
   useFetchContributorData();
   const location = useLocation();
   useNewLocation(location.pathname);
   const { contributorData } = useContext(AuthContext);
-  return <>{contributorData.username && <DummyNews />}</>;
+  return <>{contributorData.username  && <DummyNews />}</>;
 };
 
 export default Home;
