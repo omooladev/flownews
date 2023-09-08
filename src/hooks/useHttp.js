@@ -34,6 +34,9 @@ const useHttp = () => {
       if (method === "POST") {
         const { data, status } = await axios.post(uri, contributorData, {
           signal, //----------> the signal that links to the abort controller
+          headers: {
+            authorization: token && `Bearer ${token}`,
+          },
         });
 
         return { data, status };

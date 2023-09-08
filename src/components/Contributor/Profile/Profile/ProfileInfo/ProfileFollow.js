@@ -6,11 +6,11 @@ const ProfileFollow = (props) => {
     <section className={styles.follow}>
       <div className={styles.followers}>
         <BiUser className={styles.icon} />
-        <h4>{followers}</h4>
+        <h4>{followers.length}</h4>
         <label>followers</label>
       </div>
       <div className={styles.following}>
-        <h4>{following}</h4>
+        <h4>{following.length}</h4>
         <label>following</label>
       </div>
     </section>

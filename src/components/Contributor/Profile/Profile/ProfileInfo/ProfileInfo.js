@@ -1,16 +1,17 @@
+import styles from "./ProfileInfo.module.css";
 import { useContext } from "react";
-// import { dummyContributor } from "../../../../../data";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
+import { BiBadgeCheck } from "react-icons/bi";
 import ProfileLocation from "./ProfileLocation";
 import ProfileDate from "./ProfileDate";
-import styles from "./ProfileInfo.module.css";
 import ProfileEmail from "./ProfileEmail";
-import { BiBadgeCheck } from "react-icons/bi";
 import ProfileEducationWork from "./ProfileEducationWork";
 import ProfileMoreInfo from "./ProfileMoreInfo";
 import ProfileFollow from "./ProfileFollow";
 const ProfileInfo = () => {
+  //----------> access the following properties from the authentication context
   const { contributorData, searchedContributorData } = useContext(AuthContext);
+  //----------> check if the searched contributor exist
   let searchedContributorExist = searchedContributorData.username;
 
   return (
@@ -54,7 +55,7 @@ const ProfileInfo = () => {
           }
         />
       </div>
-      <hr />
+
       <ProfileEducationWork
         education={
           searchedContributorData ? searchedContributorData.education : contributorData.education

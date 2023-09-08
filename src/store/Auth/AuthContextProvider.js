@@ -43,6 +43,7 @@ const AuthContextProvider = (props) => {
     [sendRequest]
   );
 
+  //----------> Fetch the contributor data
   const getContributorData = useCallback(
     async (username) => {
       if (
@@ -54,7 +55,6 @@ const AuthContextProvider = (props) => {
         //* This means that if contributor data exits already, then there is no need to fetch data again
         return;
       }
-      console.log("searching");
 
       setPageIsLoading((prevState) => {
         return true;
@@ -69,7 +69,7 @@ const AuthContextProvider = (props) => {
       );
       const data = response.data;
       const error = response.error;
-      console.log(data);
+
       if (data) {
         const isSearch = data.isSearch;
 
@@ -115,6 +115,35 @@ const AuthContextProvider = (props) => {
     });
   }, []);
 
+  //----------> a function that lets you follow or un follow a contributor
+  const toggleFollowContributor = useCallback(
+    async ({ action }) => {
+      const response = await sendRequest(
+        `${HOSTURI}/contributor/follow?action=${action}&username=${searchedContributorData.username}`,
+        {
+          method: "POST",
+          token,
+        }
+      );
+      const data = response.data;
+      const error = response.error;
+      if (data) {
+        //----------> update the contributor data state
+        setContributorData((prevData) => {
+          return { ...prevData, ...data.contributor };
+        });
+        //----------> update the searched contributor data state
+        setSearchedContributorData((prevData) => {
+          return { ...prevData, ...data.searchedContributor };
+        });
+      }
+      if (error) {
+        console.log(error);
+        return;
+      }
+    },
+    [searchedContributorData, sendRequest, token]
+  );
   const resetContributorError = useCallback(() => {
     setContributorError((prevError) => {
       return { ...prevError, hasError: false, message: "" };
@@ -229,7 +258,7 @@ const AuthContextProvider = (props) => {
         contributorError,
         onResetContributorError: resetContributorError,
         onGetContributorData: getContributorData,
-
+        onToggleFollowContributor: toggleFollowContributor,
         onLoginOrBecomeContributor: loginOrBecomeContributor,
         onSignOut: signOutHandler,
 
