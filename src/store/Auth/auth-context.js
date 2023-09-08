@@ -5,6 +5,7 @@ export const AuthContext = React.createContext({
   token: "",
   history: "",
   searchedContributorData: {},
+  onResetSearchedContributor: () => {},
   isLoading: false,
   headerIsLoading: false,
   isLoggedIn: false,

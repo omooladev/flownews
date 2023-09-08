@@ -118,7 +118,7 @@ const UserForm = () => {
       }
       if (data) {
         onSaveContributorData(data);
-        changeAppMode({ username: data.username, token: data.token });
+        changeAppMode({ token: data.token });
         onChangeProfileUpdated(true);
       }
       if (error) {
@@ -148,7 +148,7 @@ const UserForm = () => {
         </Card>
       )}
       <div className={styles.form_controls}>
-        <ProfilePicture/>
+        <ProfilePicture />
         <FullName fullname={fullname} onGetValue={getValue} />
         <Email email={email} emailIsPrivate={emailIsPrivate} onGetValue={getValue} />
         <Username username={username} onGetValue={getValue} />

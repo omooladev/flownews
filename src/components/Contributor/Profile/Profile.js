@@ -5,6 +5,7 @@ import ProfileButton from "./Profile/ProfileButton";
 import ProfileInfo from "./Profile/ProfileInfo/ProfileInfo";
 import { useContext } from "react";
 import { AppContext } from "../../../store/App/app-context";
+
 const Profile = () => {
   const {
     appMode: { theme },

@@ -10,41 +10,62 @@ import ProfileEducationWork from "./ProfileEducationWork";
 import ProfileMoreInfo from "./ProfileMoreInfo";
 import ProfileFollow from "./ProfileFollow";
 const ProfileInfo = () => {
-  const {
-    contributorData: {
-      location,
-      bio,
-      username,
-      createdAt,
-      email,
-      userVerified,
-      emailIsVerified,
-      education,
-      work,
-      followers,
-      following,
-    },
-  } = useContext(AuthContext);
-  // const { bio, location } = dummyContributor;
+  const { contributorData, searchedContributorData } = useContext(AuthContext);
+  let searchedContributorExist = searchedContributorData.username;
 
   return (
     <section className={styles["contributor_info"]}>
       <div className={styles.username}>
-        <h2>{username}</h2>
-        {userVerified && <BiBadgeCheck className={styles.badge} />}
+        <h2>
+          {searchedContributorExist ? searchedContributorData.username : contributorData.username}
+        </h2>
+        {searchedContributorExist
+          ? searchedContributorData.userVerified
+          : contributorData.userVerified && <BiBadgeCheck className={styles.badge} />}
       </div>
-      <ProfileFollow followers={followers} following={following} />
+      <ProfileFollow
+        followers={
+          searchedContributorExist ? searchedContributorData.followers : contributorData.followers
+        }
+        following={
+          searchedContributorExist ? searchedContributorData.following : contributorData.following
+        }
+      />
       <p className={styles.bio}>
-        {bio || "Tell people what they should know about you, please update your bio"}
+        {searchedContributorExist ? searchedContributorData.bio : contributorData.bio}
       </p>
       <div className={styles.contributor_location_email_joinedDate}>
-        <ProfileLocation location={location} />
-        <ProfileDate createdAt={createdAt} />
-        <ProfileEmail email={email} emailIsVerified={emailIsVerified} />
+        <ProfileLocation
+          location={
+            searchedContributorExist ? searchedContributorData.location : contributorData.location
+          }
+        />
+        <ProfileDate
+          createdAt={
+            searchedContributorExist ? searchedContributorData.createdAt : contributorData.createdAt
+          }
+        />
+        <ProfileEmail
+          email={searchedContributorExist ? searchedContributorData.email : contributorData.email}
+          emailIsVerified={
+            searchedContributorExist
+              ? searchedContributorData.emailIsVerified
+              : contributorData.emailIsVerified
+          }
+        />
       </div>
       <hr />
-      <ProfileEducationWork education={education} work={work} />
-      <ProfileMoreInfo username={username} />
+      <ProfileEducationWork
+        education={
+          searchedContributorData ? searchedContributorData.education : contributorData.education
+        }
+        work={searchedContributorData ? searchedContributorData.work : contributorData.work}
+      />
+      <ProfileMoreInfo
+        username={
+          searchedContributorData ? searchedContributorData.username : contributorData.username
+        }
+      />
     </section>
   );
 };

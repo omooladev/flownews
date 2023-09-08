@@ -17,7 +17,7 @@ const AuthContextProvider = (props) => {
   } = useContext(AppContext);
 
   const [makeBodyFixed, setMakeBodyFixed] = useState(false);
-  const [searchedContributorData, setSearchedContributorData] = useState({ username: "" });
+
   const [pageIsLoading, setPageIsLoading] = useState(null);
 
   const [contributorError, setContributorError] = useState({
@@ -28,7 +28,9 @@ const AuthContextProvider = (props) => {
   const history = useHistory();
 
   //?refactored
+
   const [contributorData, setContributorData] = useState({ username: "" });
+  const [searchedContributorData, setSearchedContributorData] = useState({ username: "" });
   const [profileUpdated, setProfileUpdated] = useState(false);
   const loginOrBecomeContributor = useCallback(
     async ({ location, contributorAuthData }) => {
@@ -43,9 +45,12 @@ const AuthContextProvider = (props) => {
 
   const getContributorData = useCallback(
     async (username) => {
-      console.log("ola");
-      if (contributorData.username && (!username || contributorData.username === username)) {
-        console.log("no searching");
+      if (
+        contributorData.username &&
+        (!username ||
+          contributorData.username === username ||
+          searchedContributorData.username === username)
+      ) {
         //* This means that if contributor data exits already, then there is no need to fetch data again
         return;
       }
@@ -64,21 +69,20 @@ const AuthContextProvider = (props) => {
       );
       const data = response.data;
       const error = response.error;
-
+      console.log(data);
       if (data) {
         const isSearch = data.isSearch;
-        if (!isSearch) {
-          //----------> To put it simply, if we are not searching for a specific contributor,
-          //            then the data that we get is guaranteed to be from that contributor
-          setContributorData((prevData) => {
-            return { ...prevData, ...data };
-          });
-        }
+
+        setContributorData((prevData) => {
+          return { ...prevData, ...data.contributor };
+        });
+
         if (isSearch) {
           //----------> if we are searching for a contributor, then the data gotten is for the
           //            searched contributor
+
           setSearchedContributorData((prevData) => {
-            return { ...prevData, ...data };
+            return { ...prevData, ...data.searchedContributor };
           });
         }
       }
@@ -102,8 +106,14 @@ const AuthContextProvider = (props) => {
         return false;
       });
     },
-    [sendRequest, token, contributorData.username, onChangeAppMode]
+    [sendRequest, token, contributorData.username, searchedContributorData, onChangeAppMode]
   );
+  //----------> reset the searched contributor to not contain any data
+  const resetSearchedContributor = useCallback(() => {
+    return setSearchedContributorData((prevData) => {
+      return { username: "" };
+    });
+  }, []);
 
   const resetContributorError = useCallback(() => {
     setContributorError((prevError) => {
@@ -181,7 +191,7 @@ const AuthContextProvider = (props) => {
   }, []);
   const updateContributorProfile = useCallback(
     async (updateProperties) => {
-      const response = await sendRequest(`${HOSTURI}/update-profile`, {
+      const response = await sendRequest(`${HOSTURI}/contributor/update-profile`, {
         method: "PATCH",
         contributorData: { updateProperties },
         token,
@@ -213,6 +223,7 @@ const AuthContextProvider = (props) => {
         token,
         history,
         searchedContributorData,
+        onResetSearchedContributor: resetSearchedContributor,
         pageIsLoading,
         isLoggedIn,
         contributorError,
