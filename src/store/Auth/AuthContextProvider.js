@@ -87,6 +87,7 @@ const AuthContextProvider = (props) => {
         }
       }
       if (error) {
+        
         if (error === "Cannot find contributor") {
           //----------> if the contributor you're searching for does not exist,
           //            we display the 404 page
@@ -136,6 +137,10 @@ const AuthContextProvider = (props) => {
         setSearchedContributorData((prevData) => {
           return { ...prevData, ...data.searchedContributor };
         });
+        // //----------> if we have successfully unfollowed the contributor then can can reset the
+        // if (action === "unfollow") {
+        //   return "success";
+        // }
       }
       if (error) {
         console.log(error);

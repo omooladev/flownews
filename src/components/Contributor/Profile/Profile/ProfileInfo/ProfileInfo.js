@@ -11,6 +11,7 @@ import ProfileFollow from "./ProfileFollow";
 const ProfileInfo = () => {
   //----------> access the following properties from the authentication context
   const { contributorData, searchedContributorData } = useContext(AuthContext);
+
   //----------> check if the searched contributor exist
   let searchedContributorExist = searchedContributorData.username;
 
@@ -58,13 +59,13 @@ const ProfileInfo = () => {
 
       <ProfileEducationWork
         education={
-          searchedContributorData ? searchedContributorData.education : contributorData.education
+          searchedContributorExist ? searchedContributorData.education : contributorData.education
         }
-        work={searchedContributorData ? searchedContributorData.work : contributorData.work}
+        work={searchedContributorExist ? searchedContributorData.work : contributorData.work}
       />
       <ProfileMoreInfo
         username={
-          searchedContributorData ? searchedContributorData.username : contributorData.username
+          searchedContributorExist ? searchedContributorData.username : contributorData.username
         }
       />
     </section>
