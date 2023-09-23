@@ -1,13 +1,14 @@
 import styles from "./ProfileInfo.module.css";
 import { useContext } from "react";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
-import { BiBadgeCheck } from "react-icons/bi";
+
 import ProfileLocation from "./ProfileLocation";
 import ProfileDate from "./ProfileDate";
 import ProfileEmail from "./ProfileEmail";
 import ProfileEducationWork from "./ProfileEducationWork";
 import ProfileMoreInfo from "./ProfileMoreInfo";
 import ProfileFollow from "./ProfileFollow";
+import ProfileName from "./ProfileName";
 const ProfileInfo = () => {
   //----------> access the following properties from the authentication context
   const { contributorData, searchedContributorData } = useContext(AuthContext);
@@ -17,14 +18,8 @@ const ProfileInfo = () => {
 
   return (
     <section className={styles["contributor_info"]}>
-      <div className={styles.username}>
-        <h2>
-          {searchedContributorExist ? searchedContributorData.username : contributorData.username}
-        </h2>
-        {searchedContributorExist
-          ? searchedContributorData.userVerified
-          : contributorData.userVerified && <BiBadgeCheck className={styles.badge} />}
-      </div>
+      <ProfileName data={searchedContributorExist ? searchedContributorData : contributorData} />
+
       <ProfileFollow
         followers={
           searchedContributorExist ? searchedContributorData.followers : contributorData.followers
