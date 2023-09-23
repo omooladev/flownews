@@ -42,7 +42,8 @@ const ProfileInfo = () => {
             searchedContributorExist ? searchedContributorData.createdAt : contributorData.createdAt
           }
         />
-        {
+        {((searchedContributorExist && !searchedContributorData.emailIsPrivate) ||
+          !searchedContributorExist) && (
           <ProfileEmail
             email={searchedContributorExist ? searchedContributorData.email : contributorData.email}
             emailIsVerified={
@@ -51,7 +52,7 @@ const ProfileInfo = () => {
                 : contributorData.emailIsVerified
             }
           />
-        }
+        )}
       </div>
 
       <ProfileEducationWork
