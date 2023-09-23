@@ -3,6 +3,7 @@ import styles from "./ProfileName.module.css";
 const ProfileName = (props) => {
   //----------> get either the contributor data or searched contributor data
   const { data } = props;
+  console.log(data);
   return (
     <div className={styles["profile-name_container"]}>
       <div className={styles.name}>
@@ -11,9 +12,9 @@ const ProfileName = (props) => {
           {data.contributorIsVerified && <BiBadgeCheck className={styles.verified_badge} />}
         </div>
       </div>
-      <div>
+      <div className={styles.username}>
         <h3>@{data.username}</h3>
-        <span>Follows you</span>
+        {data.isFollowingContributor && <p className={styles.follows_you}>Follows you</p>}
       </div>
     </div>
   );

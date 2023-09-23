@@ -1,13 +1,15 @@
+.hr {
+  margin: 2rem 0px;
+  border: 0.5px solid var(--secondary-color);
+}
 .education_work {
   display: flex;
   flex-direction: column;
-  padding: 1rem 5%;
+  padding: 0rem 5%;
+  gap: 0.5rem;
+  padding-bottom: 1rem;
 }
-.education_work .education,
-.education_work .work {
-  margin: 0.5rem 0;
-  padding-right: 1rem;
-}
+
 .education_work .education label,
 .education_work .work label {
   font-size: 15px;
@@ -16,8 +18,8 @@
 }
 .education_work .education p,
 .education_work .work p {
-  line-height: 24px;
   font-size: 16px;
+  line-height: 24px;
   padding: 0.5rem 0;
   color: var(--tertiary-color);
 }

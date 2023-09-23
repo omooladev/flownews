@@ -2,15 +2,15 @@
   display: flex;
   flex-direction: column;
   padding: 0.5rem 5%;
-  align-items: center;
-  justify-content: left;
+  align-items: left;
 }
 .profile-name_container .name {
   margin: 0.5rem 0;
+  font-size: 20px;
+  line-height: 30px;
 }
 .profile-name_container .name h2 {
   display: inline;
-  font-size: 25px;
   padding-right: 5px;
 }
 .profile-name_container .name .icon {
@@ -22,12 +22,29 @@
   top: 50%;
   left: 50%;
   color: var(--primary-color);
-  font-size: 20px;
   transform: translateY(-50%);
 }
-
+.profile-name_container .username {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 18px;
+  line-height: 27px;
+  color: var(--secondary-color);
+}
+.profile-name_container .username h3 {
+  font-weight: normal;
+}
+.profile-name_container .username .follows_you {
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--profile-info-background-color);
+  background-color: var(--secondary-color);
+  padding: 0.3rem 0.5rem;
+}
 @media (min-width: 700px) {
   .profile-name_container {
-    justify-content: center;
+    align-items: center;
   }
 }

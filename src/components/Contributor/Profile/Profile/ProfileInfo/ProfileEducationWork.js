@@ -6,7 +6,7 @@ const ProfileEducationWork = (props) => {
     <>
       {(education || work) && (
         <>
-          <hr />
+          <hr className={styles.hr} />
           <div className={styles.education_work}>
             {education && (
               <div className={styles.education}>

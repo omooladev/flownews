@@ -21,6 +21,7 @@
   max-width: 60rem;
   margin: 0 auto;
   transform: translateX(-50%);
+  box-shadow: none;
 }
 .profile.light {
   width: 100%;

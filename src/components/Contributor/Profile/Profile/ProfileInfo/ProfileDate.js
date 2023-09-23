@@ -24,7 +24,10 @@ const ProfileDate = (props) => {
 
   return (
     <div className={styles.date}>
-      <FaBirthdayCake className={styles.icon} />
+      <div className={`global-icon-container`}>
+        <FaBirthdayCake className={`global-icon`} />
+      </div>
+
       <p className={styles.dates}>{`Joined on ${month} ${date}, ${year}`}</p>
     </div>
   );

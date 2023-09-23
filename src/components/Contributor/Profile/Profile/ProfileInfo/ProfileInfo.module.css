@@ -1,24 +1,27 @@
 .contributor_info {
+  background-color: var(--profile-info-background-color);
   color: var(--tertiary-color);
 }
 
 .contributor_info .bio {
-  font-weight: normal;
-  padding: 0.5rem 5%;
-  text-align: left;
   font-size: 18px;
   line-height: 27px;
+  font-weight: normal;
+  padding: 0 5%;
+  margin: 0.5rem 0;
+  text-align: left;
 }
 .contributor_info .contributor_location_email_joinedDate {
   display: flex;
   align-items: flex-start;
   justify-content: left;
   flex-wrap: wrap;
+  font-size: 18px;
+  line-height: 27px;
   padding: 0 5%;
-  padding-bottom: 1.5rem;
   color: var(--secondary-color);
-  font-size: 14px;
-  line-height: 21px;
+  margin: 0.5rem 0;
+  gap: 1rem;
 }
 
 @media (min-width: 700px) {

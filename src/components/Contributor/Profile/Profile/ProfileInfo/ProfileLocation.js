@@ -8,7 +8,10 @@ const ProfileLocation = (props) => {
     <>
       {location && (
         <div className={styles.location}>
-          <BiLocationPlus />
+          <div className={`global-icon-container`}>
+            <BiLocationPlus className={`global-icon`} />
+          </div>
+
           <p>{location}</p>
         </div>
       )}

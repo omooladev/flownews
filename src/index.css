@@ -44,6 +44,11 @@
   /* Public Profile colors */
   --form-border-color: rgba(48, 155, 101, 0.2);
   --form-background-color: rgba(48, 155, 101, 0.1);
+
+  /* refactored styles */
+
+  /* Styles that are more specific to a particular page */
+  --profile-info-background-color: var(--header-color);
 }
 body {
   font-family: var(--secondary-font);
@@ -74,6 +79,9 @@ body.dark {
   /* Public Profile colors */
   --form-border-color: rgba(255, 165, 0, 0.2);
   --form-background-color: transparent;
+
+  /* Styles that are more specific to a particular page */
+  --profile-info-background-color: var(--header-color);
 }
 
 body.fixed-body {
@@ -97,4 +105,15 @@ button {
 
 button {
   cursor: pointer;
+}
+
+.global-icon-container {
+  display: inline;
+  position: relative;
+}
+.global-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%);
 }
