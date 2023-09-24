@@ -1,4 +1,3 @@
-import { BiUser } from "react-icons/bi";
 import styles from "./ProfileFollow.module.css";
 const ProfileFollow = (props) => {
   const { followers, following } = props;
