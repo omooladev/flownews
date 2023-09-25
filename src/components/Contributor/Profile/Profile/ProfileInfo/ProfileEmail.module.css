@@ -1,9 +1,19 @@
-
+.email {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
 .email span {
-  margin-left: 1.5rem;
-  margin-right: 5px;
+  white-space: nowrap;
+  padding-left: 1.5rem;
+  padding-right: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .email .not_verified {
   color: rgb(208, 111, 111);
+  min-height: 18px;
+  min-width: 18px;
 }

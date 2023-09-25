@@ -4,18 +4,13 @@ const ProfileEmail = (props) => {
   let { email, emailIsVerified } = props;
 
   return (
-    <div className={styles.email}>
-      <div className={`global-icon-container`}>
-        <BiEnvelope className={`global-icon`} />
-      </div>
-
+    <span className={styles.email}>
+      <BiEnvelope className="absolute-icon" />
       <span>{email}</span>
       {!emailIsVerified && (
-        <div className={`global-icon-container`}>
-          <BiXCircle className={`global-icon ${styles.not_verified}`} title="email not verified" />
-        </div>
+        <BiXCircle className={` ${styles.not_verified}`} title="email not verified" />
       )}
-    </div>
+    </span>
   );
 };
 
