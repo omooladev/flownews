@@ -31,18 +31,20 @@
 }
 .profile_section .nav-user-list {
   margin: 0.5rem 0;
-  padding: 0 1rem;
+
   overflow: hidden;
 }
 .profile_section .nav-user-list .signed_in_as {
+  padding: 0 1rem;
 }
 .profile_section .nav-user-list .username {
   font-weight: bold;
   font-size: 1rem;
+  padding: 0 1rem;
 }
 .profile_section .nav-user-list li {
   cursor: pointer;
-  padding: 0.5rem 0;
+  padding: 0.5rem 1rem;
   color: var(--black-color);
 }
 .profile_section .nav-user-list li:hover {
@@ -60,6 +62,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   font-size: 1.1rem;
+  padding: 0 1rem;
 }
 
 @media (min-width: 500px) {
