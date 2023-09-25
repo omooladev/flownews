@@ -107,13 +107,9 @@ button {
   cursor: pointer;
 }
 
-.global-icon-container {
-  display: inline;
-  position: relative;
-}
-.global-icon {
+.absolute-icon {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 0;
   transform: translateY(-50%);
 }

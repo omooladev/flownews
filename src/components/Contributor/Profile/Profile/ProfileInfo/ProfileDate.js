@@ -23,13 +23,10 @@ const ProfileDate = (props) => {
   const year = createdAt.getFullYear();
 
   return (
-    <div className={styles.date}>
-      <div className={`global-icon-container`}>
-        <FaBirthdayCake className={`global-icon`} />
-      </div>
-
-      <p className={styles.dates}>{`Joined on ${month} ${date}, ${year}`}</p>
-    </div>
+    <span className={styles.date}>
+      <FaBirthdayCake className="absolute-icon" />
+      <span className={styles.dates}>{`Joined on ${month} ${date}, ${year}`}</span>
+    </span>
   );
 };
 
