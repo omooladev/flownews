@@ -27,11 +27,11 @@
 .profile-name_container .username {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0.5rem;
   font-size: 18px;
   line-height: 27px;
   color: var(--secondary-color);
+  flex-wrap: wrap;
 }
 .profile-name_container .username h3 {
   font-weight: normal;
@@ -44,7 +44,7 @@
   padding: 0.3rem 0.5rem;
 }
 @media (min-width: 700px) {
-  .profile-name_container {
+  .profile-name_container ,.profile-name_container .username{
     align-items: center;
   }
 }

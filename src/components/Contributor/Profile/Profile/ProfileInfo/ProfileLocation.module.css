@@ -1,6 +1,20 @@
 .location {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: left;
-  gap: 1.5rem;
+  overflow: hidden;
+}
+
+.location span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-left: 1.5rem;
+}
+.location .icon {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
 }

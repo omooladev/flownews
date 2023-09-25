@@ -4,3 +4,8 @@
   justify-content: left;
   gap: 1.5rem;
 }
+
+.date p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
