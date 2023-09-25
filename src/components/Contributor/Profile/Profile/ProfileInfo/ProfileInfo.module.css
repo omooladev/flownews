@@ -7,8 +7,7 @@
   font-size: 18px;
   line-height: 27px;
   font-weight: normal;
-  padding: 0 5%;
-  margin: 0.5rem 0;
+  margin: 0.5rem 5%;
   text-align: left;
 }
 .contributor_info .contributor_location_email_joinedDate {
@@ -18,9 +17,9 @@
   flex-wrap: wrap;
   font-size: 18px;
   line-height: 27px;
-  padding: 0 5%;
+
   color: var(--secondary-color);
-  margin: 0.5rem 0;
+  margin: 0.5rem 5%;
   gap: 1rem;
 }
 

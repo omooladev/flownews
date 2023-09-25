@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: right;
-  padding: 1rem 5%;
+  margin: 1rem 5%;
   background-color: var(--profile-info-background-color);
 }
 .profile_button_container .profile_button {

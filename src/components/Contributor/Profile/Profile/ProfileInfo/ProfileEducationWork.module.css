@@ -1,13 +1,13 @@
 .hr {
   margin: 2rem 0px;
   border: 0.5px solid var(--secondary-color);
+  font-weight: normal;
 }
 .education_work {
   display: flex;
   flex-direction: column;
-  padding: 0rem 5%;
   gap: 0.5rem;
-  padding-bottom: 1rem;
+  margin: 0 auto;
 }
 
 .education_work .education label,
@@ -27,8 +27,6 @@
 @media (min-width: 650px) {
   .education_work {
     flex-direction: row;
-    padding-left: 5%;
-    padding-right: 5%;
     justify-content: space-around;
     align-items: center;
   }
@@ -36,7 +34,6 @@
 @media (min-width: 800px) {
   .education_work {
     width: 80%;
-    margin: 0 auto;
   }
   .education_work .education,
   .education_work .work {

@@ -1,4 +1,3 @@
-import Card from "../../../UI/Card";
 import styles from "./Profile.module.css";
 import ProfileBox from "../../Header/Navigation/ContributorNavigations/ProfileBox";
 import ProfileButton from "./Profile/ProfileButton";
@@ -15,11 +14,11 @@ const Profile = () => {
     <section
       className={`${styles.profile} ${theme.includes("light") ? styles.light : styles.dark}`}
     >
-      <Card className={styles.profile_text_container}>
+      <div className={styles.profile_text_container}>
         <ProfileBox className="Profile__ProfileBox" />
         <ProfileButton />
         <ProfileInfo />
-      </Card>
+      </div>
     </section>
   );
 };
