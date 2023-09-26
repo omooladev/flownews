@@ -12,7 +12,7 @@ const Profile = () => {
   const username = location.pathname.split("@")[1];
 
   // useCloseProfileUpdated()
-  //note-------->fetches contributor data
+  //---------->fetches contributor data
   useFetchContributorData(username);
 
   //note-------->saves route location
