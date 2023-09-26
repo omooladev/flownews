@@ -22,7 +22,7 @@ const Profile = () => {
   const { contributorData } = useContext(AuthContext);
 
   //note-------->Save title of this page
-  useTitle(`${contributorData.username}`);
+  useTitle(`${contributorData.username} - FlowNews`);
 
   return <>{contributorData.username && <ProfileCmp />}</>;
 };

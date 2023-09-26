@@ -10,19 +10,25 @@
   line-height: 24px;
 }
 
-.follow .followers,
-.follow .following {
+.follow span {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   gap: 0.5rem;
 }
-.follow h4 {
+.follow span h4 {
+  cursor: pointer;
   color: var(--tertiary-color);
 }
-.follow label {
+.follow span label {
+  cursor: pointer;
   color: var(--secondary-color);
+}
+
+.follow span:hover h4,.follow span:hover label {
+  color: var(--link-color);
 }
 
 @media (min-width: 700px) {

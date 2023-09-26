@@ -3,7 +3,6 @@ import styles from "./ProfileName.module.css";
 const ProfileName = (props) => {
   //----------> get either the contributor data or searched contributor data
   const { data } = props;
-  console.log(data);
   return (
     <div className={styles["profile-name_container"]}>
       <div className={styles.name}>

@@ -17,7 +17,6 @@ const ProfileButton = () => {
 
   //----------> check if the searched username exist
   const searchedContributorExist = searchedContributorData.username;
-  console.log(contributorData, searchedContributorData);
   //? <---------------  FUNCTIONS  --------------->
 
   const clickEditProfileHandler = useCallback(() => {
