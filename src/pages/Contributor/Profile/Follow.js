@@ -20,6 +20,7 @@ const Follow = () => {
   useFetchContributorData(username);
 
   const { contributorData } = useContext(AuthContext);
+  console.log(contributorData.followers)
 
   //----------> change title of the website
   useTitle(

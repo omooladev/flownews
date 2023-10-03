@@ -6,7 +6,7 @@ const Follow = (props) => {
   //----------> access the useHistory method
   const history = useHistory();
   //----------> get the follow path and username
-  const { followPath, username } = props;
+  const { followPath } = props;
 
   const clickFollowHandler = useCallback(
     ({ path }) => {
@@ -15,7 +15,7 @@ const Follow = (props) => {
       }
       history.push(`${path}`);
     },
-    [followPath, history,username]
+    [followPath, history]
   );
   return (
     <section className={styles["follow-container"]}>

@@ -17,6 +17,7 @@
 .profile_button_container .profile_button.following {
   background-color: transparent;
   border: 1px solid var(--primary-color);
+  color: var(--secondary-color);
 }
 .profile_button_container .profile_button.unfollow {
   color: red;
