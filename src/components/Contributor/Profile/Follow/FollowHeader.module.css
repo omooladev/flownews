@@ -1,0 +1,22 @@
+.follow-navigation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  color: var(--secondary-color);
+}
+.follow-navigation li {
+  cursor: pointer;
+  padding: 1rem;
+  margin: 0 0.5rem;
+}
+.follow-navigation li:hover {
+  background-color: rgba(204, 204, 204, 0.7);
+}
+.follow-navigation li.active {
+  font-weight: bold;
+  text-decoration: underline;
+  text-decoration-thickness: 0.2rem;
+  text-underline-offset: 0.5rem;
+  text-decoration-color: var(--primary-color);
+}

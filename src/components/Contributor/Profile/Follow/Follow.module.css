@@ -4,26 +4,3 @@
   margin: 0 auto;
   margin-top: 100px;
 }
-
-.follow-container nav {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  color: var(--secondary-color);
-}
-.follow-container nav li {
-  cursor: pointer;
-  padding: 1rem;
-  margin: 0 0.5rem;
-}
-.follow-container nav li:hover {
-  background-color: red;
-}
-.follow-container nav li.active {
-  font-weight: bold;
-  text-decoration: underline;
-  text-decoration-thickness: 0.2rem;
-  text-underline-offset: 0.5rem;
-  text-decoration-color: var(--primary-color);
-}
