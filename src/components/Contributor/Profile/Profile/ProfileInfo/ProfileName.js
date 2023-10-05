@@ -1,10 +1,18 @@
 import { BiBadgeCheck } from "react-icons/bi";
 import styles from "./ProfileName.module.css";
 const ProfileName = (props) => {
-  //----------> get either the contributor data or searched contributor data
-  const { data } = props;
+  //----------> get data and the additional class name if it exists
+  //----------> The additional class name is used to configure the ProfileName component from a component where
+  //            it is been used
+  const { data, className: additionalClassName } = props;
+
+  //---------->configuring the className to accept additional styles
+  let className = `${styles["profile-name_container"]} ${
+    additionalClassName ? styles[additionalClassName] : ""
+  }`;
+
   return (
-    <div className={styles["profile-name_container"]}>
+    <div className={className}>
       <div className={styles.name}>
         <h2>{data.fullname || data.username}</h2>
         <div className={styles.icon}>
@@ -13,7 +21,8 @@ const ProfileName = (props) => {
       </div>
       <div className={styles.username}>
         <h3>@{data.username}</h3>
-        {data.isFollowingContributor && <p className={styles.follows_you}>Follows you</p>}
+        {data.isFollowingContributor ||
+          (data.follows_you && <p className={styles.follows_you}>Follows you</p>)}
       </div>
     </div>
   );

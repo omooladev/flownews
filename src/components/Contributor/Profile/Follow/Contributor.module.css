@@ -1,0 +1,9 @@
+.contributor-container {
+  margin: 0.5rem 0;
+}
+.contributor-container .contributor-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}

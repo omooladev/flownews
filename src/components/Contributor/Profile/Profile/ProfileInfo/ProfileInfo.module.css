@@ -3,13 +3,7 @@
   color: var(--tertiary-color);
 }
 
-.contributor_info .bio {
-  font-size: 18px;
-  line-height: 27px;
-  font-weight: normal;
-  margin: 0.5rem 5%;
-  text-align: left;
-}
+
 .contributor_info .contributor_location_email_joinedDate {
   display: flex;
   align-items: flex-start;

@@ -9,6 +9,7 @@ import ProfileEducationWork from "./ProfileEducationWork";
 import ProfileMoreInfo from "./ProfileMoreInfo";
 import ProfileFollow from "./ProfileFollow";
 import ProfileName from "./ProfileName";
+import ProfileBio from "./ProfileBio";
 const ProfileInfo = () => {
   //----------> access the following properties from the authentication context
   const { contributorData, searchedContributorData } = useContext(AuthContext);
@@ -28,9 +29,10 @@ const ProfileInfo = () => {
           searchedContributorExist ? searchedContributorData.following : contributorData.following
         }
       />
-      <p className={styles.bio}>
-        {searchedContributorExist ? searchedContributorData.bio : contributorData.bio}
-      </p>
+      <ProfileBio
+        bio={searchedContributorExist ? searchedContributorData.bio : contributorData.bio}
+      />
+
       <div className={styles.contributor_location_email_joinedDate}>
         <ProfileLocation
           location={

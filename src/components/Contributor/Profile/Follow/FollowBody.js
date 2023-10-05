@@ -6,9 +6,10 @@ const FollowBody = ({ followPath, data }) => {
 
   return (
     <>
-      {contributors.forEach((contributor) => {
-        return <Contributor {...contributor} />;
-      })}
+      {contributors.length > 0 &&
+        contributors.map((contributor) => {
+          return <Contributor contributor={contributor} key={contributor._id} />;
+        })}
     </>
   );
 };

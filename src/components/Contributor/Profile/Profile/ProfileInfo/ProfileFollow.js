@@ -6,7 +6,6 @@ const ProfileFollow = (props) => {
   const history = useHistory();
   //----------> get the followers and the following of the contributor
   const { followers, following } = props;
-  console.log(followers, following);
 
   const clickFollowHandler = useCallback(
     ({ path }) => {
