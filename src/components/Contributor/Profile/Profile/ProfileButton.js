@@ -5,7 +5,8 @@ import { useHistory } from "react-router-dom";
 
 import { AuthContext } from "../../../../store/Auth/auth-context";
 
-const ProfileButton = () => {
+const ProfileButton = ({ config }) => {
+  const { caller, follows_you } = config ? config : { caller: null, follows_you: null };
   const history = useHistory();
 
   //----------> access the auth store
@@ -38,7 +39,7 @@ const ProfileButton = () => {
     <section className={styles.profile_button_container}>
       {/* if searched contributor is not found then we know that you're on your profile page
       so we display the edit profile button */}
-      {!searchedContributorExist && (
+      {!searchedContributorExist && !caller && (
         <button
           className={`${styles.profile_button} ${styles.edit_profile}`}
           onClick={clickEditProfileHandler}
@@ -46,10 +47,10 @@ const ProfileButton = () => {
           Edit profile
         </button>
       )}
-      {/* if searched contributor is found */}
-      {searchedContributorExist && (
+      {/* if searched contributor is found or caller is from the contributor-container */}
+      {(searchedContributorExist || caller) && (
         <>
-          {!contributorData.isFollowingSearchedContributor && (
+          {!contributorData.isFollowingSearchedContributor && !follows_you && (
             <button
               className={`${styles.profile_button} ${styles.follow}`}
               onClick={followContributorHandler}
@@ -58,7 +59,7 @@ const ProfileButton = () => {
             </button>
           )}
           {/* If the contributor is following the contributor that he is searching for */}
-          {contributorData.isFollowingSearchedContributor && (
+          {(contributorData.isFollowingSearchedContributor || follows_you) && (
             <button
               className={`${styles.profile_button} ${
                 isFollowingButtonHovered ? styles.unfollow : styles.following

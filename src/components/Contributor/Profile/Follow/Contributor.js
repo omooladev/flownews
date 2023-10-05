@@ -17,7 +17,7 @@ const Contributor = ({ contributor }) => {
       <div>
         <span className={styles["contributor-header"]}>
           <ProfileName data={contributorData} className="contributor-card" />
-          <ProfileButton />
+          <ProfileButton config={{ caller: "contributor-container", follows_you }} />
         </span>
         <ProfileBio bio={bio} className="contributor-bio" />
       </div>
