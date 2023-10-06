@@ -13,7 +13,6 @@ import ProfileBio from "./ProfileBio";
 const ProfileInfo = () => {
   //----------> access the following properties from the authentication context
   const { contributorData, searchedContributorData } = useContext(AuthContext);
-
   //----------> check if the searched contributor exist
   let searchedContributorExist = searchedContributorData.username;
 
@@ -22,11 +21,15 @@ const ProfileInfo = () => {
       <ProfileName data={searchedContributorExist ? searchedContributorData : contributorData} />
 
       <ProfileFollow
-        followers={
-          searchedContributorExist ? searchedContributorData.followers : contributorData.followers
+        followersCount={
+          searchedContributorExist
+            ? searchedContributorData.followersCount
+            : contributorData.followersCount
         }
-        following={
-          searchedContributorExist ? searchedContributorData.following : contributorData.following
+        followingCount={
+          searchedContributorExist
+            ? searchedContributorData.followingCount
+            : contributorData.followingCount
         }
       />
       <ProfileBio

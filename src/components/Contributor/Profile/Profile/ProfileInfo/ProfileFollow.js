@@ -5,7 +5,7 @@ const ProfileFollow = (props) => {
   //----------> Get the current location pathname of the user
   const history = useHistory();
   //----------> get the followers and the following of the contributor
-  const { followers, following } = props;
+  const { followersCount, followingCount } = props;
 
   const clickFollowHandler = useCallback(
     ({ path }) => {
@@ -16,11 +16,11 @@ const ProfileFollow = (props) => {
   return (
     <section className={styles.follow}>
       <span className={styles.followers} onClick={() => clickFollowHandler({ path: "/followers" })}>
-        <h4>{followers.length}</h4>
+        <h4>{followersCount}</h4>
         <label>followers</label>
       </span>
       <span className={styles.following} onClick={() => clickFollowHandler({ path: "/following" })}>
-        <h4>{following.length}</h4>
+        <h4>{followingCount}</h4>
         <label>following</label>
       </span>
     </section>

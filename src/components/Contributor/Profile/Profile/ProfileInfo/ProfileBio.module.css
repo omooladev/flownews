@@ -4,6 +4,7 @@
   font-weight: normal;
   margin: 0.5rem 5%;
   text-align: left;
+  color: var(--tertiary-color);
 }
 
 @media (min-width: 700px) {

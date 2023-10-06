@@ -6,6 +6,7 @@ import styles from "./Contributor.module.css";
 const Contributor = ({ contributor }) => {
   const {
     follows_you,
+    isFollowed,
     contributor: { fullname, username, bio, profilePicture },
   } = contributor;
 
@@ -17,7 +18,7 @@ const Contributor = ({ contributor }) => {
       <div>
         <span className={styles["contributor-header"]}>
           <ProfileName data={contributorData} className="contributor-card" />
-          <ProfileButton config={{ caller: "contributor-container", follows_you }} />
+          <ProfileButton config={{ caller: "contributor-container", isFollowed,username }} />
         </span>
         <ProfileBio bio={bio} className="contributor-bio" />
       </div>
