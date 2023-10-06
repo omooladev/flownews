@@ -7,7 +7,7 @@ const Contributor = ({ contributor }) => {
   const {
     follows_you,
     isFollowed,
-    contributor: { fullname, username, bio, profilePicture },
+    contributor: { username, bio },
   } = contributor;
 
   let contributorData = { ...contributor.contributor, follows_you };
@@ -18,7 +18,7 @@ const Contributor = ({ contributor }) => {
       <div>
         <span className={styles["contributor-header"]}>
           <ProfileName data={contributorData} className="contributor-card" />
-          <ProfileButton config={{ caller: "contributor-container", isFollowed,username }} />
+          <ProfileButton config={{ caller: "contributor-container", isFollowed, username }} />
         </span>
         <ProfileBio bio={bio} className="contributor-bio" />
       </div>
