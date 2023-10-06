@@ -1,23 +1,20 @@
-.email_request_change_cancel {
+.email_verification {
   padding: 0.5rem;
   box-shadow: none;
-  background-color: rgba(246, 160, 12, 10%);
+  background-color: var(--email-verification-container-color);
   margin: 1rem 0;
-  h3 {
-    color: var(--profile-color);
-  }
   p {
     padding: 0.5rem 0;
     a {
       color: var(--link-color);
     }
   }
-  .verify_email,
+  .verifyEmailButton,
   .cancel {
     cursor: pointer;
     padding: 0.5rem 0.6rem;
-    background-color: var(--nav-text-hover-color);
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--white-color);
     margin: 0.5rem 0;
     margin-right: 1rem;
     &:disabled {

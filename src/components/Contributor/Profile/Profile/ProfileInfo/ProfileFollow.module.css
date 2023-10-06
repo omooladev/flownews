@@ -3,24 +3,34 @@
   align-items: flex-start;
   justify-content: left;
   flex-wrap: wrap;
-  padding: 0.5rem 5%;
+  gap: 0.5rem;
+  padding: 0 5%;
+  margin: 0.5rem 0;
+  font-size: 16px;
+  line-height: 24px;
 }
 
-.follow .followers,
-.follow .following {
+.follow span {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-right: 1rem;
   cursor: pointer;
+  gap: 0.5rem;
 }
-.follow .followers h4 {
-  padding-left: 0.5rem;
+.follow span h4 {
+  cursor: pointer;
+  color: var(--tertiary-color);
+}
+.follow span label {
+  cursor: pointer;
+  color: var(--secondary-color);
 }
 
-.follow h4 {
-  padding-right: 0.5rem;
+.follow span:hover h4,.follow span:hover label {
+  color: var(--link-color);
 }
+
 @media (min-width: 700px) {
   .follow {
     justify-content: center;

@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { BiEnvelope, BiX } from "react-icons/bi";
-import PopUp from "../../../../../UI/PopUp";
+import PopUp from "../../../UI/PopUp";
 import styles from "./EmailLinkSentPopUp.module.css";
 
 const EmailLinkSentPopUp = (props) => {
@@ -21,7 +21,7 @@ const EmailLinkSentPopUp = (props) => {
     [onSetEmailSent, onSetShowEmailLinkSentPopUp]
   );
   return (
-    <PopUp className={`auth_popup ${styles.email_link_sent}`} onClick={closePopUpHandler}>
+    <PopUp className={`popup ${styles.email_link_sent}`} onClick={closePopUpHandler}>
       <BiX className={`${styles.icon} ${styles.cancel}`} onClick={closePopUpHandler} />
       <div className={styles.header}>
         <h4>FINAL STEP</h4>

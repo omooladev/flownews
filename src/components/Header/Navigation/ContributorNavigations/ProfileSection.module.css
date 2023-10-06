@@ -9,6 +9,7 @@
   top: 3rem;
   right: 0;
   background-color: var(--nav-profile-box-color);
+  box-shadow: var(--primary-color) 0px 0px 0px 1px;
   overflow-x: hidden;
   border-radius: 5px;
 }
@@ -30,14 +31,16 @@
 }
 .profile_section .nav-user-list {
   margin: 0.5rem 0;
+
+  overflow: hidden;
 }
 .profile_section .nav-user-list .signed_in_as {
   padding: 0 1rem;
 }
 .profile_section .nav-user-list .username {
-  padding: 0 1rem;
   font-weight: bold;
   font-size: 1rem;
+  padding: 0 1rem;
 }
 .profile_section .nav-user-list li {
   cursor: pointer;
@@ -51,11 +54,15 @@
 .profile_section .nav-user-list > li:not(.nav-user-list > li:last-of-type) {
   margin-bottom: 0.5rem;
 }
-.profile_section .nav-user-list .email {
+.profile_section .nav-user-list label.email {
+  display: block;
+  width: 100%;
   cursor: pointer;
-  padding: 0 1rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   font-size: 1.1rem;
-  margin: 0;
+  padding: 0 1rem;
 }
 
 @media (min-width: 500px) {

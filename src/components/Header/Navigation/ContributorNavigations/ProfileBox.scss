@@ -16,17 +16,14 @@
     background-color: var(--primary-color);
     margin: 0 0.5rem;
     text-align: center;
-
     color: var(--white-color);
     .profile_picture {
-      height: 32px;
-      width: 32px;
+      height: 100%;
+      width: 100%;
       border-radius: 50%;
-      margin: 0 0.5rem;
       object-fit: cover;
       object-position: center;
       background-color: var(--primary-color);
-      color: var(--body-color);
     }
   }
 
@@ -83,11 +80,13 @@
 /*? ProfileBox configuration for Setting */
 .Setting__ProfileBox {
   cursor: default;
-  color: var(--nav-text-color);
-  p {
+
+  .profilePicture_Username {
     height: 45px;
     width: 45px;
     font-size: 2.25rem;
+    line-height: 40px;
+    border: none;
   }
 
   .profile_box_text {
@@ -96,8 +95,10 @@
       font-weight: bold;
       padding: 0.3rem 0;
       font-size: 1rem;
+      color: var(--tertiary-color);
     }
     .your_personal_account {
+      color: var(--secondary-color);
       font-weight: normal;
       font-size: 0.9rem;
     }
@@ -107,6 +108,22 @@
   }
 }
 
+.UserForm__ProfileBox {
+  cursor: default;
+  .username,
+  .icon {
+    display: none;
+  }
+  .profilePicture_Username {
+    cursor: default;
+    height: 180px;
+    width: 180px;
+    font-size: 10rem;
+    line-height: 140px;
+    margin: 0;
+    text-align: center;
+  }
+}
 @media (min-width: 500px) {
   /*? ProfileBox configuration for Header Profile Section */
   .Header-ProfileSection__ProfileBox {

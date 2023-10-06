@@ -11,7 +11,7 @@
   @extend %DisplayFlex;
   justify-content: space-around;
   border-bottom: 1px solid var(--primary-color);
-  z-index: 997; //TODO ZINDEX
+  z-index: 997; //TODO Z-INDEX
   .logo {
     opacity: 1;
     margin-left: 1.5rem;
@@ -49,6 +49,9 @@
     justify-content: space-between;
     .logo {
       margin-left: 0;
+    }
+    &.menu_active .logo {
+      opacity: 1;
     }
   }
 }

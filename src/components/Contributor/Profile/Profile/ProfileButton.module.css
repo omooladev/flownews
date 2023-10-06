@@ -1,12 +1,26 @@
-.edit_profile_button_container {
+.profile_button_container {
   display: flex;
   align-items: center;
   justify-content: right;
-  padding: 1rem 5%;
+  margin: 1rem 5%;
+  background-color: var(--profile-info-background-color);
 }
-.edit_profile_button_container .edit_profile_button {
+.profile_button_container .profile_button {
   cursor: pointer;
+  font-weight: bold;
   background-color: var(--primary-color);
   color: var(--white-color);
-  padding: 0.5rem 0.6rem;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  width: 7rem;
+}
+.profile_button_container .profile_button.following {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--secondary-color);
+}
+.profile_button_container .profile_button.unfollow {
+  color: red;
+  background-color: rgba(255, 0, 0, 0.2);
+  border: 1px solid red;
 }

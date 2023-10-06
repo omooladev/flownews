@@ -1,38 +1,38 @@
 .profile {
-  position: relative;
   background-color: var(--black-color);
-  overflow: visible;
-  min-height: 10rem;
-}
-.profile .profile_text_container {
-  position: absolute;
-  top: 45%;
-  background-color: var(--body-color);
-  border-radius: 15px;
-  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
 }
 
-@media (min-height: 500px) {
-  .profile .profile_text_container {
-    top: 30%;
-  }
+.profile .profile_text_container {
+  position: relative;
+  width: 100%;
+  max-width: 60rem;
+  background-color: var(--profile-info-background-color);
+  padding: 1rem 0;
+  border-radius: 15px;
 }
+/*note---->extra settings for the profile class */
+.profile.dark {
+  width: 100vw;
+  min-height: 90vh;
+}
+.profile.dark .profile_text_container {
+  margin-top: 100px;
+}
+.profile.light {
+  width: 100vw;
+  max-height: 15rem;
+}
+.profile.light .profile_text_container {
+  margin-top: 100px;
+  box-shadow: 0 1px 3px var(--tertiary-color), 0 1px 2px var(--tertiary-color);
+}
+
 @media (min-width: 700px) {
-  .profile {
-    position: relative;
-    min-height: 10rem;
-    overflow: visible;
-  }
   .profile .profile_text_container {
-    top: 60%;
-    left: 50%;
     width: 90%;
-    margin-left: -45%;
-  }
-}
-@media (min-width: 1000px) {
-  .profile .profile_text_container {
-    width: 60rem;
-    margin-left: -30rem;
   }
 }

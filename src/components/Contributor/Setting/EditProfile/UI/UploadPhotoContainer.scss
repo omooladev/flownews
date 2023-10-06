@@ -1,0 +1,38 @@
+.upload_container {
+  font-size: 0.9rem;
+  position: absolute;
+  left: 0rem;
+  top: 100%;
+  border-radius: 5px;
+  margin-top: 0.5rem;
+  padding: 0.2rem 0;
+  background-color: var(--body-color);
+  color: var(--tertiary-color);
+  box-shadow: var(--secondary-color) 0px 0px 0px 1px;
+  input {
+    display: none;
+  }
+  li {
+    position: relative;
+    label {
+      cursor: pointer;
+      padding: 0.5rem 0.6rem;
+      display: block;
+      width: 100%;
+    }
+
+    &:hover {
+      color: var(--white-color);
+      background-color: var(--primary-color);
+    }
+  }
+}
+
+@media (min-width: 1000px) {
+  .upload_container {
+    left: 0rem;
+    top: 100%;
+    margin-top: 0.5rem;
+    padding: 0.2rem 0;
+  }
+}

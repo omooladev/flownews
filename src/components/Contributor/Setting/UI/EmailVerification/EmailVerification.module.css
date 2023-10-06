@@ -1,0 +1,28 @@
+.email_verification {
+  padding: 0.5rem;
+  box-shadow: none;
+  background-color: var(--email-verification-container-color);
+  margin: 1rem 0;
+}
+.email_verification p {
+  padding: 0.5rem 0;
+}
+.email_verification p a {
+  color: var(--link-color);
+}
+.email_verification .verifyEmailButton,
+.email_verification .cancel {
+  cursor: pointer;
+  padding: 0.5rem 0.6rem;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  margin: 0.5rem 0;
+  margin-right: 1rem;
+}
+.email_verification .verifyEmailButton:disabled,
+.email_verification .cancel:disabled {
+  cursor: not-allowed;
+}
+.email_verification .cancel {
+  background-color: rgba(255, 0, 0, 0.7);
+}

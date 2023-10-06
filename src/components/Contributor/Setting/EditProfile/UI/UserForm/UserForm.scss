@@ -1,5 +1,6 @@
 .form {
   .form_controls {
+    position: relative;
     display: flex;
     flex-direction: column;
     /* padding: 1rem 0; */
@@ -9,7 +10,6 @@
       justify-content: center;
       margin: 0.5rem 0;
       p {
-        font-size: 0.9rem;
         padding: 0.2rem 0;
         a {
           color: var(--link-color);
@@ -88,9 +88,13 @@
     }
   }
 }
-
-@media (min-width: 750px) {
+@media (min-width: 800px) {
   .form .form_controls .form_control {
-    width: 30rem;
+    width: 80%;
+  }
+}
+@media (min-width: 1000px) {
+  .form .form_controls .form_control {
+    width: 50%;
   }
 }

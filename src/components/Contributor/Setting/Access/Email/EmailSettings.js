@@ -1,7 +1,7 @@
 import EmailPrivacy from "./EmailPrivacy";
 import { useContext } from "react";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
-import EmailVerify from "../../UI/EmailVerification/SendVerificationEmail_CancelEmailChangeRequest";
+import EmailVerification  from "../../UI/EmailVerification/EmailVerification"
 
 const EmailSettings = () => {
   const {
@@ -13,7 +13,7 @@ const EmailSettings = () => {
       <hr />
       {(!emailRequestChangeAddressIsVerified || emailRequestChange) && (
         <>
-          <EmailVerify />
+          <EmailVerification />
           <hr />
         </>
       )}

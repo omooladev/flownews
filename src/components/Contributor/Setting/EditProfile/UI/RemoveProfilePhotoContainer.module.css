@@ -1,0 +1,54 @@
+.remove_profile_photo_container {
+  position: absolute;
+  top: 6rem;
+  left: 0%;
+  margin-left: 0rem;
+  background-color: var(--body-color);
+  color: var(--tertiary-color);
+  box-shadow: var(--secondary-color) 0px 0px 0px 1px;
+  width: 12rem;
+  padding: 0.5rem 0.6rem;
+}
+.remove_profile_photo_container .header {
+  font-weight: normal;
+  text-align: center;
+}
+.remove_profile_photo_container .buttons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.remove_profile_photo_container .buttons button {
+  padding: 0.4rem 0.5rem;
+  border-radius: 5px;
+  color: var(--white-color);
+}
+.remove_profile_photo_container .buttons button:first-child {
+  background-color: var(--primary-color);
+}
+.remove_profile_photo_container .buttons button:last-child {
+  background-color: red;
+}
+
+@media (min-width: 800px) {
+  .remove_profile_photo_container {
+    top: 2rem;
+    left: 100%;
+    margin-left: 0.5rem;
+  }
+}
+@media (min-width: 1000px) {
+  .remove_profile_photo_container {
+    top: 6rem;
+    left: 0%;
+    margin-left: 0rem;
+  }
+}
+@media (min-width: 1400px) {
+  .remove_profile_photo_container {
+    top: 2rem;
+    left: 100%;
+    margin-left: 0.5rem;
+  }
+}

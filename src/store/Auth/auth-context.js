@@ -5,10 +5,13 @@ export const AuthContext = React.createContext({
   token: "",
   history: "",
   searchedContributorData: {},
+  onResetSearchedContributor: () => {},
+  onToggleFollowContributor: () => {},
   isLoading: false,
   headerIsLoading: false,
   isLoggedIn: false,
-  contributorError: { ref: "", message: "" },
+  contributorError: { hasError: "", message: "" },
+  onResetContributorError: () => {},
 
   //? auth functions
   onLoginOrBecomeContributor: async () => {},
@@ -33,4 +36,7 @@ export const AuthContext = React.createContext({
   profileUpdated: false,
   onChangeProfileUpdated: async () => {},
   onToggleEmailPrivacy: async () => {},
+
+  cancelRequest: () => {},
+  pageIsLoading: false,
 });

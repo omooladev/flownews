@@ -10,6 +10,7 @@ import Location from "./Location";
 import Username from "./Username";
 import Work from "./Work";
 import styles from "./UserForm.module.css";
+import ProfilePicture from "../ProfilePicture";
 const UserForm = () => {
   const {
     contributorData: { fullname, email, emailIsPrivate, username, bio, location, education, work },
@@ -28,7 +29,7 @@ const UserForm = () => {
     work,
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState("333333333333");
 
   const getValue = useCallback(({ type, value }) => {
     setNewContributorData((prevValue) => {
@@ -117,7 +118,7 @@ const UserForm = () => {
       }
       if (data) {
         onSaveContributorData(data);
-        changeAppMode({ username: data.username, token: data.token });
+        changeAppMode({ token: data.token });
         onChangeProfileUpdated(true);
       }
       if (error) {
@@ -147,6 +148,7 @@ const UserForm = () => {
         </Card>
       )}
       <div className={styles.form_controls}>
+        <ProfilePicture />
         <FullName fullname={fullname} onGetValue={getValue} />
         <Email email={email} emailIsPrivate={emailIsPrivate} onGetValue={getValue} />
         <Username username={username} onGetValue={getValue} />

@@ -8,10 +8,14 @@ import styles from "./ProfileSection.module.css";
 
 const ProfileSection = () => {
   const history = useHistory();
+  //----------> access the application context and extract
+  //            the following properties
   const {
     componentsIsActive: { profileBoxIsActive },
     onToggleComponentsIsActive,
   } = useContext(AppContext);
+  //----------> access the authentication context and extract
+  //            the following properties
   const {
     onSignOut,
     contributorData: {
@@ -19,16 +23,31 @@ const ProfileSection = () => {
       username: contributorFullUsername,
       email: contributorEmailAddress,
     },
+    searchedContributorData,
+    onResetSearchedContributor,
   } = useContext(AuthContext);
 
   const goToPage = useCallback(
-    (location) => {
+    (pageUri) => {
+      //---------->This function is responsible for pushing users
+      //           to a profile section page when the page link is clicked
+
+      //----------> reset searched contributor if it exists
+      if (searchedContributorData.username) {
+        onResetSearchedContributor();
+      }
+
+      //----------> automatically close the profile section when a page link is clicked
       onToggleComponentsIsActive({ type: "profileBox", event: "close" });
-      history.push(location);
+
+      //----------> push to the new page
+      history.push(pageUri);
     },
-    [history, onToggleComponentsIsActive]
+    [history, onToggleComponentsIsActive, searchedContributorData, onResetSearchedContributor]
   );
+
   const toggleProfileBoxHandler = useCallback(() => {
+    //----------> a function that toggles the display of the profile section UI
     onToggleComponentsIsActive({ type: "profileBox", event: "toggle" });
   }, [onToggleComponentsIsActive]);
   return (
@@ -42,7 +61,7 @@ const ProfileSection = () => {
           </ul>
           <hr />
           <ul className={`${styles["nav-user-list"]}`}>
-            <Write className={styles.write}/>
+            <Write className={styles.write} />
           </ul>
           <hr className={styles.write_line} />
           <ul className={`${styles["nav-user-list"]}`}>

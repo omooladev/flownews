@@ -10,18 +10,18 @@
 }
 .setting_navigation-links ul li a {
   cursor: pointer;
-  color: var(--secondary-color);
+  color: var(--tertiary-color);
   display: flex;
   align-items: center;
   padding: 0.5rem 0.5rem;
-  transition: all 0.4s ease;
   border-radius: 0.3rem;
+  width: 100%;
 }
 .setting_navigation-links ul li a span {
   padding: 0 0.5rem;
 }
 .setting_navigation-links ul li a.active {
-  color: var(--body-color);
+  color: var(--white-color);
   font-weight: bold;
   background-color: var(--primary-color);
 }
@@ -31,14 +31,14 @@
 .setting_navigation-links ul .link_header {
   padding: 0rem 0.5rem;
   font-weight: normal;
-  color: var(--profile-color);
+  color: var(--tertiary-color);
 }
 
 @media (min-width: 500px) {
   .setting_navigation-links ul li a:hover {
-    color: var(--body-color);
-    transition: all 0.4s ease;
+    background-color: var(--primary-hover-color);
+  }
+  .setting_navigation-links ul li a.active:hover {
     background-color: var(--primary-color);
-    opacity: 0.6;
   }
 }

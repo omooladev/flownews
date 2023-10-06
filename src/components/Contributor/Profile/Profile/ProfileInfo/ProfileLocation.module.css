@@ -1,13 +1,15 @@
 .location {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: left;
-  margin: 0.5rem 0;
-  font-size: 1.2rem;
-  padding-right: 0.5rem;
+  overflow: hidden;
 }
 
-.location p {
-  padding: 0 0.5rem;
-  font-size: 1rem;
+.location span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-left: 1.5rem;
 }
+

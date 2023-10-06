@@ -6,7 +6,8 @@ import useHttp from "../../hooks/useHttp";
 //const HOSTURI = "http://localhost:5000/api/v1";
 const HOSTURI = "https://flownews-api.onrender.com/api/v1";
 const AuthContextProvider = (props) => {
-  const { sendRequest } = useHttp();
+  //----------> get the http request functions from the useHttp hook
+  const { sendRequest, cancelRequest } = useHttp();
 
   const {
     appMode: { isLoggedIn, token },
@@ -16,14 +17,20 @@ const AuthContextProvider = (props) => {
   } = useContext(AppContext);
 
   const [makeBodyFixed, setMakeBodyFixed] = useState(false);
-  const [searchedContributorData, setSearchedContributorData] = useState({ username: "" });
-  const [contributorDataIsLoading, setContributorDataIsLoading] = useState(false);
 
-  const [contributorError, setContributorError] = useState({ ref: "", message: "" });
+  const [pageIsLoading, setPageIsLoading] = useState(null);
+
+  const [contributorError, setContributorError] = useState({
+    hasError: false,
+    message: "",
+    ref: null,
+  });
   const history = useHistory();
 
   //?refactored
+
   const [contributorData, setContributorData] = useState({ username: "" });
+  const [searchedContributorData, setSearchedContributorData] = useState({ username: "" });
   const [profileUpdated, setProfileUpdated] = useState(false);
   const loginOrBecomeContributor = useCallback(
     async ({ location, contributorAuthData }) => {
@@ -36,50 +43,117 @@ const AuthContextProvider = (props) => {
     [sendRequest]
   );
 
+  //----------> Fetch the contributor data
   const getContributorData = useCallback(
     async (username) => {
-      if (contributorData.username) {
+      if (
+        contributorData.username &&
+        (!username ||
+          contributorData.username === username ||
+          searchedContributorData.username === username)
+      ) {
         //* This means that if contributor data exits already, then there is no need to fetch data again
         return;
       }
-      setContributorDataIsLoading((prevState) => {
+
+      setPageIsLoading((prevState) => {
         return true;
       });
 
-      const response = await sendRequest(`${HOSTURI}/@${username}`, {
-        method: "GET",
-        token,
-      });
-      const error = (await response.error) || "";
-      const data = (await response.data) || "";
-      if (data) {
-        const isSearch = data.isSearch || "";
-        if (!isSearch) {
-          setContributorData((prevData) => {
-            return { ...prevData, ...data };
-          });
+      const response = await sendRequest(
+        `${HOSTURI}/contributors${username ? "/" + username : ""}`,
+        {
+          method: "GET",
+          token,
         }
+      );
+      const data = response.data;
+      const error = response.error;
+
+      if (data) {
+        const isSearch = data.isSearch;
+
+        setContributorData((prevData) => {
+          return { ...prevData, ...data.contributor };
+        });
+
         if (isSearch) {
+          //----------> if we are searching for a contributor, then the data gotten is for the
+          //            searched contributor
+
           setSearchedContributorData((prevData) => {
-            return { ...prevData, ...data };
+            return { ...prevData, ...data.searchedContributor };
           });
         }
       }
       if (error) {
-        if (error === "Cannot find your account") {
-          return onChangeAppMode({ token: null, isLoggedIn: false, username: null });
+        
+        if (error === "Cannot find contributor") {
+          //----------> if the contributor you're searching for does not exist,
+          //            we display the 404 page
+          setContributorError((prevError) => {
+            return { ...prevError, hasError: true, message: error };
+          });
+        } else if (error === "Authentication Failed" || error === "Cannot find your account") {
+          onChangeAppMode({ token: null, isLoggedIn: false });
+        } else {
+          setContributorError((prevError) => {
+            return { ...prevError, hasError: true, message: error, ref: "network_error" };
+          });
         }
-        setContributorError((prevError) => {
-          return { ...prevError, ref: "home", message: error };
-        });
       }
 
-      return setContributorDataIsLoading((prevState) => {
+      return setPageIsLoading((prevState) => {
         return false;
       });
     },
-    [sendRequest, token, contributorData.username, onChangeAppMode]
+    [sendRequest, token, contributorData.username, searchedContributorData, onChangeAppMode]
   );
+  //----------> reset the searched contributor to not contain any data
+  const resetSearchedContributor = useCallback(() => {
+    return setSearchedContributorData((prevData) => {
+      return { username: "" };
+    });
+  }, []);
+
+  //----------> a function that lets you follow or un follow a contributor
+  const toggleFollowContributor = useCallback(
+    async ({ action }) => {
+      const response = await sendRequest(
+        `${HOSTURI}/contributor/follow?action=${action}&username=${searchedContributorData.username}`,
+        {
+          method: "POST",
+          token,
+        }
+      );
+      const data = response.data;
+      const error = response.error;
+      if (data) {
+        //----------> update the contributor data state
+        setContributorData((prevData) => {
+          return { ...prevData, ...data.contributor };
+        });
+        //----------> update the searched contributor data state
+        setSearchedContributorData((prevData) => {
+          return { ...prevData, ...data.searchedContributor };
+        });
+        // //----------> if we have successfully unfollowed the contributor then can can reset the
+        // if (action === "unfollow") {
+        //   return "success";
+        // }
+      }
+      if (error) {
+        console.log(error);
+        return;
+      }
+    },
+    [searchedContributorData, sendRequest, token]
+  );
+  const resetContributorError = useCallback(() => {
+    setContributorError((prevError) => {
+      return { ...prevError, hasError: false, message: "" };
+    });
+  }, []);
 
   const signOutHandler = useCallback(() => {
     onChangeAppMode({ isLoggedIn: false, token: null, username: null, tokenExpirationTime: null });
@@ -151,7 +225,7 @@ const AuthContextProvider = (props) => {
   }, []);
   const updateContributorProfile = useCallback(
     async (updateProperties) => {
-      const response = await sendRequest(`${HOSTURI}/update-profile`, {
+      const response = await sendRequest(`${HOSTURI}/contributor/update-profile`, {
         method: "PATCH",
         contributorData: { updateProperties },
         token,
@@ -183,11 +257,13 @@ const AuthContextProvider = (props) => {
         token,
         history,
         searchedContributorData,
-        contributorDataIsLoading,
+        onResetSearchedContributor: resetSearchedContributor,
+        pageIsLoading,
         isLoggedIn,
         contributorError,
+        onResetContributorError: resetContributorError,
         onGetContributorData: getContributorData,
-
+        onToggleFollowContributor: toggleFollowContributor,
         onLoginOrBecomeContributor: loginOrBecomeContributor,
         onSignOut: signOutHandler,
 
@@ -210,6 +286,8 @@ const AuthContextProvider = (props) => {
         onUpdateContributorProfile: updateContributorProfile,
         onToggleEmailPrivacy: toggleEmailPrivacy,
         onSendPasswordResetEmail: sendPasswordResetEmail,
+
+        cancelRequest,
       }}
     >
       {props.children}

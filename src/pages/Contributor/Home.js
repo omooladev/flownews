@@ -9,7 +9,7 @@ const Home = () => {
   const location = useLocation();
   useNewLocation(location.pathname);
   const { contributorData } = useContext(AuthContext);
-  return <>{contributorData.username && <DummyNews />}</>;
+  return <>{contributorData.username  && <DummyNews />}</>;
 };
 
 export default Home;

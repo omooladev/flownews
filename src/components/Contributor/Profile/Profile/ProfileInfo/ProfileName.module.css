@@ -1,0 +1,50 @@
+.profile-name_container {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 5%;
+  align-items: left;
+}
+.profile-name_container .name {
+  margin: 0.5rem 0;
+  font-size: 20px;
+  line-height: 30px;
+}
+.profile-name_container .name h2 {
+  display: inline;
+  padding-right: 5px;
+}
+.profile-name_container .name .icon {
+  display: inline;
+  position: relative;
+}
+.profile-name_container .name .icon .verified_badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: var(--primary-color);
+  transform: translateY(-50%);
+}
+.profile-name_container .username {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 18px;
+  line-height: 27px;
+  color: var(--secondary-color);
+  flex-wrap: wrap;
+}
+.profile-name_container .username h3 {
+  font-weight: normal;
+}
+.profile-name_container .username .follows_you {
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--profile-info-background-color);
+  background-color: var(--secondary-color);
+  padding: 0.3rem 0.5rem;
+}
+@media (min-width: 700px) {
+  .profile-name_container ,.profile-name_container .username{
+    align-items: center;
+  }
+}
