@@ -1,13 +1,15 @@
+/* PROFILE PAGE STYLES FOR PROFILE NAME */
 .profile-name_container {
   display: flex;
   flex-direction: column;
   padding: 0.5rem 5%;
-  align-items: left;
+  align-items: flex-start;
 }
 .profile-name_container .name {
   margin: 0.5rem 0;
   font-size: 20px;
   line-height: 30px;
+  color: var(--tertiary-color);
 }
 .profile-name_container .name h2 {
   display: inline;
@@ -43,8 +45,20 @@
   background-color: var(--secondary-color);
   padding: 0.3rem 0.5rem;
 }
+
+/* PROFILE PAGE STYLES FOR CONTRIBUTOR CARD */
+.profile-name_container.contributor-card .name {
+  font-size: 16px;
+  line-height: 24px;
+}
 @media (min-width: 700px) {
-  .profile-name_container ,.profile-name_container .username{
+  .profile-name_container,
+  .profile-name_container .username {
     align-items: center;
+  }
+  /* PROFILE PAGE STYLES FOR CONTRIBUTOR CARD */
+  .profile-name_container.contributor-card,
+  .profile-name_container.contributor-card .username {
+    align-items: flex-start;
   }
 }

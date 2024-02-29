@@ -1,0 +1,6 @@
+.message {
+  padding: 1rem;
+  text-align: center;
+  color: var(--tertiary-color);
+  font-weight: normal;
+}

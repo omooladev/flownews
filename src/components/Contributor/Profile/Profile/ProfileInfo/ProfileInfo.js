@@ -9,10 +9,11 @@ import ProfileEducationWork from "./ProfileEducationWork";
 import ProfileMoreInfo from "./ProfileMoreInfo";
 import ProfileFollow from "./ProfileFollow";
 import ProfileName from "./ProfileName";
+import ProfileBio from "./ProfileBio";
 const ProfileInfo = () => {
   //----------> access the following properties from the authentication context
   const { contributorData, searchedContributorData } = useContext(AuthContext);
-
+  console.log({contributor_followers:contributorData.followers,contributor_following:contributorData.following}, searchedContributorData);
   //----------> check if the searched contributor exist
   let searchedContributorExist = searchedContributorData.username;
 
@@ -21,16 +22,21 @@ const ProfileInfo = () => {
       <ProfileName data={searchedContributorExist ? searchedContributorData : contributorData} />
 
       <ProfileFollow
-        followers={
-          searchedContributorExist ? searchedContributorData.followers : contributorData.followers
+        followersCount={
+          searchedContributorExist
+            ? searchedContributorData.followersCount
+            : contributorData.followersCount
         }
-        following={
-          searchedContributorExist ? searchedContributorData.following : contributorData.following
+        followingCount={
+          searchedContributorExist
+            ? searchedContributorData.followingCount
+            : contributorData.followingCount
         }
       />
-      <p className={styles.bio}>
-        {searchedContributorExist ? searchedContributorData.bio : contributorData.bio}
-      </p>
+      <ProfileBio
+        bio={searchedContributorExist ? searchedContributorData.bio : contributorData.bio}
+      />
+
       <div className={styles.contributor_location_email_joinedDate}>
         <ProfileLocation
           location={

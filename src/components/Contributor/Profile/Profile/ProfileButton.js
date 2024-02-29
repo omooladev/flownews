@@ -5,7 +5,12 @@ import { useHistory } from "react-router-dom";
 
 import { AuthContext } from "../../../../store/Auth/auth-context";
 
-const ProfileButton = () => {
+const ProfileButton = ({ config }) => {
+  const {
+    caller,
+    isFollowed,
+    username: followUsername,
+  } = config ? config : { caller: null, isFollowed: null, username: null };
   const history = useHistory();
 
   //----------> access the auth store
@@ -38,7 +43,7 @@ const ProfileButton = () => {
     <section className={styles.profile_button_container}>
       {/* if searched contributor is not found then we know that you're on your profile page
       so we display the edit profile button */}
-      {!searchedContributorExist && (
+      {!searchedContributorExist && !caller && (
         <button
           className={`${styles.profile_button} ${styles.edit_profile}`}
           onClick={clickEditProfileHandler}
@@ -46,10 +51,10 @@ const ProfileButton = () => {
           Edit profile
         </button>
       )}
-      {/* if searched contributor is found */}
-      {searchedContributorExist && (
+      {/* if searched contributor is found or caller is from the contributor-container */}
+      {(searchedContributorExist || caller) && contributorData.username !== followUsername && (
         <>
-          {!contributorData.isFollowingSearchedContributor && (
+          {!contributorData.isFollowingSearchedContributor && !isFollowed && (
             <button
               className={`${styles.profile_button} ${styles.follow}`}
               onClick={followContributorHandler}
@@ -58,18 +63,19 @@ const ProfileButton = () => {
             </button>
           )}
           {/* If the contributor is following the contributor that he is searching for */}
-          {contributorData.isFollowingSearchedContributor && (
-            <button
-              className={`${styles.profile_button} ${
-                isFollowingButtonHovered ? styles.unfollow : styles.following
-              }`}
-              onClick={unfollowContributorHandler}
-              onMouseEnter={toggleIsFollowingButtonHovered}
-              onMouseOut={toggleIsFollowingButtonHovered}
-            >
-              {isFollowingButtonHovered ? "Unfollow" : "Following"}
-            </button>
-          )}
+          {(contributorData.isFollowingSearchedContributor || isFollowed) &&
+            contributorData.username !== followUsername && (
+              <button
+                className={`${styles.profile_button} ${
+                  isFollowingButtonHovered ? styles.unfollow : styles.following
+                }`}
+                onClick={unfollowContributorHandler}
+                onMouseEnter={toggleIsFollowingButtonHovered}
+                onMouseOut={toggleIsFollowingButtonHovered}
+              >
+                {isFollowingButtonHovered ? "Unfollow" : "Following"}
+              </button>
+            )}
         </>
       )}
     </section>
