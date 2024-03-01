@@ -2,9 +2,9 @@ import { useContext } from "react";
 import { useState } from "react";
 import { useCallback } from "react";
 import { AppContext } from "../../../../store/App/app-context";
+import { configureAvailableThemes } from "./AvailableThemes";
 import Card from "../../../../UI/Card";
 import styles from "./ThemeMode.module.css";
-import { configureAvailableThemes } from "./AvailableThemes";
 
 const ThemeMode = () => {
   //----------> Access the default value of the theme in the browser from the appMode
@@ -35,7 +35,7 @@ const ThemeMode = () => {
             <Card
               key={theme.name}
               className={`${styles.single_theme} ${
-                theme.active ? styles.active : ""
+                theme.checked ? styles.active : ""
               }
           `}
               onClick={() => changeModeHandler(theme.themeName)}

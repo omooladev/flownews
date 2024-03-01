@@ -4,15 +4,20 @@ import { AuthContext } from "../../../../store/Auth/auth-context";
 import EmailVerification from "../UI/EmailVerification/EmailVerification";
 
 const Appearance = () => {
-  console.log("appearance");
-  // const {
-  //   userData: { emailRequestChangeAddressIsVerified, emailRequestChange },
-  // } = useContext(AuthContext);
+  //----------> check if the contributor has requested for an email change or if he has verified the new email he wants
+  //            to change
+  const {
+    contributorData: {
+      emailRequestChangeAddressIsVerified,
+      emailRequestChange,
+    },
+  } = useContext(AuthContext);
+
   return (
     <section>
-      {/* {(!emailRequestChangeAddressIsVerified || emailRequestChange) && (
+      {(!emailRequestChangeAddressIsVerified || emailRequestChange) && (
         <EmailVerification />
-      )} */}
+      )}
       <h2>Theme preferences</h2>
       <hr />
       <p>
