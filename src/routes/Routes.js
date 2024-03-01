@@ -7,7 +7,7 @@ import NotFoundPage from "../pages/NotFound/NotFound";
 import UserHomePage from "../pages/User/Home";
 import ContributorHomePage from "../pages/Contributor/Home";
 import ProfilePage from "../pages/Contributor/Profile/Profile";
-import FollowPage from "../pages/Contributor/Profile/Follow";
+//---import FollowPage from "../pages/Contributor/Profile/Follow";
 import EmailVerification from "../pages/EmailVerification/EmailVerification";
 import SettingPage from "../pages/Contributor/Settings/Settings/Settings";
 
@@ -56,9 +56,9 @@ const Routes = () => {
             <Route path="/@:username" exact>
               <ProfilePage />
             </Route>
-            <Route path={["/@:username/followers", "/@:username/following"]} exact>
+            {/* <Route path={["/@:username/followers", "/@:username/following"]} exact>
               <FollowPage />
-            </Route>
+            </Route> */}
             <Route path="/settings">
               <SettingPage />
             </Route>
