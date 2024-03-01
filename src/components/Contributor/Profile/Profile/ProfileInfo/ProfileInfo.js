@@ -13,13 +13,13 @@ import ProfileBio from "./ProfileBio";
 const ProfileInfo = () => {
   //----------> access the following properties from the authentication context
   const { contributorData, searchedContributorData } = useContext(AuthContext);
-  console.log(
-    {
-      contributor_followers: contributorData.followers,
-      contributor_following: contributorData.following,
-    },
-    searchedContributorData
-  );
+  // console.log(
+  //   {
+  //     contributor_followers: contributorData.followers,
+  //     contributor_following: contributorData.following,
+  //   },
+  //   searchedContributorData
+  // );
   //----------> check if the searched contributor exist
   let searchedContributorExist = searchedContributorData.username;
 

@@ -12,7 +12,9 @@ const Profile = () => {
 
   return (
     <section
-      className={`${styles.profile} ${theme.includes("light") ? styles.light : styles.dark}`}
+      className={`${styles.profile} ${
+        theme.includes("light") ? styles.light : styles.dark
+      }`}
     >
       <div className={styles.profile_text_container}>
         <ProfileBox className="Profile__ProfileBox" />

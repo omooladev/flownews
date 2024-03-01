@@ -5,18 +5,21 @@ import EmailVerification from "../UI/EmailVerification/EmailVerification";
 
 import ThemeMode from "./ThemeMode";
 const Appearance = () => {
+  console.log("appearance");
   useTitle("Appearance");
-  const {
-    userData: { emailRequestChangeAddressIsVerified, emailRequestChange },
-  } = useContext(AuthContext);
+  // const {
+  //   userData: { emailRequestChangeAddressIsVerified, emailRequestChange },
+  // } = useContext(AuthContext);
   return (
     <section>
-      {(!emailRequestChangeAddressIsVerified || emailRequestChange) && <EmailVerification />}
+      {/* {(!emailRequestChangeAddressIsVerified || emailRequestChange) && (
+        <EmailVerification />
+      )} */}
       <h2>Theme preferences</h2>
       <hr />
       <p>
-        Choose how Flownews looks to you. Select a single theme,the default value is the browser
-        theme
+        Choose how FlowNews looks to you. Select a single theme,the default
+        value is the browser theme
       </p>
       <ThemeMode />
     </section>
