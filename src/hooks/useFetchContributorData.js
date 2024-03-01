@@ -2,8 +2,11 @@ import { useContext, useEffect } from "react";
 import { AppContext } from "../store/App/app-context";
 import { AuthContext } from "../store/Auth/auth-context";
 
+//----------> The reason why username is passed into the hook is because of
+//            when you want to fetch a contributor data. This is
+//            particularly important for searching for a contributor.
 const useFetchContributorData = (username) => {
-  //----------> check if the contributor is loggedIn
+  //----------> check if this contributor is loggedIn
   const {
     appMode: { isLoggedIn },
   } = useContext(AppContext);
@@ -13,9 +16,11 @@ const useFetchContributorData = (username) => {
   const { onGetContributorData } = useContext(AuthContext);
 
   useEffect(() => {
-    //----------> so if the contributor is logged in already,
-    //            we can fetch from the database their details
+    //----------> If the contributor is logged in,
+    //            we fetch the details of the contributor from the database
     if (isLoggedIn) {
+      //---------> The username accepted into the hook is passed into the get contributor
+      //           function
       onGetContributorData(username);
     }
   }, [username, isLoggedIn, onGetContributorData]);
@@ -23,7 +28,6 @@ const useFetchContributorData = (username) => {
 
 export default useFetchContributorData;
 
-//---------->notes about this file
+//imp---------->Documentation
 // This file makes sure that the details of logged-in contributors
-// are fetched and displayed on their Flownews pages even when they
-// refresh the pages.
+// are fetched from the database

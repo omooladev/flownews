@@ -1,12 +1,10 @@
 import { useContext } from "react";
-import { useTitle } from "../../../../hooks/useTitle";
+import ThemeMode from "./ThemeMode";
 import { AuthContext } from "../../../../store/Auth/auth-context";
 import EmailVerification from "../UI/EmailVerification/EmailVerification";
 
-import ThemeMode from "./ThemeMode";
 const Appearance = () => {
   console.log("appearance");
-  useTitle("Appearance");
   // const {
   //   userData: { emailRequestChangeAddressIsVerified, emailRequestChange },
   // } = useContext(AuthContext);

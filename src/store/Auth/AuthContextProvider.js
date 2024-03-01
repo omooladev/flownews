@@ -30,7 +30,9 @@ const AuthContextProvider = (props) => {
   //?refactored
 
   const [contributorData, setContributorData] = useState({ username: "" });
-  const [searchedContributorData, setSearchedContributorData] = useState({ username: "" });
+  const [searchedContributorData, setSearchedContributorData] = useState({
+    username: "",
+  });
   const [profileUpdated, setProfileUpdated] = useState(false);
   const loginOrBecomeContributor = useCallback(
     async ({ location, contributorAuthData }) => {
@@ -46,6 +48,15 @@ const AuthContextProvider = (props) => {
   //----------> Fetch the contributor data
   const getContributorData = useCallback(
     async (username) => {
+      //----------> if username is found in the contributor data and
+      //            no username is sent from the fetch contributor data hook
+      //            or the username passed in the hook is the same as the one found
+      //            in the contributor data or if the username found in the search
+      //            contributor is the same as the one passed in the hook,
+      //            then this means that we still have access to the Contributor details
+      //            so do not fetch it again.
+      //-----------> More Explanation is found at the bottom of the file
+
       if (
         contributorData.username &&
         (!username ||
@@ -87,18 +98,25 @@ const AuthContextProvider = (props) => {
         }
       }
       if (error) {
-        
         if (error === "Cannot find contributor") {
           //----------> if the contributor you're searching for does not exist,
           //            we display the 404 page
           setContributorError((prevError) => {
             return { ...prevError, hasError: true, message: error };
           });
-        } else if (error === "Authentication Failed" || error === "Cannot find your account") {
+        } else if (
+          error === "Authentication Failed" ||
+          error === "Cannot find your account"
+        ) {
           onChangeAppMode({ token: null, isLoggedIn: false });
         } else {
           setContributorError((prevError) => {
-            return { ...prevError, hasError: true, message: error, ref: "network_error" };
+            return {
+              ...prevError,
+              hasError: true,
+              message: error,
+              ref: "network_error",
+            };
           });
         }
       }
@@ -107,7 +125,13 @@ const AuthContextProvider = (props) => {
         return false;
       });
     },
-    [sendRequest, token, contributorData.username, searchedContributorData, onChangeAppMode]
+    [
+      sendRequest,
+      token,
+      contributorData.username,
+      searchedContributorData,
+      onChangeAppMode,
+    ]
   );
   //----------> reset the searched contributor to not contain any data
   const resetSearchedContributor = useCallback(() => {
@@ -156,7 +180,12 @@ const AuthContextProvider = (props) => {
   }, []);
 
   const signOutHandler = useCallback(() => {
-    onChangeAppMode({ isLoggedIn: false, token: null, username: null, tokenExpirationTime: null });
+    onChangeAppMode({
+      isLoggedIn: false,
+      token: null,
+      username: null,
+      tokenExpirationTime: null,
+    });
     onToggleComponentsIsActive({ event: "*" });
     setProfileUpdated(false);
     setContributorData((prevData) => {
@@ -189,10 +218,13 @@ const AuthContextProvider = (props) => {
 
   const resetPasswordHandler = useCallback(
     async (username, passwordProperties) => {
-      const response = await sendRequest(`${HOSTURI}/auth/${username}/reset_password`, {
-        method: "PATCH",
-        contributorData: passwordProperties,
-      });
+      const response = await sendRequest(
+        `${HOSTURI}/auth/${username}/reset_password`,
+        {
+          method: "PATCH",
+          contributorData: passwordProperties,
+        }
+      );
       return response;
     },
     [sendRequest]
@@ -225,11 +257,14 @@ const AuthContextProvider = (props) => {
   }, []);
   const updateContributorProfile = useCallback(
     async (updateProperties) => {
-      const response = await sendRequest(`${HOSTURI}/contributor/update-profile`, {
-        method: "PATCH",
-        contributorData: { updateProperties },
-        token,
-      });
+      const response = await sendRequest(
+        `${HOSTURI}/contributor/update-profile`,
+        {
+          method: "PATCH",
+          contributorData: { updateProperties },
+          token,
+        }
+      );
       return response;
     },
     [sendRequest, token]
@@ -296,3 +331,15 @@ const AuthContextProvider = (props) => {
 };
 
 export default AuthContextProvider;
+
+//imp---------------------> Documentation
+//imp Case 1:    getContributorData
+// When I as a contributor is logged Into my account and I refresh the profile page,
+// a request is sent to fetch my details again because on refresh most of my details is already lost.
+// Now If i try to access any other page, we need to be sure that my details is still retained on the request,
+// we run the getContributorData function again and this time, we check if my username already exist on the request data
+// If it is not found, we fetch the details from the database but If it is found, we navigate to the new page.
+//imp Case 2:    getContributorData
+// In this case, when we want to search for another contributor, we check if the username of the contributor you
+// are searching for is not the same as yours. If it is the same, we do not proceed with your request, however if it
+// is not the same, then we fetch the contributor and save his details to the search Contributor data.
