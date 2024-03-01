@@ -34,22 +34,24 @@ const ThemeMode = () => {
           return (
             <Card
               key={theme.name}
-              className={`${styles.single_theme}
+              className={`${styles.single_theme} ${
+                theme.active ? styles.active : ""
+              }
           `}
               onClick={() => changeModeHandler(theme.themeName)}
             >
-              <img src={theme.image} alt={theme.name} />
+              <img src={theme.image} alt={`${theme.name} Theme `} />
               <hr />
               <div className={styles.theme_details}>
                 <input
                   type="radio"
-                  value={theme}
-                  name="theme-mode"
-                  id={theme.name}
+                  value={theme.themeName}
+                  name="theme"
+                  id={theme.themeName}
                   checked={theme.checked}
                   onChange={() => changeModeHandler(theme.themeName)}
                 />
-                <label htmlFor={theme.name}>{theme.name}</label>
+                <label htmlFor={theme.themeName}>{theme.name}</label>
               </div>
             </Card>
           );

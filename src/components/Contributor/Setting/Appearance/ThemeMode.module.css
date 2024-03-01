@@ -21,7 +21,7 @@
   width: 100%;
 }
 .themes-section .single_theme.active {
-  border: 1px solid blue;
+  border: 1px solid var(--primary-color);
 }
 
 .themes-section .single_theme .theme_details {
