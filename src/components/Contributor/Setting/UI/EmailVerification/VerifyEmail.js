@@ -1,11 +1,13 @@
 import styles from "./EmailVerification.module.css";
-const VerifyEmail = ({ isLoading, verifyEmailHandler }) => {
+const VerifyEmail = ({ error, isLoading, verifyEmailHandler }) => {
   return (
     <>
       <p>
         Please verify your email address to have access to all features of
         flowNews
       </p>
+      {error && <p className={styles["error"]}>{error}</p>}
+
       <button
         className={styles.verifyEmailButton}
         disabled={isLoading.type === "verify" ? true : false}
@@ -13,7 +15,9 @@ const VerifyEmail = ({ isLoading, verifyEmailHandler }) => {
           verifyEmailHandler(event, { action: "verify" });
         }}
       >
-        {isLoading.type === "verify" ? "Sending verification link..." : "Verify"}
+        {isLoading.type === "verify"
+          ? "Sending verification link..."
+          : "Verify"}
       </button>
     </>
   );

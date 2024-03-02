@@ -37,6 +37,7 @@
   --error-color: rgb(237, 178, 178);
   /* Email Verification */
   --email-verification-container-color: rgba(48, 155, 101, 0.3);
+  ----email-verification-container--error-color: red;
   /*? normal global colors  */
   --black-color: black;
   --white-color: white;
@@ -87,7 +88,8 @@ body.dark {
   /* Styles that are more specific to a particular page */
   --profile-info-background-color: var(--header-color);
   /* Email Verification */
-  --email-verification-container-color: rgb(255, 165, 0,0.3);
+  --email-verification-container-color: rgb(255, 165, 0, 0.3);
+  ----email-verification-container--error-color: rgb(237, 178, 178);
 }
 
 body.fixed-body {

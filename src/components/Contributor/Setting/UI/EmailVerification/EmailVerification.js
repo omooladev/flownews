@@ -30,7 +30,7 @@ const EmailVerification = () => {
   } = useContext(AuthContext);
   //<---------- States ---------->
   const [isLoading, setIsLoading] = useState({ type: "" }); //----------> this accepts what we are loading for
-  const [error, setError] = useState("an error www");
+  const [error, setError] = useState("an error has occured");
   const [emailSent, setEmailSent] = useState(false);
   const [resentSuccess, setResentSuccess] = useState(false);
 
@@ -142,6 +142,7 @@ const EmailVerification = () => {
         always the primary email used in creating an account*/}
         {!emailRequestChange && !emailRequestChangeAddressIsVerified && (
           <VerifyEmail
+            error={error}
             isLoading={isLoading}
             verifyEmailHandler={verifyEmailHandler}
           />
