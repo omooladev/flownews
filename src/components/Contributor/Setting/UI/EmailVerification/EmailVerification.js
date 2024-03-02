@@ -63,14 +63,20 @@ const EmailVerification = () => {
     [sendRequest, HOSTURI, token, onSaveContributorData]
   );
   const verifyEmailHandler = useCallback(
-    async (event, action) => {
+    async (event, { action }) => {
       event.stopPropagation();
       setError("");
       setIsLoading((prevState) => {
         return { ...prevState, type: "verify" };
       });
-      return console.log(action);
-      // return setEmailSent(true);
+
+      setEmailSent((prevState) => {
+        return true;
+      });
+      setIsLoading((prevState) => {
+        return { ...prevState, type: "" };
+      });
+      return;
       // // eslint-disable-next-line
 
       // // eslint-disable-next-line
@@ -102,9 +108,6 @@ const EmailVerification = () => {
       //   setEmailSent(false);
       //   onSetShowEmailLinkSentPopUp(false);
       // }
-      // setIsLoading((prevState) => {
-      //   return { ...prevState, type: "" };
-      // });
     },
     [HOSTURI, sendRequest, token, onSetShowEmailLinkSentPopUp]
   );

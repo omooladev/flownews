@@ -7,7 +7,6 @@ const VerifyEmail = ({ error, isLoading, verifyEmailHandler }) => {
         flowNews
       </p>
       {error && <p className={styles["error"]}>{error}</p>}
-
       <button
         className={styles.verifyEmailButton}
         disabled={isLoading.type === "verify" ? true : false}
