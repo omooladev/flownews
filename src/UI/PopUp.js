@@ -1,20 +1,9 @@
 import ReactDOM from "react-dom";
 import Card from "./Card.js";
 import styles from "./PopUp.module.css";
-import { useContext, useEffect, useCallback } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../store/Auth/auth-context.js";
 const BackDrop = (props) => {
-  const { makeBodyFixed, onMakeBodyFixed } = useContext(AuthContext);
-
-  // const closePopUpHandler = useCallback(
-  //   (event) => {
-  //     event.stopPropagation();
-  //     if (!makeBodyFixed) {
-  //       onMakeBodyFixed(true);
-  //     }
-  //   },
-  //   [makeBodyFixed, onMakeBodyFixed]
-  // );
   return <div className={styles.overlay} onClick={props.onClick}></div>;
 };
 

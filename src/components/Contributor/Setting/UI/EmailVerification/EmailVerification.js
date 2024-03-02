@@ -122,6 +122,8 @@ const EmailVerification = () => {
             isLoading={isLoading}
             resentSuccess={resentSuccess}
             emailRequestChangeAddress={emailRequestChangeAddress}
+            makeBodyFixed={makeBodyFixed}
+            onMakeBodyFixed={onMakeBodyFixed}
             onResendEmailLink={verifyEmailHandler}
             onSetEmailSent={(bool) => {
               setEmailSent(bool);

@@ -11,10 +11,31 @@
 
 .pop-up {
   z-index: 999;
-  height: 100vh;
+}
+//? media queries for responsiveness
+//* when the width is less than 500px
+@media (max-width: 500px) {
+  .pop-up {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    padding: 1rem 5%;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+  }
 }
 @media (min-width: 500px) {
   .pop-up {
-    height: 50vh;
+    position: absolute;
+    left: 50%;
+    width: 25rem;
+    margin-left: -12.5rem;
+    overflow: hidden;
+    padding: 1rem;
   }
 }

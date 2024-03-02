@@ -12,14 +12,28 @@ const EmailLinkSentPopUp = (props) => {
     onResendEmailLink,
     emailRequestChangeAddress,
     onSetShowEmailLinkSentPopUp,
+    onMakeBodyFixed,
+    makeBodyFixed,
   } = props;
+
   const closePopUpHandler = useCallback(
     (event) => {
+      //----------> A function that is called when the user clicks the cancel arrow on the PopUp
       event.stopPropagation();
-      onSetEmailSent(false);
-      onSetShowEmailLinkSentPopUp(false);
+      //----------> If body is fixed, make it normal
+      if (makeBodyFixed) {
+        onMakeBodyFixed(false);
+      }
+      //----------> set the email sent to false and make the popup invisible
+      onSetEmailSent((prevState) => false);
+      onSetShowEmailLinkSentPopUp((prevState) => false);
     },
-    [onSetEmailSent, onSetShowEmailLinkSentPopUp]
+    [
+      onSetEmailSent,
+      onSetShowEmailLinkSentPopUp,
+      onMakeBodyFixed,
+      makeBodyFixed,
+    ]
   );
   return (
     <PopUp className={`${styles.email_link_sent}`} onClick={closePopUpHandler}>
@@ -36,7 +50,13 @@ const EmailLinkSentPopUp = (props) => {
           <BiEnvelope className={styles.email_icon} />
         </div>
         <p className={styles.message}>
-          {`We sent a message to ${emailRequestChangeAddress}. Tap the verify button in that email to verify your account. If it doesn't appear within a few minutes, check your spam folder`}
+          We sent a message to
+          <p className={styles.contributor_email}>
+            {" "}
+            {`${emailRequestChangeAddress}`}
+          </p>
+          . Tap the verify button in that email to verify your account. If it
+          doesn't appear within a few minutes, check your spam folder
         </p>
       </div>
       <div className={styles.resend_verification}>
