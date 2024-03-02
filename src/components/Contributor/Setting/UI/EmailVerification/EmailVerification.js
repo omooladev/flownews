@@ -12,6 +12,7 @@ import EmailLinkSentPopUp from "../../../../PopUps/Email/EmailLinkSentPopUp";
 
 //<---------- Import Styles ---------->
 import styles from "./EmailVerification.module.css";
+import Card from "../../../../../UI/Card";
 
 const EmailVerification = () => {
   //---------> access the sendRequest function from the useHTTP hook
@@ -109,7 +110,7 @@ const EmailVerification = () => {
   );
   return (
     <Fragment>
-      <div className={styles.email_verification}>
+      <Card className={styles.email_verification}>
         {emailSent && (
           <EmailLinkSentPopUp
             isLoading={isLoading}
@@ -145,7 +146,7 @@ const EmailVerification = () => {
             verifyEmailHandler={verifyEmailHandler}
           />
         )}
-      </div>
+      </Card>
     </Fragment>
   );
 };

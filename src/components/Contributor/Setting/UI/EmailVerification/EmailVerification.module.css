@@ -1,5 +1,5 @@
 .email_verification {
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   box-shadow: none;
   background-color: var(--email-verification-container-color);
   margin: 1rem 0;
