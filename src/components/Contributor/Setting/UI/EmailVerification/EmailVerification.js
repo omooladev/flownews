@@ -114,6 +114,7 @@ const EmailVerification = () => {
   return (
     <Fragment>
       <Card className={styles.email_verification}>
+        {/* If the verification email has been sent, display this email sent component */}
         {emailSent && (
           <EmailLinkSentPopUp
             isLoading={isLoading}

@@ -4,6 +4,7 @@ import PopUp from "../../../UI/PopUp";
 import styles from "./EmailLinkSentPopUp.module.css";
 
 const EmailLinkSentPopUp = (props) => {
+  //----------> This component is responsible for rendering the notification that the email has been sent
   const {
     isLoading,
     resentSuccess,
@@ -21,8 +22,14 @@ const EmailLinkSentPopUp = (props) => {
     [onSetEmailSent, onSetShowEmailLinkSentPopUp]
   );
   return (
-    <PopUp className={`popup ${styles.email_link_sent}`} onClick={closePopUpHandler}>
-      <BiX className={`${styles.icon} ${styles.cancel}`} onClick={closePopUpHandler} />
+    <PopUp
+      className={`popup ${styles.email_link_sent}`}
+      onClick={closePopUpHandler}
+    >
+      <BiX
+        className={`${styles.icon} ${styles.cancel}`}
+        onClick={closePopUpHandler}
+      />
       <div className={styles.header}>
         <h4>FINAL STEP</h4>
         <h2>CONFIRM EMAIL</h2>
@@ -38,7 +45,9 @@ const EmailLinkSentPopUp = (props) => {
       <div className={styles.resend_verification}>
         {!resentSuccess && (
           <>
-            {isLoading.type !== "verify" && <BiEnvelope className={styles.email} />}
+            {isLoading.type !== "verify" && (
+              <BiEnvelope className={styles.email} />
+            )}
             <button
               type="button"
               onClick={(event) => {

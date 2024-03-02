@@ -9,7 +9,7 @@ const VerifyEmail = ({ error, isLoading, verifyEmailHandler }) => {
       {error && <p className={styles["error"]}>{error}</p>}
       <button
         className={styles.verifyEmailButton}
-        disabled={isLoading.type === "verify" ? true : false}
+        disabled={isLoading.type === "verify" ? true : false} // Means that disable the button or not if the loading state is verify i.e if we already clicked on the verify button
         onClick={(event) => {
           verifyEmailHandler(event, { action: "verify" });
         }}
