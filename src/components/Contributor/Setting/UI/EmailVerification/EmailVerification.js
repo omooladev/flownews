@@ -1,11 +1,20 @@
+//<---------- Import ---------->
 import { Fragment, useCallback, useContext, useState } from "react";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
+
+//<---------- Import Hooks ---------->
 import useHttp from "../../../../../hooks/useHttp";
-import EmailLinkSentPopUp from "../../../../PopUps/Email/EmailLinkSentPopUp";
-import styles from "./EmailVerification.module.css";
+
+//<---------- Import components ---------->
+import VerifyEmail from "./VerifyEmail";
 import EmailRequestChange from "./EmailRequestChange";
-import EmailRequestNotChange from "./EmailRequestNotChange";
+import EmailLinkSentPopUp from "../../../../PopUps/Email/EmailLinkSentPopUp";
+
+//<---------- Import Styles ---------->
+import styles from "./EmailVerification.module.css";
+
 const EmailVerification = () => {
+  //---------> access the sendRequest function from the useHTTP hook
   const { sendRequest } = useHttp();
   const {
     HOSTURI,
@@ -18,7 +27,8 @@ const EmailVerification = () => {
       emailRequestChangeAddressIsVerified,
     },
   } = useContext(AuthContext);
-  const [isLoading, setIsLoading] = useState({ type: "" });
+  //<---------- States ---------->
+  const [isLoading, setIsLoading] = useState({ type: "" }); //----------> this accepts what we are loading for
   const [error, setError] = useState("an error www");
   const [emailSent, setEmailSent] = useState(false);
   const [resentSuccess, setResentSuccess] = useState(false);
@@ -30,10 +40,13 @@ const EmailVerification = () => {
       setIsLoading((prevState) => {
         return { ...prevState, type: "cancel" };
       });
-      const response = await sendRequest(`${HOSTURI}/email/cancel-email-change-request`, {
-        method: "PATCH",
-        token,
-      });
+      const response = await sendRequest(
+        `${HOSTURI}/email/cancel-email-change-request`,
+        {
+          method: "PATCH",
+          token,
+        }
+      );
       const error = response.error || "";
       const data = response.data || "";
       if (data) {
@@ -49,80 +62,90 @@ const EmailVerification = () => {
     [sendRequest, HOSTURI, token, onSaveContributorData]
   );
   const verifyEmailHandler = useCallback(
-    async (event, Type) => {
+    async (event, action) => {
       event.stopPropagation();
-      return setEmailSent(true);
-      // eslint-disable-next-line
       setError("");
       setIsLoading((prevState) => {
         return { ...prevState, type: "verify" };
       });
-      // eslint-disable-next-line
-      const response = await sendRequest(`${HOSTURI}/email/sendVerificationLink`, {
-        method: "PATCH",
-        token,
-      });
-      // const response={status:200} //* for testing
-      const error = response.error || "";
-      const status = response.status || "";
+      return console.log(action);
+      // return setEmailSent(true);
+      // // eslint-disable-next-line
 
-      if (status === 200) {
-        setEmailSent(true);
-        onSetShowEmailLinkSentPopUp(true);
-        const { type } = Type || "";
-        if (type === "resend") {
-          setResentSuccess(true);
-          setTimeout(() => {
-            setResentSuccess(false);
-          }, 2000);
-        }
-      }
-      // eslint-disable-next-line
-      if (error) {
-        setError(error);
-        setEmailSent(false);
-        onSetShowEmailLinkSentPopUp(false);
-      }
-      setIsLoading((prevState) => {
-        return { ...prevState, type: "" };
-      });
+      // // eslint-disable-next-line
+      // const response = await sendRequest(
+      //   `${HOSTURI}/email/sendVerificationLink`,
+      //   {
+      //     method: "PATCH",
+      //     token,
+      //   }
+      // );
+      // // const response={status:200} //* for testing
+      // const error = response.error || "";
+      // const status = response.status || "";
+
+      // if (status === 200) {
+      //   setEmailSent(true);
+      //   onSetShowEmailLinkSentPopUp(true);
+      //   const { type } = Type || "";
+      //   if (type === "resend") {
+      //     setResentSuccess(true);
+      //     setTimeout(() => {
+      //       setResentSuccess(false);
+      //     }, 2000);
+      //   }
+      // }
+      // // eslint-disable-next-line
+      // if (error) {
+      //   setError(error);
+      //   setEmailSent(false);
+      //   onSetShowEmailLinkSentPopUp(false);
+      // }
+      // setIsLoading((prevState) => {
+      //   return { ...prevState, type: "" };
+      // });
     },
     [HOSTURI, sendRequest, token, onSetShowEmailLinkSentPopUp]
   );
   return (
     <Fragment>
-      {(!emailRequestChangeAddressIsVerified || emailRequestChange) && (
-        <div className={styles.email_verification}>
-          {emailSent && (
-            <EmailLinkSentPopUp
-              isLoading={isLoading}
-              resentSuccess={resentSuccess}
-              emailRequestChangeAddress={emailRequestChangeAddress}
-              onResendEmailLink={verifyEmailHandler}
-              onSetEmailSent={(bool) => {
-                setEmailSent(bool);
-              }}
-              onSetShowEmailLinkSentPopUp={(bool) => {
-                onSetShowEmailLinkSentPopUp(bool);
-              }}
-            />
-          )}
-          <h3>Email Verification</h3>
-
-          {emailRequestChange && !emailRequestChangeAddressIsVerified && (
-            <EmailRequestChange
-              isLoading={isLoading}
-              error={error}
-              emailRequestChangeAddress={emailRequestChangeAddress}
-              verifyEmailHandler={verifyEmailHandler}
-              onCancelEmailRequestChangeHandler={cancelEmailRequestChangeHandler}
-            />
-          )}
-          {!emailRequestChange && !emailRequestChangeAddressIsVerified && (
-            <EmailRequestNotChange isLoading={isLoading} verifyEmailHandler={verifyEmailHandler} />
-          )}
-        </div>
-      )}
+      <div className={styles.email_verification}>
+        {emailSent && (
+          <EmailLinkSentPopUp
+            isLoading={isLoading}
+            resentSuccess={resentSuccess}
+            emailRequestChangeAddress={emailRequestChangeAddress}
+            onResendEmailLink={verifyEmailHandler}
+            onSetEmailSent={(bool) => {
+              setEmailSent(bool);
+            }}
+            onSetShowEmailLinkSentPopUp={(bool) => {
+              onSetShowEmailLinkSentPopUp(bool);
+            }}
+          />
+        )}
+        <h3>Email Verification</h3>
+        {/* If Contributor already requested for an email change and the new email 
+        has not been verified, display this */}
+        {emailRequestChange && !emailRequestChangeAddressIsVerified && (
+          <EmailRequestChange
+            isLoading={isLoading}
+            error={error}
+            emailRequestChangeAddress={emailRequestChangeAddress}
+            verifyEmailHandler={verifyEmailHandler}
+            onCancelEmailRequestChangeHandler={cancelEmailRequestChangeHandler}
+          />
+        )}
+        {/* If Contributor did not request for an email change and his primary email
+        has not been verified, display this. By default the email request change address is 
+        always the primary email used in creating an account*/}
+        {!emailRequestChange && !emailRequestChangeAddressIsVerified && (
+          <VerifyEmail
+            isLoading={isLoading}
+            verifyEmailHandler={verifyEmailHandler}
+          />
+        )}
+      </div>
     </Fragment>
   );
 };

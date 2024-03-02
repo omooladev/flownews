@@ -1,4 +1,5 @@
 .setting_link_content {
+  width: 100%;
   color: var(--tertiary-color);
 }
 .setting_link_content h2 {

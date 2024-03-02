@@ -19,8 +19,17 @@
     margin-right: 1rem;
     &:disabled {
       cursor: not-allowed;
+      background-color: var(--primary-disabled-background-color);
+      color: var(--primary-disabled-color);
+      &:hover {
+        background-color: var(--primary-disabled-background-color);
+      }
+    }
+    &:hover {
+      background-color: var(--primary-hover-color);
     }
   }
+
   .cancel {
     background-color: rgba(255, 0, 0, 0.7);
   }

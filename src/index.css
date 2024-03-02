@@ -21,6 +21,8 @@
   /*? colors */
   --primary-color: rgb(48, 155, 101);
   --primary-hover-color: rgba(48, 155, 101, 0.8);
+  --primary-disabled-background-color: rgb(38, 124, 80);
+  --primary-disabled-color: rgb(220, 220, 220);
   --secondary-color: black;
   --tertiary-color: black;
   --tertiary-extra-color: white;
@@ -60,6 +62,7 @@ body.dark {
   /*? colors */
   --primary-color: rgb(255, 165, 0);
   --primary-hover-color: rgba(255, 165, 0, 0.8);
+  --primary-disabled-background-color: rgb(245, 123, 0);
   --secondary-color: rgba(255, 255, 255, 0.87);
   --tertiary-color: white;
   --tertiary-extra-color: black;
