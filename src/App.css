@@ -8,7 +8,7 @@
 /*note---->extra settings for the main class */
 .main.profile_page {
   width: 100%;
-  max-width:100%;
+  max-width: 100%;
 }
 
 .main.profile_updated {
@@ -21,7 +21,4 @@
 .success {
   color: var(--body-color);
   background-color: var(--primary-color);
-}
-.popup {
-  z-index: 999;
 }

@@ -1,12 +1,36 @@
 import ReactDOM from "react-dom";
 import Card from "./Card.js";
 import styles from "./PopUp.module.css";
+import { useContext, useEffect, useCallback } from "react";
+import { AuthContext } from "../store/Auth/auth-context.js";
 const BackDrop = (props) => {
+  const { makeBodyFixed, onMakeBodyFixed } = useContext(AuthContext);
+
+  // const closePopUpHandler = useCallback(
+  //   (event) => {
+  //     event.stopPropagation();
+  //     if (!makeBodyFixed) {
+  //       onMakeBodyFixed(true);
+  //     }
+  //   },
+  //   [makeBodyFixed, onMakeBodyFixed]
+  // );
   return <div className={styles.overlay} onClick={props.onClick}></div>;
 };
 
 const PopUpBox = (props) => {
-  return <Card className={props.className}>{props.children}</Card>;
+  const { makeBodyFixed, onMakeBodyFixed } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!makeBodyFixed) {
+      onMakeBodyFixed(true);
+    }
+  }, [makeBodyFixed, onMakeBodyFixed]);
+  return (
+    <Card className={`${styles["pop-up"]} ${props.className}`}>
+      {props.children}
+    </Card>
+  );
 };
 
 //----------> The Popup function for rendering all other pop up

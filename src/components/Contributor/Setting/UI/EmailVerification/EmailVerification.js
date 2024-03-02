@@ -22,6 +22,8 @@ const EmailVerification = () => {
     token,
     onSaveContributorData,
     onSetShowEmailLinkSentPopUp,
+    makeBodyFixed,
+    onMakeBodyFixed,
     contributorData: {
       emailRequestChange,
       emailRequestChangeAddress,

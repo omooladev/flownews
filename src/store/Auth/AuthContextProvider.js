@@ -16,7 +16,8 @@ const AuthContextProvider = (props) => {
     lastLocation,
   } = useContext(AppContext);
 
-  const [makeBodyFixed, setMakeBodyFixed] = useState(false);
+  //<----------- States ---------->
+  const [makeBodyFixed, setMakeBodyFixed] = useState(false); //----------> Used to make body fixed when a pop up is shown
 
   const [pageIsLoading, setPageIsLoading] = useState(null);
 
@@ -316,6 +317,7 @@ const AuthContextProvider = (props) => {
         profileUpdated,
         onChangeProfileUpdated: changeProfileUpdated,
         changeAppMode: onChangeAppMode,
+        //<----------- Variable and function responsible for making body fixed-------->
         makeBodyFixed,
         onMakeBodyFixed: (bool) => setMakeBodyFixed(bool),
         onUpdateContributorProfile: updateContributorProfile,

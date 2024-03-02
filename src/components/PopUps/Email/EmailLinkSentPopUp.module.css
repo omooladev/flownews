@@ -1,7 +1,9 @@
 .email_link_sent {
   background-color: var(--body-color);
   text-align: center;
-  background-color: red;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 .email_link_sent .icon {
   color: var(--secondary-color);

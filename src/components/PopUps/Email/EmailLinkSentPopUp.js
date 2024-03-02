@@ -22,10 +22,7 @@ const EmailLinkSentPopUp = (props) => {
     [onSetEmailSent, onSetShowEmailLinkSentPopUp]
   );
   return (
-    <PopUp
-      className={`popup ${styles.email_link_sent}`}
-      onClick={closePopUpHandler}
-    >
+    <PopUp className={`${styles.email_link_sent}`} onClick={closePopUpHandler}>
       <BiX
         className={`${styles.icon} ${styles.cancel}`}
         onClick={closePopUpHandler}

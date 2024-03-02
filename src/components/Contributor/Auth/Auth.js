@@ -39,7 +39,7 @@ const Auth = () => {
         return resetAuthReply();
       }
     },
-    [history, lastLocation, authReply, resetAuthReply,cancelRequest]
+    [history, lastLocation, authReply, resetAuthReply, cancelRequest]
   );
 
   const toggleViewPasswordHandler = useCallback(() => {
@@ -55,7 +55,11 @@ const Auth = () => {
       const emailLength = email.trim().length;
       if (emailLength === 0) {
         setAuthReply((prevReply) => {
-          return { ...prevReply, type: "error", message: "Please provide your email address" };
+          return {
+            ...prevReply,
+            type: "error",
+            message: "Please provide your email address",
+          };
         });
         return false;
       }
@@ -63,32 +67,10 @@ const Auth = () => {
     if (validationType === "check_@" || checkAllLogic) {
       if (!email.includes("@")) {
         setAuthReply((prevReply) => {
-          return { ...prevReply, type: "error", message: "Email Address is invalid" };
-        });
-        return false;
-      }
-    }
-    return true;
-  }, []);
-  const validatePasswordHandler = useCallback(({ validationType, password }) => {
-    let checkAllLogic;
-    if (validationType === "check_full") {
-      checkAllLogic = true;
-    }
-    if (validationType === "check_length" || checkAllLogic) {
-      const passwordLength = password.trim().length;
-      if (passwordLength === 0) {
-        setAuthReply((prevReply) => {
-          return { ...prevReply, type: "error", message: "Please provide your password" };
-        });
-        return false;
-      }
-      if (passwordLength < 8 && checkAllLogic) {
-        setAuthReply((prevReply) => {
           return {
             ...prevReply,
             type: "error",
-            message: "Password Length must be at least 8 characters",
+            message: "Email Address is invalid",
           };
         });
         return false;
@@ -96,12 +78,48 @@ const Auth = () => {
     }
     return true;
   }, []);
+  const validatePasswordHandler = useCallback(
+    ({ validationType, password }) => {
+      let checkAllLogic;
+      if (validationType === "check_full") {
+        checkAllLogic = true;
+      }
+      if (validationType === "check_length" || checkAllLogic) {
+        const passwordLength = password.trim().length;
+        if (passwordLength === 0) {
+          setAuthReply((prevReply) => {
+            return {
+              ...prevReply,
+              type: "error",
+              message: "Please provide your password",
+            };
+          });
+          return false;
+        }
+        if (passwordLength < 8 && checkAllLogic) {
+          setAuthReply((prevReply) => {
+            return {
+              ...prevReply,
+              type: "error",
+              message: "Password Length must be at least 8 characters",
+            };
+          });
+          return false;
+        }
+      }
+      return true;
+    },
+    []
+  );
 
   return (
     <>
-      <PopUp onClick={closePopUpHandler} className={`popup ${styles.auth}`}>
+      <PopUp onClick={closePopUpHandler} className={`${styles.auth}`}>
         <div className={styles.mobile_cancel_icon}>
-          <BiX className={`${styles.icon} ${styles.cancel}`} onClick={closePopUpHandler} />
+          <BiX
+            className={`${styles.icon} ${styles.cancel}`}
+            onClick={closePopUpHandler}
+          />
         </div>
 
         {loginLocation && (

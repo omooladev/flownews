@@ -5,6 +5,16 @@
   height: 100vh;
   width: 100vw;
   background-color: var(--body-color);
-  z-index: 999;
+  z-index: 998;
   opacity: 0.8;
+}
+
+.pop-up {
+  z-index: 999;
+  height: 100vh;
+}
+@media (min-width: 500px) {
+  .pop-up {
+    height: 50vh;
+  }
 }
