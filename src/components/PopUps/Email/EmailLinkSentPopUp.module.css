@@ -36,15 +36,21 @@
 .email_link_sent .body .message {
   padding: 1rem 0;
   color: var(--secondary-color);
+}
+.email_link_sent .body .message .contributor_email {
+  display: inline-block;
+  font-style: italic;
+  color: var(--primary-color);
+}
+.email_link_sent .body .message .contributor_email .local_part {
+  width: 8rem;
+  display: inline-block;
+  vertical-align: top;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.email_link_sent .body .message .contributor_email {
-  display: inline;
-  font-style: italic;
-  color: var(--primary-color);
-  text-overflow: ellipsis;
-  overflow: hidden;
+.email_link_sent .body .message .contributor_email .domain_name {
+  display: inline-block;
 }
 .email_link_sent .cancel_icon {
   font-size: 1.2rem;
