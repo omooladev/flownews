@@ -192,11 +192,3 @@
     text-decoration: underline;
   }
 }
-@media (min-height: 500px) and (min-width: 500px) {
-  .auth {
-    position: absolute;
-    top: 50%;
-    height: auto;
-    transform: translateY(-50%);
-  }
-}

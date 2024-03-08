@@ -5,7 +5,7 @@
 
 // 16px equal 1 rem
 
-
+//----------> button has a font-size of 0.9 rem and also the icon
 //* Styles
 //important------------------------> Styles explained
 
@@ -64,4 +64,3 @@
 //note       an application component.
 //note        To use the AppContext context, a component can import it and then use the
 //note        useContext hook to access the context's properties. For example:
-

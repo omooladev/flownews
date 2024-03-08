@@ -43,7 +43,7 @@
   color: var(--primary-color);
 }
 .email_link_sent .body .message .contributor_email .local_part {
-  width: 8rem;
+  width: 8.1rem;
   display: inline-block;
   vertical-align: top;
   overflow: hidden;
@@ -62,19 +62,20 @@
   justify-content: center;
   padding: 1rem 0;
   color: var(--primary-color);
+  gap: 0.5rem;
 }
 .email_link_sent .resend_verification .email {
-  font-size: 1.2rem;
+  font-size: 0.9rem;
 }
 .email_link_sent .resend_verification button {
+  font-size: 0.9rem;
   cursor: pointer;
-  margin: 0 0.5rem;
   background-color: transparent;
   color: var(--primary-color);
 }
 
 @media (min-width: 500px) {
-  .email_link_sent .icon {
+  .icon {
     display: none;
   }
 }
