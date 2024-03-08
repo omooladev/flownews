@@ -24,18 +24,14 @@ const EmailVerification = () => {
     onSetShowEmailLinkSentPopUp,
     makeBodyFixed,
     onMakeBodyFixed,
-    contributorData: {
-      emailRequestChange,
-      emailRequestChangeAddress,
-      emailRequestChangeAddressIsVerified,
-    },
+    contributorData: { emailRequestChange, emailRequestChangeAddress, emailRequestChangeAddressIsVerified },
   } = useContext(AuthContext);
   //<---------- States ---------->
   const [isLoading, setIsLoading] = useState({ type: "" }); //----------> this accepts what we are loading for
   const [error, setError] = useState("an error has occured");
   const [emailSent, setEmailSent] = useState(false);
-  const [resentSuccess, setResentSuccess] = useState(false);
-
+  //const [resentSuccess, setResentSuccess] = useState(false);
+  const resentSuccess = false;
   const cancelEmailRequestChangeHandler = useCallback(
     async (event) => {
       event.stopPropagation();
@@ -43,13 +39,10 @@ const EmailVerification = () => {
       setIsLoading((prevState) => {
         return { ...prevState, type: "cancel" };
       });
-      const response = await sendRequest(
-        `${HOSTURI}/email/cancel-email-change-request`,
-        {
-          method: "PATCH",
-          token,
-        }
-      );
+      const response = await sendRequest(`${HOSTURI}/email/cancel-email-change-request`, {
+        method: "PATCH",
+        token,
+      });
       const error = response.error || "";
       const data = response.data || "";
       if (data) {
@@ -111,7 +104,8 @@ const EmailVerification = () => {
       //   onSetShowEmailLinkSentPopUp(false);
       // }
     },
-    [HOSTURI, sendRequest, token, onSetShowEmailLinkSentPopUp]
+    []
+    //[HOSTURI, sendRequest, token, onSetShowEmailLinkSentPopUp]
   );
   return (
     <Fragment>
@@ -149,11 +143,7 @@ const EmailVerification = () => {
         has not been verified, display this. By default the email request change address is 
         always the primary email used in creating an account*/}
         {!emailRequestChange && !emailRequestChangeAddressIsVerified && (
-          <VerifyEmail
-            error={error}
-            isLoading={isLoading}
-            verifyEmailHandler={verifyEmailHandler}
-          />
+          <VerifyEmail error={error} isLoading={isLoading} verifyEmailHandler={verifyEmailHandler} />
         )}
       </Card>
     </Fragment>

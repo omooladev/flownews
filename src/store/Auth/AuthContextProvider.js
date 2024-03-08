@@ -60,9 +60,7 @@ const AuthContextProvider = (props) => {
 
       if (
         contributorData.username &&
-        (!username ||
-          contributorData.username === username ||
-          searchedContributorData.username === username)
+        (!username || contributorData.username === username || searchedContributorData.username === username)
       ) {
         //* This means that if contributor data exits already, then there is no need to fetch data again
         return;
@@ -72,13 +70,10 @@ const AuthContextProvider = (props) => {
         return true;
       });
 
-      const response = await sendRequest(
-        `${HOSTURI}/contributors${username ? "/" + username : ""}`,
-        {
-          method: "GET",
-          token,
-        }
-      );
+      const response = await sendRequest(`${HOSTURI}/contributors${username ? "/" + username : ""}`, {
+        method: "GET",
+        token,
+      });
       const data = response.data;
       const error = response.error;
 
@@ -105,10 +100,7 @@ const AuthContextProvider = (props) => {
           setContributorError((prevError) => {
             return { ...prevError, hasError: true, message: error };
           });
-        } else if (
-          error === "Authentication Failed" ||
-          error === "Cannot find your account"
-        ) {
+        } else if (error === "Authentication Failed" || error === "Cannot find your account") {
           onChangeAppMode({ token: null, isLoggedIn: false });
         } else {
           setContributorError((prevError) => {
@@ -126,13 +118,7 @@ const AuthContextProvider = (props) => {
         return false;
       });
     },
-    [
-      sendRequest,
-      token,
-      contributorData.username,
-      searchedContributorData,
-      onChangeAppMode,
-    ]
+    [sendRequest, token, contributorData.username, searchedContributorData, onChangeAppMode]
   );
   //----------> reset the searched contributor to not contain any data
   const resetSearchedContributor = useCallback(() => {
@@ -219,13 +205,10 @@ const AuthContextProvider = (props) => {
 
   const resetPasswordHandler = useCallback(
     async (username, passwordProperties) => {
-      const response = await sendRequest(
-        `${HOSTURI}/auth/${username}/reset_password`,
-        {
-          method: "PATCH",
-          contributorData: passwordProperties,
-        }
-      );
+      const response = await sendRequest(`${HOSTURI}/auth/${username}/reset_password`, {
+        method: "PATCH",
+        contributorData: passwordProperties,
+      });
       return response;
     },
     [sendRequest]
@@ -258,14 +241,11 @@ const AuthContextProvider = (props) => {
   }, []);
   const updateContributorProfile = useCallback(
     async (updateProperties) => {
-      const response = await sendRequest(
-        `${HOSTURI}/contributor/update-profile`,
-        {
-          method: "PATCH",
-          contributorData: { updateProperties },
-          token,
-        }
-      );
+      const response = await sendRequest(`${HOSTURI}/contributor/update-profile`, {
+        method: "PATCH",
+        contributorData: { updateProperties },
+        token,
+      });
       return response;
     },
     [sendRequest, token]
