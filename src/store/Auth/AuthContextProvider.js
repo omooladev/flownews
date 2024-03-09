@@ -3,11 +3,11 @@ import { useHistory } from "react-router-dom";
 import { AuthContext } from "./auth-context";
 import { AppContext } from "../App/app-context";
 import useHttp from "../../hooks/useHttp";
-//const HOSTURI = "http://localhost:5000/api/v1";
-//const HOSTURI = "https://flownews-api.onrender.com/api/v1";
+//const HOSTURI = "http://localhost:5000/api/v1";----------> works fine
+const HOSTURI = "https://flownews-api.onrender.com/api/v1";
 //----------> deployment link of the dev branch---> which is the preview deployment
 //let HOSTURI = "https://flownews-api-git-dev-omosuyi-olawoles-projects.vercel.app/api/v1";
-let HOSTURI = "https://flownews-44kwzwauc-omosuyi-olawoles-projects.vercel.app/api/v1";
+//let HOSTURI = "https://flownews-44kwzwauc-omosuyi-olawoles-projects.vercel.app/api/v1";
 
 //let HOSTURI = "https://flownews-api.vercel.app/api/v1"; //----------> master branch deployment link
 const AuthContextProvider = (props) => {
