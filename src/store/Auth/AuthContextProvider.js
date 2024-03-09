@@ -7,7 +7,7 @@ import useHttp from "../../hooks/useHttp";
 //const HOSTURI = "https://flownews-api.onrender.com/api/v1";
 //----------> deployment link of the dev branch---> which is the preview deployment
 // let HOSTURI = "https://flownews-api-git-dev-omosuyi-olawoles-projects.vercel.app";
-let HOSTURI = "flownews-1qr4x3tus-omosuyi-olawoles-projects.vercel.app";
+let HOSTURI = "flownews-arjr4p28d-omosuyi-olawoles-projects.vercel.app";
 
 //let HOSTURI = "https://flownews-api.vercel.app/api/v1"; //----------> master branch deployment link
 const AuthContextProvider = (props) => {
