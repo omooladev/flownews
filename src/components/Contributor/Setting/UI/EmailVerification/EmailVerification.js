@@ -72,7 +72,6 @@ const EmailVerification = () => {
         method: "PATCH",
         token,
       });
-      console.log(response);
       const error = response.error || "";
       const status = response.status || "";
 
