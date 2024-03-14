@@ -67,7 +67,7 @@ const EmailLinkSentPopUp = (props) => {
             <button
               type="button"
               onClick={(event) => {
-                onResendEmailLink(event, { type: "resend" });
+                onResendEmailLink(event, { action: "resend" });
               }}
             >
               {isLoading.type === "verify" ? "Sending verification link" : "RESEND ACCOUNT VERIFICATION"}
@@ -75,7 +75,7 @@ const EmailLinkSentPopUp = (props) => {
           </>
         )}
 
-        {resentSuccess && <p>Email has been successfully resent</p>}
+        {resentSuccess && <p>Email has been resent successfully</p>}
       </div>
     </PopUp>
   );

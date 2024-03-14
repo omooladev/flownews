@@ -28,10 +28,10 @@ const EmailVerification = () => {
   } = useContext(AuthContext);
   //<---------- States ---------->
   const [isLoading, setIsLoading] = useState({ type: "" }); //----------> this accepts what we are loading for
-  const [error, setError] = useState("an error has occured");
+  const [error, setError] = useState("");
   const [emailSent, setEmailSent] = useState(false);
-  //const [resentSuccess, setResentSuccess] = useState(false);
-  const resentSuccess = false;
+  const [resentSuccess, setResentSuccess] = useState(false);
+
   const cancelEmailRequestChangeHandler = useCallback(
     async (event) => {
       event.stopPropagation();
@@ -60,52 +60,49 @@ const EmailVerification = () => {
   const verifyEmailHandler = useCallback(
     async (event, { action }) => {
       event.stopPropagation();
+      let timeOutId;
+      //----------> reset error
       setError("");
+      //----------> set loading state
       setIsLoading((prevState) => {
         return { ...prevState, type: "verify" };
       });
 
-      setEmailSent((prevState) => {
-        return true;
+      const response = await sendRequest(`${HOSTURI}/email/sendVerificationLink`, {
+        method: "PATCH",
+        token,
       });
+      console.log(response);
+      const error = response.error || "";
+      const status = response.status || "";
+
+      if (status === 200) {
+        setEmailSent((prevState) => {
+          return true;
+        });
+        //onSetShowEmailLinkSentPopUp(true);
+        if (action === "resend") {
+          //----------> if we demanded for the email verification link to be resent
+          setResentSuccess((prevState) => true);
+          timeOutId = setTimeout(() => {
+            setResentSuccess((prevState) => false);
+            clearTimeout(timeOutId);
+          }, 2000);
+        }
+      }
+
+      if (error) {
+        setError((prevState) => error);
+        setEmailSent((prevState) => {
+          return false;
+        });
+      }
+      //----------> remove the loading state
       setIsLoading((prevState) => {
         return { ...prevState, type: "" };
       });
-      return;
-      // // eslint-disable-next-line
-
-      // // eslint-disable-next-line
-      // const response = await sendRequest(
-      //   `${HOSTURI}/email/sendVerificationLink`,
-      //   {
-      //     method: "PATCH",
-      //     token,
-      //   }
-      // );
-      // // const response={status:200} //* for testing
-      // const error = response.error || "";
-      // const status = response.status || "";
-
-      // if (status === 200) {
-      //   setEmailSent(true);
-      //   onSetShowEmailLinkSentPopUp(true);
-      //   const { type } = Type || "";
-      //   if (type === "resend") {
-      //     setResentSuccess(true);
-      //     setTimeout(() => {
-      //       setResentSuccess(false);
-      //     }, 2000);
-      //   }
-      // }
-      // // eslint-disable-next-line
-      // if (error) {
-      //   setError(error);
-      //   setEmailSent(false);
-      //   onSetShowEmailLinkSentPopUp(false);
-      // }
     },
-    []
-    //[HOSTURI, sendRequest, token, onSetShowEmailLinkSentPopUp]
+    [sendRequest, HOSTURI, token]
   );
   return (
     <Fragment>

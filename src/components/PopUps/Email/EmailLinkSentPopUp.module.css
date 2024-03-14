@@ -45,10 +45,10 @@
 .email_link_sent .body .message .contributor_email .local_part {
   display: inline-block;
   vertical-align: top;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .email_link_sent .body .message .contributor_email .local_part.fixed-width {
+  overflow: hidden;
+  text-overflow: ellipsis;
   width: 8.1rem;
 }
 .email_link_sent .body .message .contributor_email .domain_name {

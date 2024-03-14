@@ -43,10 +43,10 @@
         .local_part {
           display: inline-block;
           vertical-align: top;
-          overflow: hidden;
-          text-overflow: ellipsis;
 
           &.fixed-width {
+            overflow: hidden;
+            text-overflow: ellipsis;
             width: 8.1rem;
           }
         }
