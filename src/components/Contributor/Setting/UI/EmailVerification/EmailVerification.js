@@ -27,7 +27,7 @@ const EmailVerification = () => {
     contributorData: { emailRequestChange, emailRequestChangeAddress, emailRequestChangeAddressIsVerified },
   } = useContext(AuthContext);
   //<---------- States ---------->
-  const [isLoading, setIsLoading] = useState({ type: "cancel" }); //----------> this accepts what we are loading for
+  const [isLoading, setIsLoading] = useState({ type: "" }); //----------> this accepts what we are loading for
   const [error, setError] = useState("");
   const [emailSent, setEmailSent] = useState(false);
   const [resentSuccess, setResentSuccess] = useState(false);
@@ -35,10 +35,13 @@ const EmailVerification = () => {
   const cancelEmailRequestChangeHandler = useCallback(
     async (event) => {
       event.stopPropagation();
-      setError("");
+      //----------> reset error
+      setError((prevState) => "");
+      //----------> set loading state
       setIsLoading((prevState) => {
         return { ...prevState, type: "cancel" };
       });
+      //----------> send a response to the server
       const response = await sendRequest(`${HOSTURI}/email/cancel-email-change-request`, {
         method: "PATCH",
         token,
@@ -62,12 +65,12 @@ const EmailVerification = () => {
       event.stopPropagation();
       let timeOutId;
       //----------> reset error
-      setError("");
+      setError((prevState) => "");
       //----------> set loading state
       setIsLoading((prevState) => {
         return { ...prevState, type: "verify" };
       });
-
+      //----------> send a response to the server
       const response = await sendRequest(`${HOSTURI}/email/sendVerificationLink`, {
         method: "PATCH",
         token,

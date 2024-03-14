@@ -21,6 +21,7 @@
     padding: 0.5rem 0.6rem;
     margin: 0.5rem 0;
     color: var(--white-color);
+    border-radius: 2px;
     &:disabled {
       cursor: not-allowed;
       color: var(--primary-disabled-color);

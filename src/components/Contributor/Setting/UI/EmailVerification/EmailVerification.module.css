@@ -20,6 +20,7 @@
   padding: 0.5rem 0.6rem;
   margin: 0.5rem 0;
   color: var(--white-color);
+  border-radius: 2px;
 }
 .email_verification .verifyEmailButton:disabled,
 .email_verification .cancel:disabled {
