@@ -37,7 +37,9 @@
   --error-color: rgb(237, 178, 178);
   /* Email Verification */
   --email-verification-container-color: rgba(48, 155, 101, 0.3);
-  ----email-verification-container--error-color: red;
+  --email-verification-container--error-color: red;
+  --email-verification-container-cancel-button-background-color: red; /* same background color for both dark and light mode*/
+  --email-verification-container-cancel-button-disabled-background-color: rgba(255, 0, 0, 0.6);
   /*? normal global colors  */
   --black-color: black;
   --white-color: white;
@@ -90,6 +92,7 @@ body.dark {
   /* Email Verification */
   --email-verification-container-color: rgb(255, 165, 0, 0.3);
   ----email-verification-container--error-color: rgb(237, 178, 178);
+  --email-verification-container-cancel-button-disabled-background-color: rgb(216, 106, 106);
 }
 
 body.fixed-body {

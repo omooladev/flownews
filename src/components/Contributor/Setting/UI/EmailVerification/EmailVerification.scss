@@ -11,19 +11,28 @@
       color: var(--link-color);
     }
     &.error {
-      color: var(----email-verification-container--error-color);
+      color: var(--email-verification-container--error-color);
     }
   }
+
   .verifyEmailButton,
   .cancel {
     cursor: pointer;
     padding: 0.5rem 0.6rem;
-    background-color: var(--primary-color);
+    margin: 0.5rem 0;
     color: var(--white-color);
     &:disabled {
       cursor: not-allowed;
-      background-color: var(--primary-disabled-background-color);
       color: var(--primary-disabled-color);
+    }
+  }
+  .verifyEmailButton {
+    background-color: var(--primary-color);
+
+    margin-right: 1rem;
+    &:disabled {
+      background-color: var(--primary-disabled-background-color);
+
       &:hover {
         background-color: var(--primary-disabled-background-color);
       }
@@ -32,8 +41,13 @@
       background-color: var(--primary-hover-color);
     }
   }
-
   .cancel {
-    background-color: rgba(255, 0, 0, 0.7);
+    background-color: var(--email-verification-container-cancel-button-background-color);
+    &:disabled {
+      background-color: var(--email-verification-container-cancel-button-disabled-background-color);
+      &:hover {
+        background-color: var(--email-verification-container-cancel-button-disabled-background-color);
+      }
+    }
   }
 }

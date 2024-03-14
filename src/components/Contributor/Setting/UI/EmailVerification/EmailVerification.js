@@ -27,7 +27,7 @@ const EmailVerification = () => {
     contributorData: { emailRequestChange, emailRequestChangeAddress, emailRequestChangeAddressIsVerified },
   } = useContext(AuthContext);
   //<---------- States ---------->
-  const [isLoading, setIsLoading] = useState({ type: "" }); //----------> this accepts what we are loading for
+  const [isLoading, setIsLoading] = useState({ type: "cancel" }); //----------> this accepts what we are loading for
   const [error, setError] = useState("");
   const [emailSent, setEmailSent] = useState(false);
   const [resentSuccess, setResentSuccess] = useState(false);

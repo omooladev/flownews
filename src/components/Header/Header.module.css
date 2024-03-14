@@ -1,3 +1,4 @@
+/* MOBILE SCREEN OF LESS THAN 700PX */
 .header, .error {
   display: flex;
   flex-direction: row;
@@ -5,7 +6,6 @@
   justify-content: center;
 }
 
-/* MOBILE SCREEN OF LESS THAN 700PX */
 .header {
   position: fixed;
   top: 0%;
