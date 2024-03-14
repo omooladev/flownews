@@ -31,8 +31,10 @@ const EmailLinkSentPopUp = (props) => {
     [onSetEmailSent, onSetShowEmailLinkSentPopUp, onMakeBodyFixed, makeBodyFixed]
   );
   const localPartOfEmail = emailRequestChangeAddress.split("@")[0];
+  const lengthOfLocalPartOfEmail = localPartOfEmail.length;
+
   const domainName = "@" + emailRequestChangeAddress.split("@")[1];
-  console.log(localPartOfEmail, domainName);
+
   return (
     <PopUp className={`${styles.email_link_sent}`} onClick={closePopUpHandler}>
       <BiX className={`${styles.icon} ${styles.cancel}`} onClick={closePopUpHandler} />
@@ -45,16 +47,18 @@ const EmailLinkSentPopUp = (props) => {
           <BiEnvelope className={styles.email_icon} />
         </div>
 
-        <p className={styles.message}>
+        <div className={styles.message}>
           We sent a message to{" "}
-          <p className={styles.contributor_email}>
+          <div className={styles.contributor_email}>
             {" "}
-            <p className={styles.local_part}>{`${localPartOfEmail}`}</p>
+            <p
+              className={`${styles.local_part} ${lengthOfLocalPartOfEmail >= 15 && styles["fixed-width"]}`}
+            >{`${localPartOfEmail}`}</p>
             <p className={styles.domain_name}>{`${domainName}`}</p>
-          </p>
+          </div>
           . Tap the verify button in that email to verify your account. If it doesn't appear within a few
           minutes, check your spam folder
-        </p>
+        </div>
       </div>
       <div className={styles.resend_verification}>
         {!resentSuccess && (

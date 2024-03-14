@@ -35,17 +35,20 @@
     .message {
       padding: 1rem 0;
       color: var(--secondary-color);
-
       .contributor_email {
         display: inline-block;
         font-style: italic;
         color: var(--primary-color);
+
         .local_part {
-          width: 8.1rem;
           display: inline-block;
           vertical-align: top;
           overflow: hidden;
           text-overflow: ellipsis;
+
+          &.fixed-width {
+            width: 8.1rem;
+          }
         }
         .domain_name {
           display: inline-block;
