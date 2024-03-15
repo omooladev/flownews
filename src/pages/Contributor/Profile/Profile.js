@@ -15,7 +15,7 @@ const Profile = () => {
   //---------->fetches contributor data
   useFetchContributorData(username);
 
-  //note-------->saves route location
+ 
   useNewLocation("profile");
 
   //note-------->Get contributor Data
