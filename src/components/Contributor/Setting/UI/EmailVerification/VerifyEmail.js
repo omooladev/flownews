@@ -4,7 +4,7 @@ const VerifyEmail = ({ error, isLoading, verifyEmailHandler }) => {
     <>
       <p>
         Please verify your email address to have access to all features of
-        flowNews
+        FlowNews
       </p>
       {error && <p className={styles["error"]}>{error}</p>}
       <button
