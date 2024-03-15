@@ -1,10 +1,10 @@
-import { useContext, useCallback} from "react";
-import { Link } from "react-router-dom";
+import { useContext, useCallback } from "react";
 import { AuthContext } from "../../../../../../store/Auth/auth-context";
-import styles from "./UserForm.module.css";
 import ProfilePicture from "../ProfilePicture";
 import Error from "./Error";
 import FormInputs from "./FormInputs";
+import styles from "./UserForm.module.css";
+import FormActions from "./FormActions";
 const UserForm = () => {
   const {
     contributorData: { fullname, email, emailIsPrivate, username, bio, location, education, work },
@@ -14,8 +14,6 @@ const UserForm = () => {
     // onUpdateContributorProfile,
   } = useContext(AuthContext);
 
-  //const [isLoading, setIsLoading] = useState(false);
-  let isLoading = false;
   let error = "An error has occured";
   // const [error, setError] = useState("333333333333");
 
@@ -63,7 +61,7 @@ const UserForm = () => {
 
   return (
     <form className={styles.form} onSubmit={submitContributorProfileHandler}>
-      {error && <Error error={error} />}
+      <Error error={error} />
       <div className={styles.form_controls}>
         <ProfilePicture />
         <FormInputs
@@ -77,17 +75,8 @@ const UserForm = () => {
           work={work}
         />
       </div>
-      <div className={styles.form_actions}>
-        <p>
-          All of the fields on this page except the email address and username are optional and can be deleted
-          at any time, and by filling them out, you're giving us consent to share this data wherever your user
-          profile appears. Please see our <Link to="/site/privacy">privacy statement</Link> to learn more
-          about how we use this information.
-        </p>
-        <button type="submit" className={styles.update_profile} disabled={isLoading ? true : false}>
-          {isLoading ? "Updating..." : "Update Profile"}
-        </button>
-      </div>
+
+      <FormActions />
     </form>
   );
 };

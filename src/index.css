@@ -47,14 +47,15 @@
   --nav-profile-box-color: white;
 
   --profile-color: black;
-  /* Public Profile colors */
-  --form-border-color: rgba(48, 155, 101, 0.2);
-  --form-background-color: rgba(48, 155, 101, 0.1);
 
   /* refactored styles */
 
   /* Styles that are more specific to a particular page */
   --profile-info-background-color: var(--header-color);
+  /* USER FORM PAGE STYLES  */
+  --label-color: black;
+  --form-border-color: rgba(48, 155, 101, 0.2);
+  --form-background-color: rgba(48, 155, 101, 0.1);
 }
 body {
   font-family: var(--secondary-font);
@@ -83,9 +84,6 @@ body.dark {
 
   /* Profile color */
   --profile-color: #ffffff;
-  /* Public Profile colors */
-  --form-border-color: rgba(255, 165, 0, 0.2);
-  --form-background-color: transparent;
 
   /* Styles that are more specific to a particular page */
   --profile-info-background-color: var(--header-color);
@@ -93,6 +91,11 @@ body.dark {
   --email-verification-container-color: rgb(255, 165, 0, 0.3);
   ----email-verification-container--error-color: rgb(237, 178, 178);
   --email-verification-container-cancel-button-disabled-background-color: rgb(216, 106, 106);
+
+  /* USER FORM PAGE STYLES  */
+  --label-color: white;
+  --form-border-color: rgba(255, 165, 0, 0.4);
+  --form-background-color: transparent;
 }
 
 body.fixed-body {
