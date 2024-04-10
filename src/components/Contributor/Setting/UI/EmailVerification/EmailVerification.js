@@ -134,7 +134,7 @@ const EmailVerification = () => {
             isLoading={isLoading}
             error={error}
             emailRequestChangeAddress={emailRequestChangeAddress}
-            verifyEmailHandler={verifyEmailHandler}
+            onVerifyEmailHandler={verifyEmailHandler}
             onCancelEmailRequestChangeHandler={cancelEmailRequestChangeHandler}
           />
         )}
@@ -142,7 +142,7 @@ const EmailVerification = () => {
         has not been verified, display this. By default the email request change address is 
         always the primary email used in creating an account*/}
         {!emailRequestChange && !emailRequestChangeAddressIsVerified && (
-          <VerifyEmail error={error} isLoading={isLoading} verifyEmailHandler={verifyEmailHandler} />
+          <VerifyEmail error={error} isLoading={isLoading} onVerifyEmailHandler={verifyEmailHandler} />
         )}
       </Card>
     </Fragment>

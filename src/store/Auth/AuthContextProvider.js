@@ -195,7 +195,8 @@ const AuthContextProvider = (props) => {
     [sendRequest, token]
   );
 
-  const verifyEmailHandler = useCallback(
+  //<---------- FUNCTION FOR VERIFYING EMAIL ADDRESS ---------->
+  const verifyEmailAddressHandler = useCallback(
     async (uri) => {
       const response = await sendRequest(`${HOSTURI}/auth${uri}`, {
         method: "PATCH",
@@ -235,7 +236,7 @@ const AuthContextProvider = (props) => {
     },
     [sendRequest]
   );
-  //?refactored functions
+  //<---------- FUNCTION FOR SAVING CONTRIBUTOR DATA IN OUR APPLICATION ---------->
   const saveContributorData = useCallback((data) => {
     setContributorData((prevData) => {
       return { ...prevData, ...data };
@@ -287,7 +288,7 @@ const AuthContextProvider = (props) => {
 
         onUpdate_ResetPassword: update_ResetPasswordHandler,
 
-        onVerifyEmailAddress: verifyEmailHandler,
+        onVerifyEmailAddress: verifyEmailAddressHandler,
         onResetPassword: resetPasswordHandler,
 
         onVerifyPasswordResetLink: verifyPasswordResetLink,

@@ -8,8 +8,9 @@ import useFetchContributorData from "../../hooks/useFetchContributorData";
 import { AuthContext } from "../../store/Auth/auth-context";
 import styles from "./EmailVerification.module.css";
 const EmailVerification = () => {
+  //----------> fetch the contributor details
   useFetchContributorData();
-  const { onVerifyEmailAddress, onSetUserData } = useContext(AuthContext);
+  const { onVerifyEmailAddress, onSaveContributorData } = useContext(AuthContext);
   const { pathname } = useLocation();
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -17,20 +18,18 @@ const EmailVerification = () => {
   const verifyEmailHandler = useCallback(async () => {
     setIsLoading(true);
     const response = await onVerifyEmailAddress(pathname);
-    const data = response.data || "";
-    const error = response.error || "";
+    const data = response.data;
+    const error = response.error;
     setIsLoading(false);
     if (data) {
-      const message = data.message || "";
-      const contributor = data.contributor || "";
-      if (message) {
-        if (message === "email address already verified") {
-          setMessage("email address already verified");
-        }
-        if (message === "email address has been verified successfully") {
-          setMessage("email address has been verified successfully");
-          onSetUserData(contributor);
-        }
+      const message = data.message;
+      const contributor = data.contributor;
+      if (message === "email address already verified") {
+        setMessage("email address already verified");
+      }
+      if (message === "email address has been verified successfully") {
+        setMessage("email address has been verified successfully");
+        onSaveContributorData(contributor);
       }
     }
     if (error) {
@@ -40,7 +39,7 @@ const EmailVerification = () => {
         setMessage(error);
       }
     }
-  }, [pathname, onVerifyEmailAddress, onSetUserData]);
+  }, [pathname, onVerifyEmailAddress, onSaveContributorData]);
 
   useEffect(() => {
     if (pathname) {
@@ -53,9 +52,7 @@ const EmailVerification = () => {
       {isLoading && <SuspenseLoader />}
       {!isLoading && message === "invalid link" && <EmailTokenExpired />}
       {!isLoading && message === "email address already verified" && <EmailVerifiedAlready />}
-      {!isLoading && message === "email address has been verified successfully" && (
-        <EmailVerified />
-      )}
+      {!isLoading && message === "email address has been verified successfully" && <EmailVerified />}
     </div>
   );
 };

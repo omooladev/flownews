@@ -3,7 +3,7 @@ const EmailRequestChange = ({
   isLoading,
   error,
   emailRequestChangeAddress,
-  verifyEmailHandler,
+  onVerifyEmailHandler,
   onCancelEmailRequestChangeHandler,
 }) => {
   return (
@@ -19,7 +19,7 @@ const EmailRequestChange = ({
         className={styles.verifyEmailButton}
         disabled={isLoading.type === "verify" ? true : false}
         onClick={(event) => {
-          verifyEmailHandler(event, { type: "verify" });
+          onVerifyEmailHandler(event, { type: "verify" });
         }}
       >
         {isLoading.type === "verify" ? "Sending verification link..." : "Verify"}
