@@ -108,43 +108,45 @@ const EmailVerification = () => {
   );
   return (
     <Fragment>
-      <Card className={styles.email_verification}>
-        {/* If the verification email has been sent, display this email sent component */}
-        {emailSent && (
-          <EmailLinkSentPopUp
-            isLoading={isLoading}
-            resentSuccess={resentSuccess}
-            emailRequestChangeAddress={emailRequestChangeAddress}
-            makeBodyFixed={makeBodyFixed}
-            onMakeBodyFixed={onMakeBodyFixed}
-            onResendEmailLink={verifyEmailHandler}
-            onSetEmailSent={(bool) => {
-              setEmailSent(bool);
-            }}
-            onSetShowEmailLinkSentPopUp={(bool) => {
-              onSetShowEmailLinkSentPopUp(bool);
-            }}
-          />
-        )}
-        <h3>Email Verification</h3>
-        {/* If Contributor already requested for an email change and the new email 
+      {!emailRequestChangeAddressIsVerified && (
+        <Card className={styles.email_verification}>
+          {/* If the verification email has been sent, display this email sent component */}
+          {emailSent && (
+            <EmailLinkSentPopUp
+              isLoading={isLoading}
+              resentSuccess={resentSuccess}
+              emailRequestChangeAddress={emailRequestChangeAddress}
+              makeBodyFixed={makeBodyFixed}
+              onMakeBodyFixed={onMakeBodyFixed}
+              onResendEmailLink={verifyEmailHandler}
+              onSetEmailSent={(bool) => {
+                setEmailSent(bool);
+              }}
+              onSetShowEmailLinkSentPopUp={(bool) => {
+                onSetShowEmailLinkSentPopUp(bool);
+              }}
+            />
+          )}
+          <h3>Email Verification</h3>
+          {/* If Contributor already requested for an email change and the new email 
         has not been verified, display this */}
-        {emailRequestChange && !emailRequestChangeAddressIsVerified && (
-          <EmailRequestChange
-            isLoading={isLoading}
-            error={error}
-            emailRequestChangeAddress={emailRequestChangeAddress}
-            onVerifyEmailHandler={verifyEmailHandler}
-            onCancelEmailRequestChangeHandler={cancelEmailRequestChangeHandler}
-          />
-        )}
-        {/* If Contributor did not request for an email change and his primary email
+          {emailRequestChange && (
+            <EmailRequestChange
+              isLoading={isLoading}
+              error={error}
+              emailRequestChangeAddress={emailRequestChangeAddress}
+              onVerifyEmailHandler={verifyEmailHandler}
+              onCancelEmailRequestChangeHandler={cancelEmailRequestChangeHandler}
+            />
+          )}
+          {/* If Contributor did not request for an email change and his primary email
         has not been verified, display this. By default the email request change address is 
         always the primary email used in creating an account*/}
-        {!emailRequestChange && !emailRequestChangeAddressIsVerified && (
-          <VerifyEmail error={error} isLoading={isLoading} onVerifyEmailHandler={verifyEmailHandler} />
-        )}
-      </Card>
+          {!emailRequestChange && (
+            <VerifyEmail error={error} isLoading={isLoading} onVerifyEmailHandler={verifyEmailHandler} />
+          )}
+        </Card>
+      )}
     </Fragment>
   );
 };
