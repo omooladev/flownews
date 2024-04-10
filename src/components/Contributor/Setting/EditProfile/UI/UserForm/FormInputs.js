@@ -6,17 +6,23 @@ import FullName from "./FullName";
 import Location from "./Location";
 import Username from "./Username";
 import Work from "./Work";
+import styles from "./UserForm.module.css";
+import ProfilePicture from "../ProfilePicture";
 const FormInputs = (props) => {
-  const { fullname, email, emailIsPrivate, username, bio, location, education, work } = props;
-  //   const [newContributorData, setNewContributorData] = useState({
-  //     fullname,
-  //     email,
-  //     username,
-  //     bio,
-  //     location,
-  //     education,
-  //     work,
-  //   });
+  const {
+    fullname,
+    email,
+    emailIsPrivate,
+    username,
+    bio,
+    location,
+    education,
+    work,
+    updatedContributorData,
+    onUpdateContributorData,
+  } = props;
+  //----------> send in the default contributor properties into the new data
+
   //   const compareData = useCallback(({ firstValue, secondValue }) => {
   //     if (firstValue === secondValue) {
   //       return true;
@@ -78,14 +84,17 @@ const FormInputs = (props) => {
 
   //     return updateProperties;
   //   }, [fullname, email, username, bio, location, education, work, newContributorData, compareData]);
-  const getValue = useCallback(({ type, value }) => {
-    // setNewContributorData((prevValue) => {
-    //   return { ...prevValue, [type]: value };
-    // });
-  }, []);
+  const getValue = useCallback(
+    (inputData) => {
+      //----------> set the new details of the contributor
+      return onUpdateContributorData(inputData);
+    },
+    [onUpdateContributorData]
+  );
 
   return (
-    <>
+    <div className={styles.form_controls}>
+      <ProfilePicture />
       <FullName fullname={fullname} onGetValue={getValue} />
       <Email email={email} emailIsPrivate={emailIsPrivate} onGetValue={getValue} />
       <Username username={username} onGetValue={getValue} />
@@ -93,7 +102,7 @@ const FormInputs = (props) => {
       <Location location={location} onGetValue={getValue} />
       <Education education={education} onGetValue={getValue} />
       <Work work={work} onGetValue={getValue} />
-    </>
+    </div>
   );
 };
 export default FormInputs;

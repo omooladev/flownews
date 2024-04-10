@@ -76,17 +76,24 @@
 }
 .form .error {
   background-color: rgba(255, 0, 0, 0.2);
-  padding: 1rem 0.5rem;
+  padding: 1rem;
 }
-.form .error h4 {
+.form .error p {
+  font-size: 16px;
+  font-weight: bold;
   color: red;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .form .error ul {
-  padding: 1rem 0;
+  margin: 0.5rem;
 }
 .form .error li {
   list-style: circle;
-  margin-left: 2rem;
+  margin: 0.5rem 1rem;
 }
 
 @media (min-width: 800px) {

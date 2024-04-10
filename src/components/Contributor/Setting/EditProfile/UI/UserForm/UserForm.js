@@ -1,6 +1,5 @@
-import { useContext, useCallback } from "react";
+import { useContext, useCallback, useState } from "react";
 import { AuthContext } from "../../../../../../store/Auth/auth-context";
-import ProfilePicture from "../ProfilePicture";
 import Error from "./Error";
 import FormInputs from "./FormInputs";
 import styles from "./UserForm.module.css";
@@ -13,11 +12,36 @@ const UserForm = () => {
     // onSaveContributorData,
     // onUpdateContributorProfile,
   } = useContext(AuthContext);
+  const [updatedContributorData, setUpdatedContributorData] = useState({
+    fullname,
+    email,
+    emailIsPrivate,
+    username,
+    bio,
+    location,
+    education,
+    work,
+  });
 
-  let error = "An error has occured";
-  // const [error, setError] = useState("333333333333");
-
-  const submitContributorProfileHandler = useCallback(() => {}, []);
+  const [error, setError] = useState([
+    "Your fullname cannot be more than 36 characters ",
+    "Please keep your bio concise (200 characters). We'll allow longer descriptions in the future.",
+    "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvviii",
+  ]);
+  const updateContributorData = useCallback(({ type, value }) => {
+    return setUpdatedContributorData((prevValue) => {
+      return { ...prevValue, [type]: value };
+    });
+  }, []);
+  const submitContributorProfileHandler = useCallback(
+    (event) => {
+      event.preventDefault();
+      //----------> reset the error
+      setError((prevError) => []);
+      console.log(updatedContributorData);
+    },
+    [updatedContributorData]
+  );
 
   // const submitContributorProfileHandler = useCallback(
   //   async (event) => {
@@ -62,19 +86,18 @@ const UserForm = () => {
   return (
     <form className={styles.form} onSubmit={submitContributorProfileHandler}>
       <Error error={error} />
-      <div className={styles.form_controls}>
-        <ProfilePicture />
-        <FormInputs
-          fullname={fullname}
-          email={email}
-          emailIsPrivate={emailIsPrivate}
-          username={username}
-          bio={bio}
-          location={location}
-          education={education}
-          work={work}
-        />
-      </div>
+      <FormInputs
+        fullname={fullname}
+        email={email}
+        emailIsPrivate={emailIsPrivate}
+        username={username}
+        bio={bio}
+        location={location}
+        education={education}
+        work={work}
+        updatedContributorData={updatedContributorData}
+        onUpdateContributorData={updateContributorData}
+      />
 
       <FormActions />
     </form>
