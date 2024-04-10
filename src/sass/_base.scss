@@ -1,0 +1,10 @@
+%DisplayFlex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+%OverFlowEllipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

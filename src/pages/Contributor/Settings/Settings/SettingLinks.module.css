@@ -1,10 +1,1 @@
-.setting_links {
-  width: 100%;
-}
-
-@media (min-width: 700px) {
-  .setting_links {
-    max-width: 20rem;
-    padding-right: 2rem;
-  }
-}
+.setting_links{width:100%}@media(min-width: 700px){.setting_links{max-width:20rem;padding-right:2rem}}

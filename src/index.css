@@ -56,13 +56,17 @@
   --label-color: black;
   --form-border-color: rgba(48, 155, 101, 0.2);
   --form-background-color: rgba(48, 155, 101, 0.1);
+
+  /*TODO more styles */
+  --error-background-color: rgba(255, 0, 0, 0.2);
+  --error-list-style-color: black;
+  /* font sizes for application */
 }
 body {
   font-family: var(--secondary-font);
   background-color: var(--body-color);
   height: auto;
 }
-
 body.dark {
   /*? colors */
   --primary-color: rgb(255, 165, 0);
@@ -96,8 +100,8 @@ body.dark {
   --label-color: white;
   --form-border-color: rgba(255, 165, 0, 0.4);
   --form-background-color: transparent;
+  --error-list-style-color: white;
 }
-
 body.fixed-body {
   height: 100vh;
   overflow: hidden;

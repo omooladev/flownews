@@ -1,13 +1,18 @@
 import Card from "../../../../../../UI/Card";
-import styles from "./UserForm.module.css";
+import styles from "./Error.module.css";
 const Error = ({ error }) => {
   return (
     error.length > 0 && (
       <Card className={styles.error}>
-        <p>The following error has prohibited your profile from been saved</p>
+        <p className={styles.error_header}>The following error has prohibited your profile from been saved</p>
         <ul>
           {error.map((err, index) => {
-            return <li key={index}>{err}</li>;
+            return (
+              <div key={index}>
+                <span></span>
+                <li>{err}</li>
+              </div>
+            );
           })}
         </ul>
       </Card>

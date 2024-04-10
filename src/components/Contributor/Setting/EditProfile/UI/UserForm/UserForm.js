@@ -23,11 +23,7 @@ const UserForm = () => {
     work,
   });
 
-  const [error, setError] = useState([
-    "Your fullname cannot be more than 36 characters ",
-    "Please keep your bio concise (200 characters). We'll allow longer descriptions in the future.",
-    "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvviii",
-  ]);
+  const [error, setError] = useState([]);
   const updateContributorData = useCallback(({ type, value }) => {
     return setUpdatedContributorData((prevValue) => {
       return { ...prevValue, [type]: value };

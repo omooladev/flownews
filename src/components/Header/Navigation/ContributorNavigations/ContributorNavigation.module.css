@@ -1,9 +1,1 @@
-.write {
-  display: none;
-}
-
-@media (min-width: 650px) {
-  .write {
-    display: flex;
-  }
-}
+.write{display:none}@media(min-width: 650px){.write{display:flex}}
