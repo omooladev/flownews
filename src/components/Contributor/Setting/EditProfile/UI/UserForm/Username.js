@@ -24,6 +24,7 @@ const Username = (props) => {
         onSetFormValidity({ type: "username", isValid: false });
         return setNewUsernameError("username cannot be greater than 11 characters");
       }
+      //----------> if username is valid, we want to change the
       onSetFormValidity({ type: "username", isValid: true });
       setNewUsernameError("");
     },
@@ -41,6 +42,7 @@ const Username = (props) => {
         value={newUsername}
         onChange={changeUsernameHandler}
         spellCheck="false"
+        className={newUsernameError && styles.error}
       />
     </div>
   );

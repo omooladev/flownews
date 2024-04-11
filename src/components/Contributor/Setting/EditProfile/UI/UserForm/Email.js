@@ -30,12 +30,13 @@ const Email = (props) => {
       <label>Public Email</label>
       {newEmailError && <p className="error">{newEmailError}</p>}
       <input
-        type="text"
+        type="email"
         placeholder="Please enter your email address"
         value={newEmail}
         onChange={changeEmailHandler}
-        // required={true}
+        required={true}
         spellCheck="false"
+        className={newEmailError && styles.error}
       />
       {!emailIsPrivate && (
         <p>

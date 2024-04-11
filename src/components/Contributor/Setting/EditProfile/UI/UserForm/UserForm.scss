@@ -14,6 +14,7 @@
       justify-content: center;
       align-items: flex-start;
       margin: 0.5rem;
+
       p {
         font-size: 14px;
         margin: 0;
@@ -47,15 +48,24 @@
         border-radius: 5px;
         resize: vertical;
         margin: 0.5rem 0;
+        &:focus {
+          background-color: var(--form-background-color);
+          outline: 2px solid var(--primary-color);
+          // caret-color: var(--nav-text-hover-color);
+        }
       }
       textarea {
         line-height: 1.5rem;
       }
-      input:focus,
-      textarea:focus {
-        background-color: var(--form-background-color);
-        outline: 2px solid var(--primary-color);
-        // caret-color: var(--nav-text-hover-color);
+
+      input,
+      textarea {
+        &.error {
+          outline: 2px solid var(--userForm-error-color);
+          &:focus {
+            outline: 2px solid var(--userForm-error-color);
+          }
+        }
       }
     }
   }
