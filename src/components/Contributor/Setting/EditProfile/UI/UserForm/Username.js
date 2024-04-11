@@ -20,7 +20,6 @@ const Username = (props) => {
         onSetFormValidity({ type: "username", isValid: false });
         return setNewUsernameError("username cannot be greater than 11 characters");
       }
-
       //<---------SEND A REQUEST FOR CONFIRMING IF THE USERNAME CHOSEN ALREADY EXIST ------------>
       const response = await onCheckFieldExistence({ name: "username", value: username });
       console.log(response);
@@ -67,6 +66,8 @@ const Username = (props) => {
         onChange={changeUsernameHandler}
         spellCheck="false"
         className={newUsernameError && styles.error}
+        autoComplete="off"
+        
       />
     </div>
   );

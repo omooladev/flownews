@@ -29,7 +29,7 @@ const FullName = (props) => {
         value={newFullName}
         onChange={changeFullNameHandler}
         spellCheck="false"
-        autoComplete="false"
+        autoComplete="off"
         maxLength={configuration.maxLengthOfFullName} //TODO We may need to remove the maximum length of the fullname
       />
       <p>
