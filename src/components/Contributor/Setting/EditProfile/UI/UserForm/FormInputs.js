@@ -18,78 +18,35 @@ const FormInputs = (props) => {
     location,
     education,
     work,
-    updatedContributorData,
     onUpdateContributorData,
   } = props;
   //----------> send in the default contributor properties into the new data
 
-  //   const compareData = useCallback(({ firstValue, secondValue }) => {
-  //     if (firstValue === secondValue) {
-  //       return true;
-  //     }
-  //     return false;
-  //   }, []);
-
-  //   const matchProfileFields = useCallback(async () => {
-  //     let updateProperties;
-  //     const isFullNameMatch = compareData({
-  //       firstValue: fullname,
-  //       secondValue: newContributorData.fullname,
-  //     });
-  //     if (!isFullNameMatch) {
-  //       updateProperties = { fullname: newContributorData.fullname };
-  //     }
-  //     const isEmailMatch = compareData({
-  //       firstValue: email,
-  //       secondValue: newContributorData.email,
-  //     });
-  //     if (!isEmailMatch) {
-  //       updateProperties = { ...updateProperties, email: newContributorData.email };
-  //     }
-  //     const isUsernameMatch = compareData({
-  //       firstValue: username,
-  //       secondValue: newContributorData.username,
-  //     });
-  //     if (!isUsernameMatch) {
-  //       updateProperties = { ...updateProperties, username: newContributorData.username };
-  //     }
-  //     const isBioMatch = compareData({
-  //       firstValue: bio,
-  //       secondValue: newContributorData.bio,
-  //     });
-  //     if (!isBioMatch) {
-  //       updateProperties = { ...updateProperties, bio: newContributorData.bio };
-  //     }
-  //     const isLocationMatch = compareData({
-  //       firstValue: location,
-  //       secondValue: newContributorData.location,
-  //     });
-  //     if (!isLocationMatch) {
-  //       updateProperties = { ...updateProperties, location: newContributorData.location };
-  //     }
-  //     const isEducationMatch = compareData({
-  //       firstValue: education,
-  //       secondValue: newContributorData.education,
-  //     });
-  //     if (!isEducationMatch) {
-  //       updateProperties = { ...updateProperties, education: newContributorData.education };
-  //     }
-  //     const isWorkMatch = compareData({
-  //       firstValue: work,
-  //       secondValue: newContributorData.work,
-  //     });
-  //     if (!isWorkMatch) {
-  //       updateProperties = { ...updateProperties, work: newContributorData.work };
-  //     }
-
-  //     return updateProperties;
-  //   }, [fullname, email, username, bio, location, education, work, newContributorData, compareData]);
+  const compareData = useCallback(
+    (inputData) => {
+      const { type, value } = inputData;
+      const oldValue = props[type];
+      const newValue = value;
+      //-----------> If the default input value from the database is the same as the new value you entered
+      //             into the input, then we do not process the value
+      if (oldValue.trim() === newValue.trim()) {
+        return { type, value, valueChanged: false };
+      }
+      return { type, value, valueChanged: true };
+    },
+    [props]
+  );
   const getValue = useCallback(
     (inputData) => {
-      //----------> set the new details of the contributor
-      return onUpdateContributorData(inputData);
+      //----------> we compare the default input value with the new value provided in the input data
+      const result = compareData(inputData); // {type,value}
+      if (result && result.valueChanged) {
+        //----------> if result change, process the value
+        //----------> set the new details of the contributor
+        return onUpdateContributorData(inputData);
+      }
     },
-    [onUpdateContributorData]
+    [onUpdateContributorData, compareData]
   );
 
   return (

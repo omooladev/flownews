@@ -91,7 +91,6 @@ const UserForm = () => {
         location={location}
         education={education}
         work={work}
-        updatedContributorData={updatedContributorData}
         onUpdateContributorData={updateContributorData}
       />
 

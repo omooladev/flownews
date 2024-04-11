@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { configuration } from "../../../../../../config";
 import styles from "./UserForm.module.css";
 const FullName = (props) => {
   //----------> get the default fullname and the onGetValue function
@@ -7,8 +8,8 @@ const FullName = (props) => {
 
   const changeFullNameHandler = useCallback(
     (event) => {
-      //----------> set a limit of 30 characters for the fullname
-      if (event.target.value.length <= 30) {
+      //---------->if the entered fullname is less than 30 characters
+      if (event.target.value.length <= configuration.maxLengthOfFullName) {
         setNewFullName((prevValue) => {
           return event.target.value;
         });
@@ -28,11 +29,12 @@ const FullName = (props) => {
         value={newFullName}
         onChange={changeFullNameHandler}
         spellCheck="false"
-        maxLength="30"
+        autoComplete="false"
+        maxLength={configuration.maxLengthOfFullName} //TODO We may need to remove the maximum length of the fullname
       />
       <p>
-        Your fullname may appear around flowNews where you contribute or are mentioned. You can
-        remove it any time
+        Your fullname may appear around flowNews where you contribute or are mentioned. You can remove it any
+        time
       </p>
     </div>
   );

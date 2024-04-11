@@ -1,21 +1,24 @@
+@import "../../../../../../sass/base";
 .form {
   .form_controls {
     position: relative;
-    display: flex;
+    @extend %DisplayFlex;
     flex-direction: column;
+    align-items: flex-start;
     justify-content: flex-start;
     margin: 1rem 0;
     gap: 0.5rem;
     .form_control {
-      display: flex;
+      @extend %DisplayFlex;
       flex-direction: column;
       justify-content: center;
+      align-items: flex-start;
       margin: 0.5rem;
-
       p {
         font-size: 14px;
         margin: 0;
         padding: 0;
+
         a {
           color: var(--link-color);
           vertical-align: bottom;
