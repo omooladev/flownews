@@ -19,10 +19,24 @@
   --secondary-padding: 0.4rem 0.5rem;
   --auth-form-padding: 0.5rem 1rem;
   /*? colors */
-  --primary-color: rgb(48, 155, 101);
-  --primary-hover-color: rgba(48, 155, 101, 0.8);
-  --primary-disabled-background-color: rgb(38, 124, 80);
-  --primary-disabled-color: rgb(220, 220, 220);
+  /* PRIMARY COLOR SCHEME STARTS HERE */
+  --primary-color: #309b65;
+  /* COLORS BASED ON THE PRIMARY COLOR */
+  --pry-50: #effaf3;
+  --pry-100: #d9f2e1;
+  --pry-200: #b5e5c7;
+  --pry-300: #85d0a5;
+  --pry-400: #52b580;
+  --pry-500: #309b65; /*same as primary color*/
+  --pry-600: #207b4f;
+  --pry-700: #1a6242;
+  --pry-800: #174e35;
+  --pry-900: #13412d;
+  --pry-950: #0a2419;
+  --primary-hover-color: var(--pry-600);
+  --primary-disabled-background-color: var(--pry-950);
+  --primary-disabled-color: var(--pry-700);
+  /* PRIMARY COLOR SCHEME ENDS HERE */
   --secondary-color: black;
   --tertiary-color: black;
   --tertiary-extra-color: white;
@@ -48,8 +62,6 @@
 
   --profile-color: black;
 
-  /* refactored styles */
-
   /* Styles that are more specific to a particular page */
   --profile-info-background-color: var(--header-color);
   /* USER FORM PAGE STYLES  */
@@ -68,10 +80,25 @@ body {
   height: auto;
 }
 body.dark {
-  /*? colors */
-  --primary-color: rgb(255, 165, 0);
-  --primary-hover-color: rgba(255, 165, 0, 0.8);
-  --primary-disabled-background-color: rgb(245, 123, 0);
+  /* PRIMARY COLOR SCHEME STARTS HERE */
+  --primary-color: #ffa500;
+  /* COLORS BASED ON PRIMARY COLOR */
+  --pry-50: #fffcea;
+  --pry-100: #fff5c5;
+  --pry-200: #ffeb85;
+  --pry-300: #ffda46;
+  --pry-400: #ffc71b;
+  --pry-500: #ffa500; /* same as primary color */
+  --pry-600: #e27c00;
+  --pry-700: #bb5502;
+  --pry-800: #984208;
+  --pry-900: #7c360b;
+  --pry-950: #481a00;
+  --primary-hover-color: var(--pry-600);
+  --primary-disabled-background-color: var(--pry-950);
+  --primary-disabled-color: var(--pry-700);
+  /* PRIMARY COLOR SCHEME ENDS HERE */
+
   --secondary-color: rgba(255, 255, 255, 0.87);
   --tertiary-color: white;
   --tertiary-extra-color: black;

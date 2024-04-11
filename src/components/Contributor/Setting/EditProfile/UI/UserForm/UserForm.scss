@@ -74,11 +74,14 @@
     .update_profile {
       cursor: pointer;
       background-color: var(--primary-color);
-      padding: 0.5rem 0.6rem;
+      padding: 0.5rem 1rem;
       margin: 0.5rem 0;
       color: var(--white-color);
+      border-radius: 0.3rem;
       &:disabled {
         cursor: not-allowed;
+        background-color: var(--primary-disabled-background-color);
+        color: var(--primary-disabled-color);
       }
     }
   }

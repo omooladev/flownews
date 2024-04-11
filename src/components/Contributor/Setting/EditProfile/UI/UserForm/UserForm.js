@@ -2,8 +2,8 @@ import { useContext, useCallback, useState } from "react";
 import { AuthContext } from "../../../../../../store/Auth/auth-context";
 import Error from "./Error";
 import FormInputs from "./FormInputs";
-import styles from "./UserForm.module.css";
 import FormActions from "./FormActions";
+import styles from "./UserForm.module.css";
 const UserForm = () => {
   const {
     contributorData: { fullname, email, emailIsPrivate, username, bio, location, education, work },
@@ -13,8 +13,27 @@ const UserForm = () => {
     // onUpdateContributorProfile,
   } = useContext(AuthContext);
   const [updatedContributorData, setUpdatedContributorData] = useState(null);
-
+  const [formValidity, setFormValidity] = useState({ formIsValid: true, emailIsValid: true });
   const [error, setError] = useState([]);
+  const setFormValidityHandler = useCallback(
+    ({ type, isValid }) => {
+      const validityField = `${type}IsValid`;
+      if (formValidity[validityField] === isValid) {
+        //------------------> if the valid state is the same thing, do nothing
+        return;
+      }
+      setFormValidity((prevState) => {
+        //----------> update the field validity
+        let updatedState = { ...prevState, [validityField]: isValid };
+        //----------> check if all field is valid, then update the form valid field
+        const formIsValid = updatedState.emailIsValid;
+        updatedState = { ...updatedState, formIsValid };
+        return updatedState;
+      });
+    },
+    [formValidity]
+  );
+
   const updateContributorData = useCallback(
     ({ type, value }, action) => {
       if (action === "add") {
@@ -31,6 +50,7 @@ const UserForm = () => {
     },
     [updatedContributorData]
   );
+
   const submitContributorProfileHandler = useCallback(
     (event) => {
       event.preventDefault();
@@ -94,9 +114,10 @@ const UserForm = () => {
         education={education}
         work={work}
         onUpdateContributorData={updateContributorData}
+        onSetFormValidity={setFormValidityHandler}
       />
 
-      <FormActions />
+      <FormActions formIsValid={formValidity.formIsValid} />
     </form>
   );
 };

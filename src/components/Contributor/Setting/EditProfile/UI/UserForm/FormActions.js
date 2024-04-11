@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./UserForm.module.css";
-const FormActions = () => {
+const FormActions = ({ formIsValid }) => {
   //const [isLoading, setIsLoading] = useState(false);
   let isLoading = false;
   return (
@@ -11,7 +11,11 @@ const FormActions = () => {
         profile appears. Please see our <Link to="/site/privacy">privacy statement</Link> to learn more about
         how we use this information.
       </p>
-      <button type="submit" className={styles.update_profile} disabled={isLoading ? true : false}>
+      <button
+        type="submit"
+        className={styles.update_profile}
+        disabled={isLoading || !formIsValid ? true : false}
+      >
         {isLoading ? "Updating..." : "Update Profile"}
       </button>
     </div>

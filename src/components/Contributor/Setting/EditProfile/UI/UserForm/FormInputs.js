@@ -19,6 +19,7 @@ const FormInputs = (props) => {
     education,
     work,
     onUpdateContributorData,
+    onSetFormValidity,
   } = props;
   //----------> send in the default contributor properties into the new data
 
@@ -54,7 +55,12 @@ const FormInputs = (props) => {
     <div className={styles.form_controls}>
       <ProfilePicture />
       <FullName fullname={fullname} onGetValue={getValue} />
-      <Email email={email} emailIsPrivate={emailIsPrivate} onGetValue={getValue} />
+      <Email
+        email={email}
+        emailIsPrivate={emailIsPrivate}
+        onGetValue={getValue}
+        onSetFormValidity={onSetFormValidity}
+      />
       <Username username={username} onGetValue={getValue} />
       <Bio bio={bio} onGetValue={getValue} />
       <Location location={location} onGetValue={getValue} />

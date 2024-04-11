@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./UserForm.module.css";
 const Email = (props) => {
-  let { email, emailIsPrivate, onGetValue } = props;
+  let { email, emailIsPrivate, onGetValue, onSetFormValidity } = props;
   const [newEmail, setNewEmail] = useState(email);
   const [newEmailError, setNewEmailError] = useState("");
 
@@ -12,13 +12,17 @@ const Email = (props) => {
       setNewEmail((prevValue) => {
         return event.target.value;
       });
+      onGetValue({ type: "email", value: event.target.value.trim() });
       if (!emailIsValid) {
+        //----------> update the form validity state
+        onSetFormValidity({ type: "email", isValid: emailIsValid });
         return setNewEmailError("Please provide a valid email address");
       }
+      //----------> update the form validity state
+      onSetFormValidity({ type: "email", isValid: emailIsValid });
       setNewEmailError("");
-      onGetValue({ type: "email", value: event.target.value.trim() });
     },
-    [onGetValue]
+    [onGetValue, onSetFormValidity]
   );
 
   return (
@@ -26,11 +30,11 @@ const Email = (props) => {
       <label>Public Email</label>
       {newEmailError && <p className="error">{newEmailError}</p>}
       <input
-        type="email"
+        type="text"
         placeholder="Please enter your email address"
         value={newEmail}
         onChange={changeEmailHandler}
-        required={true}
+        // required={true}
         spellCheck="false"
       />
       {!emailIsPrivate && (
