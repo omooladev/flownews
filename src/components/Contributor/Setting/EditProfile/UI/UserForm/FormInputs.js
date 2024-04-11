@@ -43,8 +43,9 @@ const FormInputs = (props) => {
       if (result && result.valueChanged) {
         //----------> if result change, process the value
         //----------> set the new details of the contributor
-        return onUpdateContributorData(inputData);
+        return onUpdateContributorData(inputData, "add");
       }
+      return onUpdateContributorData(inputData, "remove");
     },
     [onUpdateContributorData, compareData]
   );

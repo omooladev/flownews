@@ -12,23 +12,25 @@ const UserForm = () => {
     // onSaveContributorData,
     // onUpdateContributorProfile,
   } = useContext(AuthContext);
-  const [updatedContributorData, setUpdatedContributorData] = useState({
-    fullname,
-    email,
-    emailIsPrivate,
-    username,
-    bio,
-    location,
-    education,
-    work,
-  });
+  const [updatedContributorData, setUpdatedContributorData] = useState(null);
 
   const [error, setError] = useState([]);
-  const updateContributorData = useCallback(({ type, value }) => {
-    return setUpdatedContributorData((prevValue) => {
-      return { ...prevValue, [type]: value };
-    });
-  }, []);
+  const updateContributorData = useCallback(
+    ({ type, value }, action) => {
+      if (action === "add") {
+        return setUpdatedContributorData((prevValue) => {
+          return { ...prevValue, [type]: value };
+        });
+      } else {
+        const data = updatedContributorData;
+        delete data[type];
+        return setUpdatedContributorData((prevValue) => {
+          return data;
+        });
+      }
+    },
+    [updatedContributorData]
+  );
   const submitContributorProfileHandler = useCallback(
     (event) => {
       event.preventDefault();
