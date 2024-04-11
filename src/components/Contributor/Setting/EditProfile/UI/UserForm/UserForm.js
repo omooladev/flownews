@@ -7,6 +7,7 @@ import styles from "./UserForm.module.css";
 const UserForm = () => {
   const {
     contributorData: { fullname, email, emailIsPrivate, username, bio, location, education, work },
+    onCheckFieldExistence,
     // changeAppMode,
     // onChangeProfileUpdated,
     // onSaveContributorData,
@@ -115,6 +116,7 @@ const UserForm = () => {
         work={work}
         onUpdateContributorData={updateContributorData}
         onSetFormValidity={setFormValidityHandler}
+        onCheckFieldExistence={onCheckFieldExistence}
       />
 
       <FormActions formIsValid={formValidity.formIsValid} />

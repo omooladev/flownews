@@ -129,6 +129,31 @@ const AuthContextProvider = (props) => {
     });
   }, []);
 
+  const checkFieldExistence = useCallback(
+    async ({ name, value }) => {
+      //----------> send a request to the server to check the field
+      try {
+        const response = await sendRequest(
+          `${HOSTURI}/contributor/check-field-existence?fieldName=${name}&fieldValue=${value}`,
+          {
+            method: "POST",
+            token,
+          }
+        );
+        const data = response.data;
+
+        if (data) {
+          return { ...data, hasError: false };
+        }
+
+        return response;
+      } catch (error) {
+        return { hasError: true, error };
+      }
+    },
+    [sendRequest, token]
+  );
+
   //----------> a function that lets you follow or un follow a contributor
   const toggleFollowContributor = useCallback(
     async ({ action }) => {
@@ -308,6 +333,7 @@ const AuthContextProvider = (props) => {
         onSendPasswordResetEmail: sendPasswordResetEmail,
 
         cancelRequest,
+        onCheckFieldExistence: checkFieldExistence,
       }}
     >
       {props.children}

@@ -1,16 +1,12 @@
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import styles from "./UserForm.module.css";
 const Username = (props) => {
-  let { username, onGetValue, onSetFormValidity } = props;
+  let { username, onGetValue, onSetFormValidity, onCheckFieldExistence } = props;
   const [newUsername, setNewUsername] = useState(username);
   const [newUsernameError, setNewUsernameError] = useState("");
-  const changeUsernameHandler = useCallback(
-    (event) => {
-      const usernameLength = event.target.value.trim().length;
-      setNewUsername((prevValue) => {
-        return event.target.value;
-      });
-      onGetValue({ type: "username", value: event.target.value.trim() });
+  let timeOutId = useRef();
+  const validateUserName = useCallback(
+    async (username, usernameLength) => {
       if (usernameLength === 0) {
         //----------> update the form validity state
         onSetFormValidity({ type: "username", isValid: false });
@@ -24,11 +20,39 @@ const Username = (props) => {
         onSetFormValidity({ type: "username", isValid: false });
         return setNewUsernameError("username cannot be greater than 11 characters");
       }
-      //----------> if username is valid, we want to change the
+
+      //<---------SEND A REQUEST FOR CONFIRMING IF THE USERNAME CHOSEN ALREADY EXIST ------------>
+      const response = await onCheckFieldExistence({ name: "username", value: username });
+      console.log(response);
+      if (response.hasError) {
+        onSetFormValidity({ type: "username", isValid: false });
+        return setNewUsernameError(response.error);
+      }
+      if (response.usernameExist) {
+        onSetFormValidity({ type: "username", isValid: false });
+        return setNewUsernameError("That username has been taken. Please choose another");
+      }
       onSetFormValidity({ type: "username", isValid: true });
       setNewUsernameError("");
     },
-    [onGetValue, onSetFormValidity]
+    [onSetFormValidity, onCheckFieldExistence]
+  );
+  const changeUsernameHandler = useCallback(
+    (event) => {
+      setNewUsername((prevValue) => {
+        return event.target.value;
+      });
+      //---------->clear the timeout
+      clearTimeout(timeOutId.current);
+      timeOutId.current = setTimeout(() => {
+        const username = event.target.value.trim();
+        const usernameLength = username.length;
+
+        onGetValue({ type: "username", value: event.target.value.trim() });
+        validateUserName(username, usernameLength);
+      }, 300); //0.3s
+    },
+    [onGetValue, timeOutId, validateUserName]
   );
 
   return (
