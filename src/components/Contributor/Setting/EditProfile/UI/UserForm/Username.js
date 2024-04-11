@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import styles from "./UserForm.module.css";
 const Username = (props) => {
-  let { username, onGetValue } = props;
+  let { username, onGetValue, onSetFormValidity } = props;
   const [newUsername, setNewUsername] = useState(username);
   const [newUsernameError, setNewUsernameError] = useState("");
   const changeUsernameHandler = useCallback(
@@ -12,17 +12,22 @@ const Username = (props) => {
       });
       onGetValue({ type: "username", value: event.target.value.trim() });
       if (usernameLength === 0) {
+        //----------> update the form validity state
+        onSetFormValidity({ type: "username", isValid: false });
         return setNewUsernameError("Please provide a valid username");
       }
       if (usernameLength < 9) {
+        onSetFormValidity({ type: "username", isValid: false });
         return setNewUsernameError("username cannot be less than 9 characters");
       }
       if (usernameLength > 11) {
+        onSetFormValidity({ type: "username", isValid: false });
         return setNewUsernameError("username cannot be greater than 11 characters");
       }
+      onSetFormValidity({ type: "username", isValid: true });
       setNewUsernameError("");
     },
-    [onGetValue]
+    [onGetValue, onSetFormValidity]
   );
 
   return (

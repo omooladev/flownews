@@ -61,7 +61,7 @@ const FormInputs = (props) => {
         onGetValue={getValue}
         onSetFormValidity={onSetFormValidity}
       />
-      <Username username={username} onGetValue={getValue} />
+      <Username username={username} onGetValue={getValue} onSetFormValidity={onSetFormValidity} />
       <Bio bio={bio} onGetValue={getValue} />
       <Location location={location} onGetValue={getValue} />
       <Education education={education} onGetValue={getValue} />
