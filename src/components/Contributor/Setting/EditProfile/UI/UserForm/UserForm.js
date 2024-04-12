@@ -9,9 +9,9 @@ const UserForm = () => {
   const {
     contributorData: { fullname, email, emailIsPrivate, username, bio, location, education, work },
     onCheckFieldExistence,
-    // changeAppMode,
-    // onChangeProfileUpdated,
-    // onSaveContributorData,
+    changeAppMode,
+    onChangeProfileUpdated,
+    onSaveContributorData,
     onUpdateContributorProfile,
   } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
@@ -73,27 +73,16 @@ const UserForm = () => {
       // }
 
       setIsLoading(true);
-      // let response = await onUpdateContributorProfile(updatedContributorData);
-      let { hasError, data, error } = await onUpdateContributorProfile({
-        fullname,
-        email,
-        emailIsPrivate,
-        username,
-        bio,
-        location,
-        education,
-        work,
-      }); //TODO remove this as i am only working with the default valus here
+      let { hasError, data, error } = await onUpdateContributorProfile(updatedContributorData);
 
       if (data) {
         if (data.message === "No changes were made to contributor details") {
           //----------> means that the content did not change
           return setIsLoading(false);
         }
-
-        // onSaveContributorData(data);
-        // changeAppMode({ token: data.token });
-        // onChangeProfileUpdated(true);
+        onSaveContributorData(data);
+        changeAppMode({ token: data.token });
+        onChangeProfileUpdated(true);
       }
       if (hasError) {
         setError((prevError) => {
@@ -103,16 +92,11 @@ const UserForm = () => {
       setIsLoading(false);
     },
     [
-      //updatedContributorData,
-      fullname,
-      email,
-      emailIsPrivate,
-      username,
-      bio,
-      location,
-      education,
-      work,
+      updatedContributorData,
       onUpdateContributorProfile,
+      changeAppMode,
+      onChangeProfileUpdated,
+      onSaveContributorData,
     ]
   );
 

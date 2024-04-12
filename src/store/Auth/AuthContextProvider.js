@@ -36,7 +36,7 @@ const AuthContextProvider = (props) => {
   const [searchedContributorData, setSearchedContributorData] = useState({
     username: "",
   });
-  const [profileUpdated, setProfileUpdated] = useState(false);
+  const [profileUpdated, setProfileUpdated] = useState(true); //TODO change to false
   const loginOrBecomeContributor = useCallback(
     async ({ location, contributorAuthData }) => {
       const response = await sendRequest(`${HOSTURI}/auth/${location}`, {

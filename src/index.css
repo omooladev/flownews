@@ -5,6 +5,10 @@
   user-select: none;
 }
 :root {
+  /* Z-INDEX */
+  --header-index: 997;
+  --profile-updated-overlay-index: 1000;
+  --profile-updated-backdrop-index: 999;
   /*? fonts family */
   --primary-font: "Merriweather", serif;
   --secondary-font: "Lato", Helvetica, sans-serif;
@@ -73,7 +77,7 @@
   --error-background-color: rgba(255, 0, 0, 0.2);
   --error-list-style-color: black;
   /* font sizes for application */
-   --userForm-error-color: red;
+  --userForm-error-color: red;
 }
 body {
   font-family: var(--secondary-font);

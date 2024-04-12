@@ -11,7 +11,7 @@
   @extend %DisplayFlex;
   justify-content: space-around;
   border-bottom: 1px solid var(--primary-color);
-  z-index: 997; //TODO Z-INDEX
+  z-index: var(--header-index);
   .logo {
     opacity: 1;
     margin-left: 1.5rem;

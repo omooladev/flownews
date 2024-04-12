@@ -5,6 +5,7 @@ import useNewLocation from "../../../../hooks/useNewLocation";
 import SettingLinks from "./SettingLinks";
 import SettingsLinkContent from "./SettingsLinkContent";
 import styles from "./Settings.module.css";
+import ProfileUpdated from "../../../../components/Contributor/Setting/EditProfile/UI/ProfileUpdated";
 const Settings = () => {
   //----------> fetch contributor data first because when you refresh the page
   //            we need all your details back
@@ -17,7 +18,7 @@ const Settings = () => {
     <Fragment>
       {contributorData.username && (
         <section className={styles.settings}>
-          {/* <ProfileUpdated /> */}
+          <ProfileUpdated />
           <SettingLinks />
           <SettingsLinkContent />
         </section>
