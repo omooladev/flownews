@@ -12,7 +12,7 @@ const UserForm = () => {
     // changeAppMode,
     // onChangeProfileUpdated,
     // onSaveContributorData,
-    // onUpdateContributorProfile,
+    onUpdateContributorProfile,
   } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [updatedContributorData, setUpdatedContributorData] = useState({});
@@ -67,33 +67,53 @@ const UserForm = () => {
       //----------> reset the error
       setError((prevError) => []);
 
-      if (Object.keys(updatedContributorData).length === 0) {
-        //----------> if the updated contributor data is empty
-        return;
-      }
+      // if (Object.keys(updatedContributorData).length === 0) {
+      //   //----------> if the updated contributor data is empty
+      //   return;
+      // }
 
       setIsLoading(true);
-      let response = await onUpdateContributorProfile(updateProperties);
-      const data = response.data;
-      const status = response.status;
-      const error = response.error;
-      if (status === 204) {
-        return setIsLoading(false);
-      }
+      // let response = await onUpdateContributorProfile(updatedContributorData);
+      let { hasError, data, error } = await onUpdateContributorProfile({
+        fullname,
+        email,
+        emailIsPrivate,
+        username,
+        bio,
+        location,
+        education,
+        work,
+      }); //TODO remove this as i am only working with the default valus here
+
       if (data) {
-        console.log(data);
+        if (data.message === "No changes were made to contributor details") {
+          //----------> means that the content did not change
+          return setIsLoading(false);
+        }
+
         // onSaveContributorData(data);
         // changeAppMode({ token: data.token });
         // onChangeProfileUpdated(true);
       }
-      if (error) {
+      if (hasError) {
         setError((prevError) => {
           return error;
         });
       }
       setIsLoading(false);
     },
-    [updatedContributorData]
+    [
+      //updatedContributorData,
+      fullname,
+      email,
+      emailIsPrivate,
+      username,
+      bio,
+      location,
+      education,
+      work,
+      onUpdateContributorProfile,
+    ]
   );
 
   return (
@@ -113,7 +133,7 @@ const UserForm = () => {
         onCheckFieldExistence={onCheckFieldExistence}
       />
 
-      <FormActions formIsValid={formValidity.formIsValid} isLoading={isLoading}/>
+      <FormActions formIsValid={formValidity.formIsValid} isLoading={isLoading} />
     </form>
   );
 };

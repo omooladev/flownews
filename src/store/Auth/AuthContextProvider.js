@@ -267,14 +267,19 @@ const AuthContextProvider = (props) => {
       return { ...prevData, ...data };
     });
   }, []);
+  //<---------- FUNCTION FOR UPDATING THE CONTRIBUTOR DATA---------->
   const updateContributorProfile = useCallback(
     async (updateProperties) => {
-      const response = await sendRequest(`${HOSTURI}/contributor/update-profile`, {
-        method: "PATCH",
-        contributorData: { updateProperties },
-        token,
-      });
-      return response;
+      try {
+        const { data } = await sendRequest(`${HOSTURI}/contributor/update-profile`, {
+          method: "PATCH",
+          contributorData: updateProperties,
+          token,
+        });
+        return { hasError: false, data };
+      } catch (error) {
+        return { hasError: true, error };
+      }
     },
     [sendRequest, token]
   );
