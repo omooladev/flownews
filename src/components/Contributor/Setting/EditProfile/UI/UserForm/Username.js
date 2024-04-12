@@ -8,7 +8,8 @@ const Username = ({ username, onGetValue, onSetFormValidity, onCheckFieldExisten
   let timeOutId = useRef();
   //<---------- FUNCTION FOR VALIDATING USERNAME AND CHECKING ITS AVAILABILITY ---------->
   const validateUserName = useCallback(
-    async (usernameInput, usernameLength) => {
+    async (usernameInput) => {
+      const usernameLength = username.length;
       const newUsername = usernameInput.trim();
       const oldUsername = username.trim();
       if (newUsername === oldUsername) {
@@ -19,7 +20,7 @@ const Username = ({ username, onGetValue, onSetFormValidity, onCheckFieldExisten
       if (usernameLength === 0) {
         //----------> update the form validity state
         onSetFormValidity({ type: "username", isValid: false });
-        return setNewUsernameError("Please provide a valid username");
+        return setNewUsernameError("Username is required. Please provide a username.");
       }
       if (usernameLength < 9) {
         onSetFormValidity({ type: "username", isValid: false });
@@ -55,11 +56,10 @@ const Username = ({ username, onGetValue, onSetFormValidity, onCheckFieldExisten
       //----------> set the timeout
       timeOutId.current = setTimeout(() => {
         const username = event.target.value.trim();
-        const usernameLength = username.length;
         //----------> SAVE THE USERNAME VALUE
         onGetValue({ type: "username", value: username });
         //--------->VALIDATE TJE USERNAME
-        validateUserName(username, usernameLength);
+        validateUserName(username);
       }, configuration.userFormInputDelay);
     },
     [onGetValue, timeOutId, validateUserName]

@@ -2,14 +2,47 @@ import { useCallback, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./UserForm.module.css";
 import { configuration } from "../../../../../../config";
-const Email = (props) => {
-  let { email, emailIsPrivate, onGetValue, onSetFormValidity } = props;
+const Email = ({ email, emailIsPrivate, onGetValue, onSetFormValidity, onCheckFieldExistence }) => {
   const [newEmail, setNewEmail] = useState(email);
   const [newEmailError, setNewEmailError] = useState("");
   let timeOutId = useRef();
+  const validateEmail = useCallback(
+    async (emailInput) => {
+      const emailLength = emailInput.length;
+      const newEmail = emailInput.trim();
+      const oldEmail = email.trim();
+      if (newEmail === oldEmail) {
+        //----------> If the email entered in the input is the same as your current email, then it is still valid
+        onSetFormValidity({ type: "email", isValid: true });
+        return setNewEmailError("");
+      }
+      if (emailLength === 0) {
+        //----------> update the form validity state
+        onSetFormValidity({ type: "email", isValid: false });
+        return setNewEmailError("Email is required. Please provide an email");
+      }
+      if (!emailInput.includes("@")) {
+        //----------> update the form validity state
+        onSetFormValidity({ type: "email", isValid: false });
+        return setNewEmailError("Please provide a valid email address");
+      }
+      //<---------SEND A REQUEST FOR CONFIRMING IF THE USERNAME CHOSEN ALREADY EXIST ------------>
+      const response = await onCheckFieldExistence({ name: "email", value: emailInput });
+      if (response.hasError) {
+        onSetFormValidity({ type: "email", isValid: false });
+        return setNewEmailError(response.error);
+      }
+      if (response.emailExist) {
+        onSetFormValidity({ type: "email", isValid: false });
+        return setNewEmailError("That email has been taken. Please choose another");
+      }
+      onSetFormValidity({ type: "email", isValid: true });
+      setNewEmailError("");
+    },
+    [email, onSetFormValidity, onCheckFieldExistence]
+  );
   const changeEmailHandler = useCallback(
     (event) => {
-      const emailIsValid = event.target.value.includes("@");
       setNewEmail((prevValue) => {
         return event.target.value;
       });
@@ -19,18 +52,10 @@ const Email = (props) => {
       timeOutId.current = setTimeout(() => {
         const email = event.target.value.trim();
         onGetValue({ type: "email", value: email });
-        //validateEmail(email);
+        validateEmail(email);
       }, configuration.userFormInputDelay);
-      if (!emailIsValid) {
-        //----------> update the form validity state
-        onSetFormValidity({ type: "email", isValid: emailIsValid });
-        return setNewEmailError("Please provide a valid email address");
-      }
-      //----------> update the form validity state
-      onSetFormValidity({ type: "email", isValid: emailIsValid });
-      setNewEmailError("");
     },
-    [onGetValue, onSetFormValidity]
+    [onGetValue, validateEmail]
   );
 
   return (

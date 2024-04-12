@@ -8,7 +8,6 @@ const FullName = (props) => {
 
   const changeFullNameHandler = useCallback(
     (event) => {
-      //---------->if the entered fullname is less than 30 characters
       if (event.target.value.length <= configuration.maxLengthOfFullName) {
         setNewFullName((prevValue) => {
           return event.target.value;

@@ -1,15 +1,18 @@
 import { useCallback, useState } from "react";
 import styles from "./UserForm.module.css";
+import { configuration } from "../../../../../../config";
 const Work = (props) => {
   let { work, onGetValue } = props;
   const [newWork, setNewWork] = useState(work);
 
   const changeWorkHandler = useCallback(
     (event) => {
-      setNewWork((prevValue) => {
-        return event.target.value;
-      });
-      onGetValue({ type: "work", value: event.target.value.trim() });
+      if (event.target.value.length <= configuration.maxLengthOfWork) {
+        setNewWork((prevValue) => {
+          return event.target.value;
+        });
+        onGetValue({ type: "work", value: event.target.value.trim() });
+      }
     },
     [onGetValue]
   );
@@ -23,10 +26,11 @@ const Work = (props) => {
         placeholder="Please enter your work"
         value={newWork}
         onChange={changeWorkHandler}
-        maxLength="100"
+        //maxLength={configuration.maxLengthOfWork}
         spellCheck="false"
+        autoComplete="off"
       />
-      <span>{`${newWork.trim().length} / 100`}</span>
+      <span>{`${newWork.trim().length} / ${configuration.maxLengthOfWork}`}</span>
     </div>
   );
 };

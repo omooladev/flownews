@@ -1,19 +1,21 @@
 import { useCallback, useState } from "react";
 import styles from "./UserForm.module.css";
+import { configuration } from "../../../../../../config";
 const Education = (props) => {
   let { education, onGetValue } = props;
   const [newEducation, setNewEducation] = useState(education);
 
   const changeEducationHandler = useCallback(
     (event) => {
-      setNewEducation((prevValue) => {
-        return event.target.value;
-      });
-      onGetValue({ type: "education", value: event.target.value.trim() });
+      if (event.target.value.length <= configuration.maxLengthOfEducation) {
+        setNewEducation((prevValue) => {
+          return event.target.value;
+        });
+        onGetValue({ type: "education", value: event.target.value.trim() });
+      }
     },
     [onGetValue]
   );
-
 
   return (
     <div className={styles.form_control}>
@@ -24,10 +26,11 @@ const Education = (props) => {
         placeholder="Please enter your education"
         value={newEducation}
         onChange={changeEducationHandler}
-        maxLength="100"
+        maxLength={configuration.maxLengthOfEducation}
         spellCheck="false"
+        autoComplete="off"
       />
-      <span>{`${newEducation.trim().length} / 100`}</span>
+      <span>{`${newEducation.trim().length} / ${configuration.maxLengthOfEducation}`}</span>
     </div>
   );
 };

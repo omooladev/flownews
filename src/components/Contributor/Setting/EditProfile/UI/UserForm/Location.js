@@ -1,15 +1,18 @@
 import { useCallback, useState } from "react";
 import styles from "./UserForm.module.css";
+import { configuration } from "../../../../../../config";
 const Location = (props) => {
   let { location, onGetValue } = props;
   const [newLocation, setNewLocation] = useState(location);
 
   const changeLocationHandler = useCallback(
     (event) => {
-      setNewLocation((prevValue) => {
-        return event.target.value;
-      });
-      onGetValue({ type: "location", value: event.target.value.trim() });
+      if (event.target.value.length <= configuration.maxLengthOfLocation) {
+        setNewLocation((prevValue) => {
+          return event.target.value;
+        });
+        onGetValue({ type: "location", value: event.target.value.trim() });
+      }
     },
     [onGetValue]
   );
@@ -23,10 +26,11 @@ const Location = (props) => {
         placeholder="Please enter your location"
         value={newLocation}
         onChange={changeLocationHandler}
-        maxLength="100"
+        maxLength={configuration.maxLengthOfLocation}
         spellCheck="false"
+        autoComplete="off"
       />
-      <span>{`${newLocation.trim().length} / 100`}</span>
+      <span>{`${newLocation.trim().length} / ${configuration.maxLengthOfLocation}`}</span>
     </div>
   );
 };
