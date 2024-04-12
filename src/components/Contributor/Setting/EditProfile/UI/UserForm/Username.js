@@ -1,11 +1,11 @@
 import { useCallback, useRef, useState } from "react";
+import { configuration } from "../../../../../../config";
 import styles from "./UserForm.module.css";
 const Username = ({ username, onGetValue, onSetFormValidity, onCheckFieldExistence }) => {
   //<---------- STATES --------->
   const [newUsername, setNewUsername] = useState(username);
   const [newUsernameError, setNewUsernameError] = useState("");
   let timeOutId = useRef();
-
   //<---------- FUNCTION FOR VALIDATING USERNAME AND CHECKING ITS AVAILABILITY ---------->
   const validateUserName = useCallback(
     async (usernameInput, usernameLength) => {
@@ -52,14 +52,15 @@ const Username = ({ username, onGetValue, onSetFormValidity, onCheckFieldExisten
       });
       //---------->clear the timeout
       clearTimeout(timeOutId.current);
+      //----------> set the timeout
       timeOutId.current = setTimeout(() => {
         const username = event.target.value.trim();
         const usernameLength = username.length;
         //----------> SAVE THE USERNAME VALUE
-        onGetValue({ type: "username", value: event.target.value.trim() });
+        onGetValue({ type: "username", value: username });
         //--------->VALIDATE TJE USERNAME
         validateUserName(username, usernameLength);
-      }, 300); //0.3s
+      }, configuration.userFormInputDelay);
     },
     [onGetValue, timeOutId, validateUserName]
   );

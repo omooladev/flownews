@@ -1,18 +1,26 @@
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./UserForm.module.css";
+import { configuration } from "../../../../../../config";
 const Email = (props) => {
   let { email, emailIsPrivate, onGetValue, onSetFormValidity } = props;
   const [newEmail, setNewEmail] = useState(email);
   const [newEmailError, setNewEmailError] = useState("");
-
+  let timeOutId = useRef();
   const changeEmailHandler = useCallback(
     (event) => {
       const emailIsValid = event.target.value.includes("@");
       setNewEmail((prevValue) => {
         return event.target.value;
       });
-      onGetValue({ type: "email", value: event.target.value.trim() });
+      //----------> clear the timeout
+      clearTimeout(timeOutId.current);
+
+      timeOutId.current = setTimeout(() => {
+        const email = event.target.value.trim();
+        onGetValue({ type: "email", value: email });
+        //validateEmail(email);
+      }, configuration.userFormInputDelay);
       if (!emailIsValid) {
         //----------> update the form validity state
         onSetFormValidity({ type: "email", isValid: emailIsValid });

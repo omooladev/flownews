@@ -14,7 +14,7 @@ const UserForm = () => {
     // onSaveContributorData,
     // onUpdateContributorProfile,
   } = useContext(AuthContext);
-  const [updatedContributorData, setUpdatedContributorData] = useState(null);
+  const [updatedContributorData, setUpdatedContributorData] = useState({});
   const [formValidity, setFormValidity] = useState({
     formIsValid: true,
     emailIsValid: true,
