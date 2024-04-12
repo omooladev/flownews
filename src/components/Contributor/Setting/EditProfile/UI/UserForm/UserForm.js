@@ -59,55 +59,41 @@ const UserForm = () => {
     [updatedContributorData]
   );
 
+  //<---------- FUNCTION FOR UPDATING THE CONTRIBUTOR DATA ---------->
   const submitContributorProfileHandler = useCallback(
-    (event) => {
+    async (event) => {
       event.preventDefault();
       //----------> reset the error
       setError((prevError) => []);
-      console.log(updatedContributorData);
+
+      if (Object.keys(updatedContributorData).length === 0) {
+        //----------> if the updated contributor data is empty
+        return;
+      }
+
+      setIsLoading(true);
+      let response = await onUpdateContributorProfile(updateProperties);
+      const data = response.data;
+      const status = response.status;
+      const error = response.error;
+      if (status === 204) {
+        return setIsLoading(false);
+      }
+      if (data) {
+        console.log(data);
+        // onSaveContributorData(data);
+        // changeAppMode({ token: data.token });
+        // onChangeProfileUpdated(true);
+      }
+      if (error) {
+        setError((prevError) => {
+          return error;
+        });
+      }
+      setIsLoading(false);
     },
     [updatedContributorData]
   );
-
-  // const submitContributorProfileHandler = useCallback(
-  //   async (event) => {
-  //     event.preventDefault();
-  //     onChangeProfileUpdated(false);
-  //     setError("");
-
-  //     const updateProperties = await matchProfileFields();
-
-  //     if (!updateProperties) {
-  //       return;
-  //     }
-  //     setIsLoading(true);
-  //     let response = await onUpdateContributorProfile(updateProperties);
-  //     const data = response.data || "";
-  //     const status = response.status || "";
-  //     const error = response.error || "";
-  //     if (status === 204) {
-  //       return setIsLoading(false);
-  //     }
-  //     if (data) {
-  //       onSaveContributorData(data);
-  //       changeAppMode({ token: data.token });
-  //       onChangeProfileUpdated(true);
-  //     }
-  //     if (error) {
-  //       setError((prevError) => {
-  //         return error;
-  //       });
-  //     }
-  //     setIsLoading(false);
-  //   },
-  //   [
-  //     matchProfileFields,
-  //     changeAppMode,
-  //     onSaveContributorData,
-  //     onUpdateContributorProfile,
-  //     onChangeProfileUpdated,
-  //   ]
-  // );
 
   return (
     <form className={styles.form} onSubmit={submitContributorProfileHandler}>
