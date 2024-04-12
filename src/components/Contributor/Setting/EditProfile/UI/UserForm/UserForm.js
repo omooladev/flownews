@@ -14,6 +14,7 @@ const UserForm = () => {
     // onSaveContributorData,
     // onUpdateContributorProfile,
   } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
   const [updatedContributorData, setUpdatedContributorData] = useState({});
   const [formValidity, setFormValidity] = useState({
     formIsValid: true,
@@ -112,7 +113,7 @@ const UserForm = () => {
         onCheckFieldExistence={onCheckFieldExistence}
       />
 
-      <FormActions formIsValid={formValidity.formIsValid} />
+      <FormActions formIsValid={formValidity.formIsValid} isLoading={isLoading}/>
     </form>
   );
 };

@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./UserForm.module.css";
-const FormActions = ({ formIsValid }) => {
-  //const [isLoading, setIsLoading] = useState(false);
-  let isLoading = false;
+const FormActions = ({ formIsValid, isLoading }) => {
   return (
     <div className={styles.form_actions}>
       <p>
