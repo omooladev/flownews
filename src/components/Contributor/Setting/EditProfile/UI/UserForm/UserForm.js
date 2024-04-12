@@ -1,3 +1,4 @@
+//<---------- IMPORT MODULES AND COMPONENTS ---------->
 import { useContext, useCallback, useState } from "react";
 import { AuthContext } from "../../../../../../store/Auth/auth-context";
 import Error from "./Error";
@@ -14,8 +15,14 @@ const UserForm = () => {
     // onUpdateContributorProfile,
   } = useContext(AuthContext);
   const [updatedContributorData, setUpdatedContributorData] = useState(null);
-  const [formValidity, setFormValidity] = useState({ formIsValid: true, emailIsValid: true });
+  const [formValidity, setFormValidity] = useState({
+    formIsValid: true,
+    emailIsValid: true,
+    usernameIsValid: true,
+  }); //This fields are all valid by default because it is already provided in the database and they are the only required field
   const [error, setError] = useState([]);
+
+  //<-----------FUNCTION FOR SAVING FORM AND REQUIRED FIELD VALIDITY ---------->
   const setFormValidityHandler = useCallback(
     ({ type, isValid }) => {
       const validityField = `${type}IsValid`;
@@ -27,14 +34,14 @@ const UserForm = () => {
         //----------> update the field validity
         let updatedState = { ...prevState, [validityField]: isValid };
         //----------> check if all field is valid, then update the form valid field
-        const formIsValid = updatedState.emailIsValid;
+        const formIsValid = updatedState.emailIsValid && updatedState.usernameIsValid;
         updatedState = { ...updatedState, formIsValid };
         return updatedState;
       });
     },
     [formValidity]
   );
-
+  //<-----------FUNCTION FOR UPDATING THE CONTRIBUTOR DATA---------->
   const updateContributorData = useCallback(
     ({ type, value }, action) => {
       if (action === "add") {
