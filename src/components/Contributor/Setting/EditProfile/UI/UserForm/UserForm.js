@@ -67,10 +67,10 @@ const UserForm = () => {
       //----------> reset the error
       setError((prevError) => []);
 
-      // if (Object.keys(updatedContributorData).length === 0) {
-      //   //----------> if the updated contributor data is empty
-      //   return;
-      // }
+      if (Object.keys(updatedContributorData).length === 0) {
+        //----------> if the updated contributor data is empty
+        return;
+      }
 
       setIsLoading(true);
       let { hasError, data, error } = await onUpdateContributorProfile(updatedContributorData);
