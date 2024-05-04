@@ -42,12 +42,11 @@ const EmailVerification = () => {
         return { ...prevState, type: "cancel" };
       });
       //----------> send a response to the server
-      const response = await sendRequest(`${HOSTURI}/email/cancel-email-change-request`, {
+      const {error,data} = await sendRequest(`${HOSTURI}/email/cancel-email-change-request`, {
         method: "PATCH",
         token,
-      });
-      const error = response.error || "";
-      const data = response.data || "";
+      })
+      
       if (data) {
         onSaveContributorData(data);
       }
