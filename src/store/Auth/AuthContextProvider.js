@@ -279,7 +279,7 @@ const AuthContextProvider = (props) => {
         if(data){
         return { hasError: false, data };}
       if (error) {
-        //----------> separate the error based on the comma
+        //----------> separate the error based on the commas
         return { hasError: true, error:error.split(",")};
       }
     },
