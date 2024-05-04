@@ -36,7 +36,7 @@ const AuthContextProvider = (props) => {
   const [searchedContributorData, setSearchedContributorData] = useState({
     username: "",
   });
-  const [profileUpdated, setProfileUpdated] = useState(true); //TODO change to false
+  const [profileUpdated, setProfileUpdated] = useState(false);
   const loginOrBecomeContributor = useCallback(
     async ({ location, contributorAuthData }) => {
       const response = await sendRequest(`${HOSTURI}/auth/${location}`, {
@@ -270,15 +270,17 @@ const AuthContextProvider = (props) => {
   //<---------- FUNCTION FOR UPDATING THE CONTRIBUTOR DATA---------->
   const updateContributorProfile = useCallback(
     async (updateProperties) => {
-      try {
-        const { data } = await sendRequest(`${HOSTURI}/contributor/update-profile`, {
+      
+        const { data,error } = await sendRequest(`${HOSTURI}/contributor/update-profile`, {
           method: "PATCH",
           contributorData: updateProperties,
           token,
         });
-        return { hasError: false, data };
-      } catch (error) {
-        return { hasError: true, error };
+        if(data){
+        return { hasError: false, data };}
+      if (error) {
+        //----------> separate the error based on the comma
+        return { hasError: true, error:error.split(",")};
       }
     },
     [sendRequest, token]

@@ -26,8 +26,8 @@ const useHttp = () => {
             authorization: token && `Bearer ${token}`,
           },
         });
-
-        return { data, status };
+        
+        return { data, status,error:null };
       }
 
       //----------> POST REQUEST
@@ -56,7 +56,7 @@ const useHttp = () => {
       if (err.response) {
         response = response.data.message;
       }
-      return { error: response };
+      return { error: response,data:null };
     }
   }, []);
 
