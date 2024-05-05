@@ -295,6 +295,12 @@ const AuthContextProvider = (props) => {
     });
     return response;
   }, [sendRequest, token]);
+
+  const changeProfilePicture=useCallback(async({action,profilePicture})=>{
+    const response = await sendRequest(`
+    ${HOSTURI}/contributor/update-profile?action=handle-profile-picture&${action}`,
+     { method: "PATCH" });
+  },[])
   useEffect(() => {
     if (makeBodyFixed) {
       return document.body.classList.add("fixed-body");
@@ -341,6 +347,7 @@ const AuthContextProvider = (props) => {
 
         cancelRequest,
         onCheckFieldExistence: checkFieldExistence,
+        onChangeProfilePicture:changeProfilePicture,
       }}
     >
       {props.children}

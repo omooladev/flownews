@@ -46,11 +46,11 @@ const Login = (props) => {
       }
 
       setIsLoading(true);
-      const {data,error} = await onLoginOrBecomeContributor({
+      const { data, error } = await onLoginOrBecomeContributor({
         location: "login",
         contributorAuthData: { email, password },
       });
-     
+
       if (data) {
         onSaveContributorData(data);
         changeAppMode({
@@ -58,7 +58,7 @@ const Login = (props) => {
           isLoggedIn: true,
           tokenExpirationTime: data.tokenExpirationTime,
         });
-        onMakeBodyFixed(false)
+        onMakeBodyFixed(false);
         history.replace("/home");
       }
       if (error) {
@@ -75,6 +75,7 @@ const Login = (props) => {
       onResetAuthReply,
       onSaveContributorData,
       onLoginOrBecomeContributor,
+      onMakeBodyFixed,
     ]
   );
 

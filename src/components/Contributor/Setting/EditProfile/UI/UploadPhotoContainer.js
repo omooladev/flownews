@@ -4,11 +4,15 @@ import { AuthContext } from "../../../../../store/Auth/auth-context";
 import RemoveProfilePhotoContainer from "./RemoveProfilePhotoContainer";
 import styles from "./UploadPhotoContainer.module.css";
 import { configuration } from "../../../../../config";
-const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadContainerIsActive }) => {
-  //min-width:1400px
+const UploadPhotoContainer = ({
+  onSetError,
+  onToggleComponentsIsActive,
+  uploadContainerIsActive,
+}) => {
   //----------> get data from the auth context
   const {
     onSaveContributorData,
+    onChangeProfilePicture,
     contributorData: { profilePicture: displayPicture },
   } = useContext(AuthContext);
   //---------> get the maximum size if the profile picture from the configuration
@@ -18,13 +22,21 @@ const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadCo
 
   //<--------- FUNCTIONS STARTS HERE---------->
   //----------> transform file
-  const transformFile = useCallback(async (file) => {
-    const reader = new FileReader();
-    if (file) {
-      reader.readAsDataURL(file);
-      reader.onloadend = () => setProfilePicture(reader.result);
-    }
-  }, []);
+  const transformFile = useCallback(
+    async (file) => {
+      const reader = new FileReader();
+      if (file) {
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+          const profilePicture = reader.result;
+          setProfilePicture(file);
+          onSaveContributorData({ profilePicture });
+          onChangeProfilePicture({ action: "save",profilePicture:file });
+        };
+      }
+    },
+    [onSaveContributorData, onChangeProfilePicture]
+  );
   //----------> save profile picture
   const saveProfilePictureHandler = useCallback(
     async (event) => {
@@ -35,7 +47,6 @@ const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadCo
       let file = event.target.files[0];
       const imageType = file.type;
       const imageSize = file.size;
-
       if (!imageType.includes("image/")) {
         return onSetError("Please upload an image");
       }
@@ -45,10 +56,19 @@ const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadCo
           `Please upload a picture smaller than ${maxProfilePictureSize.toString().slice(0, 1)}MB`
         );
       }
-      await transformFile(file);
+      await transformFile(file)
+
     },
     [onToggleComponentsIsActive, transformFile, onSetError, maxProfilePictureSize]
   );
+  const removeProfilePhotoHandler = useCallback(() => {
+    if (profilePicture) {
+      setProfilePicture(null);
+      onSaveContributorData({ profilePicture: null });
+      onToggleComponentsIsActive({ type: "uploadContainer", event: "close" });
+      onChangeProfilePicture({ action: "remove",profilePicture});
+    }
+  }, [onSaveContributorData, onToggleComponentsIsActive,profilePicture, onChangeProfilePicture]);
 
   const showRemoveProfilePhotoContainer = useCallback((event) => {
     event.stopPropagation();
@@ -60,13 +80,8 @@ const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadCo
   const stopPropagationHandler = useCallback((event) => {
     event.stopPropagation();
   }, []);
+
   //<--------- FUNCTIONS ENDS HERE---------->
-  useEffect(() => {
-    if (profilePicture) {
-      //TODO send a request to save the profile picture on the database
-      onSaveContributorData({ profilePicture });
-    }
-  }, [profilePicture, onSaveContributorData]);
 
   useEffect(() => {
     if (!uploadContainerIsActive && removeProfilePhotoContainerIsActive) {
@@ -102,6 +117,7 @@ the remove profile photo container */}
               onClick={stopPropagationHandler}
               onHideRemoveProfilePhotoContainer={hideRemoveProfilePhotoContainer}
               onToggleComponentsIsActive={onToggleComponentsIsActive}
+              onRemoveProfilePhoto={removeProfilePhotoHandler}
             />
           )}
         </section>
