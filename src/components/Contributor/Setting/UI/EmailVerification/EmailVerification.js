@@ -70,12 +70,10 @@ const EmailVerification = () => {
         return { ...prevState, type: "verify" };
       });
       //----------> send a response to the server
-      const response = await sendRequest(`${HOSTURI}/email/sendVerificationLink`, {
+      const {error,status} = await sendRequest(`${HOSTURI}/email/sendVerificationLink`, {
         method: "PATCH",
         token,
       });
-      const error = response.error || "";
-      const status = response.status || "";
 
       if (status === 200) {
         setEmailSent((prevState) => {

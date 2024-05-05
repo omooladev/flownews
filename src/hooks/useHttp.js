@@ -39,7 +39,7 @@ const useHttp = () => {
           },
         });
 
-        return { data, status };
+        return { data, status,error:null };
       }
       if (method === "GET") {
         const { data } = await axios.get(uri, {
@@ -48,7 +48,7 @@ const useHttp = () => {
             authorization: `Bearer ${token}`,
           },
         });
-        return { data };
+        return { data, error: null };
       }
     } catch (err) {
       let response = err.response || err.message;
@@ -56,7 +56,7 @@ const useHttp = () => {
       if (err.response) {
         response = response.data.message;
       }
-      return { error: response,data:null };
+      return { error: response,data:null ,status:null};
     }
   }, []);
 

@@ -17,7 +17,7 @@ const BecomeContributor = (props) => {
     onValidateEmail,
     onValidatePassword,
   } = props;
-  const { onLoginOrBecomeContributor, history } = useContext(AuthContext);
+  const { onLoginOrBecomeContributor, history} = useContext(AuthContext);
 
   const [isLoading, setIsLoading] = useState(false);
   const emailRef = useRef();
@@ -39,12 +39,11 @@ const BecomeContributor = (props) => {
         return;
       }
       setIsLoading(true);
-      const response = await onLoginOrBecomeContributor({
+      const {data,error} = await onLoginOrBecomeContributor({
         location: "become-contributor",
         contributorAuthData: { email, password },
       });
-      const data = response.data || "";
-      const error = response.error || "";
+      
       if (data) {
         onChangeAuthReply({ type: "success", message: "Account created successfully" });
         setTimeout(() => {

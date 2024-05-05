@@ -19,7 +19,7 @@ const Login = (props) => {
     onValidateEmail,
     onValidatePassword,
   } = props;
-  const { changeAppMode, onLoginOrBecomeContributor, history, onSaveContributorData } =
+  const { changeAppMode, onLoginOrBecomeContributor, history, onSaveContributorData,onMakeBodyFixed } =
     useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   //* refs
@@ -46,12 +46,11 @@ const Login = (props) => {
       }
 
       setIsLoading(true);
-      const response = await onLoginOrBecomeContributor({
+      const {data,error} = await onLoginOrBecomeContributor({
         location: "login",
         contributorAuthData: { email, password },
       });
-      const data = response.data || "";
-      const error = response.error || "";
+     
       if (data) {
         onSaveContributorData(data);
         changeAppMode({
@@ -59,6 +58,7 @@ const Login = (props) => {
           isLoggedIn: true,
           tokenExpirationTime: data.tokenExpirationTime,
         });
+        onMakeBodyFixed(false)
         history.replace("/home");
       }
       if (error) {
