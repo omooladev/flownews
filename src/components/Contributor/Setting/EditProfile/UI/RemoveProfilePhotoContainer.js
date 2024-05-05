@@ -1,11 +1,10 @@
 import { useCallback } from "react";
 import styles from "./RemoveProfilePhotoContainer.module.css";
-const RemoveProfilePhotoContainer = ({
-  onToggleComponentsIsActive,
-  onSaveContributorData,
-  onHideRemoveProfilePhotoContainer,
-  onClick,
-}) => {
+const RemoveProfilePhotoContainer = (props) => {
+  //----------> get the properties
+  const { onToggleComponentsIsActive, onSaveContributorData, onHideRemoveProfilePhotoContainer, onClick } =
+    props;
+
   const closeProfilePhotoContainer = useCallback(() => {
     onHideRemoveProfilePhotoContainer();
   }, [onHideRemoveProfilePhotoContainer]);
@@ -17,7 +16,7 @@ const RemoveProfilePhotoContainer = ({
   return (
     <section className={styles.remove_profile_photo_container} onClick={onClick}>
       <p className={styles.header}>Are you sure you want to remove your profile photo?</p>
-      <div className={styles.buttons}>
+      <div className={styles.actions}>
         <button type="button" onClick={removeProfilePhotoHandler}>
           Yes
         </button>
