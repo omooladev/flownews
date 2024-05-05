@@ -18,8 +18,8 @@ const AppContextProvider = (props) => {
     menuIsActive: false,
     profileBoxIsActive: false,
     searchFieldIsActive: false,
-    accountSubscribeContainerIsActive:false,
-    uploadContainerIsActive:false,
+    accountSubscribeContainerIsActive: false,
+    uploadContainerIsActive: false,
   });
 
   const [lastLocation, setLastLocation] = useState("");
@@ -31,6 +31,7 @@ const AppContextProvider = (props) => {
   }, []);
 
   const toggleComponentsIsActive = useCallback(({ type, event }) => {
+    //----------> if action is generic
     if (event === "*") {
       return setComponentsIsActive((prevState) => {
         const prevStateKeys = Object.keys(prevState);
@@ -44,7 +45,9 @@ const AppContextProvider = (props) => {
         return { ...newState };
       });
     }
+    //----------> when we want to close the active component
     if (event === "close") {
+      //----------> component state
       const component = `${type}IsActive`;
       return setComponentsIsActive((prevState) => {
         return { ...prevState, [component]: false };

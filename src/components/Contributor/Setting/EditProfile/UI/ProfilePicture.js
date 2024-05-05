@@ -8,7 +8,7 @@ import styles from "./ProfilePicture.module.css";
 
 const ProfilePicture = () => {
   //-----------> set the state of the error
-  const [error, setError] = useState("Error will appear here");
+  const [error, setError] = useState("");
   const {
     onToggleComponentsIsActive,
     componentsIsActive: { uploadContainerIsActive },

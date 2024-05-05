@@ -1,10 +1,9 @@
 import { useCallback } from "react";
 import styles from "./RemoveProfilePhotoContainer.module.css";
 const RemoveProfilePhotoContainer = (props) => {
-  //----------> get the properties
+  //----------> get the
   const { onToggleComponentsIsActive, onSaveContributorData, onHideRemoveProfilePhotoContainer, onClick } =
     props;
-
   const closeProfilePhotoContainer = useCallback(() => {
     onHideRemoveProfilePhotoContainer();
   }, [onHideRemoveProfilePhotoContainer]);

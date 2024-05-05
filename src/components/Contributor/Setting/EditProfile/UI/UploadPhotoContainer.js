@@ -16,6 +16,8 @@ const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadCo
   const [profilePicture, setProfilePicture] = useState("");
   const [removeProfilePhotoContainerIsActive, setRemoveProfilePhotoContainerIsActive] = useState(false);
 
+  //<--------- FUNCTIONS STARTS HERE---------->
+  //----------> transform file
   const transformFile = useCallback(async (file) => {
     const reader = new FileReader();
     if (file) {
@@ -23,20 +25,25 @@ const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadCo
       reader.onloadend = () => setProfilePicture(reader.result);
     }
   }, []);
+  //----------> save profile picture
   const saveProfilePictureHandler = useCallback(
     async (event) => {
       event.stopPropagation();
+      //----------> close the upload container
       onToggleComponentsIsActive({ type: "uploadContainer", event: "close" });
-
+      //----------> get the image file
       let file = event.target.files[0];
       const imageType = file.type;
       const imageSize = file.size;
+
       if (!imageType.includes("image/")) {
         return onSetError("Please upload an image");
       }
 
       if (imageSize > maxProfilePictureSize) {
-        return onSetError("Please upload a picture smaller than 1MB");
+        return onSetError(
+          `Please upload a picture smaller than ${maxProfilePictureSize.toString().slice(0, 1)}MB`
+        );
       }
       await transformFile(file);
     },
@@ -53,7 +60,7 @@ const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadCo
   const stopPropagationHandler = useCallback((event) => {
     event.stopPropagation();
   }, []);
-
+  //<--------- FUNCTIONS ENDS HERE---------->
   useEffect(() => {
     if (profilePicture) {
       //TODO send a request to save the profile picture on the database
@@ -87,7 +94,8 @@ const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadCo
               onChange={saveProfilePictureHandler}
             />
           </ul>
-
+          {/* IF display picture exist and the remove profile photo container is active and the upload container is also active we display
+the remove profile photo container */}
           {displayPicture && removeProfilePhotoContainerIsActive && uploadContainerIsActive && (
             <RemoveProfilePhotoContainer
               onSaveContributorData={onSaveContributorData}
