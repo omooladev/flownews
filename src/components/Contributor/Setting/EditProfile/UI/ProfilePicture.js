@@ -1,4 +1,5 @@
-import { FaRegEdit } from "react-icons/fa";
+//<---------- IMPORT MODULES ---------->
+
 import ProfileBox from "../../../../Header/Navigation/ContributorNavigations/ProfileBox";
 import { useCallback, useContext, useState } from "react";
 import { AppContext } from "../../../../../store/App/app-context";
@@ -6,12 +7,13 @@ import UploadPhotoContainer from "./UploadPhotoContainer";
 import styles from "./ProfilePicture.module.css";
 
 const ProfilePicture = () => {
-  const [error, setError] = useState("");
+  //-----------> set the state of the error
+  const [error, setError] = useState("Error will appear here");
   const {
     onToggleComponentsIsActive,
     componentsIsActive: { uploadContainerIsActive },
   } = useContext(AppContext);
- 
+
   const toggleUploadContainer = useCallback(
     (event) => {
       event.stopPropagation();
@@ -28,19 +30,15 @@ const ProfilePicture = () => {
   return (
     <section className={styles.profile_picture}>
       <p className={styles.profile_picture_header}>Profile picture</p>
-      <span className={`${styles.error} ${error ? styles.show : ""}`}>
-        {error || "Error will appear here"}
-      </span>
-      <ProfileBox className="UserForm__ProfileBox" />
-      <button
-        onClick={toggleUploadContainer}
-        className={`${styles.upload_container_button} ${
-          uploadContainerIsActive ? styles.active : ""
-        }`}
-      >
-        <FaRegEdit />
-        <span>Edit</span>
-      </button>
+      <span className={`${styles.error} ${error ? styles.show : ""}`}>{error}</span>
+      {/*THE PROFILE BOX WHICH CONTAINS EITHER THE PROFILE PICTURE OR SHORT FORM OF THE USERNAME */}
+      <ProfileBox
+        className="UserForm__ProfileBox"
+        from="user-form"
+        uploadContainerIsActive={uploadContainerIsActive}
+        onToggleUploadContainer={toggleUploadContainer}
+      />
+      {/*UPLOAD CONTAINER WHICH CONTAINS CONTROL FOR UPLOADING AND REMOVING PROFILE PICTURE */}
       <UploadPhotoContainer
         onSetError={setErrorHandler}
         onToggleComponentsIsActive={onToggleComponentsIsActive}

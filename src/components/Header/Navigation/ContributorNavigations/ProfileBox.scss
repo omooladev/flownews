@@ -107,13 +107,10 @@
     display: none;
   }
 }
-
+/*? ProfileBox configuration for UserForm*/
 .UserForm__ProfileBox {
+  position: relative;
   cursor: default;
-  .username,
-  .icon {
-    display: none;
-  }
   .profilePicture_Username {
     cursor: default;
     height: 180px;
@@ -122,6 +119,24 @@
     line-height: 140px;
     margin: 0;
     text-align: center;
+  }
+  .upload_container_button {
+    cursor: pointer;
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0;
+    background-color: var(--body-color);
+    color: var(--tertiary-color);
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--secondary-color);
+    border-radius: 3px;
+    span {
+      display: inline-block;
+      padding-left: 0.5rem;
+    }
+    &.active {
+      cursor: default;
+    }
   }
 }
 @media (min-width: 500px) {

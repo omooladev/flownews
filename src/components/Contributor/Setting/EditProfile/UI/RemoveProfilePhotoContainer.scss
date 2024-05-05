@@ -1,14 +1,9 @@
 .remove_profile_photo_container {
-  position: absolute;
-  top: 6rem;
-  left: 0%;
-  margin-left: 0rem;
   background-color: var(--body-color);
   color: var(--tertiary-color);
   box-shadow: var(--secondary-color) 0px 0px 0px 1px;
   width: 12rem;
   padding: 0.5rem 0.6rem;
-
   .header {
     font-weight: normal;
     text-align: center;

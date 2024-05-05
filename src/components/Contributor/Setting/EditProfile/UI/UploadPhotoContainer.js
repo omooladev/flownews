@@ -1,20 +1,20 @@
+//<---------IMPORT MODULES ---------->
 import { useCallback, useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
-import styles from "./UploadPhotoContainer.module.css";
 import RemoveProfilePhotoContainer from "./RemoveProfilePhotoContainer";
-const UploadPhotoContainer = ({
-  onSetError,
-  onToggleComponentsIsActive,
-  uploadContainerIsActive,
-}) => {
+import styles from "./UploadPhotoContainer.module.css";
+import { configuration } from "../../../../../config";
+const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadContainerIsActive }) => {
   //min-width:1400px
+  //----------> get data from the auth context
   const {
     onSaveContributorData,
     contributorData: { profilePicture: displayPicture },
   } = useContext(AuthContext);
+  //---------> get the maximum size if the profile picture from the configuration
+  const { maxProfilePictureSize } = configuration;
   const [profilePicture, setProfilePicture] = useState("");
-  const [removeProfilePhotoContainerIsActive, setRemoveProfilePhotoContainerIsActive] =
-    useState(false);
+  const [removeProfilePhotoContainerIsActive, setRemoveProfilePhotoContainerIsActive] = useState(false);
 
   const transformFile = useCallback(async (file) => {
     const reader = new FileReader();
@@ -30,18 +30,17 @@ const UploadPhotoContainer = ({
 
       let file = event.target.files[0];
       const imageType = file.type;
-      const maxSize = 1024 * 1024; //? This is 1MB
       const imageSize = file.size;
       if (!imageType.includes("image/")) {
         return onSetError("Please upload an image");
       }
 
-      if (imageSize > maxSize) {
+      if (imageSize > maxProfilePictureSize) {
         return onSetError("Please upload a picture smaller than 1MB");
       }
       await transformFile(file);
     },
-    [onToggleComponentsIsActive, transformFile, onSetError]
+    [onToggleComponentsIsActive, transformFile, onSetError, maxProfilePictureSize]
   );
 
   const showRemoveProfilePhotoContainer = useCallback((event) => {
@@ -66,41 +65,38 @@ const UploadPhotoContainer = ({
     if (!uploadContainerIsActive && removeProfilePhotoContainerIsActive) {
       hideRemoveProfilePhotoContainer();
     }
-  }, [
-    uploadContainerIsActive,
-    removeProfilePhotoContainerIsActive,
-    hideRemoveProfilePhotoContainer,
-  ]);
+  }, [uploadContainerIsActive, removeProfilePhotoContainerIsActive, hideRemoveProfilePhotoContainer]);
   return (
     <>
       {uploadContainerIsActive && (
-        <ul className={styles.upload_container} id="userForm_upload_container">
-          <li onClick={stopPropagationHandler}>
-            <label htmlFor="userForm_image_input">Upload a photo...</label>
-          </li>
-          {displayPicture && (
-            <>
+        <section className={styles.upload_container} id="userForm_upload_container">
+          <ul className={styles["upload-controls"]}>
+            <li onClick={stopPropagationHandler}>
+              <label htmlFor="userForm_image_input">Upload a photo...</label>
+            </li>
+            {displayPicture && (
               <li onClick={showRemoveProfilePhotoContainer}>
                 <label>Remove Profile photo</label>
               </li>
-              {removeProfilePhotoContainerIsActive && uploadContainerIsActive && (
-                <RemoveProfilePhotoContainer
-                  onSaveContributorData={onSaveContributorData}
-                  onClick={stopPropagationHandler}
-                  onHideRemoveProfilePhotoContainer={hideRemoveProfilePhotoContainer}
-                  onToggleComponentsIsActive={onToggleComponentsIsActive}
-                />
-              )}
-            </>
+            )}
+            <input
+              type="file"
+              accept="image/"
+              id="userForm_image_input"
+              onClick={stopPropagationHandler}
+              onChange={saveProfilePictureHandler}
+            />
+          </ul>
+
+          {displayPicture && removeProfilePhotoContainerIsActive && uploadContainerIsActive && (
+            <RemoveProfilePhotoContainer
+              onSaveContributorData={onSaveContributorData}
+              onClick={stopPropagationHandler}
+              onHideRemoveProfilePhotoContainer={hideRemoveProfilePhotoContainer}
+              onToggleComponentsIsActive={onToggleComponentsIsActive}
+            />
           )}
-          <input
-            type="file"
-            accept="image/"
-            id="userForm_image_input"
-            onClick={stopPropagationHandler}
-            onChange={saveProfilePictureHandler}
-          />
-        </ul>
+        </section>
       )}
     </>
   );
