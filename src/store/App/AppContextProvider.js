@@ -9,10 +9,10 @@ const getAppMode = () => {
 };
 
 const AppContextProvider = (props) => {
-  //* check the default browser theme
+  //----------> get the default browser theme
   const browserDarkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const browserLightTheme = window.matchMedia("(prefers-color-scheme: light)").matches;
-  //* states
+  //--------> app states
   const [appMode, setAppMode] = useState(getAppMode);
   const [componentsIsActive, setComponentsIsActive] = useState({
     menuIsActive: false,

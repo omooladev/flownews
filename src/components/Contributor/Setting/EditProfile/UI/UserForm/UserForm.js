@@ -76,13 +76,14 @@ const UserForm = () => {
       let { hasError, data, error } = await onUpdateContributorProfile(updatedContributorData);
      
       if (data) {
-     
         if (data.message === "No changes were made to contributor details") {
           //----------> means that the content did not change
           return setIsLoading(false);
         }
         onSaveContributorData(data);
+        if(data.token){
         changeAppMode({ token: data.token });
+        }
         onChangeProfileUpdated(true);
       }
       if (hasError) {
