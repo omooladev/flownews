@@ -4,11 +4,7 @@ import { AuthContext } from "../../../../../store/Auth/auth-context";
 import RemoveProfilePhotoContainer from "./RemoveProfilePhotoContainer";
 import styles from "./UploadPhotoContainer.module.css";
 import { configuration } from "../../../../../config";
-const UploadPhotoContainer = ({
-  onSetError,
-  onToggleComponentsIsActive,
-  uploadContainerIsActive,
-}) => {
+const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadContainerIsActive }) => {
   //----------> get data from the auth context
   const {
     onSaveContributorData,
@@ -31,11 +27,22 @@ const UploadPhotoContainer = ({
           const profilePicture = reader.result;
           setProfilePicture(file);
           onSaveContributorData({ profilePicture });
-          onChangeProfilePicture({ action: "save",profilePicture:file });
+          onChangeProfilePicture({ action: "save", profilePicture: file }).then(({ error, data }) => {
+            if (error === "File too large") {
+              return onSetError(
+                `Failed to save profile picture, Please upload a picture smaller than ${maxProfilePictureSize
+                  .toString()
+                  .slice(0, 1)}MB`
+              );
+            }
+            if (error) {
+              return onSetError(error);
+            }
+          });
         };
       }
     },
-    [onSaveContributorData, onChangeProfilePicture]
+    [onSaveContributorData, onChangeProfilePicture, onSetError, maxProfilePictureSize]
   );
   //----------> save profile picture
   const saveProfilePictureHandler = useCallback(
@@ -56,8 +63,7 @@ const UploadPhotoContainer = ({
           `Please upload a picture smaller than ${maxProfilePictureSize.toString().slice(0, 1)}MB`
         );
       }
-      await transformFile(file)
-
+      await transformFile(file);
     },
     [onToggleComponentsIsActive, transformFile, onSetError, maxProfilePictureSize]
   );
@@ -66,9 +72,9 @@ const UploadPhotoContainer = ({
       setProfilePicture(null);
       onSaveContributorData({ profilePicture: null });
       onToggleComponentsIsActive({ type: "uploadContainer", event: "close" });
-      onChangeProfilePicture({ action: "remove",profilePicture});
+      onChangeProfilePicture({ action: "remove", profilePicture });
     }
-  }, [onSaveContributorData, onToggleComponentsIsActive,profilePicture, onChangeProfilePicture]);
+  }, [onSaveContributorData, onToggleComponentsIsActive, profilePicture, onChangeProfilePicture]);
 
   const showRemoveProfilePhotoContainer = useCallback((event) => {
     event.stopPropagation();

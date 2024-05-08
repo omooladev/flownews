@@ -270,17 +270,17 @@ const AuthContextProvider = (props) => {
   //<---------- FUNCTION FOR UPDATING THE CONTRIBUTOR DATA---------->
   const updateContributorProfile = useCallback(
     async (updateProperties) => {
-      
-        const { data,error } = await sendRequest(`${HOSTURI}/contributor/update-profile`, {
-          method: "PATCH",
-          contributorData: updateProperties,
-          token,
-        });
-        if(data){
-        return { hasError: false, data };}
+      const { data, error } = await sendRequest(`${HOSTURI}/contributor/update-profile`, {
+        method: "PATCH",
+        contributorData: updateProperties,
+        token,
+      });
+      if (data) {
+        return { hasError: false, data };
+      }
       if (error) {
         //----------> separate the error based on the commas
-        return { hasError: true, error:error.split(",")};
+        return { hasError: true, error: error.split(",") };
       }
     },
     [sendRequest, token]
@@ -296,11 +296,18 @@ const AuthContextProvider = (props) => {
     return response;
   }, [sendRequest, token]);
 
-  const changeProfilePicture=useCallback(async({action,profilePicture})=>{
-    const response = await sendRequest(`
-    ${HOSTURI}/contributor/update-profile?action=handle-profile-picture&${action}`,
-     { method: "PATCH" });
-  },[])
+  const changeProfilePicture = useCallback(
+    async ({ action, profilePicture }) => {
+      const contributorData = new FormData();
+      contributorData.append("image", profilePicture);
+      const response = await sendRequest(
+        `${HOSTURI}/contributor/update-profile?action=profile-picture&&actionType=${action}`,
+        { method: "PATCH", token, contributorData, contentType: "multipart/form-data" }
+      );
+      return response;
+    },
+    [token, sendRequest]
+  );
   useEffect(() => {
     if (makeBodyFixed) {
       return document.body.classList.add("fixed-body");
@@ -347,7 +354,7 @@ const AuthContextProvider = (props) => {
 
         cancelRequest,
         onCheckFieldExistence: checkFieldExistence,
-        onChangeProfilePicture:changeProfilePicture,
+        onChangeProfilePicture: changeProfilePicture,
       }}
     >
       {props.children}

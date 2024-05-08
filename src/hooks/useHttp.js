@@ -17,17 +17,17 @@ const useHttp = () => {
     const signal = newHttpController.signal;
 
     //----------> custom https configuration settings
-    const { method, contributorData, token } = config;
+    const { method, contributorData, token, contentType } = config;
     try {
       if (method === "PATCH") {
         const { data, status } = await axios.patch(uri, contributorData && contributorData, {
-          "Content-Type": "application/json",
+          "Content-Type": contentType || "application/json",
           headers: {
             authorization: token && `Bearer ${token}`,
           },
         });
-        
-        return { data, status,error:null };
+
+        return { data, status, error: null };
       }
 
       //----------> POST REQUEST
@@ -39,7 +39,7 @@ const useHttp = () => {
           },
         });
 
-        return { data, status,error:null };
+        return { data, status, error: null };
       }
       if (method === "GET") {
         const { data } = await axios.get(uri, {
@@ -56,7 +56,7 @@ const useHttp = () => {
       if (err.response) {
         response = response.data.message;
       }
-      return { error: response,data:null ,status:null};
+      return { error: response, data: null, status: null };
     }
   }, []);
 
