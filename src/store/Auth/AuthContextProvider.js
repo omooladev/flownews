@@ -298,11 +298,17 @@ const AuthContextProvider = (props) => {
 
   const changeProfilePicture = useCallback(
     async ({ action, profilePicture }) => {
-      const contributorData = new FormData();
-      contributorData.append("image", profilePicture);
+      let contributorData;
+      if (action === "save") {
+        contributorData = new FormData();
+        contributorData.append("image", profilePicture);
+      }
+      if (action === "remove") {
+        contributorData = { profilePicture };
+      }
       const response = await sendRequest(
         `${HOSTURI}/contributor/update-profile?action=profile-picture&&actionType=${action}`,
-        { method: "PATCH", token, contributorData, contentType: "multipart/form-data" }
+        { method: "PATCH", token, contributorData, contentType: action === "save" && "multipart/form-data" }
       );
       return response;
     },
