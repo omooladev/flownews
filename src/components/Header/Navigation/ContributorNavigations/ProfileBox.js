@@ -1,5 +1,5 @@
 //<---------- IMPORT MODULES ---------->
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { AuthContext } from "../../../../store/Auth/auth-context";
 import { FaChevronDown, FaRegEdit } from "react-icons/fa";
 import styles from "./ProfileBox.module.css";
@@ -8,13 +8,17 @@ const ProfileBox = (props) => {
   //----------> get the properties
   const { location, uploadContainerIsActive, onToggleUploadContainer, from, onClick } = props;
   //----------> get the contributor Data
-  const { contributorData } = useContext(AuthContext);
+  const { contributorData, onSaveContributorData } = useContext(AuthContext);
 
   const contributorUsernameCut = contributorData.username[0];
   const contributorFullUsername = contributorData.username;
   const contributorProfilePicture = contributorData.profilePicture || "";
 
   const className = `${styles[props.className]}` || "";
+
+  const handleProfilePictureError = useCallback(() => {
+    onSaveContributorData({ profilePicture: null });
+  }, [onSaveContributorData]);
 
   return (
     <section onClick={onClick} className={`${styles.profile_box} ${className}`}>
@@ -24,6 +28,7 @@ const ProfileBox = (props) => {
             src={contributorProfilePicture}
             alt="contributor profile"
             className={styles.profile_picture}
+            onError={handleProfilePictureError}
           />
         ) : (
           `${contributorUsernameCut}`

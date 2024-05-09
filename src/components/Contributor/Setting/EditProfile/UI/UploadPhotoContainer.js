@@ -38,6 +38,9 @@ const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadCo
             if (error) {
               return onSetError(error);
             }
+            if (data) {
+              onSaveContributorData(data);
+            }
           });
         };
       }
