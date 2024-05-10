@@ -49,10 +49,12 @@ const EmailPrivacy = () => {
           <label htmlFor="emailState_checkbox">Keep my email address private</label>
         </div>
         {emailPrivacy && (
-          <p>Your email address is set to private therefore it will be visible only on your profile page.</p>
+          <p className={styles.text}>
+            Your email address is set to private therefore it will be visible only on your profile page.
+          </p>
         )}
         {!emailPrivacy && (
-          <p>
+          <p className={styles.text}>
             Your email address is set to public therefore it will appear everywhere on flownews when you
             comment or post a content
           </p>
