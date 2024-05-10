@@ -103,8 +103,8 @@ const PasswordAuthentication = () => {
       {message.type === "success" && <p className={styles2.success}>{message.text}</p>}
       {message.type === "error" && <Error error={[message.text]} location="password-authentication" />}
       <form className={`${styles.form}`} onSubmit={submitFormHandler}>
-        <div className={`${styles.form_controls} ${styles2.form_controls}`}>
-          <div className={styles.form_control}>
+        <div className={`${styles.form_controls} `}>
+          <div className={`${styles.form_control} ${styles2.form_control}`}>
             <label>Old password</label>
             <input type="password" ref={oldPasswordRef} onFocus={resetMessage} />
           </div>

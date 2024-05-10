@@ -9,6 +9,8 @@
     margin: 1rem 0;
     gap: 0.5rem;
     .form_control {
+      width: 100%;
+      max-width: 25rem;
       @extend %DisplayFlex;
       flex-direction: column;
       justify-content: center;
