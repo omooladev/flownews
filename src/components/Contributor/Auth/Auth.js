@@ -1,4 +1,4 @@
-import styles from "./Auth.module.css";
+//<----------- IMPORT MODULES ---------->
 import { useCallback, useContext, useState } from "react";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import { BiX } from "react-icons/bi";
@@ -7,6 +7,7 @@ import Login from "./Login";
 import BecomeContributor from "./BecomeContributor";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
+import styles from "./Auth.module.css";
 
 const Auth = () => {
   const [viewPassword, setViewPassword] = useState(false);
@@ -16,7 +17,9 @@ const Auth = () => {
   const loginLocation = location.includes("/login");
   const becomeContributorLocation = location.includes("/become-contributor");
   const forgotPasswordLocation = location.includes("/forgot-password");
-  const resetPasswordLocation = location.includes("reset_password");
+  const resetPasswordLocation = location.includes("/reset_password");
+
+  //<---------- FUNCTIONS --------->
   const resetAuthReply = useCallback(() => {
     return setAuthReply((prevReply) => {
       return { ...prevReply, type: null, message: "" };
@@ -78,48 +81,42 @@ const Auth = () => {
     }
     return true;
   }, []);
-  const validatePasswordHandler = useCallback(
-    ({ validationType, password }) => {
-      let checkAllLogic;
-      if (validationType === "check_full") {
-        checkAllLogic = true;
+  const validatePasswordHandler = useCallback(({ validationType, password }) => {
+    let checkAllLogic;
+    if (validationType === "check_full") {
+      checkAllLogic = true;
+    }
+    if (validationType === "check_length" || checkAllLogic) {
+      const passwordLength = password.trim().length;
+      if (passwordLength === 0) {
+        setAuthReply((prevReply) => {
+          return {
+            ...prevReply,
+            type: "error",
+            message: "Please provide your password",
+          };
+        });
+        return false;
       }
-      if (validationType === "check_length" || checkAllLogic) {
-        const passwordLength = password.trim().length;
-        if (passwordLength === 0) {
-          setAuthReply((prevReply) => {
-            return {
-              ...prevReply,
-              type: "error",
-              message: "Please provide your password",
-            };
-          });
-          return false;
-        }
-        if (passwordLength < 8 && checkAllLogic) {
-          setAuthReply((prevReply) => {
-            return {
-              ...prevReply,
-              type: "error",
-              message: "Password Length must be at least 8 characters",
-            };
-          });
-          return false;
-        }
+      if (passwordLength < 8 && checkAllLogic) {
+        setAuthReply((prevReply) => {
+          return {
+            ...prevReply,
+            type: "error",
+            message: "Password Length must be at least 8 characters",
+          };
+        });
+        return false;
       }
-      return true;
-    },
-    []
-  );
+    }
+    return true;
+  }, []);
 
   return (
     <>
       <PopUp onClick={closePopUpHandler} className={`${styles.auth}`}>
         <div className={styles.mobile_cancel_icon}>
-          <BiX
-            className={`${styles.icon} ${styles.cancel}`}
-            onClick={closePopUpHandler}
-          />
+          <BiX className={`${styles.icon} ${styles.cancel}`} onClick={closePopUpHandler} />
         </div>
 
         {loginLocation && (

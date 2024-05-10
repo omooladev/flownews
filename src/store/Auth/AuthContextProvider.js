@@ -209,8 +209,8 @@ const AuthContextProvider = (props) => {
   }, [history, onToggleComponentsIsActive, onChangeAppMode]);
 
   const update_ResetPasswordHandler = useCallback(
-    async (title, passwordProperties) => {
-      const response = await sendRequest(`${HOSTURI}/password/${title}`, {
+    async (action, passwordProperties) => {
+      const response = await sendRequest(`${HOSTURI}/password/${action}`, {
         method: "PATCH",
         contributorData: { passwordProperties },
         token,
@@ -243,8 +243,8 @@ const AuthContextProvider = (props) => {
   );
 
   const sendPasswordResetEmail = useCallback(
-    async (email, title) => {
-      const response = await sendRequest(`${HOSTURI}/auth/password/${title}`, {
+    async (email, action) => {
+      const response = await sendRequest(`${HOSTURI}/auth/password/${action}`, {
         method: "POST",
         contributorData: { email },
       });

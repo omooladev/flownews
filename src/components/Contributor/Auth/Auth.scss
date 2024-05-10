@@ -1,8 +1,12 @@
 @use "../../../sass/_DisplayFlex";
-// http://localhost:3000/:_id/reset_password/:token//TODO remove this
 .auth {
   background-color: var(--body-color);
   font-size: var(--primary-font-size);
+  .checking_link {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--tertiary-color);
+  }
   a {
     text-decoration: none;
     transition: all 2s ease;
@@ -198,4 +202,3 @@
     }
   }
 }
-

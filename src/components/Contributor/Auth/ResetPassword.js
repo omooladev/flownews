@@ -1,3 +1,4 @@
+//<--------- IMPORT MODULES --------->
 import { useContext, useEffect, useState, useCallback, useRef } from "react";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import { useTitle } from "../../../hooks/useTitle";
@@ -18,20 +19,22 @@ const ResetPassword = (props) => {
     onValidateEmail,
     onValidatePassword,
   } = props;
-  const { onResetPassword, onVerifyPasswordResetLink, history, isLoggedIn } =
-    useContext(AuthContext);
+  const { onResetPassword, onVerifyPasswordResetLink, history, isLoggedIn } = useContext(AuthContext);
   const location = history.location;
+  console.log(location);
   const [isLoading, setIsLoading] = useState({ type: null });
-  const [linkIsValid, setLinkIsValid] = useState(false);
+  const [linkIsValid, setLinkIsValid] = useState(null);
   const [username, setUsername] = useState("");
   const [passwordChanged, setPasswordChanged] = useState(false);
   //**refs
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
   const verifyPasswordResetLink = useCallback(async () => {
+    //---------> set the loading type to link
     setIsLoading((prevValue) => {
       return { ...prevValue, type: "link" };
     });
+    return;
     const response = await onVerifyPasswordResetLink(location.pathname);
     const status = response.status || "";
     const data = response.data || "";
@@ -103,7 +106,9 @@ const ResetPassword = (props) => {
   const returnToSettingsPage = useCallback(() => {
     history.push("/settings/security");
   }, [history]);
+
   useEffect(() => {
+    //----------> verify the password reset link
     verifyPasswordResetLink();
   }, [verifyPasswordResetLink]);
   useEffect(() => {
@@ -111,8 +116,9 @@ const ResetPassword = (props) => {
   }, [onResetAuthReply]);
   return (
     <>
-      {isLoading.type === "link" && <h3>Checking Link....</h3>}
-      {!isLoggedIn && passwordChanged && (
+      {/* If the loading type is link */}
+      {isLoading.type === "link" && <AuthLoader text="Checking Link" className={styles.checking_link} />}
+      {!isLoggedIn && isLoading.type !== "link" && passwordChanged && (
         <Login
           passwordChanged={passwordChanged}
           viewPassword={viewPassword}
@@ -166,9 +172,7 @@ const ResetPassword = (props) => {
                   </div>
                 </div>
                 <div className={styles.form_actions}>
-                  <p>
-                    Make sure it is at least 8 characters including a number and a lowercase letter
-                  </p>
+                  <p>Make sure it is at least 8 characters including a number and a lowercase letter</p>
                   <button type="submit" disabled={isLoading.type === true ? true : false}>
                     {isLoading.type === true ? <AuthLoader /> : "Change password"}
                   </button>

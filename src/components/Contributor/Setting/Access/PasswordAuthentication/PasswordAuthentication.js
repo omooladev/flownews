@@ -21,32 +21,48 @@ const PasswordAuthentication = () => {
   } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState({
-    type: "success",
-    text: "this is an error",
+    type: "",
+    text: "",
   });
+  let timeOutId = useRef();
 
   const oldPasswordRef = useRef();
   const newPasswordRef = useRef();
   const confirmNewPasswordRef = useRef();
+
+  const resetMessage = useCallback(() => {
+    setMessage({ type: "", text: "" });
+  }, []);
+  const resetForm = useCallback(() => {
+    oldPasswordRef.current.value = "";
+    newPasswordRef.current.value = "";
+    confirmNewPasswordRef.current.value = "";
+  }, []);
   const submitFormHandler = useCallback(
     async (event) => {
       event.preventDefault();
 
+      //----------> access the current value of the password
       const oldPassword = oldPasswordRef.current.value;
       const newPassword = newPasswordRef.current.value;
       const confirmNewPassword = confirmNewPasswordRef.current.value;
-      const result = validatePassword(oldPassword, newPassword, confirmNewPassword);
-      if (result) {
-        return setMessage({ type: "error", text: result });
+
+      const { hasError, message } = await validatePassword(oldPassword, newPassword, confirmNewPassword);
+      if (hasError) {
+        return setMessage({ type: "error", text: message });
       }
       const passwordProperties = { oldPassword, newPassword, confirmNewPassword };
       setIsLoading(true);
-      const response = await onUpdate_ResetPassword("update", passwordProperties);
-      const error = response.error;
-      const data = response.data;
+      const { error, data } = await onUpdate_ResetPassword("update", passwordProperties);
+
       if (data) {
         if (data.message === "Password has been updated successfully") {
           setMessage({ type: "success", text: data.message });
+          timeOutId.current = setTimeout(() => {
+            resetMessage();
+            resetForm();
+            clearTimeout(timeOutId.current);
+          }, 1000);
         }
       }
       if (error) {
@@ -54,30 +70,31 @@ const PasswordAuthentication = () => {
       }
       setIsLoading(false);
     },
-    [onUpdate_ResetPassword]
+    [onUpdate_ResetPassword, resetMessage, resetForm]
   );
 
-  const validatePassword = (oldPassword, newPassword, confirmNewPassword) => {
+  const validatePassword = async (oldPassword, newPassword, confirmNewPassword) => {
     if (!oldPassword) {
-      return "Please provide your old password";
+      return { hasError: true, message: "Please provide your old password" };
     }
     if (!newPassword) {
-      return "Please provide your new password";
+      return { hasError: true, message: "Please provide your new password" };
     }
     if (!confirmNewPassword) {
-      return "Please confirm your new password";
+      return { hasError: true, message: "Please confirm your new password" };
     }
-    if (newPassword.trim().length < 8) {
-      return "Password Length must be at least 8 characters";
+    if (newPassword.trim().length < configuration.minLengthOfPassword) {
+      return {
+        hasError: true,
+        message: `Password Length must be at least ${configuration.minLengthOfPassword} characters`,
+      };
     }
     if (newPassword.trim() !== confirmNewPassword.trim()) {
-      return "Password does not match";
+      return { hasError: true, message: "Password does not match" };
     }
+    return { hasError: false, message: null };
   };
 
-  const focusInputHandler = useCallback(() => {
-    setMessage({ type: "", text: "" });
-  }, []);
   return (
     <section className={styles2.password}>
       {(!emailRequestChangeAddressIsVerified || emailRequestChange) && <EmailVerification />}
@@ -89,15 +106,15 @@ const PasswordAuthentication = () => {
         <div className={`${styles.form_controls} ${styles2.form_controls}`}>
           <div className={styles.form_control}>
             <label>Old password</label>
-            <input type="password" ref={oldPasswordRef} onFocus={focusInputHandler} />
+            <input type="password" ref={oldPasswordRef} onFocus={resetMessage} />
           </div>
           <div className={styles.form_control}>
             <label>New password</label>
-            <input type="password" ref={newPasswordRef} onFocus={focusInputHandler} />
+            <input type="password" ref={newPasswordRef} onFocus={resetMessage} />
           </div>
           <div className={styles.form_control}>
             <label>Confirm new password</label>
-            <input type="password" ref={confirmNewPasswordRef} onFocus={focusInputHandler} />
+            <input type="password" ref={confirmNewPasswordRef} onFocus={resetMessage} />
           </div>
           <p
             className={styles2.text}
@@ -105,7 +122,7 @@ const PasswordAuthentication = () => {
         </div>
         <div className={`${styles.form_actions} ${styles2.form_actions}`}>
           <button type="submit" className={styles.update_profile} disabled={isLoading ? true : false}>
-            Update password
+            {isLoading ? "Updating..." : "Update password"}
           </button>
           <p className={styles2.text}>
             <Link to="/forgot-password">Forgot my password?</Link>
