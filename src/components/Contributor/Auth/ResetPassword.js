@@ -19,29 +19,27 @@ const ResetPassword = (props) => {
     onValidateEmail,
     onValidatePassword,
   } = props;
-  const { onResetPassword, onVerifyPasswordResetLink, history, isLoggedIn } = useContext(AuthContext);
+  const { onUpdate_ResetPassword, onVerifyPasswordResetLink, history, isLoggedIn } = useContext(AuthContext);
   const location = history.location;
-  console.log(location);
   const [isLoading, setIsLoading] = useState({ type: null });
   const [linkIsValid, setLinkIsValid] = useState(null);
-  const [username, setUsername] = useState("");
+  const [contributorData, setContributorData] = useState({ contributorUsername: "", contributorId: "" });
   const [passwordChanged, setPasswordChanged] = useState(false);
-  //**refs
+  //refs
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
+
+  //<--------- Function for verifying password reset link
   const verifyPasswordResetLink = useCallback(async () => {
     //---------> set the loading type to link
     setIsLoading((prevValue) => {
       return { ...prevValue, type: "link" };
     });
-    return;
-    const response = await onVerifyPasswordResetLink(location.pathname);
-    const status = response.status || "";
-    const data = response.data || "";
-    const error = response.error || "";
+    const { status, data, error } = await onVerifyPasswordResetLink(location.pathname);
+
     if (status === 200 && data) {
       setLinkIsValid(true);
-      setUsername(data.username);
+      setContributorData({ contributorUsername: data.username, contributorId: data._id });
     }
     if (error) {
       setLinkIsValid(false);
@@ -58,17 +56,17 @@ const ResetPassword = (props) => {
   const changePasswordHandler = useCallback(
     async (event) => {
       event.preventDefault();
+      //--------> reset the auth reply
       onResetAuthReply();
       const password = passwordRef.current.value;
       const confirmPassword = confirmPasswordRef.current.value;
 
-      //? validations
+      //<---------- Validations starts here --------->
       const passwordIsValid = onValidatePassword({ validationType: "check_full", password });
       if (!passwordIsValid) {
         passwordRef.current.focus();
         return;
       }
-
       const confirmPasswordIsValid = onValidatePassword({
         validationType: "check_length",
         password: confirmPassword,
@@ -81,12 +79,19 @@ const ResetPassword = (props) => {
         confirmPasswordRef.current.focus();
         return onChangeAuthReply({ type: "error", message: "Password does not match" });
       }
+      //<---------- Validations ends here --------->
       setIsLoading((prevValue) => {
         return { ...prevValue, type: true };
       });
-      const response = await onResetPassword(username, { password, confirmPassword });
-      const status = response.status || "";
-      const error = response.error || "";
+
+      const { status, error } = await onUpdate_ResetPassword(
+        "reset_password",
+        contributorData.contributorId,
+        {
+          password,
+          confirmPassword,
+        }
+      );
       if (status === 200) {
         setPasswordChanged(true);
         onChangeAuthReply({ type: "success", message: "New password set successfully" });
@@ -101,7 +106,7 @@ const ResetPassword = (props) => {
         return { ...prevValue, type: false };
       });
     },
-    [username, onResetPassword, onResetAuthReply, onValidatePassword, onChangeAuthReply]
+    [contributorData, onUpdate_ResetPassword, onResetAuthReply, onValidatePassword, onChangeAuthReply]
   );
   const returnToSettingsPage = useCallback(() => {
     history.push("/settings/security");
@@ -138,8 +143,10 @@ const ResetPassword = (props) => {
           </button>
         </>
       )}
+      {/* if password has not been changed  */}
       {!passwordChanged && (
         <>
+          {/* if we stopped loading and the link is not valid */}
           {isLoading.type !== "link" && !linkIsValid && linkIsValid !== null && (
             <ForgotPassword
               linkIsValid={linkIsValid}
@@ -149,10 +156,11 @@ const ResetPassword = (props) => {
               onValidateEmail={onValidateEmail}
             />
           )}
+          {/* if we stopped loading and the link is valid */}
           {isLoading.type !== "link" && linkIsValid && (
             <>
               <h1>Change password for</h1>
-              <p className={styles.username}>{`@${username}`}</p>
+              <p className={styles.username}>{`@${contributorData.contributorUsername}`}</p>
               <Reply authReply={authReply} onResetAuthReply={onResetAuthReply} />
               <form className={styles.form} onSubmit={changePasswordHandler}>
                 <div className={styles.form_control}>

@@ -208,18 +208,6 @@ const AuthContextProvider = (props) => {
     history.replace("/home");
   }, [history, onToggleComponentsIsActive, onChangeAppMode]);
 
-  const update_ResetPasswordHandler = useCallback(
-    async (action, passwordProperties) => {
-      const response = await sendRequest(`${HOSTURI}/password/${action}`, {
-        method: "PATCH",
-        contributorData: { passwordProperties },
-        token,
-      });
-      return response;
-    },
-    [sendRequest, token]
-  );
-
   //<---------- FUNCTION FOR VERIFYING EMAIL ADDRESS ---------->
   const verifyEmailAddressHandler = useCallback(
     async (uri) => {
@@ -231,15 +219,22 @@ const AuthContextProvider = (props) => {
     [sendRequest]
   );
 
-  const resetPasswordHandler = useCallback(
-    async (username, passwordProperties) => {
-      const response = await sendRequest(`${HOSTURI}/auth/${username}/reset_password`, {
+  const update_ResetPasswordHandler = useCallback(
+    async (action, field, passwordProperties) => {
+      let uri;
+      if (action === "reset_password") {
+        uri = `auth/${field}/reset_password`;
+      } else {
+        uri = `password/${action}`;
+      }
+      const response = await sendRequest(`${HOSTURI}/${uri}`, {
         method: "PATCH",
-        contributorData: passwordProperties,
+        contributorData: { passwordProperties },
+        ...(token && { token }),
       });
       return response;
     },
-    [sendRequest]
+    [sendRequest, token]
   );
 
   const sendPasswordResetEmail = useCallback(
@@ -252,6 +247,7 @@ const AuthContextProvider = (props) => {
     },
     [sendRequest]
   );
+  //---------> function for verifying password reset link
   const verifyPasswordResetLink = useCallback(
     async (uri) => {
       const response = await sendRequest(`${HOSTURI}/auth${uri}`, {
@@ -342,7 +338,6 @@ const AuthContextProvider = (props) => {
         onUpdate_ResetPassword: update_ResetPasswordHandler,
 
         onVerifyEmailAddress: verifyEmailAddressHandler,
-        onResetPassword: resetPasswordHandler,
 
         onVerifyPasswordResetLink: verifyPasswordResetLink,
 
