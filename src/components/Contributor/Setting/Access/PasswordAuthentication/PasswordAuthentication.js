@@ -43,6 +43,7 @@ const PasswordAuthentication = () => {
       event.preventDefault();
 
       //----------> access the current value of the password
+
       const oldPassword = oldPasswordRef.current.value;
       const newPassword = newPasswordRef.current.value;
       const confirmNewPassword = confirmNewPasswordRef.current.value;
@@ -53,7 +54,7 @@ const PasswordAuthentication = () => {
       }
       const passwordProperties = { oldPassword, newPassword, confirmNewPassword };
       setIsLoading(true);
-      const { error, data } = await onUpdate_ResetPassword("update", passwordProperties);
+      const { error, data } = await onUpdate_ResetPassword("update", "", passwordProperties);
 
       if (data) {
         if (data.message === "Password has been updated successfully") {

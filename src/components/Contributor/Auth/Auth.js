@@ -12,7 +12,7 @@ import styles from "./Auth.module.css";
 const Auth = () => {
   const [viewPassword, setViewPassword] = useState(false);
   const [authReply, setAuthReply] = useState({ type: null, message: "" });
-  const { history, lastLocation, cancelRequest } = useContext(AuthContext);
+  const { history, lastLocation, cancelRequest,onMakeBodyFixed } = useContext(AuthContext);
   const location = history.location.pathname;
   const loginLocation = location.includes("/login");
   const becomeContributorLocation = location.includes("/become-contributor");
@@ -38,11 +38,12 @@ const Auth = () => {
       //----------> cancel the http request
       cancelRequest();
       history.replace(lastLocation);
+      onMakeBodyFixed(false);
       if (authReply.type) {
         return resetAuthReply();
       }
     },
-    [history, lastLocation, authReply, resetAuthReply, cancelRequest]
+    [history, lastLocation, authReply, resetAuthReply, cancelRequest, onMakeBodyFixed]
   );
 
   const toggleViewPasswordHandler = useCallback(() => {
