@@ -7,7 +7,7 @@ import styles from "./ConfirmAccountDeletionPopUp.module.css";
 const ConfirmAccountDeletionPopUp = (props) => {
   const { onSetShowPopUp } = props;
   const {
-    userData: { username },
+    contributorData: { username },
     onMakeBodyFixed,
   } = useContext(AuthContext);
   const [details, setDetails] = useState({ username });
@@ -27,7 +27,7 @@ const ConfirmAccountDeletionPopUp = (props) => {
     });
   }, []);
   const deleteAccountHandler = useCallback((event) => {
-    setDetailsIsValid(false)
+    setDetailsIsValid(false);
     event.preventDefault();
   }, []);
 
@@ -46,8 +46,8 @@ const ConfirmAccountDeletionPopUp = (props) => {
         <p>This is extremely important</p>
       </div>
       <p className={styles.notes}>
-        <span>We will immediately delete all of your contents</span>, along with your comments,
-        replies and everything associated with your account
+        <span>We will immediately delete all of your contents</span>, along with your comments, replies and
+        everything associated with your account
       </p>
       <p className={styles.notes}>
         Your username will be available to anyone on FlowNews immediately after account deletion

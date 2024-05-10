@@ -5,7 +5,7 @@ import OauthPermission from "./OauthPermission";
 import styles from "./OauthAssociation.module.css";
 const OauthAssociation = () => {
   const {
-    userData: {
+    contributorData: {
       socialMediaHandles: { facebook, twitter },
     },
   } = useContext(AuthContext);
@@ -21,15 +21,14 @@ const OauthAssociation = () => {
           <h3>Remove OAuth Associations</h3>
           <ul>
             <li>
-              You can remove one of your authentication methods. We'll still need one to
-              authenticate you.
+              You can remove one of your authentication methods. We'll still need one to authenticate you.
             </li>
             <li>Removing an OAuth association will:</li>
             <li className={styles.example}>Remove your ability to sign in with that account</li>
             <li className={styles.example}>Remove the associated URL from your profile</li>
             <li>
-              Note that this does not revoke our OAuth app access; you will have to do so in your
-              settings for the specific provider:
+              Note that this does not revoke our OAuth app access; you will have to do so in your settings for
+              the specific provider:
             </li>
           </ul>
 

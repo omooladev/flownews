@@ -13,7 +13,7 @@ const Navigation = (props) => {
     componentsIsActive: { menuIsActive },
     onToggleComponentsIsActive,
   } = useContext(AppContext);
-  const { isLoggedIn, userData } = useContext(AuthContext);
+  const { isLoggedIn, contributorData } = useContext(AuthContext);
 
   return (
     <nav className={`${className} ${styles.navigation} ${menuIsActive ? styles.active : ""}`}>
@@ -32,7 +32,7 @@ const Navigation = (props) => {
         </ul>
       </section>
       <SearchBox />
-      {isLoggedIn && <ContributorNavigation isLoggedIn={isLoggedIn} userData={userData} />}
+      {isLoggedIn && <ContributorNavigation isLoggedIn={isLoggedIn} contributorData={contributorData} />}
     </nav>
   );
 };

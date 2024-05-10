@@ -8,7 +8,7 @@ import DeleteAccount from "./DeleteAccount";
 const Account = () => {
   useTitle("Account Settings");
   const {
-    userData: { emailRequestChangeAddressIsVerified, emailRequestChange },
+    contributorData: { emailRequestChangeAddressIsVerified, emailRequestChange },
   } = useContext(AuthContext);
   return (
     <section>

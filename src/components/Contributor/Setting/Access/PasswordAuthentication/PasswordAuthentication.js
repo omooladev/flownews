@@ -1,4 +1,4 @@
-import { useCallback, useContext, useState, useRef} from "react";
+import { useCallback, useContext, useState, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
 import EmailVerification from "../../UI/EmailVerification/EmailVerification";
@@ -13,7 +13,7 @@ const PasswordAuthentication = () => {
   useNewLocation(location.pathname);
 
   const {
-    userData: { emailRequestChangeAddressIsVerified, emailRequestChange },
+    contributorData: { emailRequestChangeAddressIsVerified, emailRequestChange },
     onUpdate_ResetPassword,
   } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
@@ -98,11 +98,7 @@ const PasswordAuthentication = () => {
           <p>Make sure it's at least 8 characters including a number and a lowercase letter.</p>
         </div>
         <div className={`${styles.form_actions} ${styles2.form_actions}`}>
-          <button
-            type="submit"
-            className={styles.update_profile}
-            disabled={isLoading ? true : false}
-          >
+          <button type="submit" className={styles.update_profile} disabled={isLoading ? true : false}>
             Update password
           </button>
           <p>

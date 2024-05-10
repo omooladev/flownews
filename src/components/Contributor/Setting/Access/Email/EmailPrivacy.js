@@ -1,16 +1,18 @@
+//<---------- IMPORT MODULES ---------->
 import { useCallback, useContext, useState } from "react";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
 import styles from "./EmailPrivacy.module.css";
 
 const EmailPrivacy = () => {
   const {
-   onSaveContributorData,
-    userData: { emailIsPrivate },
+    onSaveContributorData,
+    contributorData: { emailIsPrivate },
     onToggleEmailPrivacy,
   } = useContext(AuthContext);
   const [emailPrivacy, setEmailPrivacy] = useState(emailIsPrivate);
   const [error, setError] = useState("");
 
+  //<--------- FUNCTIONS ---------->
   const ToggleEmailPrivacyHandler = useCallback(
     async (event) => {
       event.stopPropagation();
@@ -19,10 +21,7 @@ const EmailPrivacy = () => {
       setEmailPrivacy((prevState) => {
         return checked;
       });
-      const response = await onToggleEmailPrivacy();
-
-      const data = response.data || "";
-      const error = response.error || "";
+      const { data, error } = await onToggleEmailPrivacy();
 
       if (data) {
         onSaveContributorData(data);
@@ -50,15 +49,12 @@ const EmailPrivacy = () => {
           <label htmlFor="emailState_checkbox">Keep my email address private</label>
         </div>
         {emailPrivacy && (
-          <p>
-            Your email address is set to private therefore it will be visible only on your profile
-            page.
-          </p>
+          <p>Your email address is set to private therefore it will be visible only on your profile page.</p>
         )}
         {!emailPrivacy && (
           <p>
-            Your email address is set to public therefore it will appear everywhere on flownews when
-            you comment or post a content
+            Your email address is set to public therefore it will appear everywhere on flownews when you
+            comment or post a content
           </p>
         )}
       </div>

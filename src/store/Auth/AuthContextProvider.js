@@ -212,7 +212,7 @@ const AuthContextProvider = (props) => {
     async (title, passwordProperties) => {
       const response = await sendRequest(`${HOSTURI}/password/${title}`, {
         method: "PATCH",
-        userData: { passwordProperties },
+        contributorData: { passwordProperties },
         token,
       });
       return response;
@@ -285,9 +285,11 @@ const AuthContextProvider = (props) => {
     },
     [sendRequest, token]
   );
+  //<---------- Function for updating the profile updated state ---------->
   const changeProfileUpdated = useCallback((bool) => {
     return setProfileUpdated(bool);
   }, []);
+  //<---------- Function for toggling Email Privacy---------->
   const toggleEmailPrivacy = useCallback(async () => {
     const response = await sendRequest(`${HOSTURI}/email/privacy`, {
       method: "PATCH",

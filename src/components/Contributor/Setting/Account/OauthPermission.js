@@ -4,7 +4,7 @@ import { AuthContext } from "../../../../store/Auth/auth-context";
 import styles from "./OauthPermission.module.css";
 const OauthPermission = () => {
   const {
-    userData: {
+    contributorData: {
       socialMediaHandles: { facebook, twitter },
     },
   } = useContext(AuthContext);
