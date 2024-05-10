@@ -3,6 +3,13 @@
   background-color: var(--error-background-color);
   padding: 1rem;
   width: 100%;
+  margin: 1rem 0;
+  p.error_text {
+    padding: 0;
+    margin: 0;
+    color: red;
+    font-weight: bold;
+  }
   .error_header {
     font-size: 1.2rem;
     line-height: 1.8rem;

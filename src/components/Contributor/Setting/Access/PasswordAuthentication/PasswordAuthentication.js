@@ -1,3 +1,4 @@
+//<---------- IMPORT MODULES ---------->
 import { useCallback, useContext, useState, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
@@ -6,6 +7,8 @@ import styles from "../../EditProfile/UI/UserForm/UserForm.module.css";
 import styles2 from "./PasswordAuthentication.module.css";
 import { useTitle } from "../../../../../hooks/useTitle";
 import useNewLocation from "../../../../../hooks/useNewLocation";
+import { configuration } from "../../../../../config";
+import Error from "../../EditProfile/UI/UserForm/Error";
 
 const PasswordAuthentication = () => {
   useTitle("Account Security");
@@ -18,8 +21,8 @@ const PasswordAuthentication = () => {
   } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState({
-    type: "",
-    text: "",
+    type: "success",
+    text: "this is an error",
   });
 
   const oldPasswordRef = useRef();
@@ -80,11 +83,12 @@ const PasswordAuthentication = () => {
       {(!emailRequestChangeAddressIsVerified || emailRequestChange) && <EmailVerification />}
       <h2>Change Password</h2>
       <hr />
-      {message.type && <p className={`${message.type} ${styles2[message.type]}`}>{message.text}</p>}
+      {message.type === "success" && <p className={styles2.success}>{message.text}</p>}
+      {message.type === "error" && <Error error={[message.text]} location="password-authentication" />}
       <form className={`${styles.form}`} onSubmit={submitFormHandler}>
-        <div className={styles.form_controls}>
+        <div className={`${styles.form_controls} ${styles2.form_controls}`}>
           <div className={styles.form_control}>
-            <label>Old Password</label>
+            <label>Old password</label>
             <input type="password" ref={oldPasswordRef} onFocus={focusInputHandler} />
           </div>
           <div className={styles.form_control}>
@@ -95,13 +99,15 @@ const PasswordAuthentication = () => {
             <label>Confirm new password</label>
             <input type="password" ref={confirmNewPasswordRef} onFocus={focusInputHandler} />
           </div>
-          <p>Make sure it's at least 8 characters including a number and a lowercase letter.</p>
+          <p
+            className={styles2.text}
+          >{`Make sure it's at least ${configuration.minLengthOfPassword} characters including a number and a lowercase letter.`}</p>
         </div>
         <div className={`${styles.form_actions} ${styles2.form_actions}`}>
           <button type="submit" className={styles.update_profile} disabled={isLoading ? true : false}>
             Update password
           </button>
-          <p>
+          <p className={styles2.text}>
             <Link to="/forgot-password">Forgot my password?</Link>
           </p>
         </div>
