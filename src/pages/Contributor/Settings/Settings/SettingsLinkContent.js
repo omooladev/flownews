@@ -26,6 +26,10 @@ const SettingsLinkContent = () => {
         <Route path="/settings/security" exact>
           <PasswordAuthentication />
         </Route>
+        <Route path="/settings/notifications" exact>
+          {/*TODO WORK ON THE NOTIFICATIONS ROUTE  */}
+          <div>Work In progress</div>
+        </Route>
         <Route path="*">
           <NotFound />
         </Route>

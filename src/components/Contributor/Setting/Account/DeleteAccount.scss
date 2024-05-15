@@ -1,0 +1,28 @@
+.delete_account {
+  h3 {
+    padding: 0.5rem 0;
+  }
+
+  ul {
+    li {
+      font-size: 1rem;
+      padding: 0.3rem 0;
+      &.secondary_list {
+        font-size: 1rem;
+        line-height: 1.5rem;
+        margin: 0 2rem;
+        list-style: circle;
+      }
+    }
+  }
+  .delete_button {
+    cursor: pointer;
+    padding: 0.9rem 1rem;
+    border-radius: 5px;
+    color: var(--white-color);
+    font-weight: bold;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    background-color: red;
+  }
+}
