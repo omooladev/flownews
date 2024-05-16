@@ -21,6 +21,7 @@ const DeleteAccount = () => {
       )}
       <h2>Delete Account</h2>
       <hr />
+      {/* FOR DISPLAYING THE CONNECTED SOCIAL MEDIA APPLICATION */}
       <OauthAssociation />
       <h3>Delete Your account</h3>
       <ul>
