@@ -16,7 +16,7 @@ const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadCo
   } = useContext(AuthContext);
   //---------> get the maximum size if the profile picture from the configuration
   const { maxProfilePictureSize } = configuration;
-  const [profilePicture, setProfilePicture] = useState(displayPicture);
+  const [profilePicture, setProfilePicture] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [removeProfilePhotoContainerIsActive, setRemoveProfilePhotoContainerIsActive] = useState(false);
 
