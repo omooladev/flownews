@@ -312,6 +312,18 @@ const AuthContextProvider = (props) => {
     },
     [token, sendRequest]
   );
+
+  const deleteContributorAccount = useCallback(
+    async (data) => {
+      const response = await sendRequest(`${HOSTURI}/contributor/delete-account`, {
+        method: "POST",
+        token,
+        contributorData: data,
+      });
+      return response;
+    },
+    [sendRequest, token]
+  );
   useEffect(() => {
     if (makeBodyFixed) {
       return document.body.classList.add("fixed-body");
@@ -358,6 +370,7 @@ const AuthContextProvider = (props) => {
         cancelRequest,
         onCheckFieldExistence: checkFieldExistence,
         onChangeProfilePicture: changeProfilePicture,
+        onDeleteContributorAccount: deleteContributorAccount,
       }}
     >
       {props.children}

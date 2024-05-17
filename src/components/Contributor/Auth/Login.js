@@ -1,4 +1,3 @@
-
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
@@ -19,7 +18,7 @@ const Login = (props) => {
     onValidateEmail,
     onValidatePassword,
   } = props;
-  const { changeAppMode, onLoginOrBecomeContributor, history, onSaveContributorData,onMakeBodyFixed } =
+  const { changeAppMode, onLoginOrBecomeContributor, history, onSaveContributorData, onMakeBodyFixed } =
     useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   //* refs
@@ -102,9 +101,7 @@ const Login = (props) => {
             {!viewPassword && (
               <FaEyeSlash className={styles.password_icon} onClick={toggleViewPasswordHandler} />
             )}
-            {viewPassword && (
-              <FaEye className={styles.password_icon} onClick={toggleViewPasswordHandler} />
-            )}
+            {viewPassword && <FaEye className={styles.password_icon} onClick={toggleViewPasswordHandler} />}
           </div>
         </div>
         <div className={styles.form_actions}>

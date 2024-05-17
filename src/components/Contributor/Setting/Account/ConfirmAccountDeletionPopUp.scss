@@ -89,6 +89,14 @@
         background-color: var(--error-color);
       }
     }
+    .error {
+      color: red;
+      text-align: center;
+    }
+    .success {
+      text-align: center;
+      color: green;
+    }
   }
 }
 @media (min-width: 500px) {

@@ -24,7 +24,7 @@ export const AuthContext = React.createContext({
   onResetPassword: async () => {},
   onSendPasswordResetEmail: async () => {},
   onVerifyPasswordResetLink: async () => {},
-  changeAppMode: () => {},
+  changeAppMode: (properties, type = null) => {},
 
   //refactored
   contributorData: { username: "" },
@@ -36,6 +36,7 @@ export const AuthContext = React.createContext({
   profileUpdated: false,
   onChangeProfileUpdated: async () => {},
   onToggleEmailPrivacy: async () => {},
+  onDeleteContributorAccount: async ({ userNameOrEmail, verifyText, password }) => {},
 
   cancelRequest: () => {},
   pageIsLoading: false,

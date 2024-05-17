@@ -24,8 +24,13 @@ const AppContextProvider = (props) => {
 
   const [lastLocation, setLastLocation] = useState("");
 
-  const changeAppMode = useCallback((properties) => {
-    setAppMode((prevMode) => {
+  const changeAppMode = useCallback((properties, type = null) => {
+    if (type === "reset") {
+      return setAppMode((prevMode) => {
+        return {};
+      });
+    }
+    return setAppMode((prevMode) => {
       return { ...prevMode, ...properties };
     });
   }, []);
