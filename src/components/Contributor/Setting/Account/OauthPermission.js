@@ -9,8 +9,6 @@ const OauthPermission = () => {
       socialMediaHandles: { facebook, twitter },
     },
   } = useContext(AuthContext);
-  facebook = "https://wwww.wole.com";
-  twitter = "https://wwww.wole.com";
   const oauthProfileLink = [
     { text: facebook && "Facebook profile settings", to: "eeee" },
     {

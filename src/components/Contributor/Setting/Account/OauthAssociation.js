@@ -10,8 +10,6 @@ const OauthAssociation = () => {
       socialMediaHandles: { facebook, twitter },
     },
   } = useContext(AuthContext);
-  facebook = "https://wwww.wole.com";
-  twitter = "https://wwww.wole.com";
   const oauthButtons = [
     { name: facebook && "Remove Facebook", icon: <FaFacebook className={styles.icon} /> },
     { name: twitter && "Remove Twitter", icon: <FaTwitter className={styles.icon} /> },

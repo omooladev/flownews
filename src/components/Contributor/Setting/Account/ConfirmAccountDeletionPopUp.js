@@ -1,3 +1,4 @@
+//<---------- IMPORT MODULES ---------->
 import { useCallback, useContext, useEffect, useState } from "react";
 import { BiX, BiError } from "react-icons/bi";
 import { AuthContext } from "../../../../store/Auth/auth-context";
@@ -35,12 +36,9 @@ const ConfirmAccountDeletionPopUp = (props) => {
     onMakeBodyFixed(true);
   }, [onMakeBodyFixed]);
   return (
-    <PopUp className={`auth_popup ${styles.popup}`} onClick={closePopUpHandler}>
+    <PopUp className={`${styles.popup}`} onClick={closePopUpHandler}>
       <BiX className={`${styles.icon} ${styles.cancel}`} onClick={closePopUpHandler} />
-      <div className={styles.are_you_sure}>
-        <p>Are you sure you want to do this?</p>
-        <BiX className={`${styles.icon} ${styles.cancel}`} onClick={closePopUpHandler} />
-      </div>
+
       <div className={styles.important}>
         <BiError className={`${styles.icon}`} />
         <p>This is extremely important</p>
@@ -50,9 +48,10 @@ const ConfirmAccountDeletionPopUp = (props) => {
         everything associated with your account
       </p>
       <p className={styles.notes}>
-        Your username will be available to anyone on FlowNews immediately after account deletion
+        Your username <span className={styles.username}>{username}</span> will be available to anyone on
+        FlowNews immediately after account deletion
       </p>
-      <form className={styles.form} onSubmit={deleteAccountHandler}>
+      <form onSubmit={deleteAccountHandler}>
         <div className={styles.form_control}>
           <label>Your username or email</label>
           <input
