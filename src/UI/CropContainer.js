@@ -1,3 +1,4 @@
+//<---------- IMPORT MODULES ---------->
 import { useCallback, useState } from "react";
 import PopUp from "./PopUp";
 import Cropper from "react-easy-crop";
@@ -5,19 +6,25 @@ import styles from "./CropContainer.module.css";
 import Slider from "./Slider";
 import { getCroppedImg } from "../utils/canvasUtil";
 
-const CropContainer = ({ image, onResetImage }) => {
+const CropContainer = ({ image, onResetImage, onSaveImage, onMakeBodyFixed }) => {
+  //<---------- STATES --------->
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedImage, setCroppedImage] = useState(null);
   const [isCropped, setIsCropped] = useState(false);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+
+  //<---------- FUNCTIONS ---------->
   const onCropComplete = (croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
   };
 
   const closeCropContainer = useCallback(() => {
     onResetImage();
-  }, [onResetImage]);
+    //----------> remove the fixed body
+    onMakeBodyFixed();
+  }, [onResetImage, onMakeBodyFixed]);
+
   const saveCroppedPhotoHandler = useCallback(async () => {
     try {
       const croppedImage = await getCroppedImg(image, croppedAreaPixels);
@@ -29,17 +36,36 @@ const CropContainer = ({ image, onResetImage }) => {
   }, [croppedAreaPixels, image]);
 
   const editImageHandler = useCallback(() => {
+    //----------> set the is cropped to false
     setIsCropped((prevValue) => false);
+    //----------->set the cropped image and the cropped area pixels to null once you are trying to edit again
     setCroppedImage(null);
     setCroppedAreaPixels(null);
   }, []);
-  const saveProfilePicture = useCallback(() => {}, []);
+
+  const saveImageHandler = useCallback(() => {
+    //----------> if the image was not cropped, then save the default image
+    onSaveImage(isCropped, croppedImage);
+    //----------> close the crop container
+    closeCropContainer();
+  }, [onSaveImage, closeCropContainer, croppedImage, isCropped]);
 
   return (
     <PopUp className={styles.popUp} onClick={closeCropContainer}>
+      {/* WHEN THE IMAGE IS NOT CROPPED YET, DISPLAY THIS TWO BUTTON */}
+      <div className={`${styles.actions} ${styles.top_actions} ${isCropped && styles.cropped}`}>
+        {isCropped && (
+          <button className={styles.edit} onClick={editImageHandler}>
+            Edit
+          </button>
+        )}
+        <button className={styles.save} onClick={saveImageHandler}>
+          Save
+        </button>
+      </div>
       {isCropped && (
         <div className={styles.cropped_image}>
-          <img alt="cropped" src={croppedImage} />
+          <img alt="cropped" src={croppedImage.url} />
         </div>
       )}
       {!isCropped && (
@@ -58,6 +84,7 @@ const CropContainer = ({ image, onResetImage }) => {
             </div>
           </section>
 
+          {/* slider control */}
           <div className={styles.controls}>
             <Slider
               showIcon={true}
@@ -69,22 +96,17 @@ const CropContainer = ({ image, onResetImage }) => {
         </>
       )}
 
-      <div className={styles.actions}>
-        {!isCropped && (
+      {/* WHEN THE IMAGE IS NOT CROPPED YET, DISPLAY THIS TWO BUTTON */}
+      {!isCropped && (
+        <div className={styles.actions}>
+          <button className={styles.save} onClick={saveCroppedPhotoHandler}>
+            Apply
+          </button>
           <button className={styles.cancel} onClick={closeCropContainer}>
             Close
           </button>
-        )}
-        {isCropped && (
-          <button className={styles.edit} onClick={editImageHandler}>
-            Edit
-          </button>
-        )}
-
-        <button className={styles.save} onClick={isCropped ? saveProfilePicture : saveCroppedPhotoHandler}>
-          {isCropped ? "Save" : "Apply"}
-        </button>
-      </div>
+        </div>
+      )}
     </PopUp>
   );
 };

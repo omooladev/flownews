@@ -2,19 +2,22 @@
   padding: 0;
   width: 25rem;
   height: 80vh;
+  padding: 0 2.5%;
   .crop_container {
     position: relative;
     width: 100%;
-    height: 80%;
-    background-color: black;
+    height: 70%;
+    background-color: transparent;
   }
   .cropped_image {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: red;
-    height: 90%;
+    height: 85%;
+    border-radius: 0.5rem;
+    overflow: hidden;
+
     img {
       object-fit: cover;
       min-height: 100%;
@@ -27,12 +30,21 @@
     width: 100%;
     padding: 1rem 0;
   }
+
   .actions {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    padding: 1rem 0;
+    padding: 0.5rem 0rem;
+
+    &.top_actions {
+      justify-content: end;
+      &.cropped {
+        justify-content: space-between;
+      }
+    }
+
     button {
       color: var(--white-color);
       padding: 0.5rem 1rem;

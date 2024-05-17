@@ -8,32 +8,26 @@ const BackDrop = (props) => {
 };
 
 const PopUpBox = (props) => {
-  const { makeBodyFixed, onMakeBodyFixed } = useContext(AuthContext);
-
   useEffect(() => {
-    if (!makeBodyFixed) {
-      onMakeBodyFixed(true);
+    if (!props.makeBodyFixed) {
+      props.onMakeBodyFixed(true);
     }
-  }, [makeBodyFixed, onMakeBodyFixed]);
-  return (
-    <Card className={`${styles["pop-up"]} ${props.className}`}>
-      {props.children}
-    </Card>
-  );
+  }, [props]);
+  return <Card className={`${styles["pop-up"]} ${props.className}`}>{props.children}</Card>;
 };
 
 //----------> The Popup function for rendering all other pop up
 const PopUp = (props) => {
+  const { makeBodyFixed, onMakeBodyFixed } = useContext(AuthContext);
   //----------> access the overlay element
   const portalElement = document.getElementById("overlays");
   return (
     <>
+      {ReactDOM.createPortal(<BackDrop onClick={props.onClick} />, portalElement)}
       {ReactDOM.createPortal(
-        <BackDrop onClick={props.onClick} />,
-        portalElement
-      )}
-      {ReactDOM.createPortal(
-        <PopUpBox className={props.className}>{props.children}</PopUpBox>,
+        <PopUpBox className={props.className} onMakeBodyFixed={onMakeBodyFixed} makeBodyFixed={makeBodyFixed}>
+          {props.children}
+        </PopUpBox>,
         portalElement
       )}
     </>

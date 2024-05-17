@@ -295,11 +295,12 @@ const AuthContextProvider = (props) => {
   }, [sendRequest, token]);
 
   const changeProfilePicture = useCallback(
-    async ({ action, profilePicture }) => {
+    async ({ action, isCropped, profilePicture }) => {
       let contributorData;
       if (action === "save") {
         contributorData = new FormData();
-        contributorData.append("image", profilePicture);
+        //----------> if cropped, then name the image while appending it to the form data
+        contributorData.append("image", profilePicture, isCropped && "cropped_image.jpeg");
       }
       if (action === "remove") {
         contributorData = { profilePicture };

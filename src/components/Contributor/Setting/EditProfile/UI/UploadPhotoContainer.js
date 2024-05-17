@@ -12,42 +12,63 @@ const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadCo
     onSaveContributorData,
     onChangeProfilePicture,
     contributorData: { profilePicture: displayPicture },
+    onMakeBodyFixed,
   } = useContext(AuthContext);
   //---------> get the maximum size if the profile picture from the configuration
   const { maxProfilePictureSize } = configuration;
   const [profilePicture, setProfilePicture] = useState(displayPicture);
+  const [imageFile, setImageFile] = useState(null);
   const [removeProfilePhotoContainerIsActive, setRemoveProfilePhotoContainerIsActive] = useState(false);
 
   //<--------- FUNCTIONS STARTS HERE---------->
   //----------> transform file
-  const transformFile = useCallback(
-    async (file) => {
-      const reader = new FileReader();
-      if (file) {
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-          const profilePicture = reader.result;
-          setProfilePicture(profilePicture);
-          // onSaveContributorData({ profilePicture });
-          // onChangeProfilePicture({ action: "save", profilePicture: file }).then(({ error, data }) => {
-          //   if (error === "File too large") {
-          //     return onSetError(
-          //       `Failed to save profile picture, Please upload a picture smaller than ${maxProfilePictureSize
-          //         .toString()
-          //         .slice(0, 1)}MB`
-          //     );
-          //   }
-          //   if (error) {
-          //     return onSetError(error);
-          //   }
-          //   if (data) {
-          //     onSaveContributorData(data);
-          //   }
-          // });
-        };
+  const transformFile = useCallback(async (file) => {
+    const reader = new FileReader();
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        const profilePicture = reader.result;
+        setProfilePicture(profilePicture);
+        setImageFile(file);
+      };
+    }
+  }, []);
+  const saveImageHandler = useCallback(
+    (isCropped, image) => {
+      let url;
+      let file;
+      if (isCropped) {
+        url = image.url;
+        file = image.file;
+      } else {
+        url = profilePicture;
+        file = imageFile;
       }
+      onSaveContributorData({ profilePicture: url });
+      onChangeProfilePicture({ action: "save", profilePicture: file, isCropped }).then(({ error, data }) => {
+        if (error === "File too large") {
+          return onSetError(
+            `Failed to save profile picture, Please upload a picture smaller than ${maxProfilePictureSize
+              .toString()
+              .slice(0, 1)}MB`
+          );
+        }
+        if (error) {
+          return onSetError(error);
+        }
+        if (data) {
+          onSaveContributorData(data);
+        }
+      });
     },
-    []
+    [
+      onSaveContributorData,
+      maxProfilePictureSize,
+      onChangeProfilePicture,
+      onSetError,
+      imageFile,
+      profilePicture,
+    ]
   );
   //----------> save profile picture
   const saveProfilePictureHandler = useCallback(
@@ -136,7 +157,14 @@ the remove profile photo container */}
           )}
         </section>
       )}
-      {profilePicture && <CropContainer image={profilePicture} onResetImage={resetImageHandler} />}
+      {profilePicture && (
+        <CropContainer
+          image={profilePicture}
+          onResetImage={resetImageHandler}
+          onMakeBodyFixed={onMakeBodyFixed}
+          onSaveImage={saveImageHandler}
+        />
+      )}
     </>
   );
 };
