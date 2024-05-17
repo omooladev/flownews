@@ -4,7 +4,6 @@ import ProfileBox from "../../../../Header/Navigation/ContributorNavigations/Pro
 import { useCallback, useContext, useState } from "react";
 import { AppContext } from "../../../../../store/App/app-context";
 import UploadPhotoContainer from "./UploadPhotoContainer";
-import CropContainer from "../../../../../UI/CropContainer";
 import styles from "./ProfilePicture.module.css";
 
 const ProfilePicture = () => {

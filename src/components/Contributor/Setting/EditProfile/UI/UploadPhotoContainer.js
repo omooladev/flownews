@@ -47,7 +47,7 @@ const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadCo
         };
       }
     },
-    [onSaveContributorData, onChangeProfilePicture, onSetError, maxProfilePictureSize]
+    []
   );
   //----------> save profile picture
   const saveProfilePictureHandler = useCallback(
@@ -80,6 +80,10 @@ const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadCo
       onChangeProfilePicture({ action: "remove", profilePicture });
     }
   }, [onSaveContributorData, onToggleComponentsIsActive, profilePicture, onChangeProfilePicture]);
+
+  const resetImageHandler = () => {
+    setProfilePicture(null);
+  };
 
   const showRemoveProfilePhotoContainer = useCallback((event) => {
     event.stopPropagation();
@@ -132,7 +136,7 @@ the remove profile photo container */}
           )}
         </section>
       )}
-      {profilePicture && <CropContainer image={profilePicture} />}
+      {profilePicture && <CropContainer image={profilePicture} onResetImage={resetImageHandler} />}
     </>
   );
 };

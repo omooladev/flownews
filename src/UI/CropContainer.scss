@@ -8,6 +8,18 @@
     height: 80%;
     background-color: black;
   }
+  .cropped_image {
+    position: relative;
+    height: 85%;
+    background-color: red;
+    overflow: hidden;
+    img {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
   .controls {
     width: 100%;
     padding: 1rem 0;
@@ -26,6 +38,12 @@
     button.cancel {
       background-color: red;
     }
+    button.edit {
+      background-color: transparent;
+      outline: 1px solid var(--primary-color);
+      color: var(--tertiary-color);
+    }
+
     button.save {
       background-color: var(--primary-color);
     }

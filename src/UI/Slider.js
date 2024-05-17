@@ -26,7 +26,7 @@ const Slider = ({ onZoom, showIcon }) => {
       const value = event.target.value;
       setSliderValue(value);
     },
-    [onZoom]
+    []
   );
 
   useEffect(() => {

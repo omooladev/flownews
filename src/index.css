@@ -78,6 +78,7 @@
   --error-list-style-color: black;
   /* font sizes for application */
   --userForm-error-color: red;
+  --edit-button-color: black;
 }
 body {
   font-family: var(--secondary-font);
@@ -133,6 +134,7 @@ body.dark {
   --form-border-color: rgba(255, 165, 0, 0.4);
   --form-background-color: transparent;
   --error-list-style-color: white;
+  --edit-button-color: white;
 }
 body.fixed-body {
   height: 100vh;
