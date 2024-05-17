@@ -4,6 +4,8 @@ import { AuthContext } from "../../../../../store/Auth/auth-context";
 import RemoveProfilePhotoContainer from "./RemoveProfilePhotoContainer";
 import styles from "./UploadPhotoContainer.module.css";
 import { configuration } from "../../../../../config";
+import CropContainer from "../../../../../UI/CropContainer";
+
 const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadContainerIsActive }) => {
   //----------> get data from the auth context
   const {
@@ -25,23 +27,23 @@ const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadCo
         reader.readAsDataURL(file);
         reader.onloadend = () => {
           const profilePicture = reader.result;
-          setProfilePicture(file);
-          onSaveContributorData({ profilePicture });
-          onChangeProfilePicture({ action: "save", profilePicture: file }).then(({ error, data }) => {
-            if (error === "File too large") {
-              return onSetError(
-                `Failed to save profile picture, Please upload a picture smaller than ${maxProfilePictureSize
-                  .toString()
-                  .slice(0, 1)}MB`
-              );
-            }
-            if (error) {
-              return onSetError(error);
-            }
-            if (data) {
-              onSaveContributorData(data);
-            }
-          });
+          setProfilePicture(profilePicture);
+          // onSaveContributorData({ profilePicture });
+          // onChangeProfilePicture({ action: "save", profilePicture: file }).then(({ error, data }) => {
+          //   if (error === "File too large") {
+          //     return onSetError(
+          //       `Failed to save profile picture, Please upload a picture smaller than ${maxProfilePictureSize
+          //         .toString()
+          //         .slice(0, 1)}MB`
+          //     );
+          //   }
+          //   if (error) {
+          //     return onSetError(error);
+          //   }
+          //   if (data) {
+          //     onSaveContributorData(data);
+          //   }
+          // });
         };
       }
     },
@@ -91,7 +93,6 @@ const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadCo
   }, []);
 
   //<--------- FUNCTIONS ENDS HERE---------->
-
   useEffect(() => {
     if (!uploadContainerIsActive && removeProfilePhotoContainerIsActive) {
       hideRemoveProfilePhotoContainer();
@@ -131,6 +132,7 @@ the remove profile photo container */}
           )}
         </section>
       )}
+      {profilePicture && <CropContainer image={profilePicture} />}
     </>
   );
 };

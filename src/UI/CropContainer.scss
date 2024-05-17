@@ -1,0 +1,33 @@
+.popUp {
+  padding: 0;
+  width: 25rem;
+  height: 80vh;
+  .crop_container {
+    position: relative;
+    width: 100%;
+    height: 70%;
+    background-color: black;
+  }
+  .controls {
+    width: 100%;
+    padding: 1rem 0;
+  }
+  .actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1rem 0;
+    button {
+      color: var(--white-color);
+      padding: 0.5rem 1rem;
+      border-radius: 0.3rem;
+    }
+    button.cancel {
+      background-color: red;
+    }
+    button.save {
+      background-color: var(--primary-color);
+    }
+  }
+}
