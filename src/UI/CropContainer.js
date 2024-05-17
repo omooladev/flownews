@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import PopUp from "./PopUp";
 import Cropper from "react-easy-crop";
 import styles from "./CropContainer.module.css";
@@ -11,6 +11,7 @@ const CropContainer = ({ image }) => {
   const onCropComplete = (croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
   };
+
   return (
     <PopUp className={styles.popUp}>
       <section className={styles.crop_container}>
