@@ -62,8 +62,8 @@ export async function getCroppedImg(
   }
 
   // Set the size of the cropped canvas
-  // croppedCanvas.width = pixelCrop.width;
-  // croppedCanvas.height = pixelCrop.height;
+  croppedCanvas.width = pixelCrop.width;
+  croppedCanvas.height = pixelCrop.height;
 
   // Draw the cropped image onto the new canvas
   croppedCtx.drawImage(
@@ -78,13 +78,13 @@ export async function getCroppedImg(
     pixelCrop.height
   );
   // As Base64 string
-  return croppedCanvas.toDataURL('image/jpeg');
+  //return croppedCanvas.toDataURL('image/jpeg');
 
   // As a blob
   return new Promise((resolve, reject) => {
     croppedCanvas.toBlob((file) => {
       resolve(URL.createObjectURL(file));
-    }, "image/png");
+    }, "image/jpeg");
   });
 }
 

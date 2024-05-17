@@ -37,6 +37,11 @@ const CropContainer = ({ image, onResetImage }) => {
 
   return (
     <PopUp className={styles.popUp} onClick={closeCropContainer}>
+      {isCropped && (
+        <div className={styles.cropped_image}>
+          <img alt="cropped" src={croppedImage} />
+        </div>
+      )}
       {!isCropped && (
         <>
           <section className={styles.crop_container}>
@@ -62,11 +67,6 @@ const CropContainer = ({ image, onResetImage }) => {
             />
           </div>
         </>
-      )}
-      {isCropped && (
-        <div className={styles.cropped_image}>
-          <img alt="cropped" src={croppedImage} />
-        </div>
       )}
 
       <div className={styles.actions}>
