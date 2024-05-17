@@ -12,6 +12,9 @@
         line-height: 1.5rem;
         margin: 0 2rem;
         list-style: circle;
+        a {
+          color: var(--link-color);
+        }
       }
     }
   }

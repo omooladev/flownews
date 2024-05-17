@@ -1,13 +1,16 @@
+//<---------- IMPORT MODULES ---------->
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../../../store/Auth/auth-context";
-import styles from "./OauthPermission.module.css";
+import styles from "./DeleteAccount.module.css";
 const OauthPermission = () => {
-  const {
+  let {
     contributorData: {
       socialMediaHandles: { facebook, twitter },
     },
   } = useContext(AuthContext);
+  facebook = "https://wwww.wole.com";
+  twitter = "https://wwww.wole.com";
   const oauthProfileLink = [
     { text: facebook && "Facebook profile settings", to: "eeee" },
     {
@@ -24,7 +27,7 @@ const OauthPermission = () => {
               return null;
             }
             return (
-              <li key={link.text}>
+              <li key={link.text} className={styles.secondary_list}>
                 <Link to={link.to}>{link.text}</Link>
               </li>
             );
