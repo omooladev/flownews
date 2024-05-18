@@ -94,13 +94,20 @@ const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadCo
     [onToggleComponentsIsActive, transformFile, onSetError, maxProfilePictureSize]
   );
   const removeProfilePhotoHandler = useCallback(() => {
-    if (profilePicture) {
+    if (profilePicture || displayPicture) {
       setProfilePicture(null);
       onSaveContributorData({ profilePicture: null });
       onToggleComponentsIsActive({ type: "uploadContainer", event: "close" });
-      onChangeProfilePicture({ action: "remove", profilePicture });
+      onChangeProfilePicture({ action: "remove", profilePicture: profilePicture || displayPicture });
     }
-  }, [onSaveContributorData, onToggleComponentsIsActive, profilePicture, onChangeProfilePicture]);
+  }, [
+    onSaveContributorData,
+    onToggleComponentsIsActive,
+
+    onChangeProfilePicture,
+    profilePicture,
+    displayPicture,
+  ]);
 
   const resetImageHandler = () => {
     setProfilePicture(null);
