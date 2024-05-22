@@ -1,4 +1,4 @@
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import { AuthContext } from "../../../../store/Auth/auth-context";
 import useFetchContributorData from "../../../../hooks/useFetchContributorData";
 import useNewLocation from "../../../../hooks/useNewLocation";
@@ -11,9 +11,15 @@ const Settings = () => {
   //            we need all your details back
   useFetchContributorData();
   //----------> get contributor data and the object in the history method
-  const { contributorData, history } = useContext(AuthContext);
+  const { contributorData, history, onChangeProfileUpdated } = useContext(AuthContext);
   //----------> update location
   useNewLocation(history.location.pathname);
+
+  useEffect(() => {
+    if (history.location.search === "?facebook=connected") {
+      onChangeProfileUpdated(true);
+    }
+  }, [history, onChangeProfileUpdated]);
   return (
     <Fragment>
       {contributorData.username && (

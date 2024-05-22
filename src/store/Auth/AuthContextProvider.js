@@ -36,7 +36,7 @@ const AuthContextProvider = (props) => {
   const [searchedContributorData, setSearchedContributorData] = useState({
     username: "",
   });
-  const [profileUpdated, setProfileUpdated] = useState(false);
+  const [profileUpdated, setProfileUpdated] = useState({ show: false, message: "" });
   const loginOrBecomeContributor = useCallback(
     async ({ location, contributorAuthData }) => {
       const response = await sendRequest(`${HOSTURI}/auth/${location}`, {
@@ -201,7 +201,6 @@ const AuthContextProvider = (props) => {
       tokenExpirationTime: null,
     });
     onToggleComponentsIsActive({ event: "*" });
-    setProfileUpdated(false);
     setContributorData((prevData) => {
       return { username: "" };
     });
@@ -282,8 +281,10 @@ const AuthContextProvider = (props) => {
     [sendRequest, token]
   );
   //<---------- Function for updating the profile updated state ---------->
-  const changeProfileUpdated = useCallback((bool) => {
-    return setProfileUpdated(bool);
+  const changeProfileUpdated = useCallback((show, message) => {
+    return setProfileUpdated((prevState) => {
+      return { show, message };
+    });
   }, []);
   //<---------- Function for toggling Email Privacy---------->
   const toggleEmailPrivacy = useCallback(async () => {
