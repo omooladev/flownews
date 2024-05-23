@@ -17,6 +17,11 @@ const ConnectAccount = () => {
 
   const connectFacebook = useCallback(
     async (event) => {
+      if (history.location.search) {
+        //----------> if there is a search parameter in the uri like facebook connected, remove it before changing the app mode
+        history.location.search = "";
+      }
+
       changeAppMode({ isConnectingSocial: true });
       window.location = `${HOSTURI}/contributor/connect/facebook?token=${token}&currentPageUrl=${history.location.pathname}`;
     },

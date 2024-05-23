@@ -17,9 +17,17 @@ const Settings = () => {
   useNewLocation(history.location.pathname);
 
   useEffect(() => {
-    if (history.location.search === "?facebook=connected") {
-      if (appMode.isConnectingSocial) {
+    if (appMode.isConnectingSocial) {
+      if (history.location.search === "?facebook=connected") {
         onChangeProfileUpdated(true, "You've successfully connected your Facebook account!");
+        changeAppMode({ isConnectingSocial: false });
+      }
+
+      if (history.location.search === "?facebook=failed") {
+        onChangeProfileUpdated(
+          true,
+          "We encountered an error while linking your Facebook account. Please try again"
+        );
         changeAppMode({ isConnectingSocial: false });
       }
     }
