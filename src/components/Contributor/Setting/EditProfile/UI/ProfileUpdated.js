@@ -3,8 +3,7 @@ import { BiX } from "react-icons/bi";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
 import styles from "./ProfileUpdated.module.css";
 const ProfileUpdated = () => {
-  const { profileUpdated, onChangeProfileUpdated, history } = useContext(AuthContext);
-  console.log(history);
+  const { profileUpdated, onChangeProfileUpdated } = useContext(AuthContext);
   const closeProfileUpdatedHandler = useCallback(() => {
     onChangeProfileUpdated(false, "");
   }, [onChangeProfileUpdated]);

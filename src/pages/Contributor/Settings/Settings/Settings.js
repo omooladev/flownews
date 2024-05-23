@@ -11,15 +11,19 @@ const Settings = () => {
   //            we need all your details back
   useFetchContributorData();
   //----------> get contributor data and the object in the history method
-  const { contributorData, history, onChangeProfileUpdated } = useContext(AuthContext);
+  const { contributorData, history, onChangeProfileUpdated, changeAppMode, appMode } =
+    useContext(AuthContext);
   //----------> update location
   useNewLocation(history.location.pathname);
 
   useEffect(() => {
     if (history.location.search === "?facebook=connected") {
-      onChangeProfileUpdated(true);
+      if (appMode.isConnectingSocial) {
+        onChangeProfileUpdated(true, "You've successfully connected your Facebook account!");
+        changeAppMode({ isConnectingSocial: false });
+      }
     }
-  }, [history, onChangeProfileUpdated]);
+  }, [history, onChangeProfileUpdated, changeAppMode, appMode]);
   return (
     <Fragment>
       {contributorData.username && (

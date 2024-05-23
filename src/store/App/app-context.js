@@ -5,7 +5,13 @@ export const AppContext = React.createContext({
   onPopUp: () => {},
   lastLocation: "",
   onSetLastLocation: () => {},
-  appMode: { display: "light", isLoggedIn: false },
+  appMode: {
+    isConnectingSocial: true || false,
+    isLoggedIn: true || false,
+    theme: "light-default" || "dark-default",
+    token: null,
+    tokenExpirationTime: null,
+  },
   onChangeAppMode: () => {},
   componentsIsActive: {
     menuIsActive: false,

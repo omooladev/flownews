@@ -9,6 +9,7 @@ const ConnectAccount = () => {
     HOSTURI,
     token,
     history,
+    changeAppMode,
     contributorData: {
       socialMediaHandles: { facebook, twitter },
     },
@@ -16,9 +17,10 @@ const ConnectAccount = () => {
 
   const connectFacebook = useCallback(
     async (event) => {
+      changeAppMode({ isConnectingSocial: true });
       window.location = `${HOSTURI}/contributor/connect/facebook?token=${token}&currentPageUrl=${history.location.pathname}`;
     },
-    [HOSTURI, token, history]
+    [HOSTURI, token, history, changeAppMode]
   );
   return (
     <>

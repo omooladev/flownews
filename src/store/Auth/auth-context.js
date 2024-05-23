@@ -24,6 +24,13 @@ export const AuthContext = React.createContext({
   onResetPassword: async () => {},
   onSendPasswordResetEmail: async () => {},
   onVerifyPasswordResetLink: async () => {},
+  appMode: {
+    isConnectingSocial: true || false,
+    isLoggedIn: true || false,
+    theme: "light-default" || "dark-default",
+    token: null,
+    tokenExpirationTime: null,
+  },
   changeAppMode: (properties, type = null) => {},
 
   //refactored

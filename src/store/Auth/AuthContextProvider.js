@@ -12,6 +12,7 @@ const AuthContextProvider = (props) => {
   const { sendRequest, cancelRequest } = useHttp();
 
   const {
+    appMode,
     appMode: { isLoggedIn, token },
     onChangeAppMode,
     onToggleComponentsIsActive,
@@ -335,6 +336,7 @@ const AuthContextProvider = (props) => {
   return (
     <AuthContext.Provider
       value={{
+        appMode,
         HOSTURI,
         token,
         history,
