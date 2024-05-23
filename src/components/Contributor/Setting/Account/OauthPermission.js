@@ -1,5 +1,4 @@
 //<---------- IMPORT MODULES ---------->
-import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../../../store/Auth/auth-context";
 import styles from "./DeleteAccount.module.css";
@@ -10,10 +9,13 @@ const OauthPermission = () => {
     },
   } = useContext(AuthContext);
   const oauthProfileLink = [
-    { text: facebook && "Facebook profile settings", to: "eeee" },
+    {
+      text: facebook && "Facebook profile settings",
+      href: "https://facebook.com/settings/?tab=applications",
+    },
     {
       text: twitter && "Twitter profile settings",
-      to: "https://twitter.com/settings/applications",
+      href: "https://twitter.com/settings/applications",
     },
   ];
   return (
@@ -21,12 +23,14 @@ const OauthPermission = () => {
       {(facebook || twitter) && (
         <ul className={styles.oauth_permission}>
           {oauthProfileLink.map((link) => {
-            if (!link.text || !link.to) {
+            if (!link.text || !link.href) {
               return null;
             }
             return (
               <li key={link.text} className={styles.secondary_list}>
-                <Link to={link.to}>{link.text}</Link>
+                <a href={link.href} target="_blank" rel="noopener noreferrer">
+                  {link.text}
+                </a>
               </li>
             );
           })}

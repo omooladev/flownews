@@ -1,19 +1,39 @@
 //<---------- IMPORT MODULES ---------->
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { AuthContext } from "../../../../store/Auth/auth-context";
 import { FaTwitter, FaFacebook } from "react-icons/fa";
 import OauthPermission from "./OauthPermission";
 import styles from "./DeleteAccount.module.css";
+import useHttp from "../../../../hooks/useHttp";
 const OauthAssociation = () => {
+  let { sendRequest } = useHttp();
   let {
+    token,
+    HOSTURI,
+    onSaveContributorData,
     contributorData: {
       socialMediaHandles: { facebook, twitter },
     },
   } = useContext(AuthContext);
   const oauthButtons = [
-    { name: facebook && "Remove Facebook", icon: <FaFacebook className={styles.icon} /> },
-    { name: twitter && "Remove Twitter", icon: <FaTwitter className={styles.icon} /> },
+    { key: "facebook", name: facebook && "Remove Facebook", icon: <FaFacebook className={styles.icon} /> },
+    { key: "twitter", name: twitter && "Remove Twitter", icon: <FaTwitter className={styles.icon} /> },
   ];
+
+  const unlinkSocialMediaAccount = useCallback(
+    async (key) => {
+      //----------> where key is the name of the social media
+      const { data } = await sendRequest(`${HOSTURI}/contributor/unlink/${key}`, {
+        method: "POST",
+        token,
+      });
+
+      if (data) {
+        onSaveContributorData(data);
+      }
+    },
+    [token, sendRequest, HOSTURI, onSaveContributorData]
+  );
 
   return (
     <>
@@ -39,7 +59,7 @@ const OauthAssociation = () => {
                 return null;
               }
               return (
-                <button key={button.name}>
+                <button key={button.name} onClick={() => unlinkSocialMediaAccount(button.key)}>
                   {button.icon}
                   <label> {button.name}</label>
                 </button>
