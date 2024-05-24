@@ -5,7 +5,7 @@ const Write = (props) => {
   const className = props.className || "";
   return (
     <li className={`${styles.write} ${className}`}>
-      <NavLink to="/new-story">
+      <NavLink to="/new-content">
         <FaEdit className={styles.icon} />
         <p>Write</p>
       </NavLink>
