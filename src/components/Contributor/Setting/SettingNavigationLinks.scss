@@ -1,6 +1,5 @@
 .setting_navigation-links {
   margin: 2rem 0;
-
   ul {
     display: flex;
     flex-direction: column;
@@ -39,6 +38,7 @@
 @media (min-width: 500px) {
   .setting_navigation-links ul li a {
     &:hover {
+      color: var(--white-color);
       background-color: var(--primary-hover-color);
     }
     &.active {
