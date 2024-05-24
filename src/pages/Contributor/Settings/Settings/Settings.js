@@ -22,11 +22,22 @@ const Settings = () => {
         onChangeProfileUpdated(true, "You've successfully connected your Facebook account!");
         changeAppMode({ isConnectingSocial: false });
       }
+      if (history.location.search === "?twitter=connected") {
+        onChangeProfileUpdated(true, "You've successfully connected your Twitter account!");
+        changeAppMode({ isConnectingSocial: false });
+      }
 
       if (history.location.search === "?facebook=failed") {
         onChangeProfileUpdated(
           true,
           "We encountered an error while linking your Facebook account. Please try again"
+        );
+        changeAppMode({ isConnectingSocial: false });
+      }
+      if (history.location.search === "?twitter=failed") {
+        onChangeProfileUpdated(
+          true,
+          "We encountered an error while linking your Twitter account. Please try again"
         );
         changeAppMode({ isConnectingSocial: false });
       }

@@ -15,15 +15,15 @@ const ConnectAccount = () => {
     },
   } = useContext(AuthContext);
 
-  const connectFacebook = useCallback(
-    async (event) => {
+  const connectSocialMediaAccount = useCallback(
+    async (socialMediaType) => {
       if (history.location.search) {
-        //----------> if there is a search parameter in the uri like facebook connected, remove it before changing the app mode
+        //----------> if there is a search parameter in the uri like facebook or twitter connected, remove it before changing the app mode
         history.location.search = "";
       }
 
       changeAppMode({ isConnectingSocial: true });
-      window.location = `${HOSTURI}/contributor/connect/facebook?token=${token}&currentPageUrl=${history.location.pathname}`;
+      window.location = `${HOSTURI}/contributor/connect/${socialMediaType}?token=${token}&currentPageUrl=${history.location.pathname}`;
     },
     [HOSTURI, token, history, changeAppMode]
   );
@@ -32,13 +32,13 @@ const ConnectAccount = () => {
       {(!facebook || !twitter) && (
         <Card className={styles.connect_account}>
           {!facebook && (
-            <button className={styles.facebook} onClick={connectFacebook}>
+            <button className={styles.facebook} onClick={() => connectSocialMediaAccount("facebook")}>
               <FaFacebook className={styles.icon} />
               <label>Connect Facebook</label>
             </button>
           )}
           {!twitter && (
-            <button className={styles.twitter}>
+            <button className={styles.twitter} onClick={() => connectSocialMediaAccount("twitter")}>
               <FaTwitter className={styles.icon} />
               <label>Connect Twitter</label>
             </button>
