@@ -20,6 +20,7 @@ const AppContextProvider = (props) => {
     searchFieldIsActive: false,
     accountSubscribeContainerIsActive: false,
     uploadContainerIsActive: false,
+    NewStorySettingModalIsActive: false,
   });
 
   const [lastLocation, setLastLocation] = useState("");

@@ -17,6 +17,9 @@ export const AppContext = React.createContext({
     menuIsActive: false,
     profileBoxIsActive: false,
     searchFieldIsActive: false,
+    accountSubscribeContainerIsActive: false,
+    uploadContainerIsActive: false,
+    NewStorySettingModalIsActive: false,
   },
-  onToggleComponentsIsActive: () => {},
+  onToggleComponentsIsActive: ({ type, event }) => {},
 });

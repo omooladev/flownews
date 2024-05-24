@@ -1,4 +1,5 @@
 //<---------- import modules ---------->
+import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import Publish from "../../Header/Navigation/ContributorNavigations/Publish";
@@ -30,8 +31,8 @@ const NewStory = () => {
         <button type="button">Save draft</button>
         <Settings />
       </div>
-      <div>
-        <p>Publish Like a Pro: A Guide to Posting Your Story</p>
+      <div className={styles.guides}>
+        <Link to="/guide-to-posting">How to publish like a Pro: A Guide to Posting Your Story</Link>
       </div>
     </section>
   );

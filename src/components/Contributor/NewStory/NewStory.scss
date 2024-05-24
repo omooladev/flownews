@@ -1,5 +1,6 @@
 .new-story-section {
   padding: 1rem 0;
+  margin: 0 auto;
   .header,
   .footer {
     width: 60%;
@@ -33,6 +34,11 @@
       margin: 0;
       border-radius: 0.5rem;
       padding: 0.6rem 1rem;
+    }
+  }
+  .guides {
+    a {
+      color: var(--link-color);
     }
   }
 }
