@@ -1,16 +1,16 @@
 //<----------- import modules ---------->
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext } from "react";
 import { AppContext } from "../../../store/App/app-context";
 import { BsGear } from "react-icons/bs";
-import styles from "./Settings.module.css";
 import SettingsModal from "./SettingsModal";
+import styles from "./Settings.module.css";
 
 const Settings = () => {
   const {
     componentsIsActive: { NewStorySettingModalIsActive },
     onToggleComponentsIsActive,
   } = useContext(AppContext);
-  const [settingStates, setSettingStates] = useState();
+
   const toggleNewStorySetting = useCallback(
     (event) => {
       console.log("ola");
