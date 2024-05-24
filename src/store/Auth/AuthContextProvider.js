@@ -20,6 +20,7 @@ const AuthContextProvider = (props) => {
   } = useContext(AppContext);
 
   //<----------- States ---------->
+
   const [makeBodyFixed, setMakeBodyFixed] = useState(false); //----------> Used to make body fixed when a pop up is shown
 
   const [pageIsLoading, setPageIsLoading] = useState(null);
@@ -32,7 +33,8 @@ const AuthContextProvider = (props) => {
   const history = useHistory();
 
   //?refactored
-
+  //<---------- state for sharing new content ---------->
+  const [newStory, setNewContent] = useState({ isEditing: false, value: "" });
   const [contributorData, setContributorData] = useState({ username: "" });
   const [searchedContributorData, setSearchedContributorData] = useState({
     username: "",
@@ -327,6 +329,13 @@ const AuthContextProvider = (props) => {
     },
     [sendRequest, token]
   );
+
+  const updateNewStory = useCallback((data) => {
+    return setNewContent((prevData) => {
+      return { ...prevData, ...data };
+    });
+  }, []);
+
   useEffect(() => {
     if (makeBodyFixed) {
       return document.body.classList.add("fixed-body");
@@ -375,6 +384,10 @@ const AuthContextProvider = (props) => {
         onCheckFieldExistence: checkFieldExistence,
         onChangeProfilePicture: changeProfilePicture,
         onDeleteContributorAccount: deleteContributorAccount,
+
+        //<---------- new content ---------->
+        newStory,
+        oonUpdateNewStory: updateNewStory,
       }}
     >
       {props.children}

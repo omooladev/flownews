@@ -157,6 +157,7 @@ button {
 
 button {
   cursor: pointer;
+  background-color: transparent;
 }
 
 .absolute-icon {

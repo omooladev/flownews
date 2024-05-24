@@ -10,7 +10,7 @@ import ProfilePage from "../pages/Contributor/Profile/Profile";
 //---import FollowPage from "../pages/Contributor/Profile/Follow";
 import EmailVerification from "../pages/EmailVerification/EmailVerification";
 import SettingPage from "../pages/Contributor/Settings/Settings/Settings";
-import NewContentPage from "../pages/Contributor/NewContent";
+import NewStoryPage from "../pages/Contributor/NewStory";
 
 const Routes = () => {
   const { isLoggedIn } = useContext(AuthContext);
@@ -55,8 +55,8 @@ const Routes = () => {
               <ContributorHomePage />
             </Route>
             {/* Route for writing new story */}
-            <Route path="/new-content" exact>
-              <NewContentPage />
+            <Route path="/new-story" exact>
+              <NewStoryPage />
             </Route>
             <Route path="/@:username" exact>
               <ProfilePage />

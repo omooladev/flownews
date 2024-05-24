@@ -1,0 +1,38 @@
+.new-story-section {
+  padding: 1rem 0;
+  .header,
+  .footer {
+    width: 60%;
+  }
+  .header {
+    padding: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+      color: var(--tertiary-color);
+    }
+    button {
+      font-size: 0.95rem;
+      color: var(--tertiary-color);
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+  }
+  .story-area {
+    display: flex;
+  }
+  .footer {
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    .publish {
+      margin: 0;
+      border-radius: 0.5rem;
+      padding: 0.6rem 1rem;
+    }
+  }
+}

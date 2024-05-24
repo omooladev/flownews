@@ -1,0 +1,1 @@
+.settings{position:relative}.settings button{display:flex;align-items:center;justify-content:center;padding:.6rem 1rem;border-radius:.5rem;transition:.3s ease-in-out}.settings button svg{font-size:1.1rem;color:var(--tertiary-color)}.settings button:hover{background-color:var(--primary-hover-color)}.settings button:hover svg{color:var(--tertiary-color)}

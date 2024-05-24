@@ -1,0 +1,21 @@
+.settings {
+  position: relative;
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    transition: 0.3s ease-in-out;
+    svg {
+      font-size: 1.1rem;
+      color: var(--tertiary-color);
+    }
+    &:hover {
+      background-color: var(--primary-hover-color);
+      svg {
+        color: var(--tertiary-color);
+      }
+    }
+  }
+}

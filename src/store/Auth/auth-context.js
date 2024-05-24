@@ -47,4 +47,8 @@ export const AuthContext = React.createContext({
 
   cancelRequest: () => {},
   pageIsLoading: false,
+
+  //<--------- for new content ---------->
+  newStory: { isEditing: false, value: "" },
+  onUpdateNewContent: (isEditing, value) => {},
 });
