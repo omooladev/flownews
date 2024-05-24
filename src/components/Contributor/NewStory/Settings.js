@@ -3,6 +3,7 @@ import { useCallback, useContext, useState } from "react";
 import { AppContext } from "../../../store/App/app-context";
 import { BsGear } from "react-icons/bs";
 import styles from "./Settings.module.css";
+import SettingsModal from "./SettingsModal";
 
 const Settings = () => {
   const {
@@ -26,19 +27,7 @@ const Settings = () => {
       >
         <BsGear onClick={toggleNewStorySetting} />
       </button>
-      {NewStorySettingModalIsActive && (
-        <>
-          <div className={styles["settings-modal"]}>
-            <ul className={styles["settings-list"]} onClick={(event) => event.stopPropagation()}>
-              <li>
-                <input type="checkbox" id="auto-preview" />
-                <label htmlFor="auto-preview">Disable Auto-Preview</label>
-              </li>
-            </ul>
-            <button>Save Changes</button>
-          </div>
-        </>
-      )}
+      {NewStorySettingModalIsActive && <SettingsModal />}
     </div>
   );
 };
