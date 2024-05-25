@@ -13,7 +13,6 @@ const Settings = () => {
 
   const toggleNewStorySetting = useCallback(
     (event) => {
-      console.log("ola");
       event.stopPropagation();
       onToggleComponentsIsActive({ type: "NewStorySettingModal", event: "toggle" });
     },

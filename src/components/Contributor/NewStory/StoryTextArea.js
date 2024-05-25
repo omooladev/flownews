@@ -19,10 +19,6 @@ const StoryTextArea = () => {
         onChange={(value) => onUpdateNewStory({ value })}
         data-color-mode={theme.includes("light") ? "light" : "dark"}
       />
-      <MDEditor.Markdown
-        source={newStory.value}
-        style={{ whiteSpace: "pre-wrap", height: "100%", color: "red" }}
-      />
     </div>
   );
 };
