@@ -20,7 +20,9 @@ const NewStory = () => {
     <section className={`${styles["new-story-section"]} ${autoPreview && styles["previewed"]}`}>
       <div className={styles["header"]}>
         <h1>Create Story</h1>
-        <button type="button">View Preview</button>
+        <button type="button" disabled={autoPreview}>
+          View Preview
+        </button>
       </div>
       <div>
         <button type="button">Add a cover image</button>

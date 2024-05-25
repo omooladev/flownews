@@ -1,3 +1,4 @@
+//<---------- import modules ---------->
 import MDEditor from "@uiw/react-md-editor";
 import { useContext } from "react";
 import { AuthContext } from "../../../store/Auth/auth-context";
@@ -10,6 +11,10 @@ const PreviewStory = () => {
   } = useContext(AuthContext);
   return (
     <div className={styles["preview-area"]}>
+      <div className={styles["preview-header"]}>
+        <h1>Live Preview</h1>
+      </div>
+      <hr />
       <MDEditor.Markdown
         data-color-mode={theme.includes("light") ? "light" : "dark"}
         source={newStory.value}
