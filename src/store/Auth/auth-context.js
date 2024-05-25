@@ -51,5 +51,5 @@ export const AuthContext = React.createContext({
 
   //<--------- for new content ---------->
   newStory: { isEditing: false, value: "" },
-  onUpdateNewContent: (isEditing, value) => {},
+  onUpdateNewStory: ({ isEditing, value }) => {},
 });

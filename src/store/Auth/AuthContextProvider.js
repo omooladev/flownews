@@ -34,7 +34,7 @@ const AuthContextProvider = (props) => {
 
   //?refactored
   //<---------- state for sharing new content ---------->
-  const [newStory, setNewContent] = useState({ isEditing: false, value: "" });
+  const [newStory, setNewStory] = useState({ isEditing: false, value: "" });
   const [contributorData, setContributorData] = useState({ username: "" });
   const [searchedContributorData, setSearchedContributorData] = useState({
     username: "",
@@ -331,7 +331,7 @@ const AuthContextProvider = (props) => {
   );
 
   const updateNewStory = useCallback((data) => {
-    return setNewContent((prevData) => {
+    return setNewStory((prevData) => {
       return { ...prevData, ...data };
     });
   }, []);
@@ -387,7 +387,7 @@ const AuthContextProvider = (props) => {
 
         //<---------- new content ---------->
         newStory,
-        oonUpdateNewStory: updateNewStory,
+        onUpdateNewStory: updateNewStory,
       }}
     >
       {props.children}

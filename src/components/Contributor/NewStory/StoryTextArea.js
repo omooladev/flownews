@@ -7,17 +7,22 @@ import styles from "./StoryTextArea.module.css";
 const StoryTextArea = () => {
   const {
     appMode: { theme },
+    newStory,
+    onUpdateNewStory,
   } = useContext(AuthContext);
-  const [value, setValue] = useState("");
+
   return (
     <div className={styles["story-text-area"]}>
       <MDEditor
         className={styles.editor}
-        value={value}
-        onChange={setValue}
+        value={newStory.value}
+        onChange={(value) => onUpdateNewStory({ value })}
         data-color-mode={theme.includes("light") ? "light" : "dark"}
       />
-      <MDEditor.Markdown source={value} style={{ whiteSpace: "pre-wrap", height: "100%", color: "red" }} />
+      <MDEditor.Markdown
+        source={newStory.value}
+        style={{ whiteSpace: "pre-wrap", height: "100%", color: "red" }}
+      />
     </div>
   );
 };
