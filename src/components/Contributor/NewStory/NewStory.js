@@ -9,11 +9,15 @@ import StoryTextArea from "./StoryTextArea";
 import Settings from "./Settings";
 
 const NewStory = () => {
-  const { newStory } = useContext(AuthContext);
-  //TODO---------->contributor would be able to preview their story before publish
-  //TODO----------> keyword and titles must be included
+  const {
+    newStory,
+    appMode: {
+      NewStorySettings: { autoPreview },
+    },
+  } = useContext(AuthContext);
+  console.log(autoPreview);
   return (
-    <section className={styles["new-story-section"]}>
+    <section className={`${styles["new-story-section"]} ${autoPreview && styles["previewed"]}`}>
       <div className={styles["header"]}>
         <h1>Create Story</h1>
         <button type="button">View Preview</button>
@@ -23,7 +27,7 @@ const NewStory = () => {
       </div>
       <section className={styles["story-area"]}>
         <StoryTextArea />
-        <PreviewStory />
+        {autoPreview && <PreviewStory />}
       </section>
 
       <div className={styles.footer}>

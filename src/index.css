@@ -79,6 +79,8 @@
   /* font sizes for application */
   --userForm-error-color: red;
   --edit-button-color: black;
+
+  /* new story styles */
 }
 body {
   font-family: var(--secondary-font);

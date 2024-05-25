@@ -1,0 +1,21 @@
+.story-text-area {
+  min-height: 60vh;
+  width: 100%;
+}
+.story-text-area.previewed {
+  width: 60%;
+}
+
+.story-text-area .w-md-editor {
+  color: red;
+  min-height: 100% !important;
+}
+
+.story-text-area .w-md-editor-content {
+  min-height: 100px;
+}
+
+.story-text-area .w-md-editor-bar {
+  /* this is the 3 dot icon for making the editor resizable in the y direction; */
+  display: none;
+}

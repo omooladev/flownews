@@ -14,7 +14,6 @@ const SettingsModal = () => {
     if (NewStorySettings.autoPreview === settingStates.autoPreview) {
       return;
     }
-
     changeAppMode({ NewStorySettings: settingStates });
   }, [settingStates, NewStorySettings, changeAppMode]);
 
@@ -25,7 +24,8 @@ const SettingsModal = () => {
           <input
             type="checkbox"
             id="auto-preview"
-            checked={settingStates.autoPreview}
+            // If auto preview is true, then we make the input unchecked
+            checked={!settingStates.autoPreview}
             onChange={(event) => {
               setSettingStates((prevState) => {
                 return { ...prevState, autoPreview: !prevState.autoPreview };

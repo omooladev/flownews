@@ -1,10 +1,18 @@
 .new-story-section {
   padding: 1rem 0;
   margin: 0 auto;
+  &.previewed {
+    // if preview is been done
+    .header,
+    .footer {
+      width: 60%;
+    }
+  }
   .header,
   .footer {
-    width: 60%;
+    width: 100%;
   }
+
   .header {
     padding: 0.5rem 0;
     display: flex;
@@ -24,6 +32,9 @@
   }
   .story-area {
     display: flex;
+    height: 300px;
+    min-height: 300px;
+    overflow: hidden;
   }
   .footer {
     padding: 1rem 0;
