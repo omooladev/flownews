@@ -30,6 +30,7 @@ export const AuthContext = React.createContext({
     theme: "light-default" || "dark-default",
     token: null,
     tokenExpirationTime: null,
+    NewStorySettings: { autoPreview: true },
   },
   changeAppMode: (properties, type = null) => {},
 
