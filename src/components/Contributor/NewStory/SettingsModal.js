@@ -25,14 +25,16 @@ const SettingsModal = () => {
             type="checkbox"
             id="auto-preview"
             // If auto preview is true, then we make the input unchecked
-            checked={!settingStates.autoPreview}
+            checked={NewStorySettings.autoPreview ? !settingStates.autoPreview : settingStates.autoPreview}
             onChange={(event) => {
               setSettingStates((prevState) => {
                 return { ...prevState, autoPreview: !prevState.autoPreview };
               });
             }}
           />
-          <label htmlFor="auto-preview">Disable Auto-Preview</label>
+          <label htmlFor="auto-preview">
+            {NewStorySettings.autoPreview ? "Disable Auto-Preview" : "Enable Auto-Preview"}
+          </label>
         </li>
       </ul>
       <button onClick={saveChangesHandler}>Save Changes</button>
