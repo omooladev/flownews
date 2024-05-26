@@ -3,24 +3,23 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import Publish from "../../Header/Navigation/ContributorNavigations/Publish";
-import styles from "./NewStory.module.css";
 import PreviewStory from "./PreviewStory";
 import StoryTextArea from "./StoryTextArea";
 import Settings from "./Settings";
+import styles from "./NewStory.module.css";
 
 const NewStory = () => {
   const {
-    newStory,
-    appMode: {
-      NewStorySettings: { autoPreview },
+    newStory: {
+      pageSettings: { isAutoPreviewEnabled },
     },
   } = useContext(AuthContext);
-  console.log(autoPreview);
+
   return (
-    <section className={`${styles["new-story-section"]} ${autoPreview && styles["previewed"]}`}>
+    <section className={`${styles["new-story-section"]} ${isAutoPreviewEnabled && styles["previewed"]}`}>
       <div className={styles["header"]}>
         <h1>Create Story</h1>
-        <button type="button" disabled={autoPreview}>
+        <button type="button" disabled={isAutoPreviewEnabled}>
           View Preview
         </button>
       </div>
@@ -29,7 +28,7 @@ const NewStory = () => {
       </div>
       <section className={styles["story-area"]}>
         <StoryTextArea />
-        {autoPreview && <PreviewStory />}
+        {isAutoPreviewEnabled && <PreviewStory />}
       </section>
 
       <div className={styles.footer}>

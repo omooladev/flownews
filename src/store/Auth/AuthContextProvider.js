@@ -34,7 +34,14 @@ const AuthContextProvider = (props) => {
 
   //?refactored
   //<---------- state for sharing new content ---------->
-  const [newStory, setNewStory] = useState({ isEditing: false, value: "" });
+  const [newStory, setNewStory] = useState({
+    isEditing: false,
+    value: "",
+    pageSettings: {
+      ...(appMode.NewStorySettings ? { ...appMode.NewStorySettings } : { isAutoPreviewEnabled: true }),
+    },
+  });
+
   const [contributorData, setContributorData] = useState({ username: "" });
   const [searchedContributorData, setSearchedContributorData] = useState({
     username: "",

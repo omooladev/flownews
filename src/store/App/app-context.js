@@ -11,7 +11,7 @@ export const AppContext = React.createContext({
     theme: "light-default" || "dark-default",
     token: null,
     tokenExpirationTime: null,
-    NewStorySettings: { autoPreview: true },
+    NewStorySettings: { isAutoPreviewEnabled: true },
   },
   onChangeAppMode: () => {},
   componentsIsActive: {

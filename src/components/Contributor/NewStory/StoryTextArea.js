@@ -6,13 +6,11 @@ import "./StoryTextArea.css";
 
 const StoryTextArea = () => {
   const {
-    appMode: {
-      theme,
-      NewStorySettings: { autoPreview },
-    },
+    appMode: { theme, NewStorySettings },
     newStory,
     onUpdateNewStory,
   } = useContext(AuthContext);
+  const autoPreview = NewStorySettings ? NewStorySettings.autoPreview : true;
 
   return (
     <div className={`story-text-area ${autoPreview && "previewed"}`}>

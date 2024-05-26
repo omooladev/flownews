@@ -30,7 +30,7 @@ export const AuthContext = React.createContext({
     theme: "light-default" || "dark-default",
     token: null,
     tokenExpirationTime: null,
-    NewStorySettings: { autoPreview: true },
+    NewStorySettings: { isAutoPreviewEnabled: true },
   },
   changeAppMode: (properties, type = null) => {},
 
@@ -50,6 +50,6 @@ export const AuthContext = React.createContext({
   pageIsLoading: false,
 
   //<--------- for new content ---------->
-  newStory: { isEditing: false, value: "" },
-  onUpdateNewStory: ({ isEditing, value }) => {},
+  newStory: { isEditing: false, value: "", pageSettings: { isAutoPreviewEnabled: true } },
+  onUpdateNewStory: ({ isEditing, value, pageSettings: { isAutoPreviewEnabled } }) => {},
 });
