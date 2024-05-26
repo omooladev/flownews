@@ -1,7 +1,9 @@
 //<---------- import modules ---------->
 import { useCallback, useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../store/Auth/auth-context";
+import AutoPreview from "./Settings/AutoPreview";
 import styles from "./SettingsModal.module.css";
+
 const SettingsModal = () => {
   const {
     changeAppMode,
@@ -12,57 +14,69 @@ const SettingsModal = () => {
     onUpdateNewStory,
   } = useContext(AuthContext);
 
-  const [previewState, setPreviewState] = useState({ checkbox1: false, checkbox2: false });
-
+  //<---------- the states for all the settings ----------->
+  const [settingStates, setSettingStates] = useState({
+    previewState: { checkbox1: false, checkbox2: false },
+  });
+  //<---------- for the auto preview ---------->
+  // if (data.type === "auto-preview") {
+  //   if (data.checkboxType === "checkbox2") {
+  //     prevState = {
+  //       ...prevState,
+  //       previewState: { checkbox1: false, checkbox2: !prevState.previewState.checkbox2 },
+  //     };
+  //   }
+  //   if (data.checkboxType === "checkbox1") {
+  //     prevState = {
+  //       ...prevState,
+  //       previewState: { checkbox2: false, checkbox1: !prevState.previewState.checkbox1 },
+  //     };
+  //   }
+  // }
+  const saveSettingStates = useCallback((data) => {
+    return setSettingStates((prevState) => {
+      return { ...prevState, ...data };
+    });
+  }, []);
   //<---------- function for saving the changes made in the settings ---------->
   const saveChangesHandler = useCallback(() => {
-    onUpdateNewStory({
-      pageSettings: {
-        isAutoPreviewEnabled: previewState.checkbox1 ? false : previewState.checkbox2 ? true : true,
-      },
+    //<---------- validations ---------->
+    let propertiesToUpdate = [];
+    let isAutoPreviewEnabled;
+
+    //<---------- FOR PREVIEW STATE ---------->
+    if (settingStates.previewState.checkbox1 !== false || settingStates.previewState.checkbox2 !== false) {
+      isAutoPreviewEnabled = settingStates.previewState.checkbox1 ? false : true;
+      propertiesToUpdate.push("pageSettings");
+      propertiesToUpdate.push("isAutoPreviewEnabled");
+    }
+    if (propertiesToUpdate.length === 0) {
+      return;
+    }
+
+    return onUpdateNewStory({
+      ...(propertiesToUpdate.includes("pageSettings") && {
+        pageSettings: {
+          ...(propertiesToUpdate.includes("isAutoPreviewEnabled") && { isAutoPreviewEnabled }),
+        },
+      }),
     });
-  }, [previewState, onUpdateNewStory]);
+  }, [settingStates, onUpdateNewStory]);
 
   useEffect(() => {
     //----------> if the page settings is changed, update the app mode
     if (newStory.pageSettings) {
       changeAppMode({ NewStorySettings: newStory.pageSettings });
     }
-  }, [newStory, changeAppMode]);
+  }, [newStory, changeAppMode, settingStates]);
   return (
     <div className={styles["settings-modal"]} onClick={(event) => event.stopPropagation()}>
       <ul className={styles["settings-list"]}>
-        <li>
-          {isAutoPreviewEnabled && (
-            <input
-              type="checkbox"
-              id="auto-preview-checkbox"
-              // If auto preview is true, then we make the input unchecked
-              checked={previewState.checkbox1}
-              onChange={() =>
-                setPreviewState((prevState) => {
-                  return { ...prevState, checkbox1: !prevState.checkbox1, checkbox2: false };
-                })
-              }
-            />
-          )}
-          {!isAutoPreviewEnabled && (
-            <input
-              type="checkbox"
-              id="auto-preview-checkbox"
-              // If auto preview is true, then we make the input unchecked
-              checked={previewState.checkbox2}
-              onChange={() =>
-                setPreviewState((prevState) => {
-                  return { ...prevState, checkbox2: !prevState.checkbox2, checkbox1: false };
-                })
-              }
-            />
-          )}
-          <label htmlFor="auto-preview-checkbox">
-            {isAutoPreviewEnabled ? "Disable Auto-Preview" : "Enable Auto-Preview"}
-          </label>
-        </li>
+        <AutoPreview
+          isAutoPreviewEnabled={isAutoPreviewEnabled}
+          settingStates={settingStates}
+          onSaveSettingStates={saveSettingStates}
+        />
       </ul>
       <button onClick={saveChangesHandler}>Save Changes</button>
     </div>
