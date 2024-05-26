@@ -7,6 +7,7 @@ import PreviewStory from "./PreviewStory";
 import StoryTextArea from "./StoryTextArea";
 import Settings from "./Settings";
 import styles from "./NewStory.module.css";
+import StoryTitleTagsCoverImage from "./StoryTitleTagsCoverImage";
 
 const NewStory = () => {
   const {
@@ -19,13 +20,13 @@ const NewStory = () => {
     <section className={`${styles["new-story-section"]} ${isAutoPreviewEnabled && styles["previewed"]}`}>
       <div className={styles["header"]}>
         <h1>Create Story</h1>
-        <button type="button" disabled={isAutoPreviewEnabled}>
-          View Preview
-        </button>
+        {!isAutoPreviewEnabled && (
+          <button type="button" className={styles["view-preview-button"]}>
+            View Preview
+          </button>
+        )}
       </div>
-      <div>
-        <button type="button">Add a cover image</button>
-      </div>
+      <StoryTitleTagsCoverImage isAutoPreviewEnabled={isAutoPreviewEnabled} />
       <section className={styles["story-area"]}>
         <StoryTextArea />
         {isAutoPreviewEnabled && <PreviewStory />}

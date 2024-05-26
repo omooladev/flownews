@@ -6,18 +6,24 @@ import "./StoryTextArea.css";
 
 const StoryTextArea = () => {
   const {
-    appMode: { theme, NewStorySettings },
-    newStory,
+    appMode: { theme },
+    newStory: {
+      value,
+      pageSettings: { isAutoPreviewEnabled },
+    },
     onUpdateNewStory,
   } = useContext(AuthContext);
-  const autoPreview = NewStorySettings ? NewStorySettings.autoPreview : true;
 
   return (
-    <div className={`story-text-area ${autoPreview && "previewed"}`}>
+    <div className={`story-text-area ${isAutoPreviewEnabled && "previewed"}`}>
       <MDEditor
-        value={newStory.value}
+        value={value}
         onChange={(value) => onUpdateNewStory({ value })}
         data-color-mode={theme.includes("light") ? "light" : "dark"}
+        //----------> for removing the default preview and only showing the edit
+        preview="edit"
+        //----------> for removing the extra commands
+        extraCommands={[]}
       />
     </div>
   );

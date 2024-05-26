@@ -22,16 +22,18 @@
     h1 {
       color: var(--tertiary-color);
     }
-    button {
+
+    .view-preview-button {
       font-size: 0.95rem;
-      color: var(--tertiary-color);
+      color: var(--primary-color);
       &:hover {
-        color: var(--primary-color);
+        color: var(--primary-hover-color);
       }
     }
   }
   .story-area {
     display: flex;
+    max-height: 300px;
     height: 300px;
     min-height: 300px;
     overflow: hidden;

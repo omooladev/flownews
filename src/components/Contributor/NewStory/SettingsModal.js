@@ -18,21 +18,7 @@ const SettingsModal = () => {
   const [settingStates, setSettingStates] = useState({
     previewState: { checkbox1: false, checkbox2: false },
   });
-  //<---------- for the auto preview ---------->
-  // if (data.type === "auto-preview") {
-  //   if (data.checkboxType === "checkbox2") {
-  //     prevState = {
-  //       ...prevState,
-  //       previewState: { checkbox1: false, checkbox2: !prevState.previewState.checkbox2 },
-  //     };
-  //   }
-  //   if (data.checkboxType === "checkbox1") {
-  //     prevState = {
-  //       ...prevState,
-  //       previewState: { checkbox2: false, checkbox1: !prevState.previewState.checkbox1 },
-  //     };
-  //   }
-  // }
+
   const saveSettingStates = useCallback((data) => {
     return setSettingStates((prevState) => {
       return { ...prevState, ...data };
@@ -48,11 +34,11 @@ const SettingsModal = () => {
     if (settingStates.previewState.checkbox1 !== false || settingStates.previewState.checkbox2 !== false) {
       isAutoPreviewEnabled = settingStates.previewState.checkbox1 ? false : true;
       propertiesToUpdate.push("pageSettings");
-      propertiesToUpdate.push("isAutoPreviewEnabled");
     }
     if (propertiesToUpdate.length === 0) {
       return;
     }
+    propertiesToUpdate.push("isAutoPreviewEnabled");
 
     return onUpdateNewStory({
       ...(propertiesToUpdate.includes("pageSettings") && {

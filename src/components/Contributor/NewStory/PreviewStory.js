@@ -18,11 +18,13 @@ const PreviewStory = () => {
       <MDEditor.Markdown
         data-color-mode={theme.includes("light") ? "light" : "dark"}
         source={newStory.value}
+        onScroll={true}
         style={{
           whiteSpace: "pre-wrap",
-          height: "100%",
+          height: "40vh",
           color: "var(--tertiary-color)",
           backgroundColor: "var(--body-color)",
+          overflowY: "auto",
         }}
       />
     </div>
