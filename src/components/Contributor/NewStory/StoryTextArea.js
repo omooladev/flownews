@@ -1,5 +1,5 @@
 //<---------- import modules ---------->
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import MDEditor from "@uiw/react-md-editor";
 import "./StoryTextArea.css";
