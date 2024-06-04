@@ -34,7 +34,7 @@ const NewStory = () => {
 
       <div className={styles.footer}>
         <Publish className={styles.publish} />
-        <button type="button">Save draft</button>
+        <button type="button" className={styles["save-draft-button"]}>Save draft</button>
         <Settings />
       </div>
       <div className={styles.guides}>

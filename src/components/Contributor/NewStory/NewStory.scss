@@ -33,13 +33,11 @@
   }
   .story-area {
     display: flex;
-    max-height: 300px;
-    height: 300px;
-    min-height: 300px;
+    height: 45vh;
     overflow: hidden;
+    margin-bottom: 1rem;
   }
   .footer {
-    padding: 1rem 0;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -48,8 +46,12 @@
       border-radius: 0.5rem;
       padding: 0.6rem 1rem;
     }
+    .save-draft-button {
+      color: var(--tertiary-color);
+    }
   }
   .guides {
+    padding: 0.5rem 0;
     a {
       color: var(--link-color);
     }

@@ -1,0 +1,9 @@
+.wmde-markdown.wmde-markdown-color {
+}
+
+.wmde-markdown.wmde-markdown-color ul li {
+  list-style: circle;
+}
+.wmde-markdown.wmde-markdown-color ol li {
+  list-style: decimal;
+}

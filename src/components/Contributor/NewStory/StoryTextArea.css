@@ -1,6 +1,4 @@
 .story-text-area {
-  min-height: 60vh;
-  height: 60vh;
   width: 100%;
 }
 .story-text-area.previewed {
@@ -10,22 +8,19 @@
 .story-text-area .w-md-editor {
   min-height: 100% !important;
   height: 100% !important;
-  background-color: purple;
+  border: 1px solid var(--primary-color);
 }
 
-.story-text-area .w-md-editor .w-md-editor-toolbar {
-  height: 100px;
-  background-color: orange;
+/* .story-text-area .w-md-editor .w-md-editor-toolbar {
+  
 }
 .story-text-area .w-md-editor .w-md-editor-content {
-  height: 100px;
-  background-color: red;
-}
+ 
+} */
 
 .story-text-area .w-md-editor .w-md-editor-content .w-md-editor-text {
+  /* This is the element that contains the text area */
   min-height: calc(100% - 40px) !important; /* Adjust based on padding/margin */
-  background-color: brown;
-  /* The text area */
 }
 
 .story-text-area .w-md-editor-bar {

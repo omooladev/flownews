@@ -14,6 +14,7 @@ const StoryTextArea = () => {
     onUpdateNewStory,
   } = useContext(AuthContext);
 
+  console.log({value})
   return (
     <div className={`story-text-area ${isAutoPreviewEnabled && "previewed"}`}>
       <MDEditor
