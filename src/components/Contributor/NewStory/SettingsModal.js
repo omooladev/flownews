@@ -49,7 +49,7 @@ const SettingsModal = () => {
         },
       }),
     });
-  }, [settingStates, onUpdateNewStory]);
+  }, [settingStates, onUpdateNewStory, viewPreview]);
 
   useEffect(() => {
     //----------> if the page settings is changed, update the app mode

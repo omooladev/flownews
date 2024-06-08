@@ -1,0 +1,36 @@
+.preview-story-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--body-color);
+  z-index: var(--preview-story-fullscreen-index);
+  padding: 1rem 0;
+  overflow-y: auto;
+  .fullscreen-exit-icon-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1001;
+    background-color: var(--body-color);
+    padding: 1rem 0;
+    div {
+      display: flex;
+      justify-content: right;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: var(--tertiary-color);
+      &:hover {
+        color: var(--primary-hover-color);
+      }
+    }
+  }
+  .preview-story-wrapper {
+    position: relative;
+    overflow: hidden;
+    padding: 2rem 0;
+  }
+}

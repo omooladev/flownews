@@ -1,0 +1,30 @@
+.preview-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-width: 40%;
+  width: 40%;
+  padding: 0rem 1rem;
+  .text-icon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    gap: 1rem;
+    h1 {
+      color: var(--tertiary-color);
+    }
+    .icon {
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: var(--tertiary-color);
+      &:hover {
+        color: var(--primary-hover-color);
+      }
+    }
+  }
+  hr {
+    margin-bottom: 0.5rem;
+  }
+}

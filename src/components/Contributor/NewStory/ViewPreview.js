@@ -1,5 +1,22 @@
+//<---------- import modules ---------->
+import { useCallback, useContext } from "react";
+import { AuthContext } from "../../../store/Auth/auth-context";
 import styles from "./NewStory.module.css";
-const ViewPreview = ({ isAutoPreviewEnabled, togglePreviewHandler, viewPreview }) => {
+
+const ViewPreview = () => {
+  const {
+    newStory: {
+      viewPreview,
+      pageSettings: { isAutoPreviewEnabled },
+    },
+    onUpdateNewStory,
+  } = useContext(AuthContext);
+  const togglePreviewHandler = useCallback(
+    (bool) => {
+      onUpdateNewStory({ viewPreview: bool });
+    },
+    [onUpdateNewStory]
+  );
   return (
     <>
       {!isAutoPreviewEnabled && (

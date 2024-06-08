@@ -31,21 +31,6 @@
   }
   .Story-title-preview-header {
     display: flex;
-    .preview-header {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      min-width: 40%;
-      width: 40%;
-      padding: 0rem 1rem;
-      h1 {
-        padding: 0.5rem 0;
-        color: var(--tertiary-color);
-      }
-      hr {
-        margin-bottom: 0.5rem;
-      }
-    }
   }
   .story-area {
     display: flex;

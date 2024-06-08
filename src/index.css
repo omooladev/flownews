@@ -6,9 +6,10 @@
 }
 :root {
   /* Z-INDEX */
-  --header-index: 997;
-  --profile-updated-overlay-index: 1000;
-  --profile-updated-backdrop-index: 999;
+  --header-index: 996;
+  --profile-updated-overlay-index: 999;
+  --profile-updated-backdrop-index: 998;
+  --preview-story-fullscreen-index: 1000;
   /*? fonts family */
   --primary-font: "Merriweather", serif;
   --secondary-font: "Lato", Helvetica, sans-serif;
@@ -167,4 +168,10 @@ button {
   top: 50%;
   left: 0;
   transform: translateY(-50%);
+}
+
+.wrapper {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
 }
