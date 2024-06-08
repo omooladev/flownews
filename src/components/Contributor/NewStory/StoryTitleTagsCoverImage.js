@@ -1,4 +1,5 @@
 import styles from "./StoryTitleTagsCoverImage.module.css";
+import StoryTitle from "./UI/StoryTitle";
 const StoryTitleTagsCoverImage = ({ isAutoPreviewEnabled }) => {
   return (
     <section
@@ -6,13 +7,7 @@ const StoryTitleTagsCoverImage = ({ isAutoPreviewEnabled }) => {
         isAutoPreviewEnabled && styles["previewed"]
       }`}
     >
-      <div className={styles["story-title"]}>
-        <label className={styles.title}>
-          Title<span>*</span>
-        </label>
-        <input type="text" placeholder="Enter Title Here..." autoCorrect="false" />
-      </div>
-
+      <StoryTitle />
       <div className={styles["cover-image"]}>
         <label htmlFor="story-cover-image">Add a cover image</label>
         <input type="file" id="story-cover-image" />

@@ -20,7 +20,7 @@ const PreviewStoryFullScreen = ({ onToggleFullScreen }) => {
             className={styles["fullscreen-exit-icon"]}
             onClick={() => onToggleFullScreen(false)}
           />
-          <StoryTitle title={title} />
+          <h1>{title}</h1>
         </div>
       </div>
 
