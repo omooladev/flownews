@@ -1,6 +1,6 @@
 //<---------- import modules ---------->
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import Publish from "../../Header/Navigation/ContributorNavigations/Publish";
 import PreviewStory from "./PreviewStory";
@@ -8,27 +8,40 @@ import StoryTextArea from "./StoryTextArea";
 import StoryTitleTagsCoverImage from "./StoryTitleTagsCoverImage";
 import Settings from "./Settings";
 import styles from "./NewStory.module.css";
+import ViewPreview from "./ViewPreview";
 
 const NewStory = () => {
   const {
     newStory: {
+      viewPreview,
       pageSettings: { isAutoPreviewEnabled },
     },
+    onUpdateNewStory,
   } = useContext(AuthContext);
 
+  const togglePreviewHandler = useCallback(
+    (bool) => {
+      onUpdateNewStory({ viewPreview: bool });
+    },
+    [onUpdateNewStory]
+  );
   return (
-    <section className={`${styles["new-story-section"]} ${isAutoPreviewEnabled && styles["previewed"]}`}>
+    <section
+      className={`${styles["new-story-section"]} ${
+        (isAutoPreviewEnabled || viewPreview) && styles["previewed"]
+      }`}
+    >
       <div className={styles["header"]}>
         <h1>Create Story</h1>
-        {!isAutoPreviewEnabled && (
-          <button type="button" className={styles["view-preview-button"]}>
-            View Preview
-          </button>
-        )}
+        <ViewPreview
+          isAutoPreviewEnabled={isAutoPreviewEnabled}
+          togglePreviewHandler={togglePreviewHandler}
+          viewPreview={viewPreview}
+        />
       </div>
       <section className={styles["Story-title-preview-header"]}>
         <StoryTitleTagsCoverImage isAutoPreviewEnabled={isAutoPreviewEnabled} />
-        {isAutoPreviewEnabled && (
+        {(isAutoPreviewEnabled || viewPreview) && (
           <div className={styles["preview-header"]}>
             <h1>Live Preview</h1>
             <hr />
@@ -38,7 +51,7 @@ const NewStory = () => {
 
       <section className={styles["story-area"]}>
         <StoryTextArea />
-        {isAutoPreviewEnabled && <PreviewStory />}
+        {(isAutoPreviewEnabled || viewPreview) && <PreviewStory />}
       </section>
 
       <div className={styles.footer}>

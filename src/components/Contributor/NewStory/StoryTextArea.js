@@ -8,6 +8,7 @@ const StoryTextArea = () => {
   const {
     appMode: { theme },
     newStory: {
+      viewPreview,
       value,
       pageSettings: { isAutoPreviewEnabled },
     },
@@ -15,7 +16,7 @@ const StoryTextArea = () => {
   } = useContext(AuthContext);
 
   return (
-    <div className={`story-text-area ${isAutoPreviewEnabled && "previewed"}`}>
+    <div className={`story-text-area ${(isAutoPreviewEnabled || viewPreview) && "previewed"}`}>
       <MDEditor
         value={value}
         onChange={(value) => onUpdateNewStory({ value })}

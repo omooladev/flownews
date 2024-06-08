@@ -35,6 +35,7 @@ const AuthContextProvider = (props) => {
   //?refactored
   //<---------- state for sharing new content ---------->
   const [newStory, setNewStory] = useState({
+    viewPreview: false,
     isEditing: false,
     value: "",
     pageSettings: {
