@@ -19,6 +19,7 @@ const NewStory = () => {
       value,
       pageSettings: { isAutoPreviewEnabled },
     },
+    onMakeBodyFixed,
   } = useContext(AuthContext);
 
   return (
@@ -33,7 +34,9 @@ const NewStory = () => {
       </section>
       <section className={styles["Story-title-preview-header"]}>
         <StoryTitleTagsCoverImage isAutoPreviewEnabled={isAutoPreviewEnabled} />
-        {(isAutoPreviewEnabled || viewPreview) && <PreviewHeader title={title} value={value} />}
+        {(isAutoPreviewEnabled || viewPreview) && (
+          <PreviewHeader title={title} value={value} onMakeBodyFixed={onMakeBodyFixed} />
+        )}
       </section>
       <section className={styles["story-area"]}>
         <StoryTextArea />

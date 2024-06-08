@@ -3,13 +3,17 @@ import { BsArrowsFullscreen } from "react-icons/bs";
 import styles from "./PreviewHeader.module.css";
 import PreviewStoryFullScreen from "./PreviewStoryFullScreen";
 
-const PreviewHeader = ({ title, value }) => {
+const PreviewHeader = ({ title, value, onMakeBodyFixed }) => {
   const [previewStoryFullScreen, setPreviewStoryFullScreen] = useState(false);
-  const toggleFullScreenHandler = useCallback((bool) => {
-    setPreviewStoryFullScreen((prevState) => {
-      return bool;
-    });
-  }, []);
+  const toggleFullScreenHandler = useCallback(
+    (bool) => {
+      setPreviewStoryFullScreen((prevState) => {
+        return bool;
+      });
+      onMakeBodyFixed(bool);
+    },
+    [onMakeBodyFixed]
+  );
   return (
     <div className={styles["preview-header"]}>
       <div className={styles["text-icon"]}>

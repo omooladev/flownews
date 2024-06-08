@@ -1,9 +1,9 @@
 import { BsFullscreenExit } from "react-icons/bs";
-import MDEditor from "@uiw/react-md-editor";
-import styles from "./PreviewStoryFullScreen.module.css";
 import { useContext } from "react";
+import MDEditor from "@uiw/react-md-editor";
 import { AuthContext } from "../../../store/Auth/auth-context";
-import StoryTitle from "./UI/StoryTitle";
+import styles from "./PreviewStoryFullScreen.module.css";
+
 const PreviewStoryFullScreen = ({ onToggleFullScreen }) => {
   const {
     newStory,
@@ -20,17 +20,18 @@ const PreviewStoryFullScreen = ({ onToggleFullScreen }) => {
             className={styles["fullscreen-exit-icon"]}
             onClick={() => onToggleFullScreen(false)}
           />
-          <h1>{title}</h1>
         </div>
       </div>
 
       <div className={`wrapper ${styles["preview-story-wrapper"]}`}>
+        <h1 className={styles.story_title}>{title}</h1>
+        <hr />
         <MDEditor.Markdown
           data-color-mode={theme.includes("light") ? "light" : "dark"}
           source={newStory.value}
           style={{
             whiteSpace: "pre-wrap",
-            height: "100%",
+            height: "50%",
             width: "100%",
             color: "var(--tertiary-color)",
             backgroundColor: "var(--body-color)",

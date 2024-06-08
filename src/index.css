@@ -141,7 +141,7 @@ body.dark {
 }
 body.fixed-body {
   height: 100vh;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 /* GLOBAL STYLES */
