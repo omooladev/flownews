@@ -9,6 +9,7 @@ const SettingsModal = () => {
     changeAppMode,
     newStory,
     newStory: {
+      viewPreview,
       pageSettings: { isAutoPreviewEnabled },
     },
     onUpdateNewStory,
@@ -42,6 +43,7 @@ const SettingsModal = () => {
 
     return onUpdateNewStory({
       ...(propertiesToUpdate.includes("pageSettings") && {
+        ...(propertiesToUpdate.includes("isAutoPreviewEnabled") && viewPreview && { viewPreview: false }),
         pageSettings: {
           ...(propertiesToUpdate.includes("isAutoPreviewEnabled") && { isAutoPreviewEnabled }),
         },

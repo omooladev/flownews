@@ -23,7 +23,7 @@ const ViewPreview = ({ isAutoPreviewEnabled, togglePreviewHandler, viewPreview }
                 togglePreviewHandler(false);
               }}
             >
-              Remove Preview
+              Hide Preview
             </button>
           )}
         </>
