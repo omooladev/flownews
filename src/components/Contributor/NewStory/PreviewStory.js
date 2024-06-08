@@ -12,22 +12,17 @@ const PreviewStory = () => {
   } = useContext(AuthContext);
   return (
     <div className={styles["preview-area"]}>
-      <div className={styles["preview-header"]}>
-        <h1>Live Preview</h1>
-      </div>
-      <hr />
-
       <MDEditor.Markdown
         data-color-mode={theme.includes("light") ? "light" : "dark"}
         source={newStory.value}
         style={{
           whiteSpace: "pre-wrap",
-          height: "80%",
+          height: "100%",
+          width: "100%",
           color: "var(--tertiary-color)",
           backgroundColor: "var(--body-color)",
           overflowY: "auto",
         }}
-      
       />
     </div>
   );

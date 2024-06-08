@@ -5,9 +5,9 @@ import { AuthContext } from "../../../store/Auth/auth-context";
 import Publish from "../../Header/Navigation/ContributorNavigations/Publish";
 import PreviewStory from "./PreviewStory";
 import StoryTextArea from "./StoryTextArea";
+import StoryTitleTagsCoverImage from "./StoryTitleTagsCoverImage";
 import Settings from "./Settings";
 import styles from "./NewStory.module.css";
-import StoryTitleTagsCoverImage from "./StoryTitleTagsCoverImage";
 
 const NewStory = () => {
   const {
@@ -26,7 +26,16 @@ const NewStory = () => {
           </button>
         )}
       </div>
-      <StoryTitleTagsCoverImage isAutoPreviewEnabled={isAutoPreviewEnabled} />
+      <section className={styles["Story-title-preview-header"]}>
+        <StoryTitleTagsCoverImage isAutoPreviewEnabled={isAutoPreviewEnabled} />
+        {isAutoPreviewEnabled && (
+          <div className={styles["preview-header"]}>
+            <h1>Live Preview</h1>
+            <hr />
+          </div>
+        )}
+      </section>
+
       <section className={styles["story-area"]}>
         <StoryTextArea />
         {isAutoPreviewEnabled && <PreviewStory />}
@@ -34,7 +43,9 @@ const NewStory = () => {
 
       <div className={styles.footer}>
         <Publish className={styles.publish} />
-        <button type="button" className={styles["save-draft-button"]}>Save draft</button>
+        <button type="button" className={styles["save-draft-button"]}>
+          Save draft
+        </button>
         <Settings />
       </div>
       <div className={styles.guides}>
