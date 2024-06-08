@@ -3,21 +3,24 @@ import MDEditor from "@uiw/react-md-editor";
 import styles from "./PreviewStoryFullScreen.module.css";
 import { useContext } from "react";
 import { AuthContext } from "../../../store/Auth/auth-context";
+import StoryTitle from "./UI/StoryTitle";
 const PreviewStoryFullScreen = ({ onToggleFullScreen }) => {
   const {
     newStory,
+    newStory: { title },
     appMode: { theme },
   } = useContext(AuthContext);
 
   return (
     <section className={styles["preview-story-fullscreen"]}>
-      <div className={`${styles["fullscreen-exit-icon-wrapper"]}`}>
+      <div className={`${styles["fullscreen-header-wrapper"]}`}>
         <div className={`wrapper`}>
           <BsFullscreenExit
             title="Exit fullscreen"
             className={styles["fullscreen-exit-icon"]}
             onClick={() => onToggleFullScreen(false)}
           />
+          <StoryTitle title={title} />
         </div>
       </div>
 

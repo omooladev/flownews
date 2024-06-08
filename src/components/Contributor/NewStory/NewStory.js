@@ -15,6 +15,8 @@ const NewStory = () => {
   const {
     newStory: {
       viewPreview,
+      title,
+      value,
       pageSettings: { isAutoPreviewEnabled },
     },
   } = useContext(AuthContext);
@@ -31,7 +33,7 @@ const NewStory = () => {
       </section>
       <section className={styles["Story-title-preview-header"]}>
         <StoryTitleTagsCoverImage isAutoPreviewEnabled={isAutoPreviewEnabled} />
-        {(isAutoPreviewEnabled || viewPreview) && <PreviewHeader />}
+        {(isAutoPreviewEnabled || viewPreview) && <PreviewHeader title={title} value={value} />}
       </section>
       <section className={styles["story-area"]}>
         <StoryTextArea />

@@ -3,7 +3,7 @@ import { BsArrowsFullscreen } from "react-icons/bs";
 import styles from "./PreviewHeader.module.css";
 import PreviewStoryFullScreen from "./PreviewStoryFullScreen";
 
-const PreviewHeader = () => {
+const PreviewHeader = ({ title, value }) => {
   const [previewStoryFullScreen, setPreviewStoryFullScreen] = useState(false);
   const toggleFullScreenHandler = useCallback((bool) => {
     setPreviewStoryFullScreen((prevState) => {
@@ -14,14 +14,18 @@ const PreviewHeader = () => {
     <div className={styles["preview-header"]}>
       <div className={styles["text-icon"]}>
         <h1>Live Preview</h1>
-        <BsArrowsFullscreen
-          title="view fullscreen"
-          className={styles.icon}
-          onClick={() => toggleFullScreenHandler(true)}
-        />
+        {title && value && (
+          <BsArrowsFullscreen
+            title="view fullscreen"
+            className={styles.icon}
+            onClick={() => toggleFullScreenHandler(true)}
+          />
+        )}
       </div>
       <hr />
-      {previewStoryFullScreen && <PreviewStoryFullScreen onToggleFullScreen={toggleFullScreenHandler} />}
+      {previewStoryFullScreen && title && value && (
+        <PreviewStoryFullScreen onToggleFullScreen={toggleFullScreenHandler} />
+      )}
     </div>
   );
 };
