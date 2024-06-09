@@ -38,17 +38,16 @@ const CoverImage = () => {
 
   const saveImageHandler = useCallback(
     async (isCropped, image) => {
-      const { url, file } = await getImage(isCropped, image, "coverImage");
+      const { file } = await getImage(isCropped, image, "coverImage");
       //<---------- set the loading to true ---------->
       setIsLoading((prevState) => true);
 
       //<---------- upload the image to my cloudinary ---------->
       console.log(file);
-      console.log(process.env);
     },
     [getImage]
   );
-
+  console.log(process.env.CLOUDINARY_URL);
   return (
     <div className={styles["cover-image"]}>
       {!isLoading && (
