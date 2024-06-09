@@ -1,8 +1,10 @@
 import { useCallback, useContext } from "react";
+import useHttp from "./useHttp";
 import { AuthContext } from "../store/Auth/auth-context";
 
 const useFileEditor = () => {
-  const { files, onUpdateFiles } = useContext(AuthContext);
+  const { sendRequest } = useHttp();
+  const { files, onUpdateFiles, HOSTURI, token } = useContext(AuthContext);
   const transformFile = useCallback(
     async (file, fileType) => {
       const reader = new FileReader();
@@ -37,7 +39,19 @@ const useFileEditor = () => {
     },
     [files]
   );
-  return { transformFile, resetFile, getImage };
+
+  const uploadFile = useCallback(
+    async (file, data, fileType) => {
+      const response = await sendRequest(`${HOSTURI}/contributor/upload-file?fileType=${fileType}`, {
+        method: "POST",
+        contributorData: data,
+        token,
+      });
+      return response;
+    },
+    [sendRequest, HOSTURI, token]
+  );
+  return { transformFile, resetFile, getImage, uploadFile };
 };
 
 export default useFileEditor;

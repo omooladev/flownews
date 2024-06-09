@@ -1,6 +1,6 @@
-import cloudinary from "cloudinary";
+// import cloudinary from "cloudinary";
 
-cloudinary.config({ secure: true, cloudinary_url: process.env.CLOUDINARY_URL });
+// cloudinary.v2.config({ secure: true, cloudinary_url: process.env.REACT_APP_CLOUDINARY_URL });
 
-//<----------------------------------------------------------------------------->
-module.exports = { cloudinary };
+// //<----------------------------------------------------------------------------->
+// export { cloudinary };

@@ -9,7 +9,7 @@ import Loader from "../../../Loaders/Loader";
 import styles from "./CoverImage.module.css";
 
 const CoverImage = () => {
-  const { transformFile, getImage, resetFile } = useFileEditor();
+  const { transformFile, getImage, resetFile, uploadFile } = useFileEditor();
   const {
     onMakeBodyFixed,
     files: { coverImage },
@@ -41,13 +41,14 @@ const CoverImage = () => {
       const { file } = await getImage(isCropped, image, "coverImage");
       //<---------- set the loading to true ---------->
       setIsLoading((prevState) => true);
-
+      const response = await uploadFile(file, "coverImage", "");
       //<---------- upload the image to my cloudinary ---------->
-      console.log(file);
+      //console.log
+      //console.log(file);
     },
-    [getImage]
+    [getImage, uploadFile]
   );
-  console.log(process.env.CLOUDINARY_URL);
+
   return (
     <div className={styles["cover-image"]}>
       {!isLoading && (
