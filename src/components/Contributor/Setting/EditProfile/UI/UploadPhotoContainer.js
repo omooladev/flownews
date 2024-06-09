@@ -109,9 +109,9 @@ const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadCo
     displayPicture,
   ]);
 
-  const resetImageHandler = () => {
+  const resetImageHandler = useCallback(() => {
     setProfilePicture(null);
-  };
+  }, []);
 
   const showRemoveProfilePhotoContainer = useCallback((event) => {
     event.stopPropagation();

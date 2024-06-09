@@ -55,9 +55,17 @@ export const AuthContext = React.createContext({
   newStory: {
     isEditing: false,
     title: "",
+    coverImage: "",
     value: "",
     viewPreview: false,
     pageSettings: { isAutoPreviewEnabled: true },
   },
-  onUpdateNewStory: ({ isEditing, title, value, viewPreview, pageSettings: { isAutoPreviewEnabled } }) => {},
+  onUpdateNewStory: ({
+    isEditing,
+    title,
+    coverImage,
+    value,
+    viewPreview,
+    pageSettings: { isAutoPreviewEnabled },
+  }) => {},
 });

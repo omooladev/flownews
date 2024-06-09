@@ -37,6 +37,8 @@ const AuthContextProvider = (props) => {
   const [newStory, setNewStory] = useState({
     viewPreview: false,
     isEditing: false,
+    title: "",
+    coverImage: "",
     value: "",
     pageSettings: {
       ...(appMode.NewStorySettings ? { ...appMode.NewStorySettings } : { isAutoPreviewEnabled: true }),

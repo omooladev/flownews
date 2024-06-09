@@ -3,13 +3,17 @@ import { useCallback, useContext, useState } from "react";
 import { AuthContext } from "../../../../store/Auth/auth-context";
 import { validateFile } from "../../../../utils/validateFile";
 import useFileEditor from "../../../../hooks/useFileEditor";
+import AuthLoader from "../../../Loaders/AuthLoader";
+import CropContainer from "../../../../UI/CropContainer";
 import Loader from "../../../Loaders/Loader";
 import styles from "./CoverImage.module.css";
-import AuthLoader from "../../../Loaders/AuthLoader";
 
 const CoverImage = () => {
-  const { transformFile } = useFileEditor();
-  const { files } = useContext(AuthContext);
+  const { transformFile, getImage, resetFile } = useFileEditor();
+  const {
+    onMakeBodyFixed,
+    files: { coverImage },
+  } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState({ type: null, text: "" });
   const changeImageHandler = useCallback(
@@ -28,12 +32,22 @@ const CoverImage = () => {
 
       //----------> transform the image file
       await transformFile(file, "coverImage");
-      //<---------- set the loading to true ---------->
-      //setIsLoading((prevState) => true);
     },
     [transformFile]
   );
-  console.log(files);
+
+  const saveImageHandler = useCallback(
+    async (isCropped, image) => {
+      const { url, file } = await getImage(isCropped, image, "coverImage");
+      //<---------- set the loading to true ---------->
+      setIsLoading((prevState) => true);
+
+      //<---------- upload the image to my cloudinary ---------->
+      console.log(file);
+    },
+    [getImage]
+  );
+
   return (
     <div className={styles["cover-image"]}>
       {!isLoading && (
@@ -48,6 +62,15 @@ const CoverImage = () => {
           <Loader source="cover-image" />
           <AuthLoader text="Uploading" className={styles["loader-text"]} />
         </div>
+      )}
+
+      {coverImage.transformedFile && (
+        <CropContainer
+          image={coverImage.transformedFile}
+          onResetImage={() => resetFile("coverImage")}
+          onMakeBodyFixed={onMakeBodyFixed}
+          onSaveImage={saveImageHandler}
+        />
       )}
     </div>
   );
