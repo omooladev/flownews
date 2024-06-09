@@ -7,7 +7,7 @@ import { configuration } from "../../../../../config";
 import CropContainer from "../../../../../UI/CropContainer";
 
 const UploadPhotoContainer = ({ onSetError, onToggleComponentsIsActive, uploadContainerIsActive }) => {
-  //----------> get data from the auth context
+  //<---------- get data from the auth context ---------->
   const {
     onSaveContributorData,
     onChangeProfilePicture,

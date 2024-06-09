@@ -32,7 +32,7 @@ const AuthContextProvider = (props) => {
   });
   const history = useHistory();
 
-  //?refactored
+  const [files, setFiles] = useState({ coverImage: { transformedFile: null, file: null } });
   //<---------- state for sharing new content ---------->
   const [newStory, setNewStory] = useState({
     viewPreview: false,
@@ -344,6 +344,13 @@ const AuthContextProvider = (props) => {
     });
   }, []);
 
+  //<---------- function for updating files ---------->
+  const updateFiles = useCallback((newFiles) => {
+    return setFiles((prevFiles) => {
+      return { ...prevFiles, ...newFiles };
+    });
+  }, []);
+
   useEffect(() => {
     if (makeBodyFixed) {
       return document.body.classList.add("fixed-body");
@@ -396,6 +403,10 @@ const AuthContextProvider = (props) => {
         //<---------- new content ---------->
         newStory,
         onUpdateNewStory: updateNewStory,
+
+        //<---------- files ---------->
+        files,
+        onUpdateFiles: updateFiles,
       }}
     >
       {props.children}

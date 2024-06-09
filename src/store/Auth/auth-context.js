@@ -48,7 +48,9 @@ export const AuthContext = React.createContext({
 
   cancelRequest: () => {},
   pageIsLoading: false,
-
+  //<---------- files ---------->
+  files: { coverImage: { transformedFile: "", file: File } },
+  onUpdateFiles: ({ coverImage: { transformedFile, file } }) => {},
   //<--------- for new content ---------->
   newStory: {
     isEditing: false,
