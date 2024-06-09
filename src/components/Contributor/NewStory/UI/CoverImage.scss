@@ -3,9 +3,20 @@
   label {
     cursor: pointer;
     color: var(--primary-color);
-    gap: 1rem;
   }
   input {
     display: none;
+  }
+  .message {
+    font-size: 0.9rem;
+    padding: 0.2rem 0;
+  }
+  .loader-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    .loader-text {
+      color: var(--tertiary-color);
+    }
   }
 }

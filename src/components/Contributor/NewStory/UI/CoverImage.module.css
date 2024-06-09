@@ -1,1 +1,1 @@
-.cover-image{padding:.5rem 0}.cover-image label{cursor:pointer;color:var(--primary-color);gap:1rem}.cover-image input{display:none}
+.cover-image{padding:.5rem 0}.cover-image label{cursor:pointer;color:var(--primary-color)}.cover-image input{display:none}.cover-image .message{font-size:.9rem;padding:.2rem 0}.cover-image .loader-wrapper{display:flex;align-items:center;gap:1rem}.cover-image .loader-wrapper .loader-text{color:var(--tertiary-color)}
