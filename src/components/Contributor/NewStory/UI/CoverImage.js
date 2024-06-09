@@ -44,6 +44,7 @@ const CoverImage = () => {
 
       //<---------- upload the image to my cloudinary ---------->
       console.log(file);
+      console.log(process.env);
     },
     [getImage]
   );
