@@ -1,4 +1,5 @@
 import styles from "./StoryTitleTagsCoverImage.module.css";
+import CoverImage from "./UI/CoverImage";
 import StoryTitle from "./UI/StoryTitle";
 const StoryTitleTagsCoverImage = ({ isAutoPreviewEnabled }) => {
   return (
@@ -8,10 +9,7 @@ const StoryTitleTagsCoverImage = ({ isAutoPreviewEnabled }) => {
       }`}
     >
       <StoryTitle />
-      <div className={styles["cover-image"]}>
-        <label htmlFor="story-cover-image">Add a cover image</label>
-        <input type="file" id="story-cover-image" />
-      </div>
+      <CoverImage />
     </section>
   );
 };

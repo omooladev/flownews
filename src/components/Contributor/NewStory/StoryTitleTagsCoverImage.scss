@@ -4,15 +4,4 @@
   &.previewed {
     width: 60%;
   }
-
-  .cover-image {
-    padding: 0.5rem 0;
-    label {
-      cursor: pointer;
-      color: var(--primary-color);
-    }
-    input {
-      display: none;
-    }
-  }
 }
