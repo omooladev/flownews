@@ -24,6 +24,11 @@ const CoverImage = () => {
       return { ...prevMessage, type: null, text: "" };
     });
   }, []);
+  const saveMessage = useCallback((newMessage) => {
+    return setMessage((prevMessage) => {
+      return { ...prevMessage, ...newMessage };
+    });
+  }, []);
 
   //<---------- function for changing image ---------->
   const changeImageHandler = useCallback(
@@ -38,14 +43,12 @@ const CoverImage = () => {
       //----------> validate the file
       const { error, hasError } = await validateFile({ file, type: "image", from: "cover-image" });
       if (hasError) {
-        return setMessage((prevMessage) => {
-          return { ...prevMessage, type: "error", text: error };
-        });
+        return saveMessage({ type: "error", text: error });
       }
       //----------> transform the image file
       await transformFile(file, "coverImage");
     },
-    [resetMessage, transformFile]
+    [saveMessage, resetMessage, transformFile]
   );
 
   const saveImageHandler = useCallback(
@@ -58,15 +61,13 @@ const CoverImage = () => {
       const { error, data } = await uploadFile(file, "coverImage");
 
       if (error) {
-        setMessage((prevMessage) => {
-          return { ...prevMessage, type: "error-from-server", text: error };
-        });
+        saveMessage({ type: "error-from-server", text: error });
       }
       if (data) {
       }
       return setIsLoading((prevState) => false);
     },
-    [getImage, uploadFile]
+    [saveMessage, getImage, uploadFile]
   );
   const retryFileUpload = useCallback(async () => {
     console.log(coverImage);
@@ -81,7 +82,6 @@ const CoverImage = () => {
     resetMessage();
     resetFile("coverImage");
   }, [resetFile, resetMessage]);
-  //   console.log(coverImage);
 
   return (
     <div className={styles["cover-image"]}>
