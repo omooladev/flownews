@@ -60,12 +60,18 @@ const useFileEditor = () => {
       const formData = new FormData();
       if (fileType.includes("Image")) {
         //----------> if cropped, then name the image while appending it to the form data
-        formData.append("image", file, isCropped && "cropped_image.jpeg");
+        if (isCropped) {
+          formData.append("image", file, isCropped && "cropped_image.jpeg");
+        } else {
+          formData.append("image", file);
+        }
       }
-      const response = await sendRequest(`${HOSTURI}/contributor/upload-file`, {
+
+      const response = await sendRequest(`${HOSTURI}/contributor/upload-file?fileType=${fileType}`, {
         method: "POST",
         contributorData: formData,
         token,
+        contentType: "multipart/form-data",
       });
 
       return response;

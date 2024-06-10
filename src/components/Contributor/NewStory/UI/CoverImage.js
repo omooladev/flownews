@@ -51,14 +51,20 @@ const CoverImage = () => {
     [saveMessage, resetMessage, transformFile]
   );
 
-  const saveImageHandler = useCallback(
-    async (isCropped, image) => {
+  const uploadImage = useCallback(
+    async (isCropped, image, source = null) => {
       //----------> get the file
-      const { file } = await getImage(isCropped, image, "coverImage");
+      let newFile;
+      if (source) {
+        newFile = image;
+      } else {
+        const { file } = await getImage(isCropped, image, "coverImage");
+        newFile = file;
+      }
       //<---------- set the loading to true ---------->
       setIsLoading((prevState) => true);
       //<---------- upload the image to my cloudinary ---------->
-      const { error, data } = await uploadFile(file, "coverImage", isCropped);
+      const { error, data } = await uploadFile(newFile, "coverImage", isCropped);
 
       if (error) {
         saveMessage({ type: "error-from-server", text: error });
@@ -69,9 +75,9 @@ const CoverImage = () => {
     },
     [saveMessage, getImage, uploadFile]
   );
-  const retryFileUpload = useCallback(async () => {
-    console.log(coverImage);
-  }, [coverImage]);
+  const retryImageUpload = useCallback(async () => {
+    await uploadImage(coverImage.isCropped, coverImage.file, "retry-upload");
+  }, [coverImage, uploadImage]);
 
   //<---------- function for cancelling the upload --------->
   const cancelImageUpload = useCallback(() => {
@@ -102,7 +108,7 @@ const CoverImage = () => {
           {message.type === "error" && <p className={`error ${styles.message}`}>{message.text}</p>}
           {message.type === "error-from-server" && (
             <div className={styles.actions}>
-              <button className={styles.retry} onClick={retryFileUpload}>
+              <button className={styles.retry} onClick={retryImageUpload}>
                 Retry Upload
               </button>
               <button className={styles.cancel} onClick={cancelImageUpload}>
@@ -124,7 +130,7 @@ const CoverImage = () => {
           image={coverImage.transformedFile}
           onResetImage={cancelImageUpload}
           onMakeBodyFixed={onMakeBodyFixed}
-          onSaveImage={saveImageHandler}
+          onSaveImage={uploadImage}
         />
       )}
     </div>
