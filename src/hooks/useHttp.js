@@ -34,6 +34,7 @@ const useHttp = () => {
       if (method === "POST") {
         const { data, status } = await axios.post(uri, contributorData, {
           signal, //----------> the signal that links to the abort controller
+          "Content-Type": contentType || "application/json",
           headers: {
             authorization: token && `Bearer ${token}`,
           },
@@ -51,10 +52,11 @@ const useHttp = () => {
         return { data, error: null };
       }
     } catch (err) {
+      console.log(err);
       let response = err.response || err.message;
 
       if (err.response) {
-        response = response.data.message;
+        response = response.data.message || response.data.msg;
       }
       return { error: response, data: null, status: null };
     }

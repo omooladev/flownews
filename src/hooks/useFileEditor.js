@@ -1,10 +1,10 @@
 import { useCallback, useContext } from "react";
-import useHttp from "./useHttp";
+// import useHttp from "./useHttp";
 import { AuthContext } from "../store/Auth/auth-context";
 
 const useFileEditor = () => {
-  const { sendRequest } = useHttp();
-  const { files, onUpdateFiles, HOSTURI, token } = useContext(AuthContext);
+  // const { sendRequest } = useHttp();
+  const { files, onUpdateFiles } = useContext(AuthContext);
   const transformFile = useCallback(
     async (file, fileType) => {
       const reader = new FileReader();
@@ -40,18 +40,27 @@ const useFileEditor = () => {
     [files]
   );
 
-  const uploadFile = useCallback(
-    async (file, data, fileType) => {
-      const response = await sendRequest(`${HOSTURI}/contributor/upload-file?fileType=${fileType}`, {
-        method: "POST",
-        contributorData: data,
-        token,
-      });
-      return response;
-    },
-    [sendRequest, HOSTURI, token]
-  );
-  return { transformFile, resetFile, getImage, uploadFile };
+  const uploadFile = useCallback(async (file, fileType) => {
+    return console.log(file);
+    //----------> if cropped, then name the image while appending it to the form data
+    //contributorData.append("image", profilePicture, isCropped && "cropped_image.jpeg");
+    // const formData = new FormData();
+    // if (fileType.includes("Image")) {
+    //   formData.append("image", file);
+    // }
+
+    // const response = await sendRequest(`${HOSTURI}/contributor/upload-file`, {
+    //   method: "POST",
+    //   contributorData: formData,
+    //   token,
+    // });
+
+    // return response;
+  }, []);
+
+  const retryFileUpload = useCallback((file, data, fileType) => {}, []);
+
+  return { transformFile, resetFile, getImage, uploadFile, retryFileUpload };
 };
 
 export default useFileEditor;

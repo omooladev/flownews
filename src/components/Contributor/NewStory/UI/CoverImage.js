@@ -1,5 +1,5 @@
 //<---------- import modules ---------->
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useRef, useState } from "react";
 import { AuthContext } from "../../../../store/Auth/auth-context";
 import { validateFile } from "../../../../utils/validateFile";
 import useFileEditor from "../../../../hooks/useFileEditor";
@@ -16,24 +16,36 @@ const CoverImage = () => {
   } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState({ type: null, text: "" });
+  const coverImageInputRef = useRef();
+
+  //<---------- function for resetting the cover image message ---------->
+  const resetMessage = useCallback(() => {
+    return setMessage((prevMessage) => {
+      return { ...prevMessage, type: null, text: "" };
+    });
+  }, []);
+
+  //<---------- function for changing image ---------->
   const changeImageHandler = useCallback(
     async (event) => {
-      //<----------reset the message---------->
-      setMessage((prevMessage) => {
-        return { ...prevMessage, type: null, text: "" };
-      });
+      event.stopPropagation();
+      //----------> reset the message
+      resetMessage();
+
+      //----------> access the file
       const file = event.target.files[0];
+      console.log(file);
+      //----------> validate the file
       const { error, hasError } = await validateFile({ file, type: "image", from: "cover-image" });
       if (hasError) {
         return setMessage((prevMessage) => {
           return { ...prevMessage, type: "error", text: error };
         });
       }
-
       //----------> transform the image file
       await transformFile(file, "coverImage");
     },
-    [transformFile]
+    [resetMessage, transformFile]
   );
 
   const saveImageHandler = useCallback(
@@ -41,21 +53,71 @@ const CoverImage = () => {
       const { file } = await getImage(isCropped, image, "coverImage");
       //<---------- set the loading to true ---------->
       setIsLoading((prevState) => true);
-      const response = await uploadFile(file, "coverImage", "");
       //<---------- upload the image to my cloudinary ---------->
-      //console.log
-      //console.log(file);
+      const { error, data } = await uploadFile(file, "coverImage");
+
+      if (error) {
+        setMessage((prevMessage) => {
+          return { ...prevMessage, type: "error-from-server", text: error };
+        });
+      }
+      if (data) {
+      }
+      setIsLoading((prevState) => false);
     },
     [getImage, uploadFile]
   );
+  const retryFileUpload = useCallback(async () => {
+    //<---------- set the loading to true ---------->
+    setIsLoading((prevState) => true);
+    //<---------- upload the image to my cloudinary ---------->
+    const { error, data } = await retryFileUpload("", "coverImage", "");
 
+    if (error) {
+      setMessage((prevMessage) => {
+        return { ...prevMessage, type: "error-from-server", text: error };
+      });
+    }
+    if (data) {
+    }
+    setIsLoading((prevState) => false);
+  }, []);
+
+  //<---------- function for cancelling the upload --------->
+  const cancelImageUpload = useCallback(() => {
+    console.log("cancelling");
+    //----------> reset the input value
+    coverImageInputRef.current.value = "";
+    resetMessage();
+    resetFile("coverImage");
+  }, [resetFile, resetMessage]);
   return (
     <div className={styles["cover-image"]}>
       {!isLoading && (
         <>
-          <label htmlFor="story-cover-image">Add a cover image</label>
-          <input type="file" accept="image/*" id="story-cover-image" onChange={changeImageHandler} />
+          {message.type !== "error-from-server" && (
+            <>
+              <label htmlFor="story-cover-image">Add a cover image</label>
+              <input
+                type="file"
+                accept="image/*"
+                id="story-cover-image"
+                ref={coverImageInputRef}
+                onChange={changeImageHandler}
+              />
+            </>
+          )}
           {message.type === "error" && <p className={`error ${styles.message}`}>{message.text}</p>}
+          {message.type === "error-from-server" && (
+            <div className={styles.actions}>
+              <button className={styles.retry} onClick={retryFileUpload}>
+                Retry Upload
+              </button>
+              <button className={styles.cancel} onClick={cancelImageUpload}>
+                Cancel
+              </button>
+            </div>
+          )}
         </>
       )}
       {isLoading && (
@@ -68,7 +130,7 @@ const CoverImage = () => {
       {coverImage.transformedFile && (
         <CropContainer
           image={coverImage.transformedFile}
-          onResetImage={() => resetFile("coverImage")}
+          onResetImage={cancelImageUpload}
           onMakeBodyFixed={onMakeBodyFixed}
           onSaveImage={saveImageHandler}
         />

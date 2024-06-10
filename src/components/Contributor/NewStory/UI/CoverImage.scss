@@ -5,7 +5,7 @@
     color: var(--primary-color);
   }
   input {
-    display: none;
+    // display: none;
   }
   .message {
     font-size: 0.9rem;
@@ -17,6 +17,26 @@
     gap: 1rem;
     .loader-text {
       color: var(--tertiary-color);
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: 1rem;
+    button {
+      &.retry {
+        outline: 1px solid var(--primary-color);
+        padding: 0.3rem 1rem;
+        color: var(--tertiary-color);
+        border-radius: 0.3rem;
+        background-color: transparent;
+        &:hover {
+          outline: 1px solid var(--primary-hover-color);
+        }
+      }
+      &.cancel {
+        color: red;
+      }
     }
   }
 }
