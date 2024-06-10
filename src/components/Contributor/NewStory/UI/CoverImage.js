@@ -58,7 +58,7 @@ const CoverImage = () => {
       //<---------- set the loading to true ---------->
       setIsLoading((prevState) => true);
       //<---------- upload the image to my cloudinary ---------->
-      const { error, data } = await uploadFile(file, "coverImage");
+      const { error, data } = await uploadFile(file, "coverImage", isCropped);
 
       if (error) {
         saveMessage({ type: "error-from-server", text: error });
