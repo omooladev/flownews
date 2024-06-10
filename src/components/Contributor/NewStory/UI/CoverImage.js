@@ -41,10 +41,11 @@ const CoverImage = () => {
       const file = event.target.files[0];
 
       //----------> validate the file
-      const { error, hasError } = await validateFile({ file, type: "image", from: "cover-image" });
-      if (hasError) {
-        return saveMessage({ type: "error", text: error });
-      }
+      //TODO UNCOMMENT THIS
+      // const { error, hasError } = await validateFile({ file, type: "image", from: "cover-image" });
+      // if (hasError) {
+      //   return saveMessage({ type: "error", text: error });
+      // }
       //----------> transform the image file
       await transformFile(file, "coverImage");
     },
@@ -105,7 +106,7 @@ const CoverImage = () => {
               />
             </>
           )}
-          {message.type === "error" && <p className={`error ${styles.message}`}>{message.text}</p>}
+
           {message.type === "error-from-server" && (
             <div className={styles.actions}>
               <button className={styles.retry} onClick={retryImageUpload}>
@@ -115,6 +116,9 @@ const CoverImage = () => {
                 Cancel
               </button>
             </div>
+          )}
+          {message.type && message.type.includes("error") && (
+            <p className={`error ${styles.message}`}>{message.text}</p>
           )}
         </>
       )}
