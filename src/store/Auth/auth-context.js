@@ -54,6 +54,7 @@ export const AuthContext = React.createContext({
   //<--------- for new content ---------->
   newStory: {
     isEditing: false,
+    temporaryId: "",
     title: "",
     coverImage: "",
     value: "",
@@ -63,6 +64,7 @@ export const AuthContext = React.createContext({
   onUpdateNewStory: ({
     isEditing,
     title,
+    temporaryId,
     coverImage,
     value,
     viewPreview,

@@ -7,7 +7,7 @@ const StoryTitle = () => {
   const storyTitleRef = useRef();
   const saveTitleHandler = useCallback(() => {
     const title = storyTitleRef.current.value.trim();
-    onUpdateNewStory({ title });
+    return onUpdateNewStory({ title });
   }, [onUpdateNewStory]);
   return (
     <div className={styles["story-title"]}>

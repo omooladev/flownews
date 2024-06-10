@@ -37,6 +37,7 @@ const AuthContextProvider = (props) => {
   });
   //<---------- state for sharing new content ---------->
   const [newStory, setNewStory] = useState({
+    temporaryId: null,
     viewPreview: false,
     isEditing: false,
     title: "",
@@ -354,6 +355,23 @@ const AuthContextProvider = (props) => {
       return { ...prevFiles, ...newFiles };
     });
   }, []);
+
+  const configureNewStoryTemporaryIdentifier = useCallback(
+    (action) => {
+      if (action === "remove") {
+        if (newStory.temporaryId) {
+        }
+      }
+    },
+    [newStory]
+  );
+  useEffect(() => {
+    if (history.location.pathname.includes("new-story")) {
+      return configureNewStoryTemporaryIdentifier("remove");
+    } else {
+      return configureNewStoryTemporaryIdentifier("remove");
+    }
+  }, [history.location.pathname, configureNewStoryTemporaryIdentifier]);
 
   useEffect(() => {
     if (makeBodyFixed) {

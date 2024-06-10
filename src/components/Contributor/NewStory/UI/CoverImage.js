@@ -41,11 +41,11 @@ const CoverImage = () => {
       const file = event.target.files[0];
 
       //----------> validate the file
-      //TODO UNCOMMENT THIS
-      // const { error, hasError } = await validateFile({ file, type: "image", from: "cover-image" });
-      // if (hasError) {
-      //   return saveMessage({ type: "error", text: error });
-      // }
+
+      const { error, hasError } = await validateFile({ file, type: "image", from: "cover-image" });
+      if (hasError) {
+        return saveMessage({ type: "error", text: error });
+      }
       //----------> transform the image file
       await transformFile(file, "coverImage");
     },
