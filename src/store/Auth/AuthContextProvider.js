@@ -32,7 +32,9 @@ const AuthContextProvider = (props) => {
   });
   const history = useHistory();
 
-  const [files, setFiles] = useState({ coverImage: { transformedFile: null, file: null } });
+  const [files, setFiles] = useState({
+    coverImage: { showCropContainer: false, transformedFile: null, file: null, isCropped: false },
+  });
   //<---------- state for sharing new content ---------->
   const [newStory, setNewStory] = useState({
     viewPreview: false,

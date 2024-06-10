@@ -34,7 +34,7 @@ const CoverImage = () => {
 
       //----------> access the file
       const file = event.target.files[0];
-      console.log(file);
+
       //----------> validate the file
       const { error, hasError } = await validateFile({ file, type: "image", from: "cover-image" });
       if (hasError) {
@@ -50,6 +50,7 @@ const CoverImage = () => {
 
   const saveImageHandler = useCallback(
     async (isCropped, image) => {
+      //----------> get the file
       const { file } = await getImage(isCropped, image, "coverImage");
       //<---------- set the loading to true ---------->
       setIsLoading((prevState) => true);
@@ -63,34 +64,25 @@ const CoverImage = () => {
       }
       if (data) {
       }
-      setIsLoading((prevState) => false);
+      return setIsLoading((prevState) => false);
     },
     [getImage, uploadFile]
   );
   const retryFileUpload = useCallback(async () => {
-    //<---------- set the loading to true ---------->
-    setIsLoading((prevState) => true);
-    //<---------- upload the image to my cloudinary ---------->
-    const { error, data } = await retryFileUpload("", "coverImage", "");
-
-    if (error) {
-      setMessage((prevMessage) => {
-        return { ...prevMessage, type: "error-from-server", text: error };
-      });
-    }
-    if (data) {
-    }
-    setIsLoading((prevState) => false);
-  }, []);
+    console.log(coverImage);
+  }, [coverImage]);
 
   //<---------- function for cancelling the upload --------->
   const cancelImageUpload = useCallback(() => {
-    console.log("cancelling");
     //----------> reset the input value
-    coverImageInputRef.current.value = "";
+    if (coverImageInputRef.current) {
+      coverImageInputRef.current.value = "";
+    }
     resetMessage();
     resetFile("coverImage");
   }, [resetFile, resetMessage]);
+  //   console.log(coverImage);
+
   return (
     <div className={styles["cover-image"]}>
       {!isLoading && (
@@ -127,7 +119,7 @@ const CoverImage = () => {
         </div>
       )}
 
-      {coverImage.transformedFile && (
+      {coverImage.showCropContainer && (
         <CropContainer
           image={coverImage.transformedFile}
           onResetImage={cancelImageUpload}

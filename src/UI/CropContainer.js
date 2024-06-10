@@ -43,12 +43,16 @@ const CropContainer = ({ image, onResetImage, onSaveImage, onMakeBodyFixed }) =>
     setCroppedAreaPixels(null);
   }, []);
 
-  const saveImageHandler = useCallback(() => {
-    //----------> if the image was not cropped, then save the default image
-    onSaveImage(isCropped, croppedImage);
-    //----------> close the crop container
-    closeCropContainer();
-  }, [onSaveImage, closeCropContainer, croppedImage, isCropped]);
+  const saveImageHandler = useCallback(
+    (event) => {
+      //----------> if the image was not cropped, then save the default image
+      onSaveImage(isCropped, croppedImage);
+      //----------> reset the cropped image and the area pixels
+      setCroppedImage(null);
+      setCroppedAreaPixels(null);
+    },
+    [onSaveImage, croppedImage, isCropped]
+  );
 
   return (
     <PopUp className={styles.popUp} onClick={closeCropContainer}>
