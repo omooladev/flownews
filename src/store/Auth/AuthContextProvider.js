@@ -37,12 +37,12 @@ const AuthContextProvider = (props) => {
   });
   //<---------- state for sharing new content ---------->
   const [newStory, setNewStory] = useState({
-    temporaryId: null,
-    viewPreview: false,
-    isEditing: false,
-    title: "",
-    coverImage: "",
-    value: "",
+    temporaryId: appMode.NewStorySettings?.temporaryId || null,
+    viewPreview: appMode.NewStorySettings?.viewPreview || false,
+    isEditing: appMode.NewStorySettings?.isEditing || false,
+    title: appMode.NewStorySettings?.title || "",
+    coverImage: appMode.NewStorySettings?.coverImage || "",
+    value: appMode.NewStorySettings?.value || "",
     pageSettings: {
       ...(appMode.NewStorySettings ? { ...appMode.NewStorySettings } : { isAutoPreviewEnabled: true }),
     },
@@ -356,22 +356,34 @@ const AuthContextProvider = (props) => {
     });
   }, []);
 
-  const configureNewStoryTemporaryIdentifier = useCallback(
-    (action) => {
-      if (action === "remove") {
-        if (newStory.temporaryId) {
-        }
-      }
-    },
-    [newStory]
-  );
-  useEffect(() => {
-    if (history.location.pathname.includes("new-story")) {
-      return configureNewStoryTemporaryIdentifier("remove");
-    } else {
-      return configureNewStoryTemporaryIdentifier("remove");
+  const configureNewStoryTemporaryIdentifier = useCallback((action) => {
+    if (action === "add") {
+      return setNewStory((prevState) => {
+        return { ...prevState, temporaryId: "100" };
+      });
     }
-  }, [history.location.pathname, configureNewStoryTemporaryIdentifier]);
+    if (action === "remove") {
+      return setNewStory((prevState) => {
+        return { ...prevState, temporaryId: null, coverImage: "", title: "", value: "" };
+      });
+    }
+  }, []);
+
+  //<---------- use effect for updating the new story on the local storage --------->
+  useEffect(() => {
+    if (newStory) {
+      onChangeAppMode({ NewStorySettings: newStory });
+    }
+  }, [newStory, onChangeAppMode]);
+  //<----------- use effect for adding and deleting a new story temporary identifier -------->
+  useEffect(() => {
+    if (history.location.pathname.includes("new-story") && newStory.temporaryId === null) {
+      configureNewStoryTemporaryIdentifier("add");
+    }
+    if (!history.location.pathname.includes("new-story") && newStory.temporaryId !== null) {
+      configureNewStoryTemporaryIdentifier("remove");
+    }
+  }, [history.location.pathname, newStory.temporaryId, configureNewStoryTemporaryIdentifier]);
 
   useEffect(() => {
     if (makeBodyFixed) {

@@ -1,13 +1,11 @@
 //<---------- import modules ---------->
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import AutoPreview from "./Settings/AutoPreview";
 import styles from "./SettingsModal.module.css";
 
 const SettingsModal = () => {
   const {
-    changeAppMode,
-    newStory,
     newStory: {
       viewPreview,
       pageSettings: { isAutoPreviewEnabled },
@@ -51,12 +49,6 @@ const SettingsModal = () => {
     });
   }, [settingStates, onUpdateNewStory, viewPreview]);
 
-  useEffect(() => {
-    //----------> if the page settings is changed, update the app mode
-    if (newStory.pageSettings) {
-      changeAppMode({ NewStorySettings: newStory.pageSettings });
-    }
-  }, [newStory, changeAppMode, settingStates]);
   return (
     <div className={styles["settings-modal"]} onClick={(event) => event.stopPropagation()}>
       <ul className={styles["settings-list"]}>
