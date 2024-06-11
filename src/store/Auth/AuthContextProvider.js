@@ -45,7 +45,9 @@ const AuthContextProvider = (props) => {
     coverImage: appMode.NewStorySettings?.coverImage || "",
     value: appMode.NewStorySettings?.value || "",
     pageSettings: {
-      ...(appMode.NewStorySettings ? { ...appMode.NewStorySettings.pageSettings } : { isAutoPreviewEnabled: true }),
+      ...(appMode.NewStorySettings
+        ? { ...appMode.NewStorySettings.pageSettings }
+        : { isAutoPreviewEnabled: true }),
     },
   });
 
@@ -371,12 +373,36 @@ const AuthContextProvider = (props) => {
     }
   }, []);
 
+  console.log(lastLocation);
+  // const showConfirmation = useCallback((event) => {
+  //   event.preventDefault();
+  //   event.returnValue = "";
+  // }, []);
   //<---------- use effect for updating the new story on the local storage --------->
   useEffect(() => {
     if (newStory) {
       onChangeAppMode({ NewStorySettings: newStory });
     }
   }, [newStory, onChangeAppMode]);
+
+  //<---------- use effect for handling when the browser is to be refreshed at the new story page -------->
+  useEffect(() => {
+    if (
+      history.location.pathname.includes("new-story") &&
+      (newStory.title || newStory.coverImage || newStory.value)
+    ) {
+      const handleBeforeUnload = (event) => {
+        console.log("me");
+        event.preventDefault();
+        event.returnValue = "";
+      };
+      window.addEventListener("beforeunload", handleBeforeUnload);
+
+      return () => {
+        window.removeEventListener("beforeunload", handleBeforeUnload);
+      };
+    }
+  }, [history.location.pathname, newStory]);
   //<----------- use effect for adding and deleting a new story temporary identifier -------->
   useEffect(() => {
     if (history.location.pathname.includes("new-story") && newStory.temporaryId === null) {
@@ -393,6 +419,7 @@ const AuthContextProvider = (props) => {
     }
     return document.body.classList.remove("fixed-body");
   }, [makeBodyFixed]);
+
   return (
     <AuthContext.Provider
       value={{
