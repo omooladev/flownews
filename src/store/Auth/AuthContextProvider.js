@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { AuthContext } from "./auth-context";
 import { AppContext } from "../App/app-context";
 import useHttp from "../../hooks/useHttp";
+import { createRandomString } from "../../utils/createRandomStrings";
 const HOSTURI = "http://localhost:5000/api/v1";
 //const HOSTURI = "https://flownews-api.onrender.com/api/v1";
 //----------> deployment link of the dev branch---> which is the preview deployment
@@ -44,7 +45,7 @@ const AuthContextProvider = (props) => {
     coverImage: appMode.NewStorySettings?.coverImage || "",
     value: appMode.NewStorySettings?.value || "",
     pageSettings: {
-      ...(appMode.NewStorySettings ? { ...appMode.NewStorySettings } : { isAutoPreviewEnabled: true }),
+      ...(appMode.NewStorySettings ? { ...appMode.NewStorySettings.pageSettings } : { isAutoPreviewEnabled: true }),
     },
   });
 
@@ -356,10 +357,11 @@ const AuthContextProvider = (props) => {
     });
   }, []);
 
-  const configureNewStoryTemporaryIdentifier = useCallback((action) => {
+  const configureNewStoryTemporaryIdentifier = useCallback(async (action) => {
     if (action === "add") {
+      const temporaryId = await createRandomString(12);
       return setNewStory((prevState) => {
-        return { ...prevState, temporaryId: "100" };
+        return { ...prevState, temporaryId };
       });
     }
     if (action === "remove") {
