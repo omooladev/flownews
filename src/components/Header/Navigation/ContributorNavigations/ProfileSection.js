@@ -18,13 +18,10 @@ const ProfileSection = () => {
   //            the following properties
   const {
     onSignOut,
-    contributorData: {
-      username,
-      username: contributorFullUsername,
-      email: contributorEmailAddress,
-    },
+    contributorData: { username, username: contributorFullUsername, email: contributorEmailAddress },
     searchedContributorData,
     onResetSearchedContributor,
+    newStory: { temporaryId },
   } = useContext(AuthContext);
 
   const goToPage = useCallback(
@@ -60,10 +57,16 @@ const ProfileSection = () => {
             <label className={styles.username}>{contributorFullUsername}</label>
           </ul>
           <hr />
-          <ul className={`${styles["nav-user-list"]}`}>
-            <Write className={styles.write} />
-          </ul>
-          <hr className={styles.write_line} />
+          {!history.location.pathname.startsWith("/new-story") &&
+            !history.location.pathname.startsWith(`/story/${temporaryId}/edit`) && (
+              <>
+                <ul className={`${styles["nav-user-list"]}`}>
+                  <Write className={styles.write} />
+                </ul>
+                <hr className={styles.write_line} />
+              </>
+            )}
+
           <ul className={`${styles["nav-user-list"]}`}>
             <li onClick={() => goToPage(`/@${username}`)}>Profile</li>
             <li>Lists</li>

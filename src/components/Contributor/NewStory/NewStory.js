@@ -10,8 +10,11 @@ import ViewPreview from "./ViewPreview";
 import Settings from "./Settings";
 import styles from "./NewStory.module.css";
 import PreviewHeader from "./PreviewHeader";
+import { useParams } from "react-router-dom";
 
 const NewStory = () => {
+  const { storyId } = useParams();
+
   const {
     history,
     newStory,
@@ -24,12 +27,14 @@ const NewStory = () => {
     onMakeBodyFixed,
   } = useContext(AuthContext);
 
+  //<---------- USE EFFECTS STARTS HERE
   //<---------- use effect for handling when the browser is to be refreshed at the new story page -------->
   useEffect(() => {
     if (
-      history.location.pathname.includes("new-story") &&
+      history.location.pathname.startsWith(`/story/${newStory.temporaryId}/edit`) &&
       (newStory.title || newStory.coverImage || newStory.value)
     ) {
+      //<--------- function for displaying the window dialog box --------->
       const handleBeforeUnload = (event) => {
         event.preventDefault();
         event.returnValue = "";
@@ -41,8 +46,17 @@ const NewStory = () => {
         window.removeEventListener("beforeunload", handleBeforeUnload);
       };
     }
-  }, [history.location.pathname, newStory]);
+  }, [history, newStory]);
 
+  //<---------- use effect for redirecting back to the new story page if the temporary identifier is invalid-------->
+  useEffect(() => {
+    if (storyId) {
+      if (storyId !== newStory.temporaryId) {
+        history.push(`/new-story`);
+      }
+    }
+  }, [history, storyId, newStory.temporaryId]);
+  //<---------- USE EFFECTS ENDS HERE
   return (
     <section
       className={`${styles["new-story-section"]} ${

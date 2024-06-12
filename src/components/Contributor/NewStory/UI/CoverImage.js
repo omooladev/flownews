@@ -130,14 +130,15 @@ const CoverImage = () => {
           {newStoryCoverImage && (
             <div className={styles["cover-image-preview_actions"]}>
               <div className={styles["cover-image-preview"]}>
-                <img src={newStoryCoverImage} alt="Cover photo" />
+                <img src={newStoryCoverImage} alt="Cover" />
               </div>
               <div className={styles.actions}>
                 <button className={styles.change}>
                   {/* </button> onClick={changeCoverImage}> */}
                   Change cover image
                 </button>
-                <button className={styles.remove} onClick={removeCoverImage}>
+                <button className={styles.remove}>
+                  {/* </button>onClick={removeCoverImage}> */}
                   Remove
                 </button>
               </div>

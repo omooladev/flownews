@@ -37,6 +37,7 @@ const AuthContextProvider = (props) => {
     coverImage: { showCropContainer: false, transformedFile: null, file: null, isCropped: false },
   });
   //<---------- state for sharing new content ---------->
+
   const [newStory, setNewStory] = useState({
     temporaryId: appMode.NewStorySettings?.temporaryId || null,
     viewPreview: appMode.NewStorySettings?.viewPreview || false,
@@ -373,30 +374,46 @@ const AuthContextProvider = (props) => {
     }
   }, []);
 
+  //<--------- USE EFFECTS STARTS HERE ---------->
   //<---------- use effect for updating the new story on the local storage --------->
   useEffect(() => {
     if (newStory) {
       onChangeAppMode({ NewStorySettings: newStory });
     }
   }, [newStory, onChangeAppMode]);
-
   //<----------- use effect for adding and deleting a new story temporary identifier -------->
   useEffect(() => {
-    if (history.location.pathname.includes("new-story") && newStory.temporaryId === null) {
+    if (history.location.pathname.startsWith("/new-story") && newStory.temporaryId === null) {
       configureNewStoryTemporaryIdentifier("add");
     }
-    if (!history.location.pathname.includes("new-story") && newStory.temporaryId !== null) {
+    if (
+      !history.location.pathname.startsWith(`/story/${newStory.temporaryId}/edit`) &&
+      !history.location.pathname.startsWith("/new-story") &&
+      newStory.temporaryId !== null
+    ) {
       configureNewStoryTemporaryIdentifier("remove");
     }
   }, [history.location.pathname, newStory.temporaryId, configureNewStoryTemporaryIdentifier]);
 
+  //<---------- use effect for changing the url when the title or other content is not null -------->
+  useEffect(() => {
+    if (
+      history.location.pathname.startsWith("/new-story") &&
+      newStory.temporaryId !== null &&
+      (newStory.title || newStory.coverImage || newStory.value)
+    ) {
+      history.push(`/story/${newStory.temporaryId}/edit`);
+    }
+  }, [history, newStory]);
+
+  //<----------- use effect for toggling the body document with a fixed class --------->
   useEffect(() => {
     if (makeBodyFixed) {
       return document.body.classList.add("fixed-body");
     }
     return document.body.classList.remove("fixed-body");
   }, [makeBodyFixed]);
-
+  //<--------- USE EFFECTS ENDS HERE ---------->
   return (
     <AuthContext.Provider
       value={{
@@ -467,3 +484,13 @@ export default AuthContextProvider;
 // In this case, when we want to search for another contributor, we check if the username of the contributor you
 // are searching for is not the same as yours. If it is the same, we do not proceed with your request, however if it
 // is not the same, then we fetch the contributor and save his details to the search Contributor data.
+
+//DOCUMENTATION ABOUT THE NEW STORY PAGE
+
+//When a contributor visits the new story page, we create a temporary identifier for that page and
+//the moment he starts writing content on the page, we redirect to the edit page which contains the
+//temporary identifier in the url.If he tries to go back to the create story page and the temporary identifier is still
+//available we will redirect the contributor automatically the the edit page based on the identifier.
+// When he decides to leave any of the page, either the create story page or the edit page, we save the content already
+// typed in the page to the database as a draft
+// and then delete the identifier and every other crucial data on the local storage.

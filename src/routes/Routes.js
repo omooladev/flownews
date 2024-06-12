@@ -59,8 +59,11 @@ const Routes = () => {
             <Route path="/new-story" exact>
               <NewStoryPage />
             </Route>
+            <Route path="/story/:storyId/edit" exact>
+              <NewStoryPage />
+            </Route>
             <Route path="/guide-to-posting">
-              <GuideToPostingPage/>
+              <GuideToPostingPage />
             </Route>
 
             <Route path="/@:username" exact>
