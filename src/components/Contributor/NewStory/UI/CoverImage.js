@@ -13,6 +13,7 @@ const CoverImage = () => {
   const {
     onMakeBodyFixed,
     files: { coverImage },
+    newStory: { coverImage: newStoryCoverImage },
     onUpdateNewStory,
   } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
@@ -96,48 +97,71 @@ const CoverImage = () => {
     <div className={styles["cover-image"]}>
       {!isLoading && (
         <>
-          {message.type !== "error-from-server" && (
+          {!newStoryCoverImage && (
             <>
-              <label htmlFor="story-cover-image">Add a cover image</label>
-              <input
-                type="file"
-                accept="image/*"
-                id="story-cover-image"
-                ref={coverImageInputRef}
-                onChange={changeImageHandler}
-              />
+              {message.type !== "error-from-server" && (
+                <>
+                  <label htmlFor="story-cover-image">Add a cover image</label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    id="story-cover-image"
+                    ref={coverImageInputRef}
+                    onChange={changeImageHandler}
+                  />
+                </>
+              )}
+
+              {message.type === "error-from-server" && (
+                <div className={styles.actions}>
+                  <button className={styles.retry} onClick={retryImageUpload}>
+                    Retry Upload
+                  </button>
+                  <button className={styles.cancel} onClick={cancelImageUpload}>
+                    Cancel
+                  </button>
+                </div>
+              )}
+              {message.type && message.type.includes("error") && (
+                <p className={`error ${styles.message}`}>{message.text}</p>
+              )}
             </>
           )}
-
-          {message.type === "error-from-server" && (
-            <div className={styles.actions}>
-              <button className={styles.retry} onClick={retryImageUpload}>
-                Retry Upload
-              </button>
-              <button className={styles.cancel} onClick={cancelImageUpload}>
-                Cancel
-              </button>
+          {newStoryCoverImage && (
+            <div className={styles["cover-image-preview_actions"]}>
+              <div className={styles["cover-image-preview"]}>
+                <img src={newStoryCoverImage} alt="Cover photo" />
+              </div>
+              <div className={styles.actions}>
+                <button className={styles.change} onClick={retryImageUpload}>
+                  Change cover image
+                </button>
+                <button className={styles.remove} onClick={cancelImageUpload}>
+                  Remove
+                </button>
+              </div>
             </div>
-          )}
-          {message.type && message.type.includes("error") && (
-            <p className={`error ${styles.message}`}>{message.text}</p>
           )}
         </>
       )}
-      {isLoading && (
-        <div className={styles["loader-wrapper"]}>
-          <Loader source="cover-image" />
-          <AuthLoader text="Uploading" className={styles["loader-text"]} />
-        </div>
-      )}
 
-      {coverImage.showCropContainer && (
-        <CropContainer
-          image={coverImage.transformedFile}
-          onResetImage={cancelImageUpload}
-          onMakeBodyFixed={onMakeBodyFixed}
-          onSaveImage={uploadImage}
-        />
+      {!newStoryCoverImage && (
+        <>
+          {isLoading && (
+            <div className={styles["loader-wrapper"]}>
+              <Loader source="cover-image" />
+              <AuthLoader text="Uploading" className={styles["loader-text"]} />
+            </div>
+          )}
+          {coverImage.showCropContainer && (
+            <CropContainer
+              image={coverImage.transformedFile}
+              onResetImage={cancelImageUpload}
+              onMakeBodyFixed={onMakeBodyFixed}
+              onSaveImage={uploadImage}
+            />
+          )}
+        </>
       )}
     </div>
   );

@@ -24,7 +24,8 @@
     display: flex;
     gap: 1rem;
     button {
-      &.retry {
+      &.retry,
+      &.change {
         outline: 1px solid var(--primary-color);
         padding: 0.3rem 1rem;
         color: var(--tertiary-color);
@@ -34,8 +35,23 @@
           outline: 1px solid var(--primary-hover-color);
         }
       }
-      &.cancel {
+      &.cancel,
+      &.remove {
         color: red;
+      }
+    }
+  }
+  .cover-image-preview_actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    .cover-image-preview {
+      img {
+        width: auto;
+        max-width: 250px;
+        height: 100px;
+        object-fit: scale-down;
+        object-fit: contain;
       }
     }
   }
