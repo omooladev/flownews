@@ -133,10 +133,11 @@ const CoverImage = () => {
                 <img src={newStoryCoverImage} alt="Cover photo" />
               </div>
               <div className={styles.actions}>
-                <button className={styles.change} onClick={retryImageUpload}>
+                <button className={styles.change}>
+                  {/* </button> onClick={changeCoverImage}> */}
                   Change cover image
                 </button>
-                <button className={styles.remove} onClick={cancelImageUpload}>
+                <button className={styles.remove} onClick={removeCoverImage}>
                   Remove
                 </button>
               </div>
