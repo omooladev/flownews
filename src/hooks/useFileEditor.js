@@ -73,7 +73,7 @@ const useFileEditor = () => {
         token,
         contentType: "multipart/form-data",
       });
-      console.log(response);
+
       return response;
     },
     [token, HOSTURI, sendRequest]

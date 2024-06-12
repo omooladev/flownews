@@ -1,4 +1,4 @@
-import { useCallback, useContext, useRef } from "react";
+import { useCallback, useContext, useEffect, useRef } from "react";
 import { AuthContext } from "../../../../store/Auth/auth-context";
 import styles from "./StoryTitle.module.css";
 
@@ -8,10 +8,18 @@ const StoryTitle = () => {
     newStory: { title },
   } = useContext(AuthContext);
   const storyTitleRef = useRef();
+
+  //<---------- Function for saving the title when the cursor leaves the input --------->
   const saveTitleHandler = useCallback(() => {
     const title = storyTitleRef.current.value.trim();
     return onUpdateNewStory({ title });
   }, [onUpdateNewStory]);
+
+  useEffect(() => {
+    if (title) {
+      storyTitleRef.current.value = title;
+    }
+  }, [title]);
   return (
     <div className={styles["story-title"]}>
       <label className={styles.title}>
@@ -22,7 +30,6 @@ const StoryTitle = () => {
         placeholder="Enter Title Here..."
         autoCorrect="false"
         ref={storyTitleRef}
-        value={title}
         onBlur={saveTitleHandler}
       />
     </div>

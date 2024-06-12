@@ -13,6 +13,7 @@ const CoverImage = () => {
   const {
     onMakeBodyFixed,
     files: { coverImage },
+    onUpdateNewStory,
   } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState({ type: null, text: "" });
@@ -70,11 +71,12 @@ const CoverImage = () => {
       if (error) {
         saveMessage({ type: "error-from-server", text: error });
       }
-      if (data) {
+      if (data && data.url) {
+        onUpdateNewStory({ coverImage: data.url });
       }
       return setIsLoading((prevState) => false);
     },
-    [saveMessage, getImage, uploadFile]
+    [saveMessage, getImage, uploadFile, onUpdateNewStory]
   );
   const retryImageUpload = useCallback(async () => {
     await uploadImage(coverImage.isCropped, coverImage.file, "retry-upload");
