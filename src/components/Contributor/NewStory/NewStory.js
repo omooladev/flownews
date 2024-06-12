@@ -1,6 +1,6 @@
 //<---------- import modules ---------->
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import Publish from "../../Header/Navigation/ContributorNavigations/Publish";
 import PreviewStory from "./PreviewStory";
@@ -13,6 +13,8 @@ import PreviewHeader from "./PreviewHeader";
 
 const NewStory = () => {
   const {
+    history,
+    newStory,
     newStory: {
       viewPreview,
       title,
@@ -21,6 +23,25 @@ const NewStory = () => {
     },
     onMakeBodyFixed,
   } = useContext(AuthContext);
+
+  //<---------- use effect for handling when the browser is to be refreshed at the new story page -------->
+  useEffect(() => {
+    if (
+      history.location.pathname.includes("new-story") &&
+      (newStory.title || newStory.coverImage || newStory.value)
+    ) {
+      const handleBeforeUnload = (event) => {
+        event.preventDefault();
+        event.returnValue = "";
+      };
+
+      window.addEventListener("beforeunload", handleBeforeUnload);
+      //<--------- cleanup ---------->
+      return () => {
+        window.removeEventListener("beforeunload", handleBeforeUnload);
+      };
+    }
+  }, [history.location.pathname, newStory]);
 
   return (
     <section
