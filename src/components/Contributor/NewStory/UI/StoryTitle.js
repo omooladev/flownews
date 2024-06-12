@@ -3,7 +3,10 @@ import { AuthContext } from "../../../../store/Auth/auth-context";
 import styles from "./StoryTitle.module.css";
 
 const StoryTitle = () => {
-  const { onUpdateNewStory } = useContext(AuthContext);
+  const {
+    onUpdateNewStory,
+    newStory: { title },
+  } = useContext(AuthContext);
   const storyTitleRef = useRef();
   const saveTitleHandler = useCallback(() => {
     const title = storyTitleRef.current.value.trim();
@@ -19,6 +22,7 @@ const StoryTitle = () => {
         placeholder="Enter Title Here..."
         autoCorrect="false"
         ref={storyTitleRef}
+        value={title}
         onBlur={saveTitleHandler}
       />
     </div>
