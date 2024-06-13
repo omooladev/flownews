@@ -360,19 +360,47 @@ const AuthContextProvider = (props) => {
     });
   }, []);
 
-  const configureNewStoryTemporaryIdentifier = useCallback(async (action) => {
-    if (action === "add") {
-      const temporaryId = await createRandomString(12);
-      return setNewStory((prevState) => {
-        return { ...prevState, temporaryId };
-      });
-    }
-    if (action === "remove") {
-      return setNewStory((prevState) => {
-        return { ...prevState, temporaryId: null, coverImage: "", title: "", value: "" };
-      });
-    }
-  }, []);
+  //<---------- Function for saving story as either draft or published to the database ---------->
+  const saveStory = useCallback(
+    async (story, status, storyId) => {
+      const { title, coverImage, value } = story;
+      if (title || coverImage || value) {
+        const response = await sendRequest(`${HOSTURI}/contributor/story/${status}?storyId=${storyId}`, {
+          method: "POST",
+          contributorData: {
+            ...(title && { title }),
+            ...(coverImage && { coverImage }),
+            ...(value && { content: value }),
+          },
+          token,
+        });
+
+        return response;
+      }
+    },
+    [sendRequest, token]
+  );
+
+  const configureNewStoryTemporaryIdentifier = useCallback(
+    async (action) => {
+      if (action === "add") {
+        const temporaryId = await createRandomString(12);
+        return setNewStory((prevState) => {
+          return { ...prevState, temporaryId };
+        });
+      }
+      if (action === "remove") {
+        //----------> if the contributor visits another page, we want to save the content of the new story to the database as draft and
+        // we also want to clear it from the local storage
+        //----------> before saving to draft, we check if any of title, coverImage, value exist
+        await saveStory(newStory, "draft", null);
+        setNewStory((prevState) => {
+          return { ...prevState, temporaryId: null, coverImage: "", title: "", value: "" };
+        });
+      }
+    },
+    [newStory, saveStory]
+  );
 
   //<--------- USE EFFECTS STARTS HERE ---------->
   //<---------- use effect for updating the new story on the local storage --------->
