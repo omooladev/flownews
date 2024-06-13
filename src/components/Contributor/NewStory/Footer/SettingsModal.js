@@ -1,7 +1,7 @@
 //<---------- import modules ---------->
 import { useCallback, useContext, useState } from "react";
-import { AuthContext } from "../../../store/Auth/auth-context";
-import AutoPreview from "./Settings/AutoPreview";
+import { AuthContext } from "../../../../store/Auth/auth-context";
+import AutoPreview from "../Settings/AutoPreview";
 import styles from "./SettingsModal.module.css";
 
 const SettingsModal = () => {

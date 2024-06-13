@@ -1,17 +1,18 @@
-.publish {
-  margin: 0 0.5rem;
+.save-draft-button {
+  color: var(--tertiary-color);
+  background-color: transparent;
   font-size: 0.9rem;
-  background-color: var(--primary-color);
-  padding: 0.3rem 1rem;
-  color: var(--white-color);
-  border-radius: 1rem;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
   transition: 0.3s ease-in;
   &:hover {
+    color: var(--white-color);
     background-color: var(--primary-hover-color);
   }
   &:disabled {
     cursor: not-allowed;
     background-color: var(--primary-disabled-background-color);
-    color: #eee;
+    color: #dbd8d8;
+    border-radius: 0.3rem;
   }
 }

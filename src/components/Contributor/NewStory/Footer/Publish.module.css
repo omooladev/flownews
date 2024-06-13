@@ -1,0 +1,1 @@
+.publish{font-size:.9rem;background-color:var(--primary-color);color:var(--white-color);padding:.6rem 1rem;border-radius:.5rem;transition:.3s ease-in}.publish:hover{background-color:var(--primary-hover-color)}.publish:disabled{cursor:not-allowed;background-color:var(--primary-disabled-background-color);color:#eee}

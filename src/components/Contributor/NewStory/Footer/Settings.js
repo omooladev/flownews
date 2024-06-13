@@ -1,6 +1,6 @@
 //<----------- import modules ---------->
 import { useCallback, useContext } from "react";
-import { AppContext } from "../../../store/App/app-context";
+import { AppContext } from "../../../../store/App/app-context";
 import { BsGear } from "react-icons/bs";
 import SettingsModal from "./SettingsModal";
 import styles from "./Settings.module.css";

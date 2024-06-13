@@ -1,21 +1,20 @@
 //<---------- import modules ---------->
-import { Link } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../store/Auth/auth-context";
-import Publish from "../../Header/Navigation/ContributorNavigations/Publish";
+import Publish from "./Footer/Publish";
+import SaveDraft from "./Footer/SaveDraft";
 import PreviewStory from "./PreviewStory";
 import StoryTextArea from "./StoryTextArea";
 import StoryTitleTagsCoverImage from "./StoryTitleTagsCoverImage";
 import ViewPreview from "./ViewPreview";
-import Settings from "./Settings";
+import Settings from "./Footer/Settings";
 import styles from "./NewStory.module.css";
 import PreviewHeader from "./PreviewHeader";
-import { useParams } from "react-router-dom";
-import SaveDraft from "./SaveDraft";
 
 const NewStory = () => {
   const { storyId } = useParams();
-
   const {
     history,
     newStory,
@@ -28,6 +27,7 @@ const NewStory = () => {
     onMakeBodyFixed,
   } = useContext(AuthContext);
 
+  const [isLoading, setIsLoading] = useState({ source: null });
   //<---------- USE EFFECTS STARTS HERE
   //<---------- use effect for handling when the browser is to be refreshed at the new story page -------->
   useEffect(() => {
@@ -79,9 +79,18 @@ const NewStory = () => {
         {(isAutoPreviewEnabled || viewPreview) && <PreviewStory />}
       </section>
       <section className={styles.footer}>
-        <Publish className={styles.publish} />
-        <SaveDraft />
-        <Settings />
+        {isLoading.source === null && <Publish className={styles.publish} />}
+        {(isLoading.source === null || isLoading.source === "save-draft") && (
+          <SaveDraft
+            isLoading={isLoading}
+            onSaveIsLoading={(source) => {
+              setIsLoading((prevData) => {
+                return { ...prevData, source };
+              });
+            }}
+          />
+        )}
+        {isLoading.source === null && <Settings />}
       </section>
       <section className={styles.guides}>
         <Link to="/guide-to-posting">How to publish like a Pro: A Guide to Posting Your Story</Link>
