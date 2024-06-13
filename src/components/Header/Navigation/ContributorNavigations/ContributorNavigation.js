@@ -11,15 +11,15 @@ import { AuthContext } from "../../../../store/Auth/auth-context";
 const ContributorNavigation = () => {
   const {
     history,
-    newStory: { temporaryId },
+    newStory: { storyId },
   } = useContext(AuthContext);
 
   return (
     <>
       {(history.location.pathname.startsWith("/new-story") ||
-        history.location.pathname.startsWith(`/story/${temporaryId}/edit`)) && <Publish />}
+        history.location.pathname.startsWith(`/story/${storyId}/edit`)) && <Publish />}
       {!history.location.pathname.startsWith("/new-story") &&
-        !history.location.pathname.startsWith(`/story/${temporaryId}/edit`) && (
+        !history.location.pathname.startsWith(`/story/${storyId}/edit`) && (
           <Write className={styles.write} />
         )}
       <Notification className={styles.notification} />

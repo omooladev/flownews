@@ -51,10 +51,10 @@ export const AuthContext = React.createContext({
   //<---------- files ---------->
   files: { coverImage: { showCropContainer: false, isCropped: false, transformedFile: "", file: File } },
   onUpdateFiles: ({ coverImage: { showCropContainer, transformedFile, file, isCropped } }) => {},
-  //<--------- for new content ---------->
+  //<--------- for new story ---------->
   newStory: {
     isEditing: false,
-    temporaryId: "",
+    storyId: "",
     title: "",
     coverImage: "",
     value: "",
@@ -64,10 +64,11 @@ export const AuthContext = React.createContext({
   onUpdateNewStory: ({
     isEditing,
     title,
-    temporaryId,
+    storyId,
     coverImage,
     value,
     viewPreview,
     pageSettings: { isAutoPreviewEnabled },
   }) => {},
+  onSaveStoryToDatabase: async ({ title, coverImage, value, storyId }, status) => {},
 });

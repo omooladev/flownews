@@ -11,6 +11,7 @@ import Settings from "./Settings";
 import styles from "./NewStory.module.css";
 import PreviewHeader from "./PreviewHeader";
 import { useParams } from "react-router-dom";
+import SaveDraft from "./SaveDraft";
 
 const NewStory = () => {
   const { storyId } = useParams();
@@ -31,7 +32,7 @@ const NewStory = () => {
   //<---------- use effect for handling when the browser is to be refreshed at the new story page -------->
   useEffect(() => {
     if (
-      history.location.pathname.startsWith(`/story/${newStory.temporaryId}/edit`) &&
+      history.location.pathname.startsWith(`/story/${newStory.storyId}/edit`) &&
       (newStory.title || newStory.coverImage || newStory.value)
     ) {
       //<--------- function for displaying the window dialog box --------->
@@ -51,11 +52,11 @@ const NewStory = () => {
   //<---------- use effect for redirecting back to the new story page if the temporary identifier is invalid-------->
   useEffect(() => {
     if (storyId) {
-      if (storyId !== newStory.temporaryId) {
+      if (storyId !== newStory.storyId) {
         history.push(`/new-story`);
       }
     }
-  }, [history, storyId, newStory.temporaryId]);
+  }, [history, storyId, newStory.storyId]);
   //<---------- USE EFFECTS ENDS HERE
   return (
     <section
@@ -79,9 +80,7 @@ const NewStory = () => {
       </section>
       <section className={styles.footer}>
         <Publish className={styles.publish} />
-        <button type="button" className={styles["save-draft-button"]}>
-          Save draft
-        </button>
+        <SaveDraft />
         <Settings />
       </section>
       <section className={styles.guides}>

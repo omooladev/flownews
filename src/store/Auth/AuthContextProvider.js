@@ -39,7 +39,7 @@ const AuthContextProvider = (props) => {
   //<---------- state for sharing new content ---------->
 
   const [newStory, setNewStory] = useState({
-    temporaryId: appMode.NewStorySettings?.temporaryId || null,
+    storyId: appMode.NewStorySettings?.storyId || null,
     viewPreview: appMode.NewStorySettings?.viewPreview || false,
     isEditing: appMode.NewStorySettings?.isEditing || false,
     title: appMode.NewStorySettings?.title || "",
@@ -361,9 +361,9 @@ const AuthContextProvider = (props) => {
   }, []);
 
   //<---------- Function for saving story as either draft or published to the database ---------->
-  const saveStory = useCallback(
-    async (story, status, storyId) => {
-      const { title, coverImage, value } = story;
+  const saveStoryToDatabase = useCallback(
+    async (story, status) => {
+      const { title, coverImage, value, storyId } = story;
       if (title || coverImage || value) {
         const response = await sendRequest(`${HOSTURI}/contributor/story/${status}?storyId=${storyId}`, {
           method: "POST",
@@ -384,22 +384,22 @@ const AuthContextProvider = (props) => {
   const configureNewStoryTemporaryIdentifier = useCallback(
     async (action) => {
       if (action === "add") {
-        const temporaryId = await createRandomString(12);
+        const storyId = await createRandomString(12); //24
         return setNewStory((prevState) => {
-          return { ...prevState, temporaryId };
+          return { ...prevState, storyId };
         });
       }
       if (action === "remove") {
         //----------> if the contributor visits another page, we want to save the content of the new story to the database as draft and
         // we also want to clear it from the local storage
         //----------> before saving to draft, we check if any of title, coverImage, value exist
-        await saveStory(newStory, "draft", null);
+        await saveStoryToDatabase(newStory, "draft");
         setNewStory((prevState) => {
-          return { ...prevState, temporaryId: null, coverImage: "", title: "", value: "" };
+          return { ...prevState, storyId: null, coverImage: "", title: "", value: "" };
         });
       }
     },
-    [newStory, saveStory]
+    [newStory, saveStoryToDatabase]
   );
 
   //<--------- USE EFFECTS STARTS HERE ---------->
@@ -411,26 +411,26 @@ const AuthContextProvider = (props) => {
   }, [newStory, onChangeAppMode]);
   //<----------- use effect for adding and deleting a new story temporary identifier -------->
   useEffect(() => {
-    if (history.location.pathname.startsWith("/new-story") && newStory.temporaryId === null) {
+    if (history.location.pathname.startsWith("/new-story") && newStory.storyId === null) {
       configureNewStoryTemporaryIdentifier("add");
     }
     if (
-      !history.location.pathname.startsWith(`/story/${newStory.temporaryId}/edit`) &&
+      !history.location.pathname.startsWith(`/story/${newStory.storyId}/edit`) &&
       !history.location.pathname.startsWith("/new-story") &&
-      newStory.temporaryId !== null
+      newStory.storyId !== null
     ) {
       configureNewStoryTemporaryIdentifier("remove");
     }
-  }, [history.location.pathname, newStory.temporaryId, configureNewStoryTemporaryIdentifier]);
+  }, [history.location.pathname, newStory.storyId, configureNewStoryTemporaryIdentifier]);
 
   //<---------- use effect for changing the url when the title or other content is not null -------->
   useEffect(() => {
     if (
       history.location.pathname.startsWith("/new-story") &&
-      newStory.temporaryId !== null &&
+      newStory.storyId !== null &&
       (newStory.title || newStory.coverImage || newStory.value)
     ) {
-      history.push(`/story/${newStory.temporaryId}/edit`);
+      history.push(`/story/${newStory.storyId}/edit`);
     }
   }, [history, newStory]);
 
@@ -488,6 +488,7 @@ const AuthContextProvider = (props) => {
         //<---------- new content ---------->
         newStory,
         onUpdateNewStory: updateNewStory,
+        onSaveStoryToDatabase: saveStoryToDatabase,
 
         //<---------- files ---------->
         files,

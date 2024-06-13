@@ -21,7 +21,7 @@ const ProfileSection = () => {
     contributorData: { username, username: contributorFullUsername, email: contributorEmailAddress },
     searchedContributorData,
     onResetSearchedContributor,
-    newStory: { temporaryId },
+    newStory: { storyId },
   } = useContext(AuthContext);
 
   const goToPage = useCallback(
@@ -58,7 +58,7 @@ const ProfileSection = () => {
           </ul>
           <hr />
           {!history.location.pathname.startsWith("/new-story") &&
-            !history.location.pathname.startsWith(`/story/${temporaryId}/edit`) && (
+            !history.location.pathname.startsWith(`/story/${storyId}/edit`) && (
               <>
                 <ul className={`${styles["nav-user-list"]}`}>
                   <Write className={styles.write} />
