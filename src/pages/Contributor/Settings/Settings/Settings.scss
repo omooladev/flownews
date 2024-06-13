@@ -1,6 +1,6 @@
 @use "../../../../sass/_base";
 .settings {
-  padding: 1rem 0;
+  padding: 1rem 0; //TODO remove this because we have automatically added a padding on the main itself
   @extend %DisplayFlex;
   flex-direction: column;
   justify-content: flex-start;

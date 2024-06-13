@@ -37,7 +37,7 @@ const AuthContextProvider = (props) => {
     coverImage: { showCropContainer: false, transformedFile: null, file: null, isCropped: false },
   });
   //<---------- state for sharing new content ---------->
-
+  const [draftPreview, setDraftPreview] = useState(null);
   const [newStory, setNewStory] = useState({
     storyId: appMode.NewStorySettings?.storyId || null,
     viewPreview: appMode.NewStorySettings?.viewPreview || false,
@@ -501,6 +501,10 @@ const AuthContextProvider = (props) => {
         newStory,
         onUpdateNewStory: updateNewStory,
         onSaveStoryToDatabase: saveStoryToDatabase,
+        draftPreview,
+        onSaveDraftPreview: (data) => {
+          setDraftPreview(data);
+        },
 
         //<---------- files ---------->
         files,

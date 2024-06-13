@@ -73,4 +73,6 @@ export const AuthContext = React.createContext({
     pageSettings: { isAutoPreviewEnabled },
   }) => {},
   onSaveStoryToDatabase: async ({ title, coverImage, value, storyId }, status) => {},
+  draftPreview: {},
+  onSaveDraftPreview: () => {},
 });

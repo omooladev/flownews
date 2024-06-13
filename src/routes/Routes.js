@@ -12,6 +12,7 @@ import EmailVerification from "../pages/EmailVerification/EmailVerification";
 import SettingPage from "../pages/Contributor/Settings/Settings/Settings";
 import NewStoryPage from "../pages/Contributor/NewStory";
 import GuideToPostingPage from "../pages/Contributor/GuideToPosting";
+import DraftPreview from "../pages/Contributor/Story/DraftPreview";
 
 const Routes = () => {
   const { isLoggedIn } = useContext(AuthContext);
@@ -64,6 +65,9 @@ const Routes = () => {
             </Route>
             <Route path="/guide-to-posting">
               <GuideToPostingPage />
+            </Route>
+            <Route path="/@:username/story/draft/preview/:draftId" exact>
+              <DraftPreview />
             </Route>
 
             <Route path="/@:username" exact>
