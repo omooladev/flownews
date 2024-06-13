@@ -19,3 +19,17 @@
   color: var(--body-color);
   background-color: var(--primary-color);
 }
+
+.content-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: purple;
+}
+.main-content {
+  background-color: blue;
+  height: 90vh;
+}
+.aside-content {
+  background-color: red;
+}
