@@ -56,7 +56,8 @@ const AuthContextProvider = (props) => {
   const [searchedContributorData, setSearchedContributorData] = useState({
     username: "",
   });
-  const [profileUpdated, setProfileUpdated] = useState({ show: false, message: "" });
+  const [profileUpdated, setProfileUpdated] = useState({ show: false, message: "" }); //TODO remove this soon as it is replaced in the update profile page
+  const [showInfoModal, setShowInfoModal] = useState({ show: false, message: "" });
   const loginOrBecomeContributor = useCallback(
     async ({ location, contributorAuthData }) => {
       const response = await sendRequest(`${HOSTURI}/auth/${location}`, {
@@ -300,12 +301,19 @@ const AuthContextProvider = (props) => {
     },
     [sendRequest, token]
   );
+  //<---------- Function for updating the info modal ---------->
+  const changeShowInfoModal = useCallback((show, message) => {
+    return setShowInfoModal((prevState) => {
+      return { show, message };
+    });
+  }, []);
   //<---------- Function for updating the profile updated state ---------->
   const changeProfileUpdated = useCallback((show, message) => {
     return setProfileUpdated((prevState) => {
       return { show, message };
     });
   }, []);
+
   //<---------- Function for toggling Email Privacy---------->
   const toggleEmailPrivacy = useCallback(async () => {
     const response = await sendRequest(`${HOSTURI}/email/privacy`, {
@@ -362,7 +370,7 @@ const AuthContextProvider = (props) => {
 
   //<---------- Function for saving story as either draft or published to the database ---------->
   const saveStoryToDatabase = useCallback(
-    async (story, status) => {
+    async ({ story = newStory, status }) => {
       const { title, coverImage, value, storyId } = story;
       if (title || coverImage || value) {
         const response = await sendRequest(`${HOSTURI}/contributor/story/${status}?storyId=${storyId}`, {
@@ -378,7 +386,7 @@ const AuthContextProvider = (props) => {
         return response;
       }
     },
-    [sendRequest, token]
+    [sendRequest, token, newStory]
   );
 
   const configureNewStoryTemporaryIdentifier = useCallback(
@@ -393,13 +401,13 @@ const AuthContextProvider = (props) => {
         //----------> if the contributor visits another page, we want to save the content of the new story to the database as draft and
         // we also want to clear it from the local storage
         //----------> before saving to draft, we check if any of title, coverImage, value exist
-        await saveStoryToDatabase(newStory, "draft");
+        await saveStoryToDatabase({ status: "draft" });
         setNewStory((prevState) => {
           return { ...prevState, storyId: null, coverImage: "", title: "", value: "" };
         });
       }
     },
-    [newStory, saveStoryToDatabase]
+    [saveStoryToDatabase]
   );
 
   //<--------- USE EFFECTS STARTS HERE ---------->
@@ -472,6 +480,8 @@ const AuthContextProvider = (props) => {
         onSaveContributorData: saveContributorData,
         profileUpdated,
         onChangeProfileUpdated: changeProfileUpdated,
+        showInfoModal,
+        onChangeShowInfoModal: changeShowInfoModal,
         changeAppMode: onChangeAppMode,
         //<----------- Variable and function responsible for making body fixed-------->
         makeBodyFixed,

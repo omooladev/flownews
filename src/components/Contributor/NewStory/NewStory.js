@@ -24,6 +24,7 @@ const NewStory = () => {
       value,
       pageSettings: { isAutoPreviewEnabled },
     },
+
     onMakeBodyFixed,
   } = useContext(AuthContext);
 
