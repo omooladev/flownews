@@ -57,7 +57,7 @@ const AuthContextProvider = (props) => {
     username: "",
   });
   const [profileUpdated, setProfileUpdated] = useState({ show: false, message: "" }); //TODO remove this soon as it is replaced in the update profile page
-  const [showInfoModal, setShowInfoModal] = useState({ show: false, message: "" });
+  const [infoModal, setInfoModal] = useState({ show: false, message: "" });
   const loginOrBecomeContributor = useCallback(
     async ({ location, contributorAuthData }) => {
       const response = await sendRequest(`${HOSTURI}/auth/${location}`, {
@@ -302,8 +302,8 @@ const AuthContextProvider = (props) => {
     [sendRequest, token]
   );
   //<---------- Function for updating the info modal ---------->
-  const changeShowInfoModal = useCallback((show, message) => {
-    return setShowInfoModal((prevState) => {
+  const changeInfoModal = useCallback((show, message) => {
+    return setInfoModal((prevState) => {
       return { show, message };
     });
   }, []);
@@ -480,8 +480,10 @@ const AuthContextProvider = (props) => {
         onSaveContributorData: saveContributorData,
         profileUpdated,
         onChangeProfileUpdated: changeProfileUpdated,
-        showInfoModal,
-        onChangeShowInfoModal: changeShowInfoModal,
+        //<--------- INFO MODAL STARTS HERE ---------->
+        infoModal,
+        onChangeInfoModal: changeInfoModal,
+        //<--------- INFO MODAL ENDS HERE ---------->
         changeAppMode: onChangeAppMode,
         //<----------- Variable and function responsible for making body fixed-------->
         makeBodyFixed,

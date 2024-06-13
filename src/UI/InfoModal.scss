@@ -5,21 +5,22 @@
   height: 100vh;
   width: 100vw;
   background-color: transparent;
-  z-index: var(--profile-updated-backdrop-index);
+  z-index: var(--info-modal-backdrop-index);
 }
 .info-modal {
   position: fixed;
-  top: 10vh;
+  top: 0;
   left: 0%;
   width: 100vw;
-  height: 10vh;
+  min-height: 10vh;
   padding: 1rem 5%;
+  margin-top: 10rem;
   background-color: black;
   color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: var(--profile-updated-overlay-index);
+  z-index: var(--info-modal-overlay-index);
 
   p {
     text-align: center;

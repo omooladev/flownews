@@ -43,8 +43,8 @@ export const AuthContext = React.createContext({
   onUpdateContributorProfile: async () => {},
   profileUpdated: { show: false, message: "" },
   onChangeProfileUpdated: async (show, message) => {},
-  showInfoModal: { show: false, message: "" },
-  onChangeShowInfoModal: async (show, message) => {},
+  infoModal: { show: false, message: "" },
+  onChangeInfoModal: async (show, message) => {},
   onToggleEmailPrivacy: async () => {},
   onDeleteContributorAccount: async ({ userNameOrEmail, verifyText, password }) => {},
 

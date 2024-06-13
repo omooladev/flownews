@@ -1,8 +1,9 @@
 import { useCallback, useContext } from "react";
 import styles from "./SaveDraft.module.css";
 import { AuthContext } from "../../../../store/Auth/auth-context";
+import InfoModal from "../../../../UI/InfoModal";
 const SaveDraft = ({ isLoading, onSaveIsLoading }) => {
-  const { onSaveStoryToDatabase, newStory } = useContext(AuthContext);
+  const { onSaveStoryToDatabase, newStory, infoModal, onChangeInfoModal } = useContext(AuthContext);
   const saveDraftHandler = useCallback(async () => {
     if (!newStory.title && !newStory.coverImage & !newStory.value) {
       return;
@@ -11,19 +12,23 @@ const SaveDraft = ({ isLoading, onSaveIsLoading }) => {
     //const { data, error } = await onSaveStoryToDatabase({ status: "draft" });
     let error = "olawole";
     if (error) {
-      console.log(error);
+      onChangeInfoModal(true, "Draft not saved. Please try again");
     }
     onSaveIsLoading(null);
-  }, [newStory, onSaveIsLoading, onSaveStoryToDatabase]);
+  }, [newStory, onSaveIsLoading, onSaveStoryToDatabase, onChangeInfoModal]);
   return (
-    <button
-      type="button"
-      className={styles["save-draft-button"]}
-      onClick={saveDraftHandler}
-      disabled={isLoading.source === "save-draft"}
-    >
-      {isLoading.source === "save-draft" ? "Saving Draft..." : "Save draft"}
-    </button>
+    <>
+      <button
+        type="button"
+        className={styles["save-draft-button"]}
+        onClick={saveDraftHandler}
+        disabled={isLoading.source === "save-draft"}
+      >
+        {isLoading.source === "save-draft" ? "Saving Draft..." : "Save draft"}
+      </button>
+
+      <InfoModal />
+    </>
   );
 };
 

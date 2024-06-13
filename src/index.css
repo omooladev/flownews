@@ -9,6 +9,8 @@
   --header-index: 996;
   --profile-updated-overlay-index: 999;
   --profile-updated-backdrop-index: 998;
+  --info-modal-overlay-index: 999;
+  --info-modal-backdrop-index: 998;
   --preview-story-fullscreen-index: 1000;
   /*? fonts family */
   --primary-font: "Merriweather", serif;
