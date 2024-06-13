@@ -3,7 +3,8 @@
   width: 90%;
   max-width: 1400px;
   margin: 0 auto;
-  margin-top: 4rem;
+  margin-top: var(--header-height);
+  padding-top: 1rem;
 }
 /*note---->extra settings for the main class */
 .main.profile_page {

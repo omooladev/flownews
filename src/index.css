@@ -12,6 +12,9 @@
   --info-modal-overlay-index: 999;
   --info-modal-backdrop-index: 998;
   --preview-story-fullscreen-index: 1000;
+
+  /* HEIGHTS */
+  --header-height: 4rem;
   /*? fonts family */
   --primary-font: "Merriweather", serif;
   --secondary-font: "Lato", Helvetica, sans-serif;
