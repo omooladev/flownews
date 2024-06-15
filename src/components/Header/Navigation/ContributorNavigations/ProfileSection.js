@@ -49,7 +49,7 @@ const ProfileSection = () => {
   }, [onToggleComponentsIsActive]);
   return (
     <section className={styles.profile_section}>
-      <ProfileBox className="Header-ProfileSection__ProfileBox" onClick={toggleProfileBoxHandler} />
+      {/* <ProfileBox className="Header-ProfileSection__ProfileBox" onClick={toggleProfileBoxHandler} /> */}
       {profileBoxIsActive && (
         <nav className={`${styles["nav-user"]}`}>
           <ul className={`${styles["nav-user-list"]}`}>

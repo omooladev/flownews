@@ -24,7 +24,7 @@ const ProfileBox = ({ options, className, uploadContainerIsActive, onToggleUploa
 
   const contributorUsernameCut = contributorData.username[0];
   const contributorFullUsername = contributorData.username;
-  const contributorProfilePicture = contributorData.profilePicture || "";
+  const contributorProfilePicture = ""; //contributorData.profilePicture || "";
 
   const customClass = className ? `${styles[className]}` : "";
 
