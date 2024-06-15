@@ -1,4 +1,6 @@
 /** Default profileBox configuration */
+
+//LineHeight  Multiply the font size by 11.4px
 .profile_box {
   position: relative;
   cursor: pointer;
@@ -136,6 +138,36 @@
     }
     &.active {
       cursor: default;
+    }
+  }
+}
+
+// ProfileBox configuration for ProfileCard
+.ProfileCard__ProfileBox {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  height: auto;
+  .profilePicture_Username {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    font-size: 2.2rem;
+    line-height: 25px;
+    overflow: hidden;
+    background-color: var(--primary-color);
+    margin: 0 0.5rem;
+    text-align: center;
+    color: var(--white-color);
+    .profile_picture {
+      height: 100%;
+      width: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      background-color: var(--primary-color);
     }
   }
 }

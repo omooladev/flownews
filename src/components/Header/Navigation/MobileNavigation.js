@@ -2,7 +2,7 @@ import { useCallback, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../store/Auth/auth-context";
 import Notification from "./ContributorNavigations/Notification";
-import ProfileBox from "./ContributorNavigations/ProfileBox";
+import ProfileBox from "../../../UI/ProfileBox";
 import styles from "./MobileNavigation.module.css";
 const MobileNavigation = (props) => {
   const { onToggleComponentsIsActive } = props;

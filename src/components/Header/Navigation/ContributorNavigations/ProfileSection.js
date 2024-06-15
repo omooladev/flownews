@@ -2,7 +2,7 @@ import { useCallback, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { AppContext } from "../../../../store/App/app-context";
 import { AuthContext } from "../../../../store/Auth/auth-context";
-import ProfileBox from "./ProfileBox";
+import ProfileBox from "../../../../UI/ProfileBox";
 import Write from "./Write";
 import styles from "./ProfileSection.module.css";
 

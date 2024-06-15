@@ -20,9 +20,6 @@ const DraftPreview = () => {
   //----------> get the contributor data
   const { contributorData } = useContext(AuthContext);
 
-// useEffect(() => {
-//   document.body.style.backgroundColor="purple"
-// }, []);
   return <>{contributorData.username && <DraftPreviewCmp />}</>;
 };
 

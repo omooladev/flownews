@@ -1,4 +1,4 @@
-import ProfileBox from "../../../../components/Header/Navigation/ContributorNavigations/ProfileBox";
+import ProfileBox from "../../../../UI/ProfileBox";
 import SettingNavigationLinks from "../../../../components/Contributor/Setting/SettingNavigationLinks";
 import styles from "./SettingLinks.module.css";
 const SettingLinks = () => {

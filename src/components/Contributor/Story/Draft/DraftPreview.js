@@ -3,12 +3,7 @@ import Preview from "./Preview";
 import Share from "./Share";
 import styles from "./DraftPreview.module.css";
 
-
 const DraftPreview = () => {
-
-
-
-  
   return (
     <section className={styles["draft-preview"]}>
       <Share />

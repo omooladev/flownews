@@ -1,6 +1,6 @@
 //<---------- IMPORT MODULES ---------->
 
-import ProfileBox from "../../../../Header/Navigation/ContributorNavigations/ProfileBox";
+import ProfileBox from "../../../../../UI/ProfileBox";
 import { useCallback, useContext, useState } from "react";
 import { AppContext } from "../../../../../store/App/app-context";
 import UploadPhotoContainer from "./UploadPhotoContainer";
