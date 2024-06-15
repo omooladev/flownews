@@ -21,6 +21,7 @@ const Main = () => {
   //note----->For the class name, we check current page the user is on,
   //note----->and if this page is the profile page then we add a class name of profile_page.
   //note----->This is because we want to add configure some extra settings
+ 
   return (
     <>
       <main

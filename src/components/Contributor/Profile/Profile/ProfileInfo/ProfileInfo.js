@@ -1,7 +1,6 @@
 import styles from "./ProfileInfo.module.css";
 import { useContext } from "react";
 import { AuthContext } from "../../../../../store/Auth/auth-context";
-
 import ProfileLocation from "./ProfileLocation";
 import ProfileDate from "./ProfileDate";
 import ProfileEmail from "./ProfileEmail";
@@ -10,21 +9,17 @@ import ProfileMoreInfo from "./ProfileMoreInfo";
 // import ProfileFollow from "./ProfileFollow";
 import ProfileName from "./ProfileName";
 import ProfileBio from "./ProfileBio";
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
+  //-----------> for adding additional styles to the profile info
+ const className = props.className || "";
   //----------> access the following properties from the authentication context
   const { contributorData, searchedContributorData } = useContext(AuthContext);
-  // console.log(
-  //   {
-  //     contributor_followers: contributorData.followers,
-  //     contributor_following: contributorData.following,
-  //   },
-  //   searchedContributorData
-  // );
+ 
   //----------> check if the searched contributor exist
   let searchedContributorExist = searchedContributorData.username;
 
   return (
-    <section className={styles["contributor_info"]}>
+    <section className={`${styles["contributor_info"]} ${className}`}>
       <ProfileName
         data={
           searchedContributorExist ? searchedContributorData : contributorData

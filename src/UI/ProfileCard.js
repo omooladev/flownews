@@ -1,10 +1,12 @@
+
 import styles from "./ProfileCard.module.css";
+
+import ProfileInfo from "../components/Contributor/Profile/Profile/ProfileInfo/ProfileInfo";
 const ProfileCard = (props) => {
   const className = props.className || "";
   return (
     <section className={`${className} ${styles["profile-card"]}`}>
-      <h1>Olawole</h1>
-      <h2>Adewole</h2>
+      <ProfileInfo className={styles["profile-info"]}/>
     </section>
   );
 };

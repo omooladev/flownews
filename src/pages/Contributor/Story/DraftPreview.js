@@ -7,7 +7,6 @@ import { useTitle } from "../../../hooks/useTitle";
 import DraftPreviewCmp from "../../../components/Contributor/Story/Draft/DraftPreview";
 
 const DraftPreview = () => {
-  console.log("emi");
   //----------> fetch contributor data
   useFetchContributorData();
   //----------> access the location
@@ -21,6 +20,9 @@ const DraftPreview = () => {
   //----------> get the contributor data
   const { contributorData } = useContext(AuthContext);
 
+// useEffect(() => {
+//   document.body.style.backgroundColor="purple"
+// }, []);
   return <>{contributorData.username && <DraftPreviewCmp />}</>;
 };
 

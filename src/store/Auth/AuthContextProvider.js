@@ -4,14 +4,12 @@ import { AuthContext } from "./auth-context";
 import { AppContext } from "../App/app-context";
 import useHttp from "../../hooks/useHttp";
 import { createRandomString } from "../../utils/createRandomStrings";
+
+//<---------- constant variables ---------->
 const HOSTURI = "http://localhost:5000/api/v1";
 //const HOSTURI = "https://flownews-api.onrender.com/api/v1";
-//----------> deployment link of the dev branch---> which is the preview deployment
-//let HOSTURI = "https://flownews-api.vercel.app/api/v1"; //----------> master branch deployment link
 const AuthContextProvider = (props) => {
-  //----------> get the http request functions from the useHttp hook
   const { sendRequest, cancelRequest } = useHttp();
-
   const {
     appMode,
     appMode: { isLoggedIn, token },
@@ -20,10 +18,9 @@ const AuthContextProvider = (props) => {
     lastLocation,
   } = useContext(AppContext);
 
-  //<----------- States ---------->
-
+  //<---------------------------------------- USE STATE STARTS HERE ---------------------------------------->
+  const history = useHistory();
   const [makeBodyFixed, setMakeBodyFixed] = useState(false); //----------> Used to make body fixed when a pop up is shown
-
   const [pageIsLoading, setPageIsLoading] = useState(null);
 
   const [contributorError, setContributorError] = useState({
@@ -31,13 +28,10 @@ const AuthContextProvider = (props) => {
     message: "",
     ref: null,
   });
-  const history = useHistory();
-
   const [files, setFiles] = useState({
     coverImage: { showCropContainer: false, transformedFile: null, file: null, isCropped: false },
   });
-  //<---------- state for sharing new content ---------->
-  const [draftPreview, setDraftPreview] = useState(null);
+
   const [newStory, setNewStory] = useState({
     storyId: appMode.NewStorySettings?.storyId || null,
     viewPreview: appMode.NewStorySettings?.viewPreview || false,
@@ -51,13 +45,15 @@ const AuthContextProvider = (props) => {
         : { isAutoPreviewEnabled: true }),
     },
   });
-
+  const [draftPreview, setDraftPreview] = useState(null);
   const [contributorData, setContributorData] = useState({ username: "" });
   const [searchedContributorData, setSearchedContributorData] = useState({
     username: "",
   });
   const [profileUpdated, setProfileUpdated] = useState({ show: false, message: "" }); //TODO remove this soon as it is replaced in the update profile page
   const [infoModal, setInfoModal] = useState({ show: false, message: "" });
+  //<---------------------------------------- USE STATE ENDS HERE ---------------------------------------->
+
   const loginOrBecomeContributor = useCallback(
     async ({ location, contributorAuthData }) => {
       const response = await sendRequest(`${HOSTURI}/auth/${location}`, {
@@ -69,9 +65,9 @@ const AuthContextProvider = (props) => {
     [sendRequest]
   );
 
-  //----------> Fetch the contributor data
   const getContributorData = useCallback(
     async (username) => {
+      //----------> Fetch the contributor data
       //----------> if username is found in the contributor data and
       //            no username is sent from the fetch contributor data hook
       //            or the username passed in the hook is the same as the one found
@@ -143,8 +139,9 @@ const AuthContextProvider = (props) => {
     },
     [sendRequest, token, contributorData.username, searchedContributorData, onChangeAppMode]
   );
-  //----------> reset the searched contributor to not contain any data
+
   const resetSearchedContributor = useCallback(() => {
+    //----------> reset the searched contributor to not contain any data
     return setSearchedContributorData((prevData) => {
       return { username: "" };
     });
@@ -175,9 +172,9 @@ const AuthContextProvider = (props) => {
     [sendRequest, token]
   );
 
-  //----------> a function that lets you follow or un follow a contributor
   const toggleFollowContributor = useCallback(
     async ({ action }) => {
+      //----------> a function that lets you follow or un follow a contributor
       const response = await sendRequest(
         `${HOSTURI}/contributor/follow?action=${action}&username=${searchedContributorData.username}`,
         {
@@ -213,7 +210,6 @@ const AuthContextProvider = (props) => {
       return { ...prevError, hasError: false, message: "" };
     });
   }, []);
-
   const signOutHandler = useCallback(() => {
     onChangeAppMode({
       isLoggedIn: false,
@@ -228,9 +224,9 @@ const AuthContextProvider = (props) => {
     history.replace("/home");
   }, [history, onToggleComponentsIsActive, onChangeAppMode]);
 
-  //<---------- FUNCTION FOR VERIFYING EMAIL ADDRESS ---------->
   const verifyEmailAddressHandler = useCallback(
     async (uri) => {
+      //<---------- FUNCTION FOR VERIFYING EMAIL ADDRESS ---------->
       const response = await sendRequest(`${HOSTURI}/auth${uri}`, {
         method: "PATCH",
       });
@@ -267,9 +263,9 @@ const AuthContextProvider = (props) => {
     },
     [sendRequest]
   );
-  //---------> function for verifying password reset link
   const verifyPasswordResetLink = useCallback(
     async (uri) => {
+      //---------> function for verifying password reset link
       const response = await sendRequest(`${HOSTURI}/auth${uri}`, {
         method: "POST",
       });
@@ -277,8 +273,9 @@ const AuthContextProvider = (props) => {
     },
     [sendRequest]
   );
-  //<---------- FUNCTION FOR SAVING CONTRIBUTOR DATA IN OUR APPLICATION ---------->
+
   const saveContributorData = useCallback((data) => {
+    //<---------- FUNCTION FOR SAVING CONTRIBUTOR DATA IN OUR APPLICATION ---------->
     setContributorData((prevData) => {
       return { ...prevData, ...data };
     });
@@ -410,9 +407,9 @@ const AuthContextProvider = (props) => {
     [saveStoryToDatabase]
   );
 
-  //<--------- USE EFFECTS STARTS HERE ---------->
-  //<---------- use effect for updating the new story on the local storage --------->
+  //<---------------------------------------- USE EFFECTS STARTS HERE ---------------------------------------->
   useEffect(() => {
+    //<---------- for updating the new story on the local storage --------->
     if (newStory) {
       onChangeAppMode({ NewStorySettings: newStory });
     }
@@ -449,6 +446,22 @@ const AuthContextProvider = (props) => {
     }
     return document.body.classList.remove("fixed-body");
   }, [makeBodyFixed]);
+
+  //<---------- use effect for changing the background color of the draft preview page for dark theme ---------->
+  useEffect(() => {
+    const handleBackgroundColor = () => {
+      if (history.location.pathname.includes("/story/draft/preview") && appMode.theme === "dark-default") {
+        document.body.style.backgroundColor = "black";
+      } else {
+        document.body.style.backgroundColor = "";
+      }
+    };
+    handleBackgroundColor();
+    return () => {
+      document.body.style.backgroundColor = "";
+    };
+  }, [history.location.pathname, appMode.theme]);
+
   //<--------- USE EFFECTS ENDS HERE ---------->
   return (
     <AuthContext.Provider
