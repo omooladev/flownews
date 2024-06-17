@@ -22,9 +22,9 @@ const ProfileBox = ({ options, className, uploadContainerIsActive, onToggleUploa
     showYourPersonalAccountText = false,
   } = options || defaultOptions;
 
-  const contributorUsernameCut = contributorData.username[0];
+  const contributorUsernameCut = contributorData.username[0].toUpperCase();
   const contributorFullUsername = contributorData.username;
-  const contributorProfilePicture = ""; //contributorData.profilePicture || "";
+  const contributorProfilePicture = contributorData.profilePicture || "";
 
   const customClass = className ? `${styles[className]}` : "";
 
@@ -43,7 +43,7 @@ const ProfileBox = ({ options, className, uploadContainerIsActive, onToggleUploa
             onError={handleProfilePictureError}
           />
         ) : (
-          `${contributorUsernameCut}`
+          <div className={styles["username-cut"]}>{contributorUsernameCut}</div>
         )}
       </div>
       {showIcon && <FaChevronDown className={styles.icon} />}

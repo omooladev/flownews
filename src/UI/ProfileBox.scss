@@ -1,48 +1,50 @@
 /** Default profileBox configuration */
+.profile_box {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  height: auto;
+  .profilePicture_Username {
+    height: 32px;
+    width: 32px;
+    color: var(--white-color);
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    .username-cut {
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+    .profile_picture {
+      background-color: var(--primary-color);
+      height: 100%;
+      width: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
 
-//LineHeight  Multiply the font size by 11.4px
-// .profile_box {
-//   position: relative;
-//   cursor: pointer;
-//   display: flex;
-//   align-items: center;
-//   overflow: hidden;
-//   height: auto;
-//   .profilePicture_Username {
-//     height: 32px;
-//     width: 32px;
-//     border-radius: 50%;
-//     font-size: 2.2rem;
-//     line-height: 25px;
-//     overflow: hidden;
-//     background-color: var(--primary-color);
-//     margin: 0 0.5rem;
-//     text-align: center;
-//     color: var(--white-color);
-//     .profile_picture {
-//       height: 100%;
-//       width: 100%;
-//       border-radius: 50%;
-//       object-fit: cover;
-//       object-position: center;
-//       background-color: var(--primary-color);
-//     }
-//   }
-
-//   .icon {
-//     color: var(--secondary-color);
-//     font-size: 0.8rem;
-//   }
-//   .profile_box_text {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: flex-start;
-//     justify-content: center;
-//     .username {
-//       color: var(--secondary-color);
-//     }
-//   }
-// }
+  .icon {
+    font-size: 0.8rem;
+    color: var(--secondary-color);
+  }
+  .profile_box_text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    .username {
+      color: var(--secondary-color);
+    }
+  }
+}
 /*? ProfileBox configuration for Header Profile Section */
 .Header-ProfileSection__ProfileBox {
   display: none;
@@ -144,32 +146,11 @@
 
 // ProfileBox configuration for ProfileCard
 .ProfileCard__ProfileBox {
-  cursor: pointer;
-  position: relative;
-  width: auto;
-  height: auto;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-
   .profilePicture_Username {
     height: 100px;
     width: 100px;
-    border-radius: 50%;
-    font-size: 2.2rem;
-    line-height: 25px;
-    overflow: hidden;
-    background-color: var(--primary-color);
-    margin: 0 0.5rem;
-    text-align: center;
-    color: var(--white-color);
-    .profile_picture {
-      height: 100%;
-      width: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      object-position: center;
-      background-color: var(--primary-color);
+    .username-cut {
+      font-size: 16px;
     }
   }
 }
@@ -177,9 +158,12 @@
   /*? ProfileBox configuration for Header Profile Section */
   .Header-ProfileSection__ProfileBox {
     display: flex;
-    .username {
-      display: none;
+    .profilePicture_Username {
+      margin: 0 0.5rem;
     }
+    // .username {
+    //   display: none;
+    // }
   }
   /*? ProfileBox configuration for Mobile Navigation */
   .MobileNavigation__ProfileBox {
@@ -187,23 +171,23 @@
   }
 }
 
-@media (min-width: 700px) {
-  /*? ProfileBox configuration for Profile */
-  .Profile__ProfileBox {
-    cursor: default;
-    position: absolute;
-    top: -2.5rem;
-    left: 50%;
-    margin-left: -50px;
-    .profilePicture_Username {
-      height: 100px;
-      width: 100px;
-      font-size: 4rem;
-      border: 8px solid var(--black-color);
-      line-height: 75px;
-    }
-    .icon {
-      display: none;
-    }
-  }
-}
+// @media (min-width: 700px) {
+//   /*? ProfileBox configuration for Profile */
+//   .Profile__ProfileBox {
+//     cursor: default;
+//     position: absolute;
+//     top: -2.5rem;
+//     left: 50%;
+//     margin-left: -50px;
+//     .profilePicture_Username {
+//       height: 100px;
+//       width: 100px;
+//       font-size: 4rem;
+//       border: 8px solid var(--black-color);
+//       line-height: 75px;
+//     }
+//     .icon {
+//       display: none;
+//     }
+//   }
+// }
