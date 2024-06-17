@@ -34,9 +34,9 @@ const ProfilePicture = () => {
       {/*THE PROFILE BOX WHICH CONTAINS EITHER THE PROFILE PICTURE OR SHORT FORM OF THE USERNAME */}
       <ProfileBox
         className="UserForm__ProfileBox"
-        from="user-form"
         uploadContainerIsActive={uploadContainerIsActive}
         onToggleUploadContainer={toggleUploadContainer}
+        options={{ showEditButton: true }}
       />
       {/*UPLOAD CONTAINER WHICH CONTAINS CONTROL FOR UPLOADING AND REMOVING PROFILE PICTURE */}
       <UploadPhotoContainer
