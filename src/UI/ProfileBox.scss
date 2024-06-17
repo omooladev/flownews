@@ -4,6 +4,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  gap: 0.5rem;
   overflow: hidden;
   height: auto;
   .profilePicture_Username {
@@ -41,6 +42,13 @@
     align-items: flex-start;
     justify-content: center;
     .username {
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--secondary-color);
+    }
+    .your_personal_account {
+      font-size: 0.9rem;
+      font-weight: normal;
       color: var(--secondary-color);
     }
   }
@@ -55,10 +63,6 @@
 .MobileNavigation__ProfileBox {
   display: flex;
   margin: 0.5rem 0;
-  gap: 0.5rem;
-  .username {
-    cursor: pointer;
-  }
 }
 /*? ProfileBox configuration for Profile */
 .Profile__ProfileBox {
@@ -78,31 +82,18 @@
 /*? ProfileBox configuration for Setting */
 .Setting__ProfileBox {
   cursor: default;
-
   .profilePicture_Username {
     height: 45px;
     width: 45px;
-    font-size: 2.25rem;
-    line-height: 40px;
-    border: none;
+    .username-cut {
+      font-size: 2.3rem;
+    }
   }
-
   .profile_box_text {
-    padding: 0 0.5rem;
     .username {
       font-weight: bold;
-      padding: 0.3rem 0;
-      font-size: 1rem;
       color: var(--tertiary-color);
     }
-    .your_personal_account {
-      color: var(--secondary-color);
-      font-weight: normal;
-      font-size: 0.9rem;
-    }
-  }
-  .icon {
-    display: none;
   }
 }
 /*? ProfileBox configuration for UserForm*/
@@ -114,7 +105,7 @@
     height: 180px;
     width: 180px;
     .username-cut {
-      font-size: 10rem;
+      font-size: 8rem;
     }
   }
   .upload_container_button {

@@ -4,7 +4,10 @@ import styles from "./SettingLinks.module.css";
 const SettingLinks = () => {
   return (
     <section className={styles.setting_links}>
-      <ProfileBox className="Setting__ProfileBox" location={"setting"} />
+      <ProfileBox
+        className="Setting__ProfileBox"
+        options={{ showUsername: true, showText: true, showYourPersonalAccountText: true }}
+      />
       <SettingNavigationLinks />
     </section>
   );
