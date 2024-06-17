@@ -46,7 +46,7 @@
   }
 }
 /*? ProfileBox configuration for Header Profile Section */
-.Header-ProfileSection__ProfileBox {
+.Header__ProfileBox {
   display: none;
 }
 /*? ProfileBox configuration for Mobile Navigation */
@@ -156,7 +156,7 @@
 }
 @media (min-width: 500px) {
   /*? ProfileBox configuration for Header Profile Section */
-  .Header-ProfileSection__ProfileBox {
+  .Header__ProfileBox{
     display: flex;
     .profilePicture_Username {
       margin: 0 0.5rem;
