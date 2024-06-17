@@ -31,6 +31,7 @@ const MobileNavigation = (props) => {
         <>
           <ProfileBox
             className="MobileNavigation__ProfileBox"
+            options={{ showUsername: true, showText: true }}
             onClick={() => {
               onToggleComponentsIsActive({ type: "menu", event: "close" });
               history.replace(`/@${contributorData.username}`);

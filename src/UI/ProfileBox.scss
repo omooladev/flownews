@@ -46,19 +46,18 @@
   }
 }
 /*? ProfileBox configuration for Header Profile Section */
+
 .Header__ProfileBox {
+  // Remove the profile box from the header when the width is less than 500px
   display: none;
 }
 /*? ProfileBox configuration for Mobile Navigation */
 .MobileNavigation__ProfileBox {
   display: flex;
-  width: auto;
-  margin: 0.5rem;
+  margin: 0.5rem 0;
+  gap: 0.5rem;
   .username {
     cursor: pointer;
-  }
-  .icon {
-    display: none;
   }
 }
 /*? ProfileBox configuration for Profile */
@@ -156,14 +155,11 @@
 }
 @media (min-width: 500px) {
   /*? ProfileBox configuration for Header Profile Section */
-  .Header__ProfileBox{
+  .Header__ProfileBox {
     display: flex;
     .profilePicture_Username {
       margin: 0 0.5rem;
     }
-    // .username {
-    //   display: none;
-    // }
   }
   /*? ProfileBox configuration for Mobile Navigation */
   .MobileNavigation__ProfileBox {
