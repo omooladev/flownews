@@ -450,7 +450,11 @@ const AuthContextProvider = (props) => {
   //<---------- use effect for changing the background color of the draft preview page for dark theme ---------->
   useEffect(() => {
     const handleBackgroundColor = () => {
-      if (history.location.pathname.includes("/story/draft/preview") && appMode.theme === "dark-default") {
+      if (
+        (history.location.pathname.includes("/story/draft/preview") ||
+          history.location.pathname === `/@${contributorData.username}`) &&
+        appMode.theme === "dark-default"
+      ) {
         document.body.style.backgroundColor = "black";
       } else {
         document.body.style.backgroundColor = "";
@@ -460,7 +464,7 @@ const AuthContextProvider = (props) => {
     return () => {
       document.body.style.backgroundColor = "";
     };
-  }, [history.location.pathname, appMode.theme]);
+  }, [history.location.pathname, appMode.theme, contributorData.username]);
 
   //<--------- USE EFFECTS ENDS HERE ---------->
   return (

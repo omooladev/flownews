@@ -11,8 +11,8 @@ const Profile = () => {
   const username = location.pathname.split("@")[1];
   useFetchContributorData(username);
   useNewLocation("profile");
-  useTitle(`${contributorData.username} - FlowNews`);
   const { contributorData } = useContext(AuthContext);
+  useTitle(`${contributorData.username} - FlowNews`);
 
   return <>{contributorData.username && <ProfileCmp />}</>;
 };

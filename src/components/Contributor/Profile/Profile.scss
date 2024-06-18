@@ -1,0 +1,38 @@
+.profile {
+  background-color: var(--black-color);
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // width: 100vw;
+  // &_text_container {
+  //   position: relative;
+  //   width: 100%;
+  //   max-width: 60rem;
+  //   background-color: var(--profile-info-background-color);
+  //   padding: 1rem 0;
+  //   border-radius: 15px;
+  // }
+  /*note---->extra settings for the profile class */
+  // &.dark {
+  //   width: 100vw;
+  //   min-height: 90vh;
+
+  //   .profile.dark .profile_text_container {
+  //     margin-top: 100px;
+  //   }
+  // }
+  // &.light {
+  //   width: 100vw;
+  //   max-height: 15rem;
+  //   .profile_text_container {
+  //     margin-top: 100px;
+  //     box-shadow: 0 1px 3px var(--tertiary-color), 0 1px 2px var(--tertiary-color);
+  //   }
+  // }
+}
+
+// @media (min-width: 700px) {
+//   .profile .profile_text_container {
+//     width: 90%;
+//   }
+// }
