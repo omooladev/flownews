@@ -1,16 +1,10 @@
 .main {
-  /* background-color: var(--body-color); */
   background-color: inherit;
   width: 90%;
   max-width: 1400px;
   margin: 0 auto;
   margin-top: var(--header-height);
   padding-top: 1rem;
-}
-/*note---->extra settings for the main class */
-.main.profile_page {
-  width: 100%;
-  max-width: 100%;
 }
 
 .error {

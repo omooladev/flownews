@@ -8,19 +8,11 @@ import ProfileCmp from "../../../components/Contributor/Profile/Profile";
 
 const Profile = () => {
   const location = useLocation();
-  //----------> get the username in the uri
   const username = location.pathname.split("@")[1];
-
-  //---------->fetches contributor data
   useFetchContributorData(username);
-
   useNewLocation("profile");
-
-  //note-------->Get contributor Data
-  const { contributorData } = useContext(AuthContext);
-
-  //note-------->Save title of this page
   useTitle(`${contributorData.username} - FlowNews`);
+  const { contributorData } = useContext(AuthContext);
 
   return <>{contributorData.username && <ProfileCmp />}</>;
 };
