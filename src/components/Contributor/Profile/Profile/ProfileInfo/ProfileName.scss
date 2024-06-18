@@ -1,0 +1,82 @@
+/* PROFILE PAGE STYLES FOR PROFILE NAME */
+.profile-name_container {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 5%;
+  gap: 0.5rem;
+  align-items: flex-start;
+  .name {
+    font-size: 20px;
+    line-height: 30px;
+    text-transform: capitalize;
+    color: var(--tertiary-color);
+    h2 {
+      display: inline;
+      padding-right: 5px;
+    }
+    .icon {
+      position: relative;
+      display: inline;
+      .verified_badge {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        color: var(--primary-color);
+        transform: translateY(-50%);
+      }
+    }
+  }
+
+  .username {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    line-height: 27px;
+    color: var(--secondary-color);
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    h3 {
+      font-weight: normal;
+    }
+    .follows_you {
+      font-size: 12px;
+      line-height: 18px;
+      color: var(--profile-info-background-color);
+      background-color: var(--secondary-color);
+      padding: 0.3rem 0.5rem;
+    }
+  }
+}
+/* PROFILE PAGE STYLES FOR CONTRIBUTOR CARD */
+.profile-name_container.contributor-card .name {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+// FOR DRAFT PREVIEW
+.draft-preview {
+  display: block;
+  padding: 0.5rem 0;
+  .name {
+    font-size: 0.8rem;
+    .icon {
+      .verified_badge {
+        font-size: 1.1rem;
+      }
+    }
+  }
+  .username {
+    font-size: 0.9rem;
+  }
+}
+@media (min-width: 700px) {
+  .profile-name_container,
+  .profile-name_container .username {
+    align-items: center;
+  }
+  /* PROFILE PAGE STYLES FOR CONTRIBUTOR CARD */
+  .profile-name_container.contributor-card,
+  .profile-name_container.contributor-card .username {
+    align-items: flex-start;
+  }
+}

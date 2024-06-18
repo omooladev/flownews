@@ -11,19 +11,19 @@ import ProfileName from "./ProfileName";
 import ProfileBio from "./ProfileBio";
 const ProfileInfo = (props) => {
   //-----------> for adding additional styles to the profile info
- const className = props.className || "";
+  const className = props.className || "";
+  const source = props.source || "";
   //----------> access the following properties from the authentication context
   const { contributorData, searchedContributorData } = useContext(AuthContext);
- 
+
   //----------> check if the searched contributor exist
   let searchedContributorExist = searchedContributorData.username;
 
   return (
     <section className={`${styles["contributor_info"]} ${className}`}>
       <ProfileName
-        data={
-          searchedContributorExist ? searchedContributorData : contributorData
-        }
+        data={searchedContributorExist ? searchedContributorData : contributorData}
+        source={source}
       />
 
       {/* <ProfileFollow
@@ -38,38 +38,19 @@ const ProfileInfo = (props) => {
             : contributorData.followingCount
         }
       /> */}
-      <ProfileBio
-        bio={
-          searchedContributorExist
-            ? searchedContributorData.bio
-            : contributorData.bio
-        }
-      />
+      <ProfileBio bio={searchedContributorExist ? searchedContributorData.bio : contributorData.bio} />
 
       <div className={styles.contributor_location_email_joinedDate}>
         <ProfileLocation
-          location={
-            searchedContributorExist
-              ? searchedContributorData.location
-              : contributorData.location
-          }
+          location={searchedContributorExist ? searchedContributorData.location : contributorData.location}
         />
         <ProfileDate
-          createdAt={
-            searchedContributorExist
-              ? searchedContributorData.createdAt
-              : contributorData.createdAt
-          }
+          createdAt={searchedContributorExist ? searchedContributorData.createdAt : contributorData.createdAt}
         />
-        {((searchedContributorExist &&
-          !searchedContributorData.emailIsPrivate) ||
+        {((searchedContributorExist && !searchedContributorData.emailIsPrivate) ||
           !searchedContributorExist) && (
           <ProfileEmail
-            email={
-              searchedContributorExist
-                ? searchedContributorData.email
-                : contributorData.email
-            }
+            email={searchedContributorExist ? searchedContributorData.email : contributorData.email}
             emailIsVerified={
               searchedContributorExist
                 ? searchedContributorData.emailIsVerified
@@ -80,23 +61,11 @@ const ProfileInfo = (props) => {
       </div>
 
       <ProfileEducationWork
-        education={
-          searchedContributorExist
-            ? searchedContributorData.education
-            : contributorData.education
-        }
-        work={
-          searchedContributorExist
-            ? searchedContributorData.work
-            : contributorData.work
-        }
+        education={searchedContributorExist ? searchedContributorData.education : contributorData.education}
+        work={searchedContributorExist ? searchedContributorData.work : contributorData.work}
       />
       <ProfileMoreInfo
-        username={
-          searchedContributorExist
-            ? searchedContributorData.username
-            : contributorData.username
-        }
+        username={searchedContributorExist ? searchedContributorData.username : contributorData.username}
       />
     </section>
   );

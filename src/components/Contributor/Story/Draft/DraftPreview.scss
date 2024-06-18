@@ -1,7 +1,10 @@
 .draft-preview {
   display: flex;
   overflow: hidden;
-  .aside-content{
+  .aside-content {
+  }
+
+  h2 {
     background-color: red;
   }
 }

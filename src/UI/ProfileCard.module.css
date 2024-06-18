@@ -1,1 +1,1 @@
-.profile-card{overflow:hidden}
+.profile-card{background-color:var(--profile-info-background-color);border-radius:.3rem;padding:1rem;overflow:hidden}

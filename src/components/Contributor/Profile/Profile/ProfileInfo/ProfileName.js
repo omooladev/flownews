@@ -5,12 +5,12 @@ const ProfileName = (props) => {
   //----------> The additional class name is used to configure the ProfileName component from a component where
   //            it is been used
   const { data, className: additionalClassName } = props;
+  const source = props.source || "";
 
   //---------->configuring the className to accept additional styles
   let className = `${styles["profile-name_container"]} ${
     additionalClassName ? styles[additionalClassName] : ""
-  }`;
-
+  } ${source && styles[source]}`;
   return (
     <div className={className}>
       <div className={styles.name}>
@@ -21,8 +21,8 @@ const ProfileName = (props) => {
       </div>
       <div className={styles.username}>
         <h3>@{data.username}</h3>
-        {data.isFollowingContributor ||
-          (data.follows_you && <p className={styles.follows_you}>Follows you</p>)}
+        {/* {data.isFollowingContributor ||
+          (data.follows_you && <p className={styles.follows_you}>Follows you</p>)} */}
       </div>
     </div>
   );
