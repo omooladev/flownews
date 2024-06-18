@@ -157,10 +157,10 @@
   .Profile__ProfileBox {
     top: -2.5rem;
     left: 50%;
-    margin-left: -50px;
+    transform: translate(-50%);
     .profilePicture_Username {
-      height: 100px;
-      width: 100px;
+      height: 120px;
+      width: 120px;
       border: 8px solid var(--black-color);
       .username-cut {
         font-size: 4rem;

@@ -10,12 +10,17 @@ const Profile = () => {
     appMode: { theme },
   } = useContext(AppContext);
 
+  //  ${theme.includes("light") ? styles.light : styles.dark}`}
+
   return (
-    <section className={`${styles.profile} ${theme.includes("light") ? styles.light : styles.dark}`}>
-      <div className={styles.profile_text_container}>
-        <ProfileBox className="Profile__ProfileBox"/>
-        <ProfileButton />
-        <ProfileInfo />
+    <section className={`${styles.profile}`}>
+      {theme === "light-default" && <div className={styles["profile-light-theme-only-container"]}></div>}
+      <div className={styles["profile-container"]}>
+        <div className={styles["profile-details"]}>
+          <ProfileBox className="Profile__ProfileBox" />
+          <ProfileButton />
+          <ProfileInfo />
+        </div>
       </div>
     </section>
   );
