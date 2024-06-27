@@ -39,3 +39,15 @@
   top: var(--header-height);
   left: 0;
 } */
+
+/* .icon-wrapper {
+  position: relative;
+  display: inline;
+}
+
+/* .icon-wrapper svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%);
+} */

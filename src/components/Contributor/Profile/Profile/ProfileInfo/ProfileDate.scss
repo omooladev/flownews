@@ -1,0 +1,20 @@
+.date {
+  color: var(--tertiary-color);
+  p {
+    font-size: 20px;
+    display: inline;
+    margin-left: 1.4rem;
+  }
+
+  .icon-wrapper {
+    position: relative;
+    display: inline;
+
+    .icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}

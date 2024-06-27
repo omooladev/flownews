@@ -1,13 +1,1 @@
-.date {
-  position: relative;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-}
-
-.date span {
-  white-space:nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding-left: 1.5rem;
-}
+.date{color:var(--tertiary-color)}.date p{font-size:20px;display:inline;margin-left:1.4rem}.date .icon-wrapper{position:relative;display:inline}.date .icon-wrapper .icon{position:absolute;top:50%;left:50%;transform:translateY(-50%)}
