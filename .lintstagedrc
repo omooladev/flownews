@@ -1,0 +1,6 @@
+{
+  "*.{js,jsx,ts,tsx,json}": [
+    "biome lint --staged --no-errors-on-unmatched",
+    "biome check --write --staged --no-errors-on-unmatched"
+  ]
+}
