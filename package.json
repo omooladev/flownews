@@ -9,7 +9,9 @@
     "lint": "biome lint .",
     "format": "biome format . --write",
     "check": "biome check --apply .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "check-types": "tsc --pretty --noEmit",
+    "watch-types": "tsc --pretty --noEmit --watch"
   },
   "dependencies": {
     "next": "16.1.6",
